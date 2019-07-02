@@ -1,0 +1,9 @@
+---
+- name: install screen-git | Archlinux
+  aur:
+    name: screen-git
+    use: yay
+  become: yes
+  become_user: "{{ aur_user }}"
+  tags:
+    - initial

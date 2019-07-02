@@ -1,0 +1,8 @@
+<!--    Base16 {{ base16.theme[default_theme]['scheme_name'] }}
+        Author: {{ base16.theme[default_theme]['scheme_author'] }}   -->
+
+<application>
+  <component name="EditorColorsManagerImpl">
+    <global_color_scheme name="Base16 {{ base16.theme[default_theme]['scheme_name'] }}" />
+  </component>
+</application>

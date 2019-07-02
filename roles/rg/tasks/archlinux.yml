@@ -1,0 +1,9 @@
+---
+- name: install rg | Arch
+  aur:
+    name: ripgrep
+    use: yay
+  become: yes
+  become_user: "{{ aur_user }}"
+  tags:
+    - initial

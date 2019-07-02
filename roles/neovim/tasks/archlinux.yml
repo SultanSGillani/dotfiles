@@ -1,0 +1,9 @@
+---
+- name: Arch | Install Neovim
+  package:
+    name: "{{ vim_packages }}"
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial

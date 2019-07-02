@@ -1,0 +1,42 @@
+---
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: ansible_facts['os_family']|lower is defined
+
+- name: Create ranger config directory if it doesnt exist
+  file:
+    path: "{{ dotfiles_user_home }}/.config/ranger"
+    state: directory
+    mode: 0755
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    recurse: yes
+  tags:
+    - initial
+
+- name: Write ranger config
+  template:
+    src: ranger.j2
+    dest: "{{ dotfiles_user_home }}/.config/ranger/rc.conf"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+  tags:
+    - update
+
+- name: Write rifle config
+  template:
+    src: rifle.j2
+    dest: "{{ dotfiles_user_home }}/.config/ranger/rifle.conf"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+  tags:
+    - update
+
+- name: copy Ranger python files
+  copy:
+    src: "{{ item.path }}"
+    dest: "{{ dotfiles_user_home }}/.config/ranger/{{ item.dest }}"
+    mode: 0755
+  loop: "{{ ranger_files }}"
+  tags:
+    - update

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+SCRIPT=${ZSH}/bin/rsync_tmbackup
+DIR1=${1?Error: no src dir given}
+DIR2=${2?Error: no dest dir given}
+EXCLUDE_FILE=${3?Need file name}
+
+sudo $SCRIPT ${DIR1} ${DIR2} ${DIR2}/${EXCLUDE_FILE}

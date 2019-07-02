@@ -1,0 +1,24 @@
+---
+ignore: |
+  ../misc/lib/
+  ./misc/lib/
+  venv/
+  ../venv/
+  *.template.yaml
+
+extends: default
+
+rules:
+  braces:
+    max-spaces-inside: 1
+    level: error
+  brackets:
+    max-spaces-inside: 1
+    level: error
+  comments: 
+    min-spaces-from-content: 2
+    require-starting-space: true
+  comments-indentation:
+    level: warning
+  line-length: disable
+  truthy: disable

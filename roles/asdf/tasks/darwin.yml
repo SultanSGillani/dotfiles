@@ -1,0 +1,7 @@
+---
+- name: Install asdf | for osx
+  homebrew:
+    name: asdf
+    state: present
+  tags:
+    - initial

@@ -1,0 +1,18 @@
+---
+- name: Install apt items
+  package:
+    name: "{{ rbenv_pkgs }}"
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: Install rbenv
+  git:
+    repo: "{{ rbenv_repo }}"
+    dest: "{{ dotfiles_user_home }}/.rbenv"
+    update: no
+    version: master
+  tags:
+    - initial

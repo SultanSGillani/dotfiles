@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# nodenv setup
+export NODENV_ROOT={{ nodenv.path }}
+export PATH="$NODENV_ROOT/bin:$NODENV_ROOT/shims:$PATH"
+eval "$(nodenv init -)"

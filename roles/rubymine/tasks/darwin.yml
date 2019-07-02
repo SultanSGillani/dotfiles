@@ -1,0 +1,7 @@
+---
+- name: Install jetbrains | Macos
+  homebrew_cask:
+    name: rubymine
+    state: present
+  tags:
+    - initial

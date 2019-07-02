@@ -1,0 +1,22 @@
+---
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: ansible_facts['os_family']|lower is defined
+
+- name: Create Rclone Dir if it doesn't Exist
+  file:
+    path: "{{ dotfiles_user_home }}/.config/rclone"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
+    recurse: yes
+  tags:
+    - initial
+
+- name: copy rclone
+  copy:
+    src: .config/rclone/rclone.conf
+    dest: "{{ dotfiles_user_home }}/.config/rclone/rclone.conf"
+  tags:
+    - update

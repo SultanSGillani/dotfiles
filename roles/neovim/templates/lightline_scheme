@@ -1,0 +1,40 @@
+let s:base00 = [ '#{{ base16.theme[default_theme]['base00_hex'] }}', 000 ] " black
+let s:base01 = [ '#{{ base16.theme[default_theme]['base01_hex'] }}', 16 ]
+let s:base02 = [ '#{{ base16.theme[default_theme]['base02_hex'] }}', 17 ]
+let s:base03 = [ '#{{ base16.theme[default_theme]['base03_hex'] }}', 102 ]
+let s:base04 = [ '#{{ base16.theme[default_theme]['base04_hex'] }}', 145 ]
+let s:base05 = [ '#{{ base16.theme[default_theme]['base05_hex'] }}', 188 ]
+let s:base06 = [ '#{{ base16.theme[default_theme]['base06_hex'] }}', 231 ]
+let s:base07 = [ '#{{ base16.theme[default_theme]['base07_hex'] }}', 231 ] " white
+let s:base08 = [ '#{{ base16.theme[default_theme]['base08_hex'] }}', 203 ] " red
+let s:base09 = [ '#{{ base16.theme[default_theme]['base09_hex'] }}', 214 ] " orange
+let s:base0A = [ '#{{ base16.theme[default_theme]['base0A_hex'] }}', 229 ] " yellow
+let s:base0B = [ '#{{ base16.theme[default_theme]['base0B_hex'] }}', 84 ] " green
+let s:base0C = [ '#{{ base16.theme[default_theme]['base0C_hex'] }}', 123 ] " teal
+let s:base0D = [ '#{{ base16.theme[default_theme]['base0D_hex'] }}', 81 ] " blue
+let s:base0E = [ '#{{ base16.theme[default_theme]['base0E_hex'] }}', 205 ] " pink
+let s:base0F = [ '#{{ base16.theme[default_theme]['base0F_hex'] }}', 130 ] " brown
+
+let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
+let s:p.normal.left     = [ [ s:base00, s:base0D ], [ s:base05, s:base02 ] ]
+let s:p.insert.left     = [ [ s:base01, s:base0B ], [ s:base05, s:base02 ] ]
+let s:p.visual.left     = [ [ s:base00, s:base09 ], [ s:base05, s:base02 ] ]
+let s:p.replace.left    = [ [ s:base00, s:base08 ], [ s:base05, s:base02 ] ]
+let s:p.inactive.left   = [ [ s:base02, s:base00 ] ]
+
+let s:p.normal.middle   = [ [ s:base07, s:base01 ] ]
+let s:p.inactive.middle = [ [ s:base01, s:base00 ] ]
+
+let s:p.normal.right    = [ [ s:base01, s:base03 ], [ s:base06, s:base02 ] ]
+let s:p.inactive.right  = [ [ s:base01, s:base00 ] ]
+
+let s:p.normal.error    = [ [ s:base07, s:base08 ] ]
+let s:p.normal.warning  = [ [ s:base07, s:base09 ] ]
+
+let s:p.tabline.left    = [ [ s:base05, s:base02 ] ]
+let s:p.tabline.middle  = [ [ s:base05, s:base01 ] ]
+let s:p.tabline.right   = [ [ s:base05, s:base02 ] ]
+let s:p.tabline.tabsel  = [ [ s:base02, s:base0A ] ]
+
+let g:lightline#colorscheme#base16_{{ base16.theme[default_theme]['scheme_slug'] }}#palette = lightline#colorscheme#flatten(s:p)
+

@@ -1,0 +1,6 @@
+---
+apt_packages:
+  - libglib2.0-dev
+  - libgtk-3-dev
+  - libpango1.0-dev
+  - libxdg-basedir-dev

@@ -1,0 +1,5 @@
+---
+rubymine_version: 2019.1.2
+rubymine_install_dir: /opt/rubymine/rubymine-{{ rubymine_version }}
+rubymine_filename: "RubyMine-{{ rubymine_version }}.tar.gz"
+rubymine_mirror: "http://download.jetbrains.com/ruby"

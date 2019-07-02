@@ -1,0 +1,43 @@
+---
+- name: Insert/Update lightline config
+  blockinfile:
+    path: "{{ neovim_config_dir }}/init.vim"
+    marker: '""<!-- {mark} CONFIG BLOCK -->"'
+    insertafter: lightconfigs
+    block: |
+      let g:lightline = {
+      \ 'colorscheme': '{{ lightline_scheme_name }}',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ], ['ctrlpmark'], [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ],
+      \   'right': [ [ 'syntastic', 'lineinfo' ], ['percent'], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+      \ },
+      \ 'component_function': {
+      \   'filename': 'LightLineFilename',
+      \   'fileformat': 'LightLineFileformat',
+      \   'filetype': 'LightLineFiletype',
+      \   'fileencoding': 'LightLineFileencoding',
+      \   'mode': 'LightLineMode',
+      \   'ctrlpmark': 'CtrlPMark',
+      \   'cocstatus': 'coc#status',
+      \   'currentfunction': 'CocCurrentFunction',
+      \ },
+      \ 'component_expand': {
+      \   'syntastic': 'SyntasticStatuslineFlag',
+      \ },
+      \ 'component_type': {
+      \   'syntastic': 'error',
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+
+- name: Insert/Update lightline config
+  blockinfile:
+    path: "{{ neovim_config_dir }}/init.vim"
+    marker: '""<!-- {mark} AU BLOCK -->"'
+    insertafter: " lightau"
+    block: |
+      augroup AutoSyntastic
+        autocmd!
+        autocmd BufWritePost *.c,*.cpp call s:syntastic()
+      augroup END

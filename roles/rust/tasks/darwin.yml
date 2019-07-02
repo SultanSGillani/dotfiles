@@ -1,0 +1,7 @@
+---
+- name: Install | osx
+  homebrew:
+    name: exa
+    state: present
+  tags:
+    - initial

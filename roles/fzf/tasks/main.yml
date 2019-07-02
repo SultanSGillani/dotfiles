@@ -1,0 +1,12 @@
+---
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: ansible_facts['os_family']|lower is defined
+
+- name: copy completions
+  copy:
+    src: "fzf-zsh.symlink"
+    dest: "{{ dotfiles_user_home }}/.fzf.zsh"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0644

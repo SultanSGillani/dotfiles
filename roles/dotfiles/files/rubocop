@@ -1,0 +1,21 @@
+---
+inherit_from:
+  - .rubocop_airbnb.yml
+AllCops:
+  Exclude:
+    - '**/*.db'
+    - '**/node_modules/*'
+    - '**/*.py'
+    - 'config/**/*'
+    - 'script/**/*'
+  Include:
+    - '**/*.rb'
+    - '**/*.gemfile'
+    - '**/*.gemspec'
+    - '**/*.rake'
+    - '**/*.ru'
+    - '**/Gemfile'
+    - '**/Rakefile'
+
+Metrics/LineLength:
+  Max: 120

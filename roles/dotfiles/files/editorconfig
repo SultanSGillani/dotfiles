@@ -1,0 +1,40 @@
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{js,py}]
+charset = utf-8
+max-line-length = 120
+
+# python
+[*.py]
+indent_style = space
+indent_size = 4
+skip = .eggs,.tox,docs,.env,venv
+skip_glob = **/migrations/*
+line_length = 120
+known_future_library = future,six
+known_standard_library = collections,copy,distutils,functools,inspect,io,json,logging,operator,os,pkg_resources,re,setuptools,sys,types,warnings
+known_third_party = debug_toolbar,decouple,django,django_extensions,django_su,rest_framework,corsheaders,django_filters,rest_framework_filters,docs,drf_yasg
+known_first_party = comments,films,forums,imdb,import_scripts,api,invites,media_formats,mediainfo,rotten_tomatoes,tests,torrent_requests,torrent_stats,torrents,tracker,users,wiki,www
+
+# Tab indentation (no size specified)
+[Makefile]
+indent_style = tab
+
+# Indentation override for remote.yml JS under lib directory
+[lib/**.js]
+indent_style = space
+indent_size = 2
+
+# Matches the exact files either package.json or .travis.yml
+[{package.json,.travis.yml,.gitlab-ci.yml}]
+indent_style = space
+indent_size = 2
+

@@ -1,0 +1,11 @@
+---
+# list of username or %groupname
+sudo_users:
+  - name: '%{{ sudoers_group }}'
+    nopasswd: yes
+# list of username or %groupname and their defaults
+sudo_defaults: []
+# default sudoers file
+sudoers_file: ansible
+# delete other files in /etc/sudoers.d/
+purge_other_sudoers_files: no

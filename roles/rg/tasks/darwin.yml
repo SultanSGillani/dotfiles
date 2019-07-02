@@ -1,0 +1,7 @@
+---
+- name: Install rg | osx
+  homebrew:
+    name: ripgrep
+    state: present
+  tags:
+    - initial

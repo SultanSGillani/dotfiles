@@ -1,0 +1,54 @@
+[global]
+monitor = 0
+follow = mouse
+geometry = "250x50-24+24"
+indicate_hidden = yes
+shrink = no
+separator_height = 0
+padding = 16
+horizontal_padding = 24
+frame_width = 2
+sort = no
+idle_threshold = 120
+font = Noto Sans 8
+line_height = 4
+markup = full
+format = "<b>%s</b>\n%b"
+alignment = left
+show_age_threshold = 60
+word_wrap = yes
+ignore_newline = no
+stack_duplicates = false
+hide_duplicate_count = yes
+show_indicators = no
+icon_position = off
+sticky_history = yes
+history_length = 20
+browser = /usr/bin/firefox -new-tab
+always_run_script = true
+title = Dunst
+class = Dunst
+
+[shortcuts]
+close = ctrl+space
+close_all = ctrl+shift+space
+history = ctrl+grave
+context = ctrl+shift+period
+
+frame_color = "#{{ base16.theme[default_theme]['base05_hex'] }}"
+separator_color = "#{{ base16.theme[default_theme]['base05_hex'] }}"
+
+[base16_low]
+    msg_urgency = low
+    background = "#{{ base16.theme[default_theme]['base01_hex'] }}"
+    foreground = "#{{ base16.theme[default_theme]['base03_hex'] }}"
+
+[base16_normal]
+    msg_urgency = normal
+    background = "#{{ base16.theme[default_theme]['base02_hex'] }}"
+    foreground = "#{{ base16.theme[default_theme]['base05_hex'] }}"
+
+[base16_critical]
+    msg_urgency = critical
+    background = "#{{ base16.theme[default_theme]['base08_hex'] }}"
+    foreground = "#{{ base16.theme[default_theme]['base06_hex'] }}"

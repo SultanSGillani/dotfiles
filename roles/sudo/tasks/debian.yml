@@ -1,0 +1,10 @@
+---
+- name: Install sudo for apt
+  package:
+    name: sudo
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial
+    - sudo

@@ -1,0 +1,197 @@
+---
+# .zshrc config
+zsh_editor: nvim
+zsh_term: xterm-256color
+
+zsh_rbenv_root: "export RBENV_ROOT=${HOME}/.rbenv"
+zsh_debian_path: ${HOME}/bin:/snap/bin
+
+zsh_mac_path: "$(ruby -e 'puts Gem.user_dir')/bin"
+zsh_arch_path: "/usr/lib/ccache/bin"
+zsh_mac_exports: "export GROOVY_HOME=/usr/local/opt/groovy/libexec"
+zsh_path:
+  - ${ZSH}/bin
+  - ${HOME}/.local/bin
+  - /usr/local/bin
+  - ${RBENV_ROOT}/bin
+  - /usr/sbin
+  - /usr/bin
+  - /sbin
+  - /bin
+  - ${PYENV_ROOT}/bin
+  - ${HOME}/.cargo/bin
+  - ${JAVA_HOME}/bin
+  - /usr/local/sbin
+
+fzf_widgets: ytet5uy4/fzf-widgets
+
+# Zsh Aliases
+zsh_aliases:
+  ### Bat ###
+  - { alias: 'cat', action: 'bat' }
+  ### Exa ###
+  - { alias: 'l', action: 'exa' }
+  - { alias: 'ls', action: 'exa -a --group-directories-first --color-scale' }
+  - { alias: 'la', action: 'exa -alF --group-directories-first --color-scale' }
+  - { alias: 'll', action: 'exa -aFG --group-directories-first --color-scale' }
+  - { alias: 'lg', action: 'exa -alFG --group-directories-first --color-scale' }
+  - { alias: 'lh', action: 'exa -abFgGhlSu --group-directories-first --color-scale' }
+  - { alias: 'lr', action: 'exa -alr --group-directories-first --color-scale' }
+  - { alias: 'lt', action: 'exa -alFs time --color-scale' }
+  - { alias: 'lk', action: 'exa -als extension --group-directories-first --color-scale' }
+  - { alias: 'lS', action: 'exa -alFs size --group-directories-first --color-scale' }
+  - { alias: 'lR', action: 'exa -R --group-directories-first' }
+  - { alias: 'lT', action: 'exa -T' }
+  - { alias: 'l.', action: 'exa -adl .* --color-scale' }
+  - { alias: 'tree', action: 'exa --tree' }
+  ### Git ###
+  - { alias: 'git', action: 'hub' }
+  ### Gpg ###
+  - { alias: 'gpg', action: 'gpg2' }
+  ### Neovim ###
+  - { alias: 'vim', action: 'nvim' }
+  ### Tmux ###
+  - { alias: 'tmux', action: 'tmux -2' }
+  ### Rsync ###
+  - { alias: 'rsync', action: 'noglob rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system --acls --xattrs --crtimes --fileflags --protect-decmpfs --force-change' }
+  - { alias: 'rsync-copy', action: 'rsync' }
+  - { alias: 'rsync-move', action: 'rsync --remove-source-files' }
+  - { alias: 'nodenv', action: 'nocorrect nodenv' }
+  - { alias: 'rbenv', action: 'nocorrect rbenv' }
+  - { alias: 'rsync-update', action: 'rsync --update' }
+  - { alias: 'rsync-synchronize', action: 'rsync --update --delete' }
+  - { alias: 'cpv', action: 'command rsync --human-readable --progress --archive --hard-links --acls --protect-decmpfs --crtimes --rsh=/dev/null --one-file-system --backup --backup-dir=/tmp/rsync --' }
+  - { alias: 'visudo', action: 'sudo EDITOR=/usr/bin/nvim visudo' }
+  - { alias: '', action: '' }
+
+zsh_linux_aliases:
+  - { alias: 'apt-update-list-upgrade', action: 'apt update && apt upgrade --dry-run | grep Inst | sort | fzf && apt upgrade' }
+  ### Copy ###
+  - { alias: 'copy', action: 'xclip -sel clip < $@ ' }
+  - { alias: 'paste', action: 'xclip -selection clip -o' }
+  ### Lsb ###
+  - { alias: 'ubuntu-release', action: 'lsb_release -a' }
+
+### Mac ###
+zsh_mac_aliases:
+  - { alias: 'cask', action: 'brew cask' }
+  - { alias: 'copy', action: 'pbcopy < $@' }
+  - { alias: 'paste', action: 'pbpaste' }
+  - { alias: 'services', action: 'brew services' }
+  - { alias: 'growl', action: 'terminal-notifier -message' }
+  - { alias: 'update!', action: 'sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm update npm -g; npm update -g; sudo gem update --system; sudo gem update' }
+  - { alias: 'cleanup!', action: 'brew cleanup -s' }
+  - { alias: 'sleep!', action: 'pmset sleepnow' }
+  - { alias: 'hidedesktop', action: 'defaults write com.apple.finder CreateDesktop -bool false && killall Finder' }
+  - { alias: 'showdesktop', action: 'defaults write com.apple.finder CreateDesktop -bool true && killall Finder' }
+
+# zsh_aliases:
+zsh_misc_aliases:
+  - { alias: 'nmap_open_ports', action: 'nmap --open' }
+  - { alias: 'mkdir', action: 'mkdir -p' }
+  - { alias: 'weather', action: 'curl -k4 http://wttr.in/Atlanta' }
+  - { alias: '......', action: 'cd ../../../../..' }
+  - { alias: '.....', action: 'cd ../../../..' }
+  - { alias: '....', action: 'cd ../../..' }
+  - { alias: '...', action: 'cd ../..' }
+  - { alias: '..', action: 'cd ..' }
+  - { alias: 'compfuckyou', action: 'compaudit | xargs chmod g-w' }
+  - { alias: 'cputemp', action: 'sensors | grep Core' }
+  - { alias: 'find_big_files', action: 'du -a / | sort -n -r | head -n 10' }
+  - { alias: 'mkcd', action: '_(){ mkdir -p $1; cd $1; }; _' }
+  - { alias: 'rd', action: 'rmdir' }
+  - { alias: 'suser', action: 'su -' }
+  - { alias: 'vlc', action: 'open -a vlc' }
+  - { alias: 'week', action: 'date +%V' }
+  # Flush Directory Service cache
+  - { alias: 'flush', action: 'dscacheutil -flushcache' }
+  - { alias: 'pcat', action: 'pygmentize -f terminal256 -O style=native -g' }
+  - { alias: 'grep', action: 'grep --color=auto' }
+  - { alias: 'egrep', action: 'egrep --color=auto' }
+  - { alias: 'fgrep', action: 'fgrep --color=auto' }
+  # remove broken symlinks
+  - { alias: 'clsym', action: 'find -L . -name . -o -type d -prune -o -type l -exec rm {} +' }
+  # File Size
+  - { alias: 'fs', action: 'stat -f \"%z bytes\"' }
+  # ROT13-encode text. Works for decoding, too! ;)
+  - { alias: 'rot13', action: 'tr a-zA-Z n-za-mN-ZA-M' }
+  - { alias: '', action: '' }
+  ### The Rest ###
+  - { alias: 'clr', action: 'clear' }
+  - { alias: 'pg', action: 'ps -ef | rg' }
+  - { alias: 'pkill!', action: 'pkill -9 -f ' }
+  - { alias: 'fkill', action: 'fkill -v' }
+  - { alias: 'lj', action: 'jobs' }
+  - { alias: 'reload!', action: '. ~/.zshrc' }
+  - { alias: 'timezsh', action: 'time zsh -i -c echo' }
+  - { alias: 'ipe', action: 'curl ipinfo.io/ip' }
+  - { alias: 'play', action: 'ansible-playbook' }
+  - { alias: '', action: '' }
+
+zsh_python_aliases:
+  - { alias: 'delete_pycs', action: 'fd . -name \"*.pyc\" -exec rm -rf {} \;' }
+  - { alias: 'pyencode', action: 'python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"' }
+  - { alias: 'py', action: 'python3' }
+  - { alias: 'icurl', action: 'curl -I' }
+  - { alias: 'pyserv2', action: 'python2 -m SimpleHTTPServer' }
+  - { alias: 'pyserv', action: 'python -m http.server' }
+  - { alias: 'autopy', action: 'autopep8 --in-place --aggressive $@' }
+  - { alias: '', action: '' }
+# Some useful nmap aliases for scan modes
+
+# Nmap options are:
+#   -sS - TCP SYN scan
+#   -v - verbose
+#   -T1 - timing of scan. Options are paranoid (0), sneaky (1), polite (2), normal (3), aggressive (4), and insane (5)
+#   -sF - FIN scan (can sneak through non-stateful firewalls)
+#   -PE - ICMP echo discovery probe
+#   -PP - timestamp discovery probe
+#   -PY - SCTP init ping
+#   -g - use given number as source port
+#   -A - enable OS detection, version detection, script scanning, and traceroute (aggressive)
+#   -O - enable OS detection
+#   -sA - TCP ACK scan
+#   -F - fast scan
+#   --script=vulscan - also access vulnerabilities in target
+
+# Aliases explained:
+#   nmap_open_ports            - Scan for open ports on target
+#   nmap_list_interfaces       - List all network interfaces on host where the command runs
+#   nmap_slow                  - Slow scan that avoids to spam the targets logs
+#   nmap_fin                   - Scan to see if hosts are up with TCP FIN scan
+#   nmap_full                  - Aggressive full scan that scans all ports, tries to determine OS and service versions
+#   nmap_check_for_firewall    - TCP ACK scan to check for firewall existence
+#   nmap_ping_through_firewall - Host discovery with SYN and ACK probes instead of just pings to avoid firewall restrictions
+#   nmap_fast                  - Fast scan of the top 300 popular ports
+#   nmap_detect_versions       - Detects versions of services and OS, runs on all ports
+#   nmap_check_for_vulns       - Uses vulscan script to check target services for vulnerabilities
+#   nmap_full_udp              - Same as full but via UDP
+#   nmap_traceroute            - Try to traceroute using the most linux ports
+#   nmap_full_with_scripts     - Same as nmap_full but also runs all the scripts
+#   nmap_web_safe_osscan       - Little "safer" scan for OS version  as connecting to only HTTP and HTTPS ports doesn't look so attacking.
+
+zsh_nmap_aliases:
+  - { alias: 'nmap_open_ports', action: 'nmap --open' }
+  - { alias: 'nmap_list_interfaces', action: 'nmap --iflist' }
+  - { alias: 'nmap_slow', action: 'nmap -sS -v -T1' }
+  - { alias: 'nmap_fin', action: 'nmap -sF -v' }
+  - { alias: 'nmap_full', action: 'nmap -sS -T4 -PE -PP -PS80,443 -PY -g 53 -A -p1-65535 -v' }
+  - { alias: 'nmap_check_for_firewall', action: 'nmap -sA -p1-65535 -v -T4' }
+  - { alias: 'nmap_ping_through_firewall', action: 'sudo nmap -PS -PA' }
+  - { alias: 'nmap_fast', action: 'sudo nmap -F -T5 --version-light --top-ports 300' }
+  - { alias: 'nmap_detect_versions', action: 'sudo nmap -sV -p1-65535 -O --osscan-guess -T4 -Pn' }
+  - { alias: 'nmap_check_for_vulns', action: 'sudo nmap --script=vulscan' }
+  - { alias: 'nmap_full_udp', action: 'sudo nmap -sS -sU -T4 -A -v -PE -PS22,25,80 -PA21,23,80,443,3389 ' }
+  - { alias: 'nmap_traceroute', action: 'sudo nmap -sP -PE -PS22,25,80 -PA21,23,80,3389 -PU -PO --traceroute ' }
+  - { alias: 'nmap_full_with_scripts', action: 'sudo nmap -sS -sU -T4 -A -v -PE -PP -PS21,22,23,25,80,113,31339 -PA80,113,443,10042 -PO --script all ' }
+  - { alias: 'nmap_web_safe_osscan', action: 'sudo nmap -p 80,443 -O -v --osscan-guess --fuzzy  ' }
+  - { alias: '', action: '' }
+
+zsh_ruby_aliases:
+  - { alias: 'urlencode', action: 'ruby -r cgi -e "puts CGI.escape(ARGV[0])"' }
+  - { alias: 'urldecode', action: 'ruby -r cgi -e "puts CGI.unescape(ARGV[0])"' }
+  - { alias: 'urlencode_json', action: 'ruby -e "require \"uri\"; puts URI.escape(STDIN.read)"' }
+  - { alias: 'urldecode_json', action: 'ruby -e "require \"uri\"; puts URI.unescape(STDIN.read)"' }
+  - { alias: 'pp_json', action: 'ruby -e "require \"json\"; require \"yaml\"; puts JSON.parse(STDIN.read).to_yaml"' }
+  - { alias: 'is_json', action: 'ruby -e "require \"json\"; begin; JSON.parse(STDIN.read); puts true; rescue Exception => e; puts false; end"' }
+  - { alias: '', action: '' }

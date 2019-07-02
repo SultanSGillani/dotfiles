@@ -1,0 +1,7 @@
+---
+- name: OSX | Install neovim
+  homebrew:
+    name: "{{ vim_packages }}"
+    state: present
+  tags:
+    - initial

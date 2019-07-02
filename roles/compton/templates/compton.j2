@@ -1,0 +1,149 @@
+#################################
+#
+# Backend
+#
+#################################
+
+backend = "glx";
+
+#################################
+#
+# GLX backend
+#
+#################################
+
+glx-no-stencil = true;
+glx-copy-from-front = false;
+glx-swap-method = "undefined";
+
+#################################
+#
+# Shadows
+#
+#################################
+
+shadow = true;
+shadow-radius = 5;
+shadow-offset-x = -5;
+shadow-offset-y = -5;
+shadow-opacity = 0.5;
+no-dock-shadow = true;
+shadow-exclude = [
+    "! name~=''",
+    "name = 'Notification'",
+    "name = 'Plank'",
+    "name = 'Docky'",
+    "name = 'Kupfer'",
+    "name = 'xfce4-notifyd'",
+    "name *= 'VLC'",
+    "name *= 'compton'",
+    "name *= 'Firefox'",
+    "name *= 'Chrome'",
+    "class_g = 'Firefox'",
+    "class_g = 'Conky'",
+    "class_g = 'Dunst'",
+    "class_g = 'Synapse'",
+    "class_g ?= 'Notify-osd'",
+    "class_g ?= 'Cairo-dock'",
+    "class_g ?= 'Xfce4-notifyd'",
+    "class_g ?= 'Xfce4-power-manager'",
+    "_GTK_FRAME_EXTENTS@:c",
+    "_NET_WM_STATE@:32a *= '_NET_WM_STATE_HIDDEN'"
+];
+shadow-ignore-shaped = false;
+
+#################################
+#
+# Opacity
+#
+#################################
+
+#inactive-opacity = 0.75;
+#active-opacity = 0.75;
+#frame-opacity = 0.75;
+
+blur-background-fixed = false;
+blur-background-exclude = [
+    "window_type = 'desktop'",
+    "name = 'GLava'",
+    "class_g *?= 'Fire'",
+    "class_g *?= 'Navi'",
+    "name = 'xfce4-screenshooter'",
+    "class_g ?= 'xfce4-screenshooter'"
+];
+inactive-opacity-override = true;
+alpha-step = 0.06;
+
+blur-background = true;
+blur-background-frame = true;
+blur-method = "kawase";
+blur-strength = 15;
+blur-level = 5;
+
+opacity-rule = [
+  "99:_NET_WM_STATE@[0]:32a = '_NET_WM_STATE_FULLSCREEN'",
+  "99:_NET_WM_STATE@[1]:32a = '_NET_WM_STATE_FULLSCREEN'",
+  "99:_NET_WM_STATE@[2]:32a = '_NET_WM_STATE_FULLSCREEN'",
+  "99:_NET_WM_STATE@[3]:32a = '_NET_WM_STATE_FULLSCREEN'",
+  "99:_NET_WM_STATE@[4]:32a = '_NET_WM_STATE_FULLSCREEN'",
+  "99:class_g = 'Firefox'",
+  "99:class_g = 'Slack'",
+  "93:class_g = 'jetbrains-pycharm'",
+  "93:class_g = 'jetbrains-rubymine'",
+  "75:class_g = 'URxvt'",
+  "50:class_g = 'Polybar'"
+];
+
+#################################
+#
+# Fading
+#
+#################################
+
+fading = true;
+fade-delta = 4;
+fade-in-step = 0.03;
+fade-out-step = 0.03;
+fade-exclude = [ ];
+
+#################################
+#
+# Other
+#
+#################################
+
+mark-wmwin-focused = false;
+mark-ovredir-focused = false;
+use-ewmh-active-win = false;
+detect-rounded-corners = true;
+detect-client-opacity = true;
+refresh-rate = 0;
+dbe = false;
+unredir-if-possible = false;
+focus-exclude = [ ];
+detect-transient = true;
+detect-client-leader = true;
+
+#################################
+#
+# Window type settings
+#
+#################################
+
+wintypes:
+{
+    tooltip =
+    {
+        fade = true;
+        shadow = true;
+        opacity = 0.85;
+        focus = false;
+    };
+};
+
+######################
+#
+# XSync
+#
+######################
+xrender-sync-fence = true;

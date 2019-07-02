@@ -1,0 +1,5 @@
+---
+- name: Install nodenv | OSX
+  homebrew:
+    name: nodenv
+    state: present

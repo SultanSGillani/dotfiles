@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+echo -n ${1} | sha1sum | /home/sultan/.rbenv/shims/ruby -e "require 'prime'; puts STDIN.gets.split('').values_at(*Prime.first(12)).join"

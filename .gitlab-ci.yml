@@ -1,0 +1,58 @@
+---
+image: docker:stable
+services:
+  - docker:dind
+stages:
+  - linting
+  - testing
+variables:
+  DOCKER_DRIVER: overlay2
+  GIT_SUBMODULE_STRATEGY: recursive
+  PIP_CACHE_DIR: "${CI_PROJECT_DIR}/.cache"
+  ANSIBLE_LIBRARY: $ANSIBLE_LIBRARY
+  ANSIBLE_VERBOSITY: $ANSIBLE_VERBOSITY
+  ANSIBLE_ROLES_PATH: $ANSIBLE_ROLES_PATH
+  ANSIBLE_HOST_KEY_CHECKING: $ANSIBLE_HOST_KEY_CHECKING
+  ANSIBLE_LOG_PATH: $ANSIBLE_LOG_PATH
+  ANSIBLE_EXECUTABLE: $ANSIBLE_EXECUTABLE
+  ANSIBLE_BECOME: $ANSIBLE_BECOME
+  ANSIBLE_BECOME_USER: $ANSIBLE_BECOME_USER
+  ANSIBLE_PIPELINING: $ANSIBLE_PIPELINING
+  ANSIBLE_INVENTORY: $ANSIBLE_INVENTORY
+  ANSIBLE_INVENTORY_ENABLED: $ANSIBLE_INVENTORY_ENABLED
+  TTY: xterm
+cache:
+  paths:
+    - .cache/
+.linting: &linting
+  stage: linting
+yamllint:
+  <<: *linting
+  image: registry.gitlab.com/sultangillani/docker-yamllint:latest
+  script:
+    - yamllint -c ./.yamllint -f standard .
+ansible-lint:
+  <<: *linting
+  image: registry.gitlab.com/sultangillani/docker-ansible-lint:latest
+  script:
+    - chmod 0700 .
+    - ansible-lint -c .ansible-lint sudo.yml
+.testing: &testing
+  stage: testing
+test-debian:
+  <<: *testing
+  image: registry.gitlab.com/sultangillani/ansible-docker-debian:buster
+  script:
+    - ansible-playbook -i inventory.yml tests/test.yml -vvv --skip-tags upgrade,keys
+  stage: testing
+test-ubuntu:
+  <<: *testing
+  image: registry.gitlab.com/sultangillani/ansible-docker-ubuntu:disco
+  script:
+    - ansible-playbook -i inventory.yml tests/test.yml -vvv --skip-tags upgrade,keys
+  stage: testing
+test-arch:
+  <<: *testing
+  image: registry.gitlab.com/sultangillani/ansible-docker-archlinux:latest
+  script:
+    - ansible-playbook -i inventory.yml tests/test.yml -vvv --skip-tags upgrade,keys

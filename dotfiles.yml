@@ -1,0 +1,175 @@
+---
+- name: Ansible Dev & Dotfiles Setup
+  vars_files:
+    - group_vars/all/main.yml
+  hosts: all
+  gather_facts: yes
+  become: yes
+  become_user: "{{ zsh_user }}"
+  tasks:
+    - block:
+        - import_role:
+            name: apt
+          tags:
+            - apt
+          when: ansible_facts['os_family']|lower == "debian"
+        - import_role:
+            name: arch
+          tags:
+            - arch
+            - aur
+            - pacman
+            - yay
+          when: ansible_facts['os_family']|lower == "archlinux"
+        - import_role:
+            name: osx
+          tags:
+            - osx
+            - mac
+            - darwin
+          when: ansible_facts['os_family']|lower == "darwin"
+        - import_role:
+            name: base
+          tags:
+            - dev
+            - base
+        - import_role:
+            name: git
+          tags:
+            - git
+        - import_role:
+            name: zsh
+          tags:
+            - zsh
+            - zplugin
+        - import_role:
+            name: dotfiles
+          tags:
+            - dotfiles
+        - import_role:
+            name: ssh
+          tags:
+            - ssh
+            - ssh_conf
+        - import_role:
+            name: gpg
+          tags:
+            - gpg
+            - gnupg
+        - import_role:
+            name: wallpaper
+          tags:
+            - wallpaper
+            - wallpapers
+        - import_role:
+            name: bat
+          tags:
+            - bat
+        - import_role:
+            name: screen
+          tags:
+            - screen
+            - term
+        - import_role:
+            name: firefox
+          tags:
+            - firefox
+            - firefox_uri
+        - import_role:
+            name: slack
+          tags:
+            - slack
+        - import_role:
+            name: docker
+          tags:
+            - docker
+        - import_role:
+            name: fd
+          tags:
+            - fd
+        - import_role:
+            name: asdf
+          tags:
+            - asdf
+        - import_role:
+            name: fzf
+          tags:
+            - fzf
+        - import_role:
+            name: hub
+          tags:
+            - hub
+        - import_role:
+            name: pycharm
+          tags:
+            - jetbrains
+            - pycharm
+        - import_role:
+            name: webstorm
+          tags:
+            - jetbrains
+            - webstorm
+        - import_role:
+            name: intellij
+          tags:
+            - jetbrains
+            - intellij
+        - import_role:
+            name: rubymine
+          tags:
+            - jetbrains
+            - rubymine
+        - import_role:
+            name: neofetch
+          tags:
+            - neofetch
+        - import_role:
+            name: neovim
+          tags:
+            - neovim
+            - vim
+            - nvim
+        - import_role:
+            name: nodenv
+          tags:
+            - node
+            - nodejs
+            - nodenv
+            - npm
+        - import_role:
+            name: pyenv
+          tags:
+            - python
+            - pyenv
+        - import_role:
+            name: pip
+          tags:
+            - pip
+        - import_role:
+            name: rclone
+          tags:
+            - rclone
+        - import_role:
+            name: rg
+          tags:
+            - rg
+            - ripgrep
+        - import_role:
+            name: ruby
+          tags:
+            - ruby
+            - rbenv
+        - import_role:
+            name: rust
+          tags:
+            - rust
+            - exa
+        - import_role:
+            name: tmux
+          tags:
+            - tmux
+            - tmuxp
+- import_playbook: linux.yml
+  when: "ansible_facts['os_family']|lower != 'darwin'"
+- import_playbook: darwin.yml
+  when: "ansible_facts['os_family']|lower == 'darwin'"

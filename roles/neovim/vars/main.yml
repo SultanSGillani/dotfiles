@@ -1,0 +1,28 @@
+---
+colorscheme:
+  - '{{ vim_theme }}'
+
+color:
+  - '{{ vim_theme }}'
+
+filetype:
+  - "on"
+  - plugin indent on
+
+neovim_config_dir: '{{ dotfiles_user_home }}/.config/nvim'
+
+snippet_files:
+  - 'c'
+  - 'global'
+  - 'html'
+  - 'python'
+  - 'ruby'
+  - 'sh'
+  - 'zsh'
+
+syntax:
+  - "on"
+
+vim_packages:
+  - neovim
+  - vim

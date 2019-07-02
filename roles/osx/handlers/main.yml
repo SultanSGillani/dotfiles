@@ -1,0 +1,21 @@
+---
+# handlers files for osx
+- name: Clear homebrew cache
+  file:
+    path: "{{ homebrew_cache_path.stdout | trim }}"
+    state: absent
+  become: "{{ (zsh_user != ansible_user_id) | bool }}"
+  become_user: "{{ zsh_user }}"
+  when: 'homebrew_clear_cache | bool'
+
+- name: kill_finder
+  command: killall Finder
+  ignore_errors: yes
+
+- name: kill_dock
+  command: killall Dock
+  ignore_errors: yes
+
+- name: kill_systemUIserver
+  command: killall SystemUIServer
+  ignore_errors: yes

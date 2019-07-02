@@ -1,0 +1,7 @@
+---
+- name: OSX | install neofetch
+  homebrew:
+    name: neofetch
+    state: present
+  tags:
+    - initial

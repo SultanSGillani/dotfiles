@@ -1,0 +1,69 @@
+---
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: "ansible_facts['os_family']|lower is defined"
+
+- name: install zplugin
+  git:
+    repo: "https://github.com/zdharma/zplugin.git"
+    dest: "{{ dotfiles_user_home }}/.zplugin/bin"
+    update: no
+    version: master
+  tags:
+    - initial
+
+- name: Zplugin permissions
+  file:
+    dest: "{{ dotfiles_user_home }}/.zplugin"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: "u=rwX,g=rX,o=rX"
+
+- name: Write .zshrc config
+  template:
+    src: zshrc.j2
+    dest: "{{ dotfiles_user_home }}/.zshrc"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    backup: no
+  tags:
+    - update
+
+- name: Write .zprofile config
+  template:
+    src: zprofile.j2
+    dest: "{{ dotfiles_user_home }}/.zprofile"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    backup: no
+  tags:
+    - update
+
+- name: Write zplugin.zsh config file
+  template:
+    src: zplugin.j2
+    dest: "{{ dotfiles_user_home }}/zplugin.zsh"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    backup: no
+  tags:
+    - update
+
+- name: Write theme config file
+  template:
+    src: "{{ zsh_prompt }}.j2"
+    dest: "{{ dotfiles_user_home }}/.prompt"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    backup: no
+  tags:
+    - update
+
+- name: Set zsh as default shell
+  user:
+    name: "{{ zsh_user }}"
+    shell: "/bin/zsh"
+  become: yes
+  become_user: root
+  tags:
+    - initial

@@ -1,0 +1,13 @@
+
+{{ ansible_managed | comment }}
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name={{ webstorm_application_name }}
+Icon={{ webstorm_install_dir }}/bin/webstorm.png
+Exec="{{ webstorm_install_dir }}/bin/webstorm.sh" %f
+Comment=webstorm foo!
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass={{ webstorm_startup_wm_class }}

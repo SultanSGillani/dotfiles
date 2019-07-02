@@ -1,0 +1,142 @@
+/**
+ * Base16 {{ base16.theme[default_theme]['scheme_name'] }} ROFI Color theme
+ *
+ * Authors
+ *  Scheme: {{ base16.theme[default_theme]['scheme_author'] }}
+ *  Template: Jordi Pakey-Rodriguez (https://github.com/0xdec), Andrea Scarpino (https://github.com/ilpianista)
+ */
+configuration {
+	show-icons: true;
+	sidebar-mode: true;
+	display-drun: "Activate";
+	display-run: "Execute";
+	display-window: "Window";
+    font: "Hack Nerd Font 16";
+
+}
+
+* {
+    red:                         rgba ( {{ base16.theme[default_theme]['base08_rgb_r'] }}, {{ base16.theme[default_theme]['base08_rgb_g'] }}, {{ base16.theme[default_theme]['base08_rgb_b'] }}, 100 % );
+    blue:                        rgba ( {{ base16.theme[default_theme]['base0D_rgb_r'] }}, {{ base16.theme[default_theme]['base0D_rgb_g'] }}, {{ base16.theme[default_theme]['base0D_rgb_b'] }}, 100 % );
+    lightfg:                     rgba ( {{ base16.theme[default_theme]['base06_rgb_r'] }}, {{ base16.theme[default_theme]['base06_rgb_g'] }}, {{ base16.theme[default_theme]['base06_rgb_b'] }}, 100 % );
+    lightbg:                     rgba ( {{ base16.theme[default_theme]['base01_rgb_r'] }}, {{ base16.theme[default_theme]['base01_rgb_g'] }}, {{ base16.theme[default_theme]['base01_rgb_b'] }}, 100 % );
+    foreground:                  rgba ( {{ base16.theme[default_theme]['base05_rgb_r'] }}, {{ base16.theme[default_theme]['base05_rgb_g'] }}, {{ base16.theme[default_theme]['base05_rgb_b'] }}, 100 % );
+    background:                  rgba ( {{ base16.theme[default_theme]['base00_rgb_r'] }}, {{ base16.theme[default_theme]['base00_rgb_g'] }}, {{ base16.theme[default_theme]['base00_rgb_b'] }}, 100 % );
+    background-color:            rgba ( {{ base16.theme[default_theme]['base00_rgb_r'] }}, {{ base16.theme[default_theme]['base00_rgb_g'] }}, {{ base16.theme[default_theme]['base00_rgb_b'] }}, 0 % );
+    separatorcolor:              @foreground;
+    border-color:                @foreground;
+    selected-normal-foreground:  @lightbg;
+    selected-normal-background:  @lightfg;
+    selected-active-foreground:  @background;
+    selected-active-background:  @blue;
+    selected-urgent-foreground:  @background;
+    selected-urgent-background:  @red;
+    normal-foreground:           @foreground;
+    normal-background:           @background;
+    active-foreground:           @blue;
+    active-background:           @background;
+    urgent-foreground:           @red;
+    urgent-background:           @background;
+    alternate-normal-foreground: @foreground;
+    alternate-normal-background: @lightbg;
+    alternate-active-foreground: @blue;
+    alternate-active-background: @lightbg;
+    alternate-urgent-foreground: @red;
+    alternate-urgent-background: @lightbg;
+	line-margin:                 2;
+	line-padding:                2;
+	separator-style:             "none";
+	hide-scrollbar:              "true";
+	margin:                      0;
+	padding:                     0;
+}
+
+window {
+	location:	 west;
+	anchor:		 west;
+	height:		 100%;
+	width:		 22%;
+	orientation: horizontal;
+	children:	 [mainbox];
+}
+
+mainbox {
+	spacing:  0.8em;
+	children: [ entry,listview,sidebar ];
+}
+
+button { padding: 5px 2px; }
+
+button selected {
+	background-color: @active-background;
+	text-color: @background-color;
+}
+
+inputbar {
+	padding: 5px;
+	spacing: 5px;
+}
+
+listview {
+	spacing: 0.5em;
+	dynamic: false;
+	cycle:   true;
+}
+
+element { padding: 10px; }
+
+entry {
+	expand:         false;
+	text-color: @normal-foreground;
+	vertical-align: 1;
+	padding:        5px;
+}
+
+element.normal.normal {
+	background-color: @normal-background;
+	text-color:       @normal-foreground;
+}
+
+element normal.urgent {
+	background-color: @urgent-background;
+	text-color:       @urgent-foreground;
+}
+
+element normal.active {
+	background-color: @active-background;
+	text-color:       @active-foreground;
+}
+
+element.selected.normal {
+	background-color: @selected-normal-background;
+	text-color:       @selected-normal-foreground;
+	border:           0 5px solid 0 0;
+	border-color:	    @active-background;
+}
+
+element.selected.urgent {
+	background-color: @selected-urgent-background;
+	text-color:       @selected-urgent-foreground;
+}
+
+element.selected.active {
+	background-color: @selected-active-background;
+	text-color:       @selected-active-foreground;
+}
+
+element.alternate.normal {
+	background-color: @normal-background;
+	text-color:       @normal-foreground;
+}
+
+element.alternate.urgent {
+	background-color: @urgent-background;
+	text-color:       @urgent-foreground;
+}
+
+element.alternate.active {
+	background-color: @active-background;
+	text-color:       @active-foreground;
+}
+
+/* vim:ft=css

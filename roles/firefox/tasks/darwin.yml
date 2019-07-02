@@ -1,0 +1,7 @@
+---
+- name: Install firefox | Macos
+  homebrew_cask:
+    name: firefox
+    state: present
+  tags:
+    - initial

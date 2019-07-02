@@ -1,0 +1,75 @@
+---
+- name: clone screen
+  git:
+    repo: https://git.savannah.gnu.org/git/screen.git
+    dest: "{{ dotfiles_user_home }}/screen"
+    update: no
+    version: master
+  tags:
+    - initial
+
+- name: run autogen on screen
+  command: "{{ dotfiles_user_home }}/screen/src/autogen.sh"
+  args:
+    chdir: "{{ dotfiles_user_home }}/screen/src"
+    creates: "{{ dotfiles_user_home }}/screen/src/configure"
+  tags:
+    - initial
+
+- name: configure screen
+  command: |
+    "{{ dotfiles_user_home }}/screen/src/configure"
+    --prefix=/usr \
+    --mandir=/usr/share/man \
+    --infodir=/usr/share/info \
+    --enable-pam \
+    --enable-utmp \
+    --enable-telnet \
+    --enable-socket-dir \
+    --with-system_screenrc="/etc/screenrc" \
+    --with-pty-mode="0622" \
+    --with-pty-group=5 \
+    --with-pty-rofs="yes"
+  args:
+    chdir: "{{ dotfiles_user_home }}/screen/src"
+    creates: "{{ dotfiles_user_home }}/screen/src/Makefile"
+  tags:
+    - initial
+
+- name: make screen
+  make:
+    chdir: "{{ dotfiles_user_home }}/screen/src"
+    target:
+  tags:
+    - initial
+
+- name: make install screen
+  make:
+    chdir: "{{ dotfiles_user_home }}/screen/src"
+    target: install
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: copy pam.d and tmpfiles.d
+  copy:
+    src: "{{ item.name }}"
+    dest: "{{ item.dest }}"
+    mode: 0644
+  loop:
+    - { name: pam.d, dest: /etc/pam.d/screen }
+    - { name: tmpfiles.d, dest: /usr/lib/tmpfiles.d/screen.conf }
+    - { name: "{{ dotfiles_user_home }}/screen/src/etc/etcscreenrc", dest: /etc/screenrc }
+    - { name: "{{ dotfiles_user_home }}/screen/src/etc/screenrc", dest: /etc/skel/.screenrc }
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: remove screen repo dir
+  file:
+    path: "{{ dotfiles_user_home }}/screen"
+    state: absent
+  tags:
+    - initial

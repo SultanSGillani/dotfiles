@@ -1,0 +1,93 @@
+# Powerline symbols
+# thin arrow > 
+# thin arrow < 
+# fat arrow > 
+# fat arrow < 
+# Base16 Styling Guidelines:
+
+base00='#{{ base16.theme[default_theme]['base00_hex'] }}' # - Dark shade of blue. Default Background
+base01='#{{ base16.theme[default_theme]['base01_hex'] }}' # - Very dark grayish blue. Lighter Background (Used for status bars)
+base02='#{{ base16.theme[default_theme]['base02_hex'] }}' # - Very dark grayish blue. Selection Background
+base03='#{{ base16.theme[default_theme]['base03_hex'] }}' # - darker grey. Comments, Invisibles, Line Highlighting
+base04='#{{ base16.theme[default_theme]['base04_hex'] }}' # - grey. Dark Foreground (Used for status bars)
+base05='#{{ base16.theme[default_theme]['base05_hex'] }}' # - light grey. Default Foreground, Caret, Delimiters, Operators
+base06='#{{ base16.theme[default_theme]['base06_hex'] }}' # - hint of grey but more white. Light Foreground (Not often used)
+base07='#{{ base16.theme[default_theme]['base07_hex'] }}' # - light grey. Light Background (Not often used)
+base08='#{{ base16.theme[default_theme]['base08_hex'] }}' # - medium red. Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+base09='#{{ base16.theme[default_theme]['base09_hex'] }}' # - medium light orange. Integers, Boolean, Constants, XML Attributes, Markup Link Url
+base0A='#{{ base16.theme[default_theme]['base0A_hex'] }}' # - light yellow green. Classes, Markup Bold, Search Text Background
+base0B='#{{ base16.theme[default_theme]['base0B_hex'] }}' # - medium light green. Strings, Inherited Class, Markup Code, Diff Inserted
+base0C='#{{ base16.theme[default_theme]['base0C_hex'] }}' # - light cyan. Support, Regular Expressions, Escape Characters, Markup Quotes
+base0D='#{{ base16.theme[default_theme]['base0D_hex'] }}' # - cyan blue. Functions, Methods, Attribute IDs
+base0E='#{{ base16.theme[default_theme]['base0E_hex'] }}' # - light magenta. Keywords, Storage, Selector, Markup Italic, Diff Changed
+base0F='#{{ base16.theme[default_theme]['base0F_hex'] }}' # - brownish red. Deprecated, Opening/Closing Embedded Language Tags
+
+# Basic status bar colors
+set -g status-style fg=$base07,bg=$base00
+
+# Left side of status bar
+set -g status-left-style "none"
+set -g status-left-length 150
+
+set -g status-left "#{prefix_highlight}#[fg=$base07,bg=$base00,bold] #S  #[bg=$base07,fg=$base00]#[fg=$base07,bg=$base0D]#[fg=$base00,bg=$base0D] #(whoami) #[fg=$base0D,bg=$base07]#[fg=$base07,bg=$base03] #[fg=$base07,bg=$base03]#I:#P #[fg=$base03,bg=$base07,bold]#[fg=$base07,bg=$base0E,bold]#[bg=$base0E,fg=$base07,bold] #{sysstat_mem}#[fg=$base0E,bg=$base07,bold]#[bg=$base09,fg=$base07]#[fg=$base00,bg=$base09,bold]#{sysstat_cpu}#[fg=$base09,bg=$base07,bold]#[fg=$base07,{% if ansible_facts['hostname'] == 'linuxlaptop' %}bg=$base0B,bold]#{battery_color_bg}#[bg=$base0B,fg=$base00,bold]Batt: #{battery_icon} #{battery_percentage} #{battery_remain}#[fg=$base0B,bg=$base07,bold]#[fg=$base07,bg=$base00,bold]"{% else %}bg=$base00,bold]"
+{% endif %}
+
+# No Right side of status bar
+set -g status-right-style "none"
+set -g status-right-length 60
+set -g status-right ""
+
+# Current window status
+set -g window-status-current-style bg=$base00,fg=$base07
+
+# Window with activity status
+set -g window-status-activity-style bg=$base00,fg=$base07
+
+# Window separator
+set -g window-status-separator ""
+
+# Window status alignment
+set -g status-justify left
+
+# Pane border
+set -g pane-border-style bg=default,fg=colour238
+
+# Active pane border
+set -g pane-active-border-style bg=default,fg=$base0E
+
+# Pane number indicator
+set -g display-panes-colour colour233
+set -g display-panes-active-colour colour245
+
+# Clock mode
+set -g clock-mode-colour $base0E
+set -g clock-mode-style 24
+
+# Message
+set -g message-style bg=$base0E,fg=black
+
+# Command message
+set -g message-command-style bg=colour233,fg=black
+
+# Mode
+set -g mode-style bg=$base00,fg=$base07
+
+# prefix highlight color
+set -g @prefix_highlight_fg "$base06"
+set -g @prefix_highlight_bg "$base0D"
+
+# battery
+set -g @batt_icon_charge_tier8 '🌕'
+set -g @batt_icon_charge_tier7 '🌖'
+set -g @batt_icon_charge_tier6 '🌖'
+set -g @batt_icon_charge_tier5 '🌗'
+set -g @batt_icon_charge_tier4 '🌗'
+set -g @batt_icon_charge_tier3 '🌘'
+set -g @batt_icon_charge_tier2 '🌘'
+set -g @batt_icon_charge_tier1 '🌑'
+set -g @batt_icon_status_charged '🔋'
+set -g @batt_icon_status_charging '⚡'
+set -g @batt_icon_status_discharging '👎'
+set -g @batt_color_status_primary_charged '#3daee9'
+set -g @batt_color_status_primary_charging '#3daee9'
+set -g @prefix_highlight_bg "$base0D"

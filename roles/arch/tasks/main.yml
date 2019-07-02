@@ -1,0 +1,106 @@
+---
+- name: update package cache
+  pacman:
+    upgrade: no
+    update_cache: yes
+  become: yes
+  become_user: root
+  tags:
+    - update
+
+- name: install packages for makepkg.conf
+  package:
+    name: pigz
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: install packages for makepkg.conf
+  package:
+    name: lzop
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: Write makepkg config
+  template:
+    src: makepkg.j2
+    dest: /etc/makepkg.conf
+  become: yes
+  become_user: root
+  tags:
+    - update
+
+- name: Install pacman packages [Archlinux]
+  package:
+    name: "{{ pacman_packages }}"
+    state: present
+    update_cache: yes
+  become: yes
+  become_user: root
+  tags:
+    - initial
+    
+- name: Install sudo for pacman
+  pacman:
+    name: sudo
+    state: present
+    update_cache: yes
+  become: yes
+  become_user: root
+  tags:
+    - initial
+    - sudo
+
+- name: create aur user and give sudo
+  user:
+    name: "{{ aur_user }}"
+    group: wheel
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: aur-builder sudo access
+  lineinfile:
+    path: /etc/sudoers.d/11-install-aur_builder
+    line: "{{ aur_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
+    create: yes
+    validate: "visudo -cf %s"
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+
+- name: Install yay with makepkg
+  aur:
+    name: yay
+    use: makepkg
+  become: yes
+  become_user: "{{ aur_user }}"
+  tags:
+    - initial
+
+- name: upgrade packages [Archlinux]
+  pacman:
+    upgrade: yes
+  become: yes
+  become_user: root
+  tags:
+    - upgrade
+
+- name: install aur packages [Archlinux]
+  aur:
+    name: "{{ yay_packages }}"
+    use: yay
+    skip_pgp_check: true
+  tags:
+    - initial
+    - aur_install
+  become: yes
+  become_user: "{{ aur_user }}"

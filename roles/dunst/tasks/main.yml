@@ -1,0 +1,24 @@
+---
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: ansible_facts['os_family']|lower is defined
+
+- name: Create dunst config directory if it doesnt exist
+  file:
+    path: "{{ dotfiles_user_home }}/.config/dunst"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
+    recurse: yes
+  tags:
+    - initial
+
+- name: Write dunst config
+  template:
+    src: dunst.j2
+    dest: "{{ dotfiles_user_home }}/.config/dunst/dunstrc"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+  tags:
+    - update

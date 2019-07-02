@@ -1,0 +1,15 @@
+---
+- name: Install skhd | Macos
+  homebrew:
+    name: skhd
+    state: present
+  tags:
+    - initial
+
+- name: Write sxhkd config
+  copy:
+    src: skhdrc
+    dest: "{{ dotfiles_user_home }}/.skhdrc"
+    mode: 0755
+  tags:
+    - update

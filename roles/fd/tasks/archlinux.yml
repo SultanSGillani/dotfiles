@@ -1,0 +1,9 @@
+---
+- name: install fd | Archlinux
+  aur:
+    name: fd
+    use: yay
+  become: yes
+  become_user: "{{ aur_user }}"
+  tags:
+    - initial

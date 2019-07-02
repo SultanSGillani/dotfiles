@@ -1,0 +1,12 @@
+---
+vim_packages: []
+
+neovim_config_dir: '{{ dotfiles_user_home }}/.config/nvim'
+
+syntax: []
+
+colorscheme: []
+
+filetype: []
+
+snippet_files: []

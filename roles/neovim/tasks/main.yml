@@ -1,0 +1,79 @@
+---
+- name: Include all .yml files
+  include_vars:
+    dir: vars
+    extensions: [yml]
+
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: "ansible_facts['os_family']|lower is defined"
+
+- name: add functions block
+  set_fact:
+    functions_content: "{{ lookup('template', 'templates/functions.j2') }}"
+
+- name: Create config directory
+  file:
+    path: "{{ neovim_config_dir }}"
+    state: directory
+    recurse: yes
+  tags:
+    - initial
+
+- name: Put config and coc-settings endpoint
+  template:
+    src: "{{ item }}"
+    dest: "{{ neovim_config_dir }}/{{ item }}"
+  loop:
+    - init.vim
+    - coc-settings.json
+  tags:
+    - update
+
+- name: import lightline config block
+  import_tasks: lightline.yml
+
+
+- name: Insert/Update lightline config
+  blockinfile:
+    path: "{{ neovim_config_dir }}/init.vim"
+    marker: '""<!-- {mark} FUNCTIONS BLOCK -->"'
+    insertafter: functions_marker
+    block: "{{ functions_content }}"
+
+- name: import coc block
+  import_tasks: coc.yml
+
+- name: Create plug-config directory
+  file:
+    path: "{{ neovim_config_dir }}/plugs"
+    state: directory
+    recurse: yes
+  tags:
+    - initial
+
+- name: Makes sure UltiSnips directory exists
+  file:
+    path: "{{ neovim_config_dir }}/UltiSnips"
+    state: directory
+  tags:
+    - initial
+
+- name: Copy all snippet files
+  copy:
+    src: "{{ item }}/{{ item }}.snippets"
+    dest: "{{ neovim_config_dir }}/UltiSnips/{{ item }}.snippets"
+  loop: "{{ snippet_files }}"
+  tags:
+    - update
+
+- name: Template the lightline theme
+  template:
+    src: lightline_scheme
+    dest: "{{ neovim_config_dir }}/plugged/lightline.vim/autoload/lightline/colorscheme/{{ lightline_scheme_name }}.vim"
+  notify:
+    - Install plugins
+    - Update plugins
+    - Clean plugins
+  tags:
+    - update

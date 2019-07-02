@@ -1,0 +1,9 @@
+---
+- name: Archlinux Install git
+  package:
+    name: git
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial

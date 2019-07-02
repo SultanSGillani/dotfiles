@@ -1,0 +1,16 @@
+---
+# defaults files for ranger
+
+ranger_files:
+  - { path: 'commands_full', dest: 'commands_full.py' }
+  - { path: 'commands', dest: 'commands.py' }
+  - { path: 'scope', dest: 'scope.sh' }
+
+ranger_apt_packages:
+  - atool
+  - caca-utils
+  - highlight
+  - mediainfo
+  - poppler-utils
+  - ranger
+  - w3m

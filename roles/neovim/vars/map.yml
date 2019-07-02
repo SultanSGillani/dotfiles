@@ -1,0 +1,63 @@
+---
+cmap:
+  - <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+
+cnoremap:
+  - <C-P> <C-R>=expand("%:p:h") . "/" <CR>
+
+imap:
+  - <C-v> <Esc>pi
+  - <C-y> <Esc>ddi
+  - <C-z> <Esc>ui
+  - <C-F> <C-R>=expand("%")<CR>
+  - <Tab> <C-N>
+  - <C-L> <Space>=><Space>
+
+map:
+  - <Leader>w :call OpenURL()<CR>
+  - <C-z> <Esc>
+nmap:
+  - <F1> <Esc>
+  - <silent> <F8> :TagbarToggle<CR>
+  - <silent> [c <Plug>(coc-diagnostic-prev)
+  - <silent> ]c <Plug>(coc-diagnostic-next)
+  - <silent> gd <Plug>(coc-definition)
+  - <silent> gy <Plug>(coc-type-definition)
+  - <silent> gi <Plug>(coc-implementation)
+  - <silent> gr <Plug>(coc-references)
+  - <leader>rn <Plug>(coc-rename)
+  - <leader>f  <Plug>(coc-format-selected)
+  - <leader>a  <Plug>(coc-codeaction-selected)
+  - <leader>ac  <Plug>(coc-codeaction)
+  - <leader>qf  <Plug>(coc-fix-current)
+
+nnoremap:
+  - <silent> <F2> :NERDTreeFind<CR>
+  - <silent> <F3> :NERDTreeToggle<CR>
+  - <silent> K :call <SID>show_documentation()<CR>
+  - <leader>q :call OpenUrl#UnderCursor()<CR>
+
+noremap:
+  - <leader>ct :silent ! ctags -R --pluguages=ruby --exclude=.git --exclude=log -f .tags<cr>
+
+inoremap:
+  - '<expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"'
+  - <silent><expr> <c-space> coc#refresh()
+  - '<expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"'
+
+vmap:
+  # copy paste in visual n
+  - <C-c> y<Esc>i
+  - <C-x> d<Esc>i
+  - D y'>p
+  - P p :call setreg('"', getreg('0')) <CR>
+  - '< <gv'
+  - '> >gv'
+
+vnoremap:
+  - J :m '>+1<CR>gv=gv
+  - K :m '<-2<CR>gv=gv
+
+xmap:
+  - <leader>f  <Plug>(coc-format-selected)
+  - <leader>a  <Plug>(coc-codeaction-selected)

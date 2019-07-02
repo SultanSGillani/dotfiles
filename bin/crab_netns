@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -e
+
+ip netns add port0
+ip link set eth0 netns port0
+ip netns exec port0 ip link set lo up
+ip netns exec port0 ip addr add 192.168.64.20/24 broadcast 192.168.64.255 dev eth0
+ip netns exec port0 ip link set eth0 up
+
+ip netns add port4
+ip netns set eth4 netns port4
+ip netns exec port4 ip link set lo up
+ip netns exec port4 ip addr add 192.168.64.60/24 broadcast 192.168.64.255 dev eth4
+ip netns exec port4 ip link set eth4 up
+

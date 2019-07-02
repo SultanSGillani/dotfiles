@@ -1,0 +1,12 @@
+<!--    Base16 {{ base16.theme[default_theme]['scheme_name'] }}
+        Author: {{ base16.theme[default_theme]['scheme_author'] }}   -->
+
+<application>
+  <component name="MaterialThemeConfig">
+    <option name="version" value="2.2.0.1" />
+    <option name="selectedTheme" value="CUSTOM" />
+    <option name="highlightColor" value="{{ base16.theme[default_theme]['base0D_hex'] }}" />
+    <option name="accentColor" value="{{ base16.theme[default_theme]['base0D_hex'] }}" />
+    <option name="darkTitleBar" value="true" />
+  </component>
+</application>

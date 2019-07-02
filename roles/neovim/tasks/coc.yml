@@ -1,0 +1,11 @@
+---
+- name: Add coc inoremap
+  blockinfile:
+    path: "{{ neovim_config_dir }}/init.vim"
+    marker: '""<!-- {mark} COC BLOCK -->"'
+    insertafter: " inoremap_marker"
+    block: |
+      inoremap <silent><expr> <TAB>
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()

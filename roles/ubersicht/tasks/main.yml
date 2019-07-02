@@ -1,0 +1,34 @@
+---
+- name: install ubersicht
+  homebrew_cask:
+    name: ubersicht
+    state: present
+
+- name: install ifstat for network bandwidth
+  homebrew:
+    name: ifstat
+    state: present
+
+- name: clone pecan bar
+  git:
+    repo: https://github.com/zzzeyez/pecan.git
+    dest: " {{ dotfiles_user_home }}/Library/Application Support/Übersicht/widgets/pecan"
+    version: master
+  tags:
+    - initial
+
+- name: link pecan widget
+  file:
+    src: "{{ dotfiles_user_home }}/Library/Application Support/Übersicht/widgets/pecan/pecan-style"
+    dest: /usr/local/bin/pecan-style
+    state: link
+
+- name: copy pecan ws script file
+  template:
+    src: ws
+    dest: "{{ dotfiles_user_home }}/Library/Application Support/Übersicht/widgets/pecan/scripts/ws"
+    mode: 0755
+
+- name: start pecan⁩
+  command: pecan-style --load default
+  changed_when: false

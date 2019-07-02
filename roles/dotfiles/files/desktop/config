@@ -1,0 +1,15 @@
+output DVI-I-0
+off
+output DVI-I-1
+mode 2880x1620
+pos 0x0
+output HDMI-0
+mode primary
+pos x
+rotate 2880x1620+2880+0
+output DP-0
+off
+output DVI-D-0
+off
+output DP-1
+off

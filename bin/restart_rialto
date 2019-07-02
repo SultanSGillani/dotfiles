@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+
+cd ~/projects/veracity/rialto && ./reset_mininet.rb ~/projects/veracity/hudsucker/rialto_config.json
+
+cd ~/projects/veracity/hudsucker && rm -rf {rialto.log,rialto.db}
+
+# cd ~/projects/veracity/hudsucker && ruby hudsucker -r rialto_config.json -q rialto.log -d rialto.db 2>hudsucker.log &
+
+cd ~/projects/veracity/hudsucker && ruby hudsucker -v DEBUG -r ~/projects/veracity/hudsucker/auth.json -q rialto.log -d rialto.db 2>hudsucker.log &
+

@@ -1,0 +1,14 @@
+---
+- name: Check if bat is installed
+  command: dpkg-query -W bat
+  register: bat_check_deb
+  changed_when: no
+  ignore_errors: yes
+
+- name: make sure bat is only installed through cargo
+  package:
+    name: bat
+    state: absent
+  become: yes
+  become_user: root
+  when: bat_check_deb.rc == 1

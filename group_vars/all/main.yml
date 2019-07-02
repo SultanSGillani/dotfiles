@@ -1,0 +1,244 @@
+---
+ansible_distribution_release:
+  '{{ ansible_facts["distribution_major_version"].split("/")[0]
+  if (ansible_facts["distribution_major_version"].split("/") | length) > 1
+  else ansible_facts["distribution_release"] }}'
+ansible_python_interpreter: "{{ lookup('pipe', 'which python3') }}"
+aur_user: yay-builder
+zsh_user: "{{ lookup('pipe', 'whoami') }}"
+zsh_user_group: "{{ lookup('pipe','id -g') }}"
+dotfiles_user_home: "{{ '~' | expanduser }}"
+pyenv_path: "{{ dotfiles_user_home }}/.pyenv"
+pip_executable: "{{ pyenv_path }}/shims/pip"
+cargo_home: "{{ dotfiles_user_home }}/.cargo"
+rustup_home: "{{ dotfiles_user_home }}/.rustup"
+dotfiles_dir: "{{ dotfiles_user_home }}/dotfiles"
+dotfiles_home: "{{ dotfiles_dir }}/roles/dotfiles/files"
+user_tmp_dir: "{{ dotfiles_user_home }}/tmp"
+macfiles_home: "{{ dotfiles_dir }}/roles/osx/files"
+debianfiles_home: "{{ dotfiles_dir }}/roles/apt/files"
+docker_users: "{{ zsh_user }}"
+gitfiles_dir: "{{ dotfiles_dir }}/roles/git/files"
+gemfile_dir: "{{ dotfiles_dir }}/roles/ruby/files"
+wallpaper_dir: "{{ dotfiles_dir }}/roles/wallpaper/files"
+vcenter_hostname: "{{ lookup('env','VMWARE_IP') }}"
+vcenter_username: "{{ lookup('env','VMWARE_USERNAME') }}"
+vcenter_password: "{{ lookup('env','VMWARE_PASS') }}"
+esxi_hostname: "{{ lookup('env','VMWARE_HOSTNAME') }}"
+wallpaper_file: "{{ dotfiles_user_home }}/wallpapers/comp.jpg"
+
+## Base16 Theme Vars for xresources and i3
+default_theme: dracula
+vim_theme: 'base16-dracula'
+lightline_scheme_name: "base16_{{ default_theme }}"
+jetbrains_scheme_name: "base16-{{ default_theme }}"
+
+base16:
+  theme:
+    tomorrow_night_eighties:
+      scheme_name: "Tomorrow Night Eighties"
+      scheme_slug: "tomorrow_night_eighties"
+      scheme_author: 'Chris Kempson'
+      base00_hex: '2d2d2d' # black basically
+      base01_hex: '393939' # dark dark grey almost black
+      base02_hex: '515151' # medium grey
+      base03_hex: '999999' # lighter grey than above
+      base04_hex: 'b4b7b4' # light grey with tad blue
+      base05_hex: 'cccccc' # light grey but darker than below
+      base06_hex: 'e0e0e0' # light grey
+      base07_hex: 'ffffff' # white
+      base08_hex: 'f2777a' # magenta red
+      base09_hex: 'f99157' # more orange
+      base0A_hex: 'ffcc66' # lighter orangish yellow
+      base0B_hex: '99cc99' # foggy slytherin green
+      base0C_hex: '66cccc' # teal
+      base0D_hex: '6699cc' # sky blue
+      base0E_hex: 'cc99cc' # purpleish pink
+      base0F_hex: 'a3685a' # reddish poop
+      # rgb
+      base00_rgb_r: 45
+      base00_rgb_g: 45
+      base00_rgb_b: 45
+      base01_rgb_r: 57
+      base01_rgb_g: 57
+      base01_rgb_b: 57
+      base02_rgb_r: 81
+      base02_rgb_g: 81
+      base02_rgb_b: 81
+      base03_rgb_r: 153
+      base03_rgb_g: 153
+      base03_rgb_b: 153
+      base04_rgb_r: 180
+      base04_rgb_g: 183
+      base04_rgb_b: 180
+      base05_rgb_r: 204
+      base05_rgb_g: 204
+      base05_rgb_b: 204
+      base06_rgb_r: 224
+      base06_rgb_g: 224
+      base06_rgb_b: 224
+      base07_rgb_r: 255
+      base07_rgb_g: 255
+      base07_rgb_b: 255
+      base08_rgb_r: 242
+      base08_rgb_g: 119
+      base08_rgb_b: 122
+      base09_rgb_r: 249
+      base09_rgb_g: 145
+      base09_rgb_b: 87
+      base0A_rgb_r: 255
+      base0A_rgb_g: 204
+      base0A_rgb_b: 102
+      base0B_rgb_r: 153
+      base0B_rgb_g: 204
+      base0B_rgb_b: 153
+      base0C_rgb_r: 102
+      base0C_rgb_g: 204
+      base0C_rgb_b: 204
+      base0D_rgb_r: 102
+      base0D_rgb_g: 153
+      base0D_rgb_b: 204
+      base0E_rgb_r: 204
+      base0E_rgb_g: 153
+      base0E_rgb_b: 204
+      base0F_rgb_r: 163
+      base0F_rgb_g: 104
+      base0F_rgb_b: 90
+    dracula:
+      scheme_name: "Dracula"
+      scheme_slug: "dracula"
+      scheme_author: 'Mike Barkmin'
+      base00_hex: '282936'  # Dark shade of blue. Default Background
+      base01_hex: '3a3c4e'  # dark blue little lighter than above. Lighter Background (Used for status bars)
+      base02_hex: '4d4f68'  # dark purplish blue. Selection Background
+      base03_hex: '626483'  # light blue / grey / purple. Comments, Invisibles, Line Highlighting
+      base04_hex: '62d6e8'  # aqua, light cyan. Dark Foreground (Used for status bars)
+      base05_hex: 'e9e9f4'  # light grey/white. Default Foreground, Caret, Delimiters, Operators
+      base06_hex: 'f1f2f8'  # hint of grey but more white. Light Foreground (Not often used)
+      base07_hex: 'f7f7fb'  # light grey. Light Background (Not often used)
+      base08_hex: 'ea51b2'  # magenta / hot pink. Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+      base09_hex: 'b45bcf'  # bright purple. Integers, Boolean, Constants, XML Attributes, Markup Link Url
+      base0A_hex: '00f769'  # bright green. Classes, Markup Bold, Search Text Background
+      base0B_hex: 'ebff87'  # yellowish green. Strings, Inherited Class, Markup Code, Diff Inserted
+      base0C_hex: 'a1efe4'  # light cyan/green. Support, Regular Expressions, Escape Characters, Markup Quotes
+      base0D_hex: '62d6e8'  # cyan blue bright. Functions, Methods, Attribute IDs, Headings
+      base0E_hex: 'b45bcf'  # bright purple. Keywords, Storage, Selector, Markup Italic, Diff Changed
+      base0F_hex: '00f769'  # bright green. Deprecated, Opening/Closing Embedded Language Tags
+      # rgb
+      base00_rgb_r: 40
+      base00_rgb_g: 41
+      base00_rgb_b: 54
+      base01_rgb_r: 58
+      base01_rgb_g: 60
+      base01_rgb_b: 70
+      base02_rgb_r: 77
+      base02_rgb_g: 79
+      base02_rgb_b: 104
+      base03_rgb_r: 98
+      base03_rgb_g: 100
+      base03_rgb_b: 131
+      base04_rgb_r: 98
+      base04_rgb_g: 214
+      base04_rgb_b: 232
+      base05_rgb_r: 233
+      base05_rgb_g: 233
+      base05_rgb_b: 244
+      base06_rgb_r: 241
+      base06_rgb_g: 242
+      base06_rgb_b: 248
+      base07_rgb_r: 247
+      base07_rgb_g: 247
+      base07_rgb_b: 251
+      base08_rgb_r: 234
+      base08_rgb_g: 81
+      base08_rgb_b: 178
+      base09_rgb_r: 249
+      base09_rgb_g: 180
+      base09_rgb_b: 91
+      base0A_rgb_r: 0
+      base0A_rgb_g: 247
+      base0A_rgb_b: 105
+      base0B_rgb_r: 235
+      base0B_rgb_g: 255
+      base0B_rgb_b: 135
+      base0C_rgb_r: 161
+      base0C_rgb_g: 239
+      base0C_rgb_b: 228
+      base0D_rgb_r: 98
+      base0D_rgb_g: 214
+      base0D_rgb_b: 232
+      base0E_rgb_r: 180
+      base0E_rgb_g: 91
+      base0E_rgb_b: 207
+      base0F_rgb_r: 0
+      base0F_rgb_g: 247
+      base0F_rgb_b: 104
+    snazzy:
+      scheme_name: "Snazzy"
+      scheme_slug: "snazzy"
+      scheme_author: 'Chawye Hsu'
+      base00_hex: '282a36'  # Dark shade of blue. Default Background
+      base01_hex: '34353e'  # Very dark grayish blue. Lighter Background (Used for status bars)
+      base02_hex: '43454f'  # Very dark grayish blue. Selection Background
+      base03_hex: '78787e'  # darker grey. Comments, Invisibles, Line Highlighting
+      base04_hex: 'a5a5a9'  # grey. Dark Foreground (Used for status bars)
+      base05_hex: 'e2e4e5'  # light grey. Default Foreground, Caret, Delimiters, Operators
+      base06_hex: 'eff0eb'  # hint of grey but more white. Light Foreground (Not often used)
+      base07_hex: 'f1f1f0'  # light grey. Light Background (Not often used)
+      base08_hex: 'ff5c57'  # medium red. Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+      base09_hex: 'ff9f43'  # medium light orange. Integers, Boolean, Constants, XML Attributes, Markup Link Url
+      base0A_hex: 'f3f99d'  # light yellow green. Classes, Markup Bold, Search Text Background
+      base0B_hex: '5af78e'  # medium light green. Strings, Inherited Class, Markup Code, Diff Inserted
+      base0C_hex: '9aedfe'  # light cyan. Support, Regular Expressions, Escape Characters, Markup Quotes
+      base0D_hex: '57c7ff'  # cyan blue. Functions, Methods, Attribute IDs, Headings
+      base0E_hex: 'ff6ac1'  # light magenta. Keywords, Storage, Selector, Markup Italic, Diff Changed
+      base0F_hex: 'b2643c'  # brownish red. Deprecated, Opening/Closing Embedded Language Tags
+      # rgb
+      base00_rgb_r: 40
+      base00_rgb_g: 42
+      base00_rgb_b: 54
+      base01_rgb_r: 52
+      base01_rgb_g: 53
+      base01_rgb_b: 62
+      base02_rgb_r: 67
+      base02_rgb_g: 69
+      base02_rgb_b: 79
+      base03_rgb_r: 120
+      base03_rgb_g: 120
+      base03_rgb_b: 126
+      base04_rgb_r: 165
+      base04_rgb_g: 165
+      base04_rgb_b: 169
+      base05_rgb_r: 226
+      base05_rgb_g: 228
+      base05_rgb_b: 229
+      base06_rgb_r: 224
+      base06_rgb_g: 224
+      base06_rgb_b: 224
+      base07_rgb_r: 241
+      base07_rgb_g: 241
+      base07_rgb_b: 240
+      base08_rgb_r: 255
+      base08_rgb_g: 92
+      base08_rgb_b: 87
+      base09_rgb_r: 255
+      base09_rgb_g: 159
+      base09_rgb_b: 67
+      base0A_rgb_r: 243
+      base0A_rgb_g: 249
+      base0A_rgb_b: 157
+      base0B_rgb_r: 90
+      base0B_rgb_g: 247
+      base0B_rgb_b: 142
+      base0C_rgb_r: 154
+      base0C_rgb_g: 237
+      base0C_rgb_b: 254
+      base0D_rgb_r: 87
+      base0D_rgb_g: 199
+      base0D_rgb_b: 255
+      base0E_rgb_r: 255
+      base0E_rgb_g: 106
+      base0E_rgb_b: 193
+      base0F_rgb_r: 178
+      base0F_rgb_g: 100
+      base0F_rgb_b: 60

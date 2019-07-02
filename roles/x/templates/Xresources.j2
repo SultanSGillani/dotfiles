@@ -1,0 +1,110 @@
+Xft.dpi: 220
+{% if ansible_facts['hostname'] == 'linuxlaptop' %}
+Xft.lcdfilter: lcddefault
+{% endif %}
+Xft.autohint: 0
+Xft.hintstyle:  hintslight
+Xft.hinting: : true
+Xft.antialias: true
+Xft.rgba: rgb
+XTerm*renderFont:true
+
+st.termname: st-256color
+st.font: Hack Nerd Font Mono:style=Regular:size=9
+
+xterm*termName: xterm-256color
+
+termite.alpha: 1
+
+*.font: xft:Hack Nerd Font Mono:style=Regular:size=11
+*.boldFont: xft:Hack Nerd Font Mono:style=Bold:size=11
+*.italicFont: xft:Hack Nerd Font Mono:style=Italic:size=11
+*.boldItalicFont: xft:Hack Nerd Font Mono:style=Bold Italic:size=11
+
+URxvt.geometry: 		72x18
+URxvt*letterSpace: 	    0
+URxvt.lineSpace: 		0
+URxvt*internalBorder:   24
+URxvt*externalBorder:   0
+URxvt*depth:            32
+URxvt*saveline:         2000
+URxvt*termName:         rxvt-256color
+
+URxvt.iso14755:        false
+URxvt.iso14755_52:     false
+
+URxvt.keysym.C-M-c:    builtin-string:
+URxvt.keysym.C-M-v:    builtin-string:
+
+URxvt*scrollBar:        false
+URxvt*scrollBar_right:  false
+URxvt.perl-ext: default,matcher
+URxvt.url-launcher: firefox
+URxvt.matcher.button: 1
+URxvt.keysym.M-i: matcher:select
+URxvt.keysym.M-l: matcher:last
+URxvt.keysym.M-u: matcher:list
+URxvt.keyboard-select.clipboard: true
+URxvt.keysym.M-Escape:  perl:keyboard-select:activate
+URxvt.keysym.Shift-Up:	command:\033]720;1\007
+URxvt.keysym.Shift-Down:command:\033]721;1\007
+URxvt.keysym.M-s:       perl:keyboard-select:search
+URxvt.urlLauncher:      firefox
+URxvt.underlineURLs:    true
+URxvt.urlButton:        1
+URxvt*buffered:         false
+URxvt.urgentOnBell: 	true
+URxvt.clipboard.autocopy: true
+
+URxvt.keysym.C-S-0x43: eval:selection_to_clipboard
+URxvt.keysym.C-S-0x56: eval:paste_clipboard
+
+! Base16 {{ base16.theme[default_theme]['scheme_name'] }}
+! Scheme {{ base16.theme[default_theme]['scheme_author'] }}
+
+#define base00 #{{ base16.theme[default_theme]['base00_hex'] }}
+#define base01 #{{ base16.theme[default_theme]['base01_hex'] }}
+#define base02 #{{ base16.theme[default_theme]['base02_hex'] }}
+#define base03 #{{ base16.theme[default_theme]['base03_hex'] }}
+#define base04 #{{ base16.theme[default_theme]['base04_hex'] }}
+#define base05 #{{ base16.theme[default_theme]['base05_hex'] }}
+#define base06 #{{ base16.theme[default_theme]['base06_hex'] }}
+#define base07 #{{ base16.theme[default_theme]['base07_hex'] }}
+#define base08 #{{ base16.theme[default_theme]['base08_hex'] }}
+#define base09 #{{ base16.theme[default_theme]['base09_hex'] }}
+#define base0A #{{ base16.theme[default_theme]['base0A_hex'] }}
+#define base0B #{{ base16.theme[default_theme]['base0B_hex'] }}
+#define base0C #{{ base16.theme[default_theme]['base0C_hex'] }}
+#define base0D #{{ base16.theme[default_theme]['base0D_hex'] }}
+#define base0E #{{ base16.theme[default_theme]['base0E_hex'] }}
+#define base0F #{{ base16.theme[default_theme]['base0F_hex'] }}
+
+
+*foreground:   base05
+*background:   base00
+*cursorColor:  base05
+
+*color0:       base00
+*color1:       base08
+*color2:       base0B
+*color3:       base0A
+*color4:       base0D
+*color5:       base0E
+*color6:       base0C
+*color7:       base05
+*color8:       base03
+*color9:       base08
+*color10:      base0B
+*color11:      base0A
+*color12:      base0D
+*color13:      base0E
+*color14:      base0C
+*color15:      base07
+*color16:      base09
+*color17:      base0F
+*color18:      base01
+*color19:      base02
+*color20:      base04
+*color21:      base06
+
+Termite.termname: termite-256color

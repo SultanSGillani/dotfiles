@@ -1,0 +1,49 @@
+---
+- name: Check if ripgrep is installed
+  command: dpkg-query -W ripgrep
+  register: rg_check_deb
+  failed_when: rg_check_deb.rc > 1
+  changed_when: rg_check_deb.rc == 1
+  tags:
+    - initial
+
+- name: Install ripgrep with a .deb file
+  apt:
+    deb: "{{ rg_release_url }}/{{ rg_version }}/{{ rg_dpkg_file }}"
+  become: yes
+  become_user: root
+  when: rg_check_deb.rc == 1
+  tags:
+    - initial
+
+- name: Check if ripgrep is up to date
+  shell: |
+    set -o pipefail
+    rg --version | awk NR==1'{print $2}'
+  register: rg_check_ver
+  args:
+    executable: /bin/bash
+  changed_when: false
+  tags:
+    - update
+
+- name: set fact for latest rg_version
+  set_fact:
+    rg_ver: "{{ rg_check_ver }}"
+  tags:
+    - update
+
+- name: set fact of installed rg version
+  set_fact:
+    rg_installed_ver: "{{ rg_version }}"
+  tags:
+    - update
+
+- name: Update ripgrep
+  apt:
+    deb: "{{ rg_release_url }}/{{ rg_version }}/{{ rg_dpkg_file }}"
+  become: yes
+  become_user: root
+  when: rg_version != rg_installed_ver
+  tags:
+    - update

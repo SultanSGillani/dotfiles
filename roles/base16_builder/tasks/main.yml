@@ -1,0 +1,43 @@
+---
+- name: install new scheme
+  base16_builder:
+    scheme: monokai
+    template: blink
+    schemes_source: https://github.com/SultanSGillani/base16-schemes-source
+  register: base16_schemes
+
+- name: copy stdout to file
+  copy:
+    content: "{{ base16_schemes['schemes']['monokai']['blink']['colors']['base16-monokai.js'] }}"
+    dest: "{{ dotfiles_dir }}/misc/colors/base16/monokai/blink/base16-monokai.js"
+
+- name: install new scheme
+  base16_builder:
+    scheme: monokai
+    template: jetbrains
+    schemes_source: https://github.com/SultanSGillani/base16-schemes-source
+  register: base16_jetbrains
+
+- name: copy stdout to file
+  copy:
+    content: "{{ base16_jetbrains['schemes']['monokai']['jetbrains']['colors']['base16-monokai.icls'] }}"
+    dest: "{{ dotfiles_dir }}/misc/colors/base16/monokai/jetbrains/colors/base16-monokai.icls"
+
+- name: copy stdout to file
+  copy:
+    content: "{{ base16_jetbrains['schemes']['monokai']['jetbrains']['options']['base16-monokai.theme.xml'] }}"
+    dest: "{{ dotfiles_dir }}/misc/colors/base16/monokai/jetbrains/options/base16-monokai.theme.xml"
+
+- name: copy stdout to file
+  copy:
+    content: "{{ base16_jetbrains['schemes']['monokai']['jetbrains']['options']['base16-monokai.accent.xml'] }}"
+    dest: "{{ dotfiles_dir }}/misc/colors/base16/monokai/jetbrains/options/base16-monokai.accent.xml"
+
+- name: copy stdout to file
+  copy:
+    content: "{{ base16_jetbrains['schemes']['monokai']['jetbrains']['options']['base16-monokai.scheme.xml'] }}"
+    dest: "{{ dotfiles_dir }}/misc/colors/base16/monokai/jetbrains/options/base16-monokai.scheme.xml"
+
+- name: copy files
+  copy:
+    src: "{{ dotfiles_dir }}/misc/colors/base16/monokai/jetbrains/"

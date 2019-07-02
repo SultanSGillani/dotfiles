@@ -1,0 +1,68 @@
+activemodel ~>5.1.1
+activerecord ~>5.1.1
+activesupport ~>5.1.1
+arel
+bigdecimal
+bundler
+bundler-unload
+cmath
+coderay
+concurrent-ruby ~>1.0.5
+csv
+did_you_mean ~>1.0.2
+domain_name ~>0.5.0
+etc
+executable-hooks
+fcntl
+ffi
+fiddle
+fileutils
+gem-wrappers
+gdbm
+http-cookie
+i18n
+io-console
+ipaddr
+json
+mail ~>2.6.4
+method_source
+mime-types ~>3.1
+mime-types-data ~>3.2016.0521
+mini_mime
+minitest
+mustermann
+ncurses-ruby ~>1.2.4
+net-telnet
+netrc
+openssl
+packetfu
+pcaprub
+pony
+power_assert
+pry
+psych
+rack ~>2.0.7
+rack-protection ~>2.0.5
+rake
+rdoc
+rest-client
+rrd-ffi
+rrd-ruby
+ruby-duration
+ruby-pcap
+rubygems-bundler
+rubocop ~>0.58.0
+rubocop-airbnb
+scanf
+sdbm
+sinatra ~>2.0.5
+sqlite3 ~>1.3.12
+test-unit
+thread_safe
+tilt
+tzinfo ~>1.2.3
+unf ~>0.0.3
+unf_ext ~>0.0.7.4
+webrick
+xmlrpc
+zlib

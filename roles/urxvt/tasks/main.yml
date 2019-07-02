@@ -1,0 +1,118 @@
+---
+- name: Create config directory if it doesnt exist
+  file:
+    path: "{{ dotfiles_user_home }}/.urxvt/ext"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
+    recurse: yes
+  tags:
+    - initial
+
+- name: copy ext files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_user_home }}/.urxvt/ext/{{ item }}"
+    mode: 0755
+  loop:
+    - keyboard-select
+  tags:
+    - update
+
+- name: unarchive 24-bit urxvt
+  unarchive:
+    src: rxvt-unicode-9.22.tar.bz2
+    dest: /tmp/
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+  become: yes
+  become_user: root
+
+- name: patch urxvt
+  patch:
+    src: 24-bit-color.patch
+    basedir: /tmp/rxvt-unicode-9.22
+    strip: 0
+
+- name: configure 24-bit
+  command: |
+    /tmp/rxvt-unicode-9.22/configure
+    --prefix=/usr \
+    --enable-256-color \
+    --enable-combining \
+    --enable-fading \
+    --enable-font-styles \
+    --enable-iso14755 \
+    --enable-keepscrolling \
+    --enable-lastlog \
+    --enable-mousewheel \
+    --enable-next-scroll \
+    --enable-perl \
+    --enable-pointer-blank \
+    --enable-rxvt-scroll \
+    --enable-selectionscrolling \
+    --enable-slipwheeling \
+    --disable-smart-resize \
+    --enable-startup-notification \
+    --enable-transparency \
+    --enable-unicode3 \
+    --enable-utmp \
+    --enable-wtmp \
+    --enable-xft \
+    --enable-xim \
+    --enable-xterm-scroll \
+    --disable-pixbuf \
+    --disable-frills \
+    --enable-24-bit-color
+  args:
+    chdir: /tmp/rxvt-unicode-9.22
+    creates: /tmp/rxvt-unicode-9.22/Makefile
+  tags:
+    - skip_ansible_lint
+
+- name: make 24-bit rxvt
+  make:
+    chdir: /tmp/rxvt-unicode-9.22
+    target:
+
+- name: install desktop files
+  copy:
+    src: "{{ item }}.desktop"
+    dest: "/usr/share/applications/{{ item }}.desktop"
+    mode: 0644
+  loop:
+    - urxvt
+    - urxvtc
+    - urxvt-tabbed
+  become: yes
+  become_user: root
+
+- name: make install 24-bit rxvt
+  make:
+    chdir: /tmp/rxvt-unicode-9.22
+    target: install
+  become: yes
+  become_user: root
+
+- name: Replace after the expression till the end of the file (requires Ansible >= 2.4)
+  replace:
+    path: /tmp/rxvt-unicode-9.22/doc/rxvt-tabbed
+    regexp: 'rxvt'
+    replace: 'urxvt'
+    mode: '0755'
+
+- name: copy tabbed file to bin
+  copy:
+    src: /tmp/rxvt-unicode-9.22/doc/rxvt-tabbed
+    dest: /usr/bin/urxvt-tabbed
+    mode: 0755
+  become: yes
+  become_user: root
+
+- name: remove rxvt true color dir
+  file:
+    path: /tmp/rxvt-unicode-9.22
+    state: absent
+  become: yes
+  become_user: root

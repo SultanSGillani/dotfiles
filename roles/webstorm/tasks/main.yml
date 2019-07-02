@@ -1,0 +1,51 @@
+---
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: ansible_facts['os_family']|lower is defined
+
+- name: config dir
+  set_fact:
+     config_dir: "{% if ansible_facts['os_family'] != 'Darwin' %}{{ dotfiles_user_home }}/.{{ webstorm_user_dir }}/config{% else %}{{ dotfiles_user_home }}/Library/Preferences/{{ webstorm_user_dir }}{% endif %}"
+  become: yes
+  become_user: "{{ zsh_user }}"
+
+#- name: update material accent theme
+#  template:
+#    src: accent
+#    dest: "{{ config_dir }}/options/material_theme.xml"
+#  become: yes
+#  become_user: "{{ zsh_user }}"
+#  tags:
+#    - initial
+#
+#- name: update material colors scheme
+#  template:
+#    src: scheme
+#    dest: "{{ config_dir }}/options/colors.scheme.xml"
+#  tags:
+#    - initial
+#
+#- name: update material custom theme
+#  template:
+#    src: theme
+#    dest: "{{ config_dir }}/options/material_custom_theme.xml"
+#  tags:
+#    - initial
+#
+#- name: update material editor color scheme
+#  template:
+#    src: default
+#    dest: "{{ config_dir }}/colors/{{ jetbrains_scheme_name }}.icls"
+#  tags:
+#    - initial
+#    - scheme
+#  when: ansible_facts['os_family'] != 'Darwin'
+#
+#- name: update material editor color scheme
+#  template:
+#    src: default
+#    dest: "{{ config_dir }}/jba_config/colors/{{ jetbrains_scheme_name }}.icls"
+#  tags:
+#    - initial
+#    - scheme
+#  when: ansible_facts['os_family'] == 'Darwin'

@@ -1,0 +1,36 @@
+---
+- name: update apt packages.
+  apt:
+    upgrade: no
+    update_cache: yes
+  become: yes
+  become_user: root
+  tags:
+    - update
+
+- name: Upgrade APT to the latest packages
+  apt:
+    upgrade: dist
+  become: yes
+  become_user: root
+  tags:
+    - dist_upgrade
+    - upgrade
+
+- name: Upgrade apt packages.
+  apt:
+    upgrade: yes
+    update_cache: no
+  become: yes
+  become_user: root
+  tags:
+    - upgrade
+
+- name: Install Debian apt modules
+  apt:
+    name: "{{ debian_packages }}"
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial

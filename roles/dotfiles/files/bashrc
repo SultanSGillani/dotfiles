@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# promt
+
+
+# better history settings
+export HISTFILE=$HOME/bash_history
+shopt -s histappend # Append history instead of rewriting it
+shopt -s cmdhist # Use one command per line
+HISTCONTROL="erasedups:ignoreboth" # Avoid duplicate entries
+HISTFILESIZE=1000 # Allow a larger history files
+HISTSIZE=1000 # Allow a larger history files
+HISTTIMEFORMAT='%F %T ' # Record timestamps
+PROMPT_COMMAND='history -a' # Store history immediately
+
+# Load the secrets file
+if [[ -e ~/.secrets ]]; then
+     source ~/.secrets
+fi

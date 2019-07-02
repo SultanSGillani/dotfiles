@@ -1,0 +1,67 @@
+---
+projects_dir: "{{ dotfiles_user_home }}/projects"
+python_env_dir: "{{ dotfiles_user_home }}/.projs"
+ssh_dir: "{{ dotfiles_user_home }}/.ssh"
+login_shell: /usr/local/bin/zsh
+finder_new_window_path: file://"{{ dotfiles_user_home }}"
+screenshots_dir: "{{ dotfiles_user_home }}/screenshots"
+mac_files_dir: "{{ dotfiles_dir }}/roles/osx/files"
+
+dmg_files:
+  - Sblack
+
+brew_packages:
+  - autoconf
+  - automake
+  - bash-snippets
+  - convmv
+  - coreutils
+  - ctop
+  - diff-so-fancy
+  - docker-compose
+  - gnupg
+  - gpg
+  - htop
+  - libtool
+  - libxslt
+  - libyaml
+  - mas
+  - ngrep
+  - nmap
+  - openssl
+  - pkg-config
+  - python@2
+  - rsync
+  - subversion
+  - terminal-notifier
+  - tldr
+  - unixodbc
+  - wget
+  - zlib
+
+brew_taps:
+  - homebrew/bundle
+  - homebrew/cask
+  - homebrew/cask-fonts
+  - homebrew/cask-versions
+  - homebrew/core
+  - homebrew/services
+  - koekeishiya/formulae
+
+brew_casks:
+  - appcleaner
+  - daisydisk
+  - docker
+  - evernote
+  - font-cousine
+  - font-hack-nerd-font
+  - microsoft-office
+  - tunnelblick
+  - vagrant
+  - webstorm
+
+homebrew_clear_cache: yes
+
+homebrew_prefix: /usr/local
+homebrew_install_path: "{{ homebrew_prefix }}/Homebrew"
+homebrew_brew_bin_path: "{{ homebrew_prefix }}/bin"

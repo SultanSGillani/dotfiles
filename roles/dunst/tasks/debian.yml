@@ -1,0 +1,34 @@
+---
+- name: install dunst prereqs for apt apt packages
+  package:
+    name: "{{ apt_packages }}"
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: Install dunst
+  git:
+    repo: "https://github.com/dunst-project/dunst.git"
+    dest: "{{ dotfiles_user_home }}/dunst"
+    update: no
+    version: master
+  tags:
+    - initial
+
+- name: make dunst
+  make:
+    chdir: "{{ dotfiles_user_home }}/dunst"
+    target:
+  tags:
+    - initial
+
+- name: Install dunst
+  make:
+    chdir: "{{ dotfiles_user_home }}/dunst"
+    target: install
+  become: yes
+  become_user: root
+  tags:
+    - initial

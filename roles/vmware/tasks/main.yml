@@ -1,0 +1,32 @@
+---
+- name: Create a virtual machine on given ESXi hostname
+  vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    validate_certs: no
+    folder: /ha-datacenter/vm/
+    name: OpenBSD65_devmachine
+    state: poweredon
+    guest_id: freebsd64Guest
+    esxi_hostname: "{{ esxi_hostname }}"
+    disk:
+      - size_gb: 75
+        type: thin
+        datastore: synology200
+    hardware:
+      memory_mb: 8096
+      num_cpus: 2
+      scsi: paravirtual
+    cdrom:
+      type: iso
+      iso_path: "[synology200] 65/veracity_1.1.0.2019052317.iso"
+    networks:
+      - name: VM Network
+        mac: aa:bb:dd:aa:00:14
+        ip: 10.0.75.1
+        netmask: 255.255.255.0
+        device_type: vmxnet3
+    wait_for_ip_address: no
+  delegate_to: localhost
+  register: deploy_vm

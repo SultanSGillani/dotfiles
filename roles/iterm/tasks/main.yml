@@ -1,0 +1,14 @@
+---
+- name: install iterm2-nightly
+  homebrew_cask:
+    name: iterm2-nightly
+    state: present
+  tags:
+    - initial
+
+- name: copy template to my home to test
+  template:
+    src: iterm2.plist.j2
+    dest: "{{ dotfiles_user_home }}/Library/Preferences/base16-{{ base16.theme[default_theme]['scheme_slug'] }}-256.itermcolors"
+  tags:
+    - update

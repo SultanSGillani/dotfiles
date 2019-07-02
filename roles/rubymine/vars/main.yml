@@ -1,0 +1,15 @@
+---
+rubymine_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
+
+# Name to use in the desktop link
+rubymine_application_name: Rubymine
+
+# Dockbar group
+rubymine_startup_wm_class: jetbrains-rubymine
+
+# Name of desktop file
+rubymine_desktop_filename: jetbrains-rubymine.desktop
+
+# Name of the directory where user specific settings are stored
+rubymine_user_dir: "RubyMine{{ rubymine_version | regex_replace('^([0-9]+\\.[0-9]+)(\\..*)?$', '\\1') }}"
+

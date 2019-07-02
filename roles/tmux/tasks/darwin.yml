@@ -1,0 +1,7 @@
+---
+- name: Install | mac
+  homebrew:
+    name: tmux
+    state: present
+  tags:
+    - initial

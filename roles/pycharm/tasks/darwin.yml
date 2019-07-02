@@ -1,0 +1,7 @@
+---
+- name: Install jetbrains | Macos
+  homebrew_cask:
+    name: pycharm
+    state: present
+  tags:
+    - initial

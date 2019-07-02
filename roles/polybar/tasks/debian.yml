@@ -1,0 +1,58 @@
+---
+- name: check if polybar is installed
+  command: which polybar
+  changed_when: false
+  failed_when: false
+  register: polybar_installed
+
+- name: Debian | Install apt polybar dependencies
+  package:
+    name: "{{ debian_packages }}"
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: clone polybar
+  git:
+    repo: https://github.com/polybar/polybar.git
+    dest: "{{ dotfiles_user_home }}/polybar"
+    update: no
+    version: master
+    recursive: yes
+  tags:
+    - initial
+
+- name: create poly build dir
+  file:
+    path: "{{ dotfiles_user_home }}/polybar/build"
+    state: directory
+  tags:
+    - initial
+
+- name: cmake polybar
+  command: cmake ..
+  args:
+    chdir: "{{ dotfiles_user_home }}/polybar/build"
+    creates: "{{ dotfiles_user_home }}/polybar/build/Makefile"
+  tags:
+    - initial
+
+- name: make install polybar
+  make:
+    chdir: "{{ dotfiles_user_home }}/polybar/build"
+    target: install
+    params:
+      NUM_THREADS: 8
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: remove polybar repo dir
+  file:
+    path: "{{ dotfiles_user_home }}/polybar"
+    state: absent
+  tags:
+    - initial

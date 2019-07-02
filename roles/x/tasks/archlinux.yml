@@ -1,0 +1,14 @@
+---
+- name: install pacman packages for arch
+  package:
+    name: "{{ pacman_packages }}"
+    state: present
+  become: yes
+  become_user: root
+
+- name: install xinit-xsession using aur
+  aur:
+    name: xinit-xsession
+    use: yay
+  become: yes
+  become_user: "{{ aur_user }}"

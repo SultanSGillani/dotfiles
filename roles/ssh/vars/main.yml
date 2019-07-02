@@ -1,0 +1,3 @@
+---
+ssh_config:
+    - { path: 'ssh_local_config', dest: 'config' }

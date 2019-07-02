@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o pipefail
+set -o nounset
+
+ZSH=${HOME}/dotfiles
+
+PLAYBOOK=${HOME}/dotfiles/dotfiles.yml
+
+HOSTS=${HOME}/dotfiles/inventory.yml
+
+# Run main playbook
+
+HOST_OS=$(uname)
+
+cd ${ZSH} && git pull
+
+echo "Running dotfiles Playbook for ${HOST_OS}"
+if [[ ! -f ~/.vault_password.txt ]]; then
+    echo "please add your vault password file to your home directory"
+elif [[ "${HOST_OS}" = 'Darwin' ]] || [[ "${HOST_OS}" = 'Linux' ]]; then
+    ansible-playbook -i ${HOSTS} ${PLAYBOOK} --vault-password-file ~/.vault_password.txt --skip-tags "$@"
+else
+    echo "Unknown host OS: ${HOST_OS}"
+    exit 1
+fi
+
+trap - EXIT

@@ -1,0 +1,32 @@
+---
+
+# defaults files for dotfiles
+zsh_dotfiles:
+    - { path: 'aprc', dest: '.aprc' }
+    - { path: 'ansible-lint', dest: '.ansible-lint' }
+    - { path: 'bash_profile', dest: '.bash_profile' }
+    - { path: 'bashrc', dest: '.bashrc' }
+    - { path: 'ctags', dest: '.ctags.d/config.ctags' }
+    - { path: 'curlrc', dest: '.curlrc' }
+    - { path: 'desktop_xrandr', dest: '.desktop.sh' }
+    - { path: 'editorconfig', dest: '.editorconfig' }
+    - { path: 'eslintrc', dest: '.eslintrc' }
+    - { path: 'flake8', dest: '.flake8' }
+    - { path: 'gemrc', dest: '.gemrc' }
+    - { path: 'hadolint', dest: '.hadolint.yaml' }
+    - { path: 'htoprc', dest: '.htoprc' }
+    - { path: 'hushlogin', dest: '.hushlogin' }
+    - { path: 'inputrc', dest: '.inputrc' }
+    - { path: 'irbrc', dest: '.irbrc' }
+    - { path: 'jshintrc', dest: '.jshintrc' }
+    - { path: 'nanorc', dest: '.nanorc' }
+    - { path: 'pep8', dest: 'pep8' }
+    - { path: 'pryrc', dest: '.pryrc.rb' }
+    - { path: 'psqlrc', dest: '.psqlrc' }
+    - { path: 'pyrc', dest: '.pyrc.py' }
+    - { path: 'rubocop', dest: '.rubocop.yml' }
+    - { path: 'rubocop_airbnb', dest: '.rubocop_airbnb.yml' }
+    - { path: 'shellrc', dest: '.shellrc' }
+    - { path: 'toprc', dest: '.toprc' }
+    - { path: 'wgetrc', dest: '.wgetrc' }
+    - { path: 'yamllint', dest: '.yamllint' }

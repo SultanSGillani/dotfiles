@@ -1,0 +1,23 @@
+---
+# Edition can be one of: 'ce' (Community Edition) or 'ee' (Enterprise Edition).
+docker_edition: 'ce'
+docker_packages:
+  - "docker-{{ docker_edition }}"
+  - "docker-{{ docker_edition }}-cli"
+  - "containerd.io"
+
+docker_package_state: present
+
+# Service options.
+docker_service_state: started
+docker_service_enabled: yes
+docker_restart_handler_state: restarted
+
+# Used only for Debian/Ubuntu. Switch 'stable' to 'edge' if needed.
+docker_apt_release_channel: test
+docker_apt_arch: amd64
+docker_apt_repository: "deb [arch={{ docker_apt_arch }}] https://download.docker.com/linux/{{ ansible_facts['distribution']|lower }} {{ ansible_facts['distribution_release'] }} {{ docker_apt_release_channel }}"
+docker_apt_ignore_key_error: yes
+docker_apt_absent_packages:
+  - docker
+  - docker-engine

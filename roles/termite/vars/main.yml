@@ -1,0 +1,11 @@
+---
+termite_packages:
+  - gnutls-bin
+  - gperf
+  - gtk-doc-tools
+  - intltool
+  - libgirepository1.0-dev
+  - libglib3.0-cil-dev
+  - libgnutls28-dev
+  - libxml2-utils
+  - valac

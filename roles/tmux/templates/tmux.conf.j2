@@ -1,0 +1,138 @@
+######################
+####   Settings   ####
+######################
+
+# Rebind the prefix from C-b to C-Space.
+unbind C-b
+set -g prefix C-Space
+bind C-Space send-prefix
+
+set -g history-limit 20000
+
+set-option -g status-position top
+
+# automatically renumber tmux windows
+set -g renumber-windows on
+
+# Status update interval
+set -g status-interval 1
+
+set -g set-clipboard on
+
+# Disable the delay between an escape key press and subsequent characters.
+# This increases Vim responsiveness.
+set -sg escape-time 0
+
+# Set the numbering of windows to go from 1 instead of 0 - silly programmers :|
+set-option -g base-index 1
+set-window-option -g pane-base-index 1
+setw -g pane-base-index 1
+
+# Monitor window activity. Windows with activity are then highlighted in the
+# status line.
+setw -g monitor-activity on
+
+# for nested tmux sessions
+bind-key a send-prefix
+
+# Activity Monitoring
+set -g visual-activity off
+
+# enable mouse support for switching panes/windows
+setw -g mouse on
+
+# auto window rename
+set-window-option -g automatic-rename
+
+# Rather than constraining window size to the maximum size of any client
+# connected to the *session*, constrain window size to the maximum size of any
+# client connected to *that window*. Much more reasonable.
+setw -g aggressive-resize off
+
+# make delay shorter
+set -sg escape-time 0
+
+# tile all windows
+unbind =
+bind = select-layout tiled
+
+# zsh
+set -g default-shell /usr/local/bin/zsh
+
+# Enable vi keys.
+set -g status-keys vi
+setw -g mode-keys vi
+
+# Pass xterm style keys
+setw -g xterm-keys on
+
+set -g @resurrect-save-shell-history 'on'
+set -g @resurrect-capture-pane-contents 'on'
+
+######################
+#### Key Bindings ####
+######################
+
+bind P paste-buffer
+
+# reload config file
+bind r source-file ~/.tmux.conf \; display "Config Reloaded!"
+
+# split window and fix path for tmux 1.9
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+
+# Kill
+bind x kill-pane \; move-window -r\; setw automatic-rename
+bind & kill-window \; move-window -r\; setw automatic-rename
+
+# synchronize all panes in a window
+bind y setw synchronize-panes
+
+# pane movement shortcuts
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+
+# Resize
+# Alt-Left/Right/Up/Down
+bind -n M-Left resize-pane -L 5
+bind -n M-Down resize-pane -D 5
+bind -n M-Up resize-pane -U 5
+bind -n M-Right resize-pane -R 5
+
+# Do not display the original window's name when renaming it. This makes
+# renaming faster since one does not need to first erase the original name.
+bind , command-prompt -p "(rename-window '#W')" "rename-window '%%'"
+
+bind -r C-h select-window -t :-
+bind -r C-l select-window -t :+
+
+##############################
+### Color & Style Settings ###
+##############################
+
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",*256col*:Tc"
+set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
+
+# Window status
+set-window-option -g window-status-format '#I:#{=15:window_name}#F'
+set -g window-status-current-format '#I:#{=15:window_name}#F'
+
+source {{ dotfiles_user_home }}/.tmux/powerline.tmuxtheme
+
+# List of plugins
+set -g @plugin 'tmux-plugins/tpm'
+# set -g @plugin "arcticicestudio/nord-tmux"
+# set -g @plugin "eenderoroy/tmux-simple-theme"
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'samoshkin/tmux-plugin-sysstat'
+set -g @plugin 'tmux-plugins/tmux-battery'
+set -g @plugin 'tmux-plugins/tmux-sidebar'
+set -g @plugin 'tmux-plugins/tmux-prefix-highlight'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run -b '~/.tmux/plugins/tpm/tpm'

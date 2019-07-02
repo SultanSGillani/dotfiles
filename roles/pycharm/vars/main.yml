@@ -1,0 +1,14 @@
+---
+pycharm_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
+
+# Name to use in the desktop link
+pycharm_application_name: Pycharm Professional
+
+# Dockbar group
+pycharm_startup_wm_class: jetbrains-pycharm
+
+# Name of desktop file
+pycharm_desktop_filename: jetbrains-pycharm.desktop
+
+# Name of the directory where user specific settings are stored
+pycharm_user_dir: "PyCharm{{ pycharm_version | regex_replace('^([0-9]+\\.[0-9]+)(\\..*)?$', '\\1') }}"

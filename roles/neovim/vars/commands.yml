@@ -1,0 +1,9 @@
+---
+command:
+  - -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+  - -nargs=0 Format :call CocAction('format')
+  - -nargs=? Fold :call     CocAction('fold', <f-args>)
+  - -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+command_noex:
+  - -bar -nargs=1 OpenURL :!open <args>

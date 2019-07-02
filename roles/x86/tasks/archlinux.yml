@@ -1,0 +1,11 @@
+---
+- name: install pkgs | arch
+  package:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - pulseaudio
+    - gnome-power-manager
+    - numlockx
+  become: yes
+  become_user: root

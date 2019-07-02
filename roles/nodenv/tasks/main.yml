@@ -1,0 +1,104 @@
+---
+- name: include os specific tasks
+  include_tasks: darwin.yml
+  when: "ansible_facts['os_family']|lower == 'darwin'"
+
+- name: Check for previous installation of nodenv
+  stat:
+    path: "{{ nodenv.path }}/bin/nodenv"
+  register: nvd
+  tags:
+    - initial
+
+- name: Clone and Compile nodenv
+  block:
+    - name: Create base directory
+      file:
+        path: "{{ nodenv.path }}"
+        state: directory
+        group: "{{ zsh_user_group }}"
+        owner: "{{ zsh_user }}"
+      become: true
+      become_user: "{{ zsh_user }}"
+    - name: Clone nodenv
+      git:
+        repo: "{{ nodenv.repo }}"
+        dest: "{{ nodenv.path }}"
+        version: master
+        accept_hostkey: yes
+        update: no
+    - name: Compile dynamic bash extension to speed up nodenv
+      command: "{{ nodenv.path }}/src/configure && make -C {{ nodenv.path }}/src"
+    - name: Add nodenv to PATH
+      template:
+        src: nodenv.sh.j2
+        dest: /etc/profile.d/nodenv.sh
+        owner: root
+        group: root
+        mode: 0775
+      become: true
+      become_user: root
+  when: nvd.stat.isdir is not defined
+  tags:
+    - initial
+
+- name: create versions directory
+  file:
+    path: "{{ nodenv.path }}/versions"
+    state: directory
+    mode: 0775
+  tags:
+    - initial
+
+- name: check installed versions
+  command: "ls {{ nodenv.path }}/versions"
+  register: installed_nodes
+  failed_when: false
+  changed_when: false
+  tags:
+    - initial
+
+- name: show difference between installed versions and wanted versions
+  set_fact:
+    nodes: "{{ nodenv.versions | difference(installed_nodes.stdout_lines) }}"
+  tags:
+    - initial
+
+- name: copy the nodenv default-packages file to the nodenv path
+  copy:
+    src: default-packages
+    dest: "{{ nodenv.path }}/default-packages"
+    mode: 0644
+    group: "{{ zsh_user_group }}"
+    owner: "{{ zsh_user }}"
+  tags:
+    - update
+
+- name: Clone plugins
+  git:
+    repo: "{{ item.repo }}"
+    dest: "{{ nodenv.path }}/plugins/{{ item.name }}"
+    version: master
+    update: no
+  loop: "{{ nodenv.plugins }}"
+  tags:
+    - initial
+
+- name: install versions "{{ nodes }}"
+  command: "{{ nodenv.path }}/bin/nodenv install {{ item }}"
+  args:
+    creates: "{{ nodenv.path }}/versions/{{ nodenv.versions }}"
+  loop: "{{ nodes }}"
+  when: nodes | length | int > 0
+  tags:
+    - initial
+
+- name: set global version to {{ nodenv.versions | max }}
+  lineinfile:
+    dest: "{{ nodenv.path }}/version"
+    line: "{{ nodenv.versions | max }}"
+    state: present
+    create: yes
+  notify: rehash nodenv
+  tags:
+    - initial

@@ -1,0 +1,25 @@
+---
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: "ansible_facts['os_family']|lower is defined"
+
+- name: Create i3 config directory if it doesnt exist
+  file:
+    path: "{{ dotfiles_user_home }}/.config/i3"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
+    recurse: yes
+  tags:
+    - update
+
+- name: Write i3 config
+  template:
+    src: config.j2
+    dest: "{{ dotfiles_user_home }}/.config/i3/config"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+  tags:
+    - update
+    - update_i3

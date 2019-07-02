@@ -1,0 +1,14 @@
+---
+- name: Ansible Dev & Dotfiles Setup
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - group_vars/all/main.yml
+  become: yes
+  become_user: "{{ zsh_user }}"
+  tasks:
+    - import_role:
+        name: vmware
+      tags:
+        - vmware
+        - vsphere

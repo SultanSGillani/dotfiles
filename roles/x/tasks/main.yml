@@ -1,0 +1,19 @@
+---
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: ansible_facts['os_family']|lower is defined
+
+- debug:
+    var: base16.theme[default_theme]['scheme_name']
+  tags:
+    - xtest
+
+- name: copy xresources and xinitrc
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ dotfiles_user_home }}/.{{ item }}"
+  loop:
+    - Xresources
+    - xinitrc
+  tags:
+    - update

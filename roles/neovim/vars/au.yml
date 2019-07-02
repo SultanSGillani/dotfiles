@@ -1,0 +1,10 @@
+---
+au:
+  - BufNewFile,BufRead *.html,*.htm,*.shtml,*.stm set ft=jinja
+  - BufNewFile,BufRead Jenkinsfile setf groovy
+  - BufNewFile,BufRead ~/.config/i3/config set filetype=i3config
+  - BufRead,BufNewFile Gemfile,Rakefile,Thorfile,config.ru,Vagrantfile,Guardfile,Capfile set ft=ruby
+  - FileType rust nmap <leader>gd <Plug>(rust-doc)
+  - FileType rust nmap gd <Plug>(rust-def)
+  - FileType rust nmap gs <Plug>(rust-def-split)
+  - FileType rust nmap gx <Plug>(rust-def-vertical)

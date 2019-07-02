@@ -1,0 +1,26 @@
+---
+- name: Ensure latest pip is installed.
+  pip:
+    name: pip
+    executable: "{{ pip_executable }}"
+    state: latest
+  tags:
+    - skip_ansible_lint
+    - initial
+
+- name: add pip extra packages for debian
+  set_fact:
+    pip_packages: "{{ pip_install_packages + [ debian_pip_packages ] }}"
+  tags:
+    - initial
+
+- name: Ensure pip_install_packages are installed.
+  pip:
+    name: "{{ item.name | default(item) }}"
+    version: "{{ item.version | default(omit) }}"
+    virtualenv: "{{ item.virtualenv | default(omit) }}"
+    state: "{{ item.state | default(omit) }}"
+    executable: "{{ pip_executable }}"
+  loop: "{% if  ansible_facts['os_family']|lower == 'debian' %}{{ pip_packages }}{% else %}{{ pip_install_packages }}{% endif %}"
+  tags:
+    - initial

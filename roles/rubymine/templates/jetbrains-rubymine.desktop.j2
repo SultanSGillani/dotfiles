@@ -1,0 +1,13 @@
+
+{{ ansible_managed | comment }}
+
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name={{ rubymine_application_name }}
+Icon={{ rubymine_install_dir }}/bin/rubymine.png
+Exec="{{ rubymine_install_dir }}/bin/rubymine.sh" %f
+Comment=rubymine foo!
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass={{ rubymine_startup_wm_class }}

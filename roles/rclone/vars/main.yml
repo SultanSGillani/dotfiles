@@ -1,0 +1,2 @@
+---
+rclone_dir: "{{ dotfiles_dir }}/roles/rclone/files"

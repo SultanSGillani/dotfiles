@@ -1,0 +1,43 @@
+---
+- name: Check if hub is installed
+  stat:
+    path: /usr/local/bin/hub
+  register: hub_stat
+  become: yes
+  become_user: "{{ zsh_user }}"
+  tags:
+    - initial
+
+- name: Download hub
+  unarchive:
+    remote_src: yes
+    src: "https://github.com/github/hub/releases/download/v{{ hub_linux_version }}/{{ hub_linux_full_version }}.tgz"
+    dest: /tmp/
+  become: yes
+  become_user: root
+  when: not hub_stat.stat.exists
+  tags:
+    - initial
+
+- name: Install hub
+  command: "/tmp/{{ hub_linux_full_version }}/install"
+  become: yes
+  become_user: root
+  register: hub_output
+  when: not hub_stat.stat.exists
+  tags:
+    - initial
+
+- debug:
+    var: hub_output
+  tags:
+    - initial
+
+- name: Clean hub files
+  file:
+    path: "/tmp/{{ hub_linux_full_version }}.tgz"
+    state: absent
+  become: yes
+  become_user: root
+  tags:
+    - initial

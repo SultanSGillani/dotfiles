@@ -1,0 +1,21 @@
+<!--    Base16 {{ base16.theme[default_theme]['scheme_name'] }}
+        Author: {{ base16.theme[default_theme]['scheme_author'] }}   -->
+
+<application>
+  <component name="MaterialCustomThemeConfig">
+    <option name="notificationsColor" value="{{ base16.theme[default_theme]['base00_hex'] }}" />
+    <option name="treeSelectionColor" value="{{ base16.theme[default_theme]['base0D_hex'] }}" />
+    <option name="highlightColor" value="{{ base16.theme[default_theme]['base02_hex'] }}" />
+    <option name="secondBorderColor" value="{{ base16.theme[default_theme]['base00_hex'] }}" />
+    <option name="tableSelectedColor" value="{{ base16.theme[default_theme]['base0D_hex'] }}" />
+    <option name="contrastColor" value="{{ base16.theme[default_theme]['base01_hex'] }}" />
+    <option name="disabledColor" value="{{ base16.theme[default_theme]['base04_hex'] }}" />
+    <option name="secondaryBackgroundColor" value="{{ base16.theme[default_theme]['base01_hex'] }}" />
+    <option name="buttonColor" value="{{ base16.theme[default_theme]['base00_hex'] }}" />
+    <option name="selectionForegroundColor" value="{{ base16.theme[default_theme]['base06_hex'] }}" />
+    <option name="selectionBackgroundColor" value="{{ base16.theme[default_theme]['base0D_hex'] }}" />
+    <option name="textColor" value="{{ base16.theme[default_theme]['base06_hex'] }}" />
+    <option name="foregroundColor" value="{{ base16.theme[default_theme]['base05_hex'] }}" />
+    <option name="backgroundColor" value="{{ base16.theme[default_theme]['base00_hex'] }}" />
+  </component>
+</application> 

@@ -1,0 +1,7 @@
+---
+- name: Install fd for OSX
+  homebrew:
+    name: fd
+    state: present
+  tags:
+    - initial

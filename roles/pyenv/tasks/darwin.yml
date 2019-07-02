@@ -1,0 +1,7 @@
+---
+- name: Install pyenv pkgs
+  homebrew:
+    name: "{{ pyenv_pkgs }}"
+    state: present
+  tags:
+    - initial

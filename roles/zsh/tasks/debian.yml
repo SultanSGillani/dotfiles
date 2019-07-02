@@ -1,0 +1,9 @@
+---
+- name: install zsh
+  package:
+    name: zsh
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial

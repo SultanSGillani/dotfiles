@@ -1,0 +1,100 @@
+[options]
+scroll_on_output = false
+scroll_on_keystroke = true
+audible_bell = false
+mouse_autohide = false
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+#font = Monospace 9
+scrollback_lines = 10000
+search_wrap = true
+#icon_name = terminal
+#geometry = 640x480
+
+#font = Symbola 10
+#font = Monospace 10
+
+font = Hack Nerd Font Mono 12
+
+# "system", "on" or "off"
+cursor_blink = system
+
+# "block", "underline" or "ibeam"
+cursor_shape = block
+
+# $BROWSER is used by default if set, with xdg-open as a fallback
+#browser = xdg-open
+
+# set size hints for the window
+#size_hints = false
+
+# Hide links that are no longer valid in url select overlay mode
+filter_unmatched_urls = true
+
+# emit escape sequences for extra modified keys
+#modify_other_keys = false
+
+[colors]
+# Base16 {{ base16.theme[default_theme]['scheme_name'] }}
+# Author: {{ base16.theme[default_theme]['scheme_author'] }}
+
+foreground          = #{{ base16.theme[default_theme]['base05_hex'] }}
+foreground_bold     = #{{ base16.theme[default_theme]['base06_hex'] }}
+cursor              = #{{ base16.theme[default_theme]['base06_hex'] }}
+cursor_foreground   = #{{ base16.theme[default_theme]['base00_hex'] }}
+background          = rgba({{ base16.theme[default_theme]['base00_rgb_r'] }}, {{ base16.theme[default_theme]['base00_rgb_g'] }}, {{ base16.theme[default_theme]['base00_rgb_b'] }})
+
+# 16 color space
+
+# Black, Gray, Silver, White
+color0  = #{{ base16.theme[default_theme]['base00_hex'] }}
+color8  = #{{ base16.theme[default_theme]['base03_hex'] }}
+color7  = #{{ base16.theme[default_theme]['base05_hex'] }}
+color15 = #{{ base16.theme[default_theme]['base07_hex'] }}
+
+# Red
+color1  = #{{ base16.theme[default_theme]['base08_hex'] }}
+color9  = #{{ base16.theme[default_theme]['base08_hex'] }}
+
+# Green
+color2  = #{{ base16.theme[default_theme]['base0B_hex'] }}
+color10 = #{{ base16.theme[default_theme]['base0B_hex'] }}
+
+# Yellow
+color3  = #{{ base16.theme[default_theme]['base0A_hex'] }}
+color11 = #{{ base16.theme[default_theme]['base0A_hex'] }}
+
+# Blue
+color4  = #{{ base16.theme[default_theme]['base0D_hex'] }}
+color12 = #{{ base16.theme[default_theme]['base0D_hex'] }}
+
+# Purple
+color5  = #{{ base16.theme[default_theme]['base0E_hex'] }}
+color13 = #{{ base16.theme[default_theme]['base0E_hex'] }}
+
+# Teal
+color6  = #{{ base16.theme[default_theme]['base0C_hex'] }}
+color14 = #{{ base16.theme[default_theme]['base0C_hex'] }}
+
+# Extra colors
+color16 = #{{ base16.theme[default_theme]['base09_hex'] }}
+color17 = #{{ base16.theme[default_theme]['base0F_hex'] }}
+color18 = #{{ base16.theme[default_theme]['base01_hex'] }}
+color19 = #{{ base16.theme[default_theme]['base02_hex'] }}
+color20 = #{{ base16.theme[default_theme]['base04_hex'] }}
+color21 = #{{ base16.theme[default_theme]['base06_hex'] }}
+
+[hints]
+#font = Monospace 12
+#foreground = #dcdccc
+#background = #3f3f3f
+#active_foreground = #e68080
+#active_background = #3f3f3f
+#padding = 2
+#border = #3f3f3f
+#border_width = 0.5
+#roundness = 2.0
+
+# vim: ft=dosini cms=#%s

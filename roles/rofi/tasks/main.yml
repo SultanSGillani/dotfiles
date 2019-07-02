@@ -1,0 +1,22 @@
+---
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: ansible_facts['os_family']|lower is defined
+
+- name: Create rofi theme directory if it doesnt exist
+  file:
+    path: "{{ dotfiles_user_home }}/.local/share/rofi/themes"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
+    recurse: yes
+  tags:
+    - initial
+
+- name: write rasi file
+  template:
+    src: base16.css
+    dest: "{{ dotfiles_user_home }}/.local/share/rofi/themes/base16-{{ default_theme }}.rasi"
+  tags:
+    - update

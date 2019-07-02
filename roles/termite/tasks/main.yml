@@ -1,0 +1,19 @@
+---
+- name: include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: ansible_facts['os_family']|lower is defined
+
+- name: Create termite config directory if it doesnt exist
+  file:
+    path: "{{ dotfiles_user_home }}/.config/termite"
+    state: directory
+    recurse: yes
+  tags:
+    - initial
+
+- name: Write termite config
+  template:
+    src: termite.j2
+    dest: "{{ dotfiles_user_home }}/.config/termite/config"
+  tags:
+    - update

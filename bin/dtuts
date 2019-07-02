@@ -1,0 +1,3 @@
+#!/bin/bash
+
+youtube-dl --username "sultan33g" --password "Immortal55" -o "/media/nasfour1/torrents/tutorials/"${1}"/%(playlist)s/%(chapter_number)s - %(chapter)s/%(playlist_index)s - %(title)s.%(ext)s" --min-sleep-interval 30 --max-sleep-interval 60 "${2}"/ --playlist-start 1

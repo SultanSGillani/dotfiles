@@ -1,0 +1,40 @@
+---
+- name: Create ssh directory if it doesnt exist
+  file:
+    path: "{{ dotfiles_user_home }}/.ssh"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0700
+    recurse: no
+  tags:
+    - initial
+
+- name: copy Local Config
+  copy:
+    src: ssh_local_config
+    dest: "{{ dotfiles_user_home }}/.ssh/config"
+    mode: 0644
+  loop: "{{ ssh_config }}"
+  tags:
+    - update
+
+- name: Copy each file over that matches the given pattern
+  copy:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_user_home }}/.ssh/"
+    mode: 0644
+  with_fileglob:
+    - "{{ ssh_directory }}/files/pub_keys/*"
+  tags:
+    - keys
+
+- name: Copy each file over that matches the given pattern
+  copy:
+    src: "{{ item }}"
+    dest: "{{ dotfiles_user_home }}/.ssh/"
+    mode: 0600
+  with_fileglob:
+    - "{{ ssh_directory }}/files/priv_keys/*"
+  tags:
+    - keys

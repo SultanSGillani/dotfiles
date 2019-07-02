@@ -1,0 +1,15 @@
+---
+- name: Check if fd is installed
+  command: dpkg-query -W fd
+  register: fd_check_deb
+  failed_when: fd_check_deb.rc > 1
+  changed_when: fd_check_deb.rc == 1
+
+- name: Install a fd .deb file
+  apt:
+    deb: "{{ fd_release_url }}/{{ fd_version }}/{{ fd_dpkg_file }}"
+  become: yes
+  become_user: root
+  when: fd_check_deb.rc == 1
+  tags:
+    - initial

@@ -1,0 +1,63 @@
+---
+- name: find latest firefox
+  uri:
+    url: https://product-details.mozilla.org/1.0/firefox_versions.json
+    return_content: yes
+  changed_when: false
+  register: firefox_version
+  tags:
+    - update
+
+- name: latest version
+  set_fact: latest_version={{ firefox_version.json.LATEST_FIREFOX_VERSION }}
+  tags:
+    - update
+
+- name: Download firefox
+  get_url:
+    url: "https://ftp.mozilla.org/pub/firefox/releases/{{ latest_version }}/linux-x86_64/en-US/firefox-{{ latest_version }}.tar.bz2"
+    dest: "/tmp/firefox-{{ latest_version }}.tar.bz2"
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- block:
+    - name: Create directory.
+      file:
+        path: "/opt/firefox/firefox-{{ latest_version }}"
+        state: directory
+        recurse: yes
+        mode: 0755
+
+    - name: Unarchive.
+      unarchive:
+        src: /tmp/firefox-{{ latest_version }}.tar.bz2
+        dest: /opt/firefox/firefox-{{ latest_version }}
+        remote_src: true
+        creates: "/opt/firefox/firefox-{{ latest_version }}/firefox/firefox"
+
+    - name: Symlink.
+      file:
+        src: "/opt/firefox/firefox-{{ latest_version }}/firefox/firefox"
+        dest: /usr/bin/firefox
+        state: link
+  become: true
+  become_user: root
+
+- name: copy icon file
+  copy:
+    src: /opt/firefox/firefox-{{ latest_version }}/firefox/browser/chrome/icons/default/default128.png
+    dest: /usr/share/icons/firefox128.png
+  become: yes
+  become_user: root
+
+- name: Create desktop icon.
+  template:
+    src: firefox.desktop.j2
+    dest: /usr/share/applications/firefox.desktop
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  become_user: root

@@ -1,0 +1,14 @@
+---
+webstorm_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
+
+# Name to use in the desktop link
+webstorm_application_name: Webstorm Professional
+
+# Dockbar group
+webstorm_startup_wm_class: jetbrains-webstorm
+
+# Name of desktop file
+webstorm_desktop_filename: jetbrains-webstorm.desktop
+
+# Name of the directory where user specific settings are stored
+webstorm_user_dir: "Webstorm{{ webstorm_version | regex_replace('^([0-9]+\\.[0-9]+)(\\..*)?$', '\\1') }}"

@@ -1,0 +1,9 @@
+#!/bin/sh
+#
+# clone multiple repos in one directory
+#
+#
+# Example:
+#   git_work repo1 repo2 repo3
+git clone git@work:sultangillani3/${@}.git
+

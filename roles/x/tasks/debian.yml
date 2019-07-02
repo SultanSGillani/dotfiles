@@ -1,0 +1,7 @@
+---
+- name: install x11-xserver-utils for debian
+  package:
+    name: x11-xserver-utils
+    state: present
+  become: yes
+  become_user: root

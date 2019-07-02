@@ -1,0 +1,10 @@
+---
+- name: Install asdf
+  git:
+    repo: "https://github.com/asdf-vm/asdf.git"
+    dest: "{{ dotfiles_user_home }}/.asdf"
+    update: yes
+    accept_hostkey: yes
+    version: master
+  tags:
+    - initial

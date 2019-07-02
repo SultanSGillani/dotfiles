@@ -1,0 +1,90 @@
+---
+- name: check if termite is installed
+  command: which termite
+  changed_when: false
+  failed_when: false
+  register: termite_installed
+
+- name: Debian | Install apt termite dependencies
+  package:
+    name: "{{ termite_packages }}"
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: clone termite
+  git:
+    repo: https://github.com/thestinger/termite.git
+    dest: "{{ dotfiles_user_home }}/termite"
+    update: no
+    version: master
+  when: termite_installed.rc == 1
+
+- name: clone vte-ng
+  git:
+    repo: https://github.com/thestinger/vte-ng.git
+    dest: "{{ dotfiles_user_home }}/vte-ng"
+    update: no
+    version: 0.56.2-ng
+  when: termite_installed.rc == 1
+
+- name: autogen vte-ng
+  command: ./autogen.sh
+  args:
+    chdir: "{{ dotfiles_user_home }}/vte-ng"
+  environment:
+    LIBRARY_PATH: "/usr/include/gtk-3.0:{{ ansible_env.PATH }}"
+  when: termite_installed.rc == 1
+
+- name: make vte-ng
+  make:
+    chdir: "{{ dotfiles_user_home }}/vte-ng"
+    target:
+  when: termite_installed.rc == 1
+
+- name: make vte-ng
+  make:
+    chdir: "{{ dotfiles_user_home }}/vte-ng"
+    target: install
+  become: yes
+  become_user: root
+  when: termite_installed.rc == 1
+
+- name: make termite
+  make:
+    chdir: "{{ dotfiles_user_home }}/termite"
+    target:
+  when: termite_installed.rc == 1
+
+- name: make install termite
+  make:
+    chdir: "{{ dotfiles_user_home }}/termite"
+    target: install
+  become: yes
+  become_user: root
+  when: termite_installed.rc == 1
+
+- name: exec ldconfig
+  command: ldconfig
+  become: yes
+  become_user: root
+  changed_when: false
+  when: termite_installed.rc == 1
+
+- name: remove termite repo dir
+  file:
+    path: "{{ dotfiles_user_home }}/termite"
+    state: absent
+  tags:
+    - initial
+  when: termite_installed.rc == 1
+
+- name: remove vte-ng repo dir
+  file:
+    path: "{{ dotfiles_user_home }}/vte-ng"
+    state: absent
+  tags:
+    - initial
+  when: termite_installed.rc == 1

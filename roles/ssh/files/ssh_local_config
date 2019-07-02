@@ -1,0 +1,64 @@
+# Local GitConfig
+
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa
+
+Host gitlab.com
+HostName gitlab.com
+User git
+IdentityFile ~/.ssh/id_ed25519
+
+Host personal
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_ecdsa
+
+Host work
+HostName github.com
+user git
+IdentityFile ~/.ssh/id_ecdsa_work
+
+Host 10.10.0.45
+Hostname 10.10.0.45
+user sultan
+IdentityFile ~/.ssh/id_rsa_office
+
+Host 10.0.75.201
+Hostname 10.0.75.201
+user root
+IdentityFile ~/.ssh/id_rsa_devops
+
+Host 10.0.75.156
+Hostname 10.0.75.156
+user gitlab-runner
+IdentityFile ~/.ssh/id_rsa_personal
+
+Host 10.0.75.20
+Hostname 10.0.75.20
+user devops
+IdentityFile ~/.ssh/id_ecdsa_devops
+
+Host 10.0.75.102
+Hostname 10.0.75.102
+user devops
+IdentityFile ~/.ssh/id_ecdsa_devops
+
+Host 10.0.75.132
+Hostname 10.0.75.132
+user devops
+IdentityFile ~/.ssh/id_ecdsa_devops
+
+Host *
+	# Always use SSH2.
+	Protocol 2
+
+	# Use a shared channel for all sessions to the same host,
+	# instead of always opening a new one. This leads to much
+	# quicker connection times.
+    AddKeysToAgent yes
+    #IdentityFile ~/.ssh/id_rsa
+	# also this stuff
+	Compression yes
+

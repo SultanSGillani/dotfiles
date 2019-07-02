@@ -1,0 +1,19 @@
+[flake8]
+ignore =
+
+        # line too long (> 79 characters)
+        E501,
+
+        # line break before and after binary operator
+        W503, W504
+
+        # star imports confuse undefined name detection
+        F403, F405
+
+
+
+include = kinetic, setup.py, install.py
+exclude = docs, migrations, static, provision, .git, .idea, .vagrant, __pycache__, *.pyc, *.gz
+
+max-line-length = 120
+

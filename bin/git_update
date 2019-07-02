@@ -1,0 +1,23 @@
+#!/usr/bin/env zsh
+
+if [[ -z "$1" ]] then
+  DIR=~/projects
+else
+  DIR="$1"
+fi
+
+CURRENT_DIR=`pwd`
+
+for repo in "${DIR}/"*; do
+  if [[ -d "${repo}/.git" ]] then
+    cd "${repo}"
+    echo -e "\033[1mFound git repository in $repo.\033[0m"
+    git fetch
+    if [[ ! -z `git remote | grep upstream` ]] then
+      echo -e "\033[1mFetching upstream changes for $repo.\033[0m"
+      git fetch upstream
+    fi
+  fi
+done
+
+cd "${CURRENT_DIR}"

@@ -1,0 +1,9 @@
+---
+- name: Install i3, i3-gaps and its dependencies | "{{ ansible_facts['distribution']|lower }}"
+  package:
+    name: xcb
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial

@@ -1,0 +1,42 @@
+---
+- name: check if st is installed
+  command: which st
+  changed_when: false
+  failed_when: false
+  register: st_installed
+
+- name: Debian | Install apt st dependencies
+  package:
+    name: "{{ st_packages }}"
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial
+  when: ansible_facts['os_family']|lower == 'debian'
+
+- name: clone suckless terminal to ~/.config/st
+  git:
+    repo: https://gitlab.com/sultangillani/st.git
+    dest: "{{ dotfiles_user_home }}/.config/st"
+    update: no
+    version: master
+  when: st_installed.rc == 1
+  tags:
+    - initial
+
+- name: Write st config
+  template:
+    src: st.j2
+    dest: "{{ dotfiles_user_home }}/.config/st/config.h"
+  tags:
+    - update
+
+- name: make install st
+  make:
+    chdir: "{{ dotfiles_user_home }}/.config/st"
+    target: install
+  become: yes
+  become_user: root
+  tags:
+    - update

@@ -1,0 +1,242 @@
+--exclude=.git
+--exclude=log
+--exclude=node_modules
+-R
+--tag-relative=yes
+--exclude=*.min.js
+--exclude=jquery.*.js
+--exclude=jquery-*.js
+--exclude=vendor
+--languages=-html
+--extra=+q+f
+--fields=+i+a+S+n
+
+--extra=+f --c-kinds=+px
+--regex-asm=/^(ENTRY|_GLOBAL)\(([^)]*)\).*/\2/       
+--regex-c=/^SYSCALL_DEFINE[[:digit:]]?\(([^,)]*).*/sys_\1/
+--regex-c++=/^TRACE_EVENT\(([^,)]*).*/trace_\1/
+--regex-c++=/^DEFINE_EVENT\([^,)]*,\s*([^,)]*).*/trace_\1/
+--regex-c++=/PAGEFLAG\(([^,)]*).*/Page\1/
+--regex-c++=/PAGEFLAG\(([^,)]*).*/SetPage\1/
+--regex-c++=/PAGEFLAG\(([^,)]*).*/ClearPage\1/        
+--regex-c++=/TESTSETFLAG\(([^,)]*).*/TestSetPage\1/
+--regex-c++=/TESTPAGEFLAG\(([^,)]*).*/Page\1/
+--regex-c++=/SETPAGEFLAG\(([^,)]*).*/SetPage\1/
+--regex-c++=/__SETPAGEFLAG\(([^,)]*).*/__SetPage\1/
+--regex-c++=/TESTCLEARFLAG\(([^,)]*).*/TestClearPage\1/
+--regex-c++=/__TESTCLEARFLAG\(([^,)]*).*/TestClearPage\1/
+--regex-c++=/CLEARPAGEFLAG\(([^,)]*).*/ClearPage\1/
+--regex-c++=/__CLEARPAGEFLAG\(([^,)]*).*/__ClearPage\1/
+--regex-c++=/__PAGEFLAG\(([^,)]*).*/__SetPage\1/
+--regex-c++=/__PAGEFLAG\(([^,)]*).*/__ClearPage\1/
+--regex-c++=/PAGEFLAG_FALSE\(([^,)]*).*/Page\1/
+--regex-c++=/TESTSCFLAG\(([^,)]*).*/TestSetPage\1/
+--regex-c++=/TESTSCFLAG\(([^,)]*).*/TestClearPage\1/
+--regex-c++=/SETPAGEFLAG_NOOP\(([^,)]*).*/SetPage\1/
+--regex-c++=/CLEARPAGEFLAG_NOOP\(([^,)]*).*/ClearPage\1/
+--regex-c++=/__CLEARPAGEFLAG_NOOP\(([^,)]*).*/__ClearPage\1/
+--regex-c++=/TESTCLEARFLAG_FALSE\(([^,)]*).*/TestClearPage\1/
+--regex-c++=/__TESTCLEARFLAG_FALSE\(([^,)]*).*/__TestClearPage\1/
+--regex-c++=/_PE\(([^,)]*).*/PEVENT_ERRNO__\1/        
+--regex-c=/PCI_OP_READ\((\w*).*[1-4]\)/pci_bus_read_config_\1/
+--regex-c=/PCI_OP_WRITE\((\w*).*[1-4]\)/pci_bus_write_config_\1/
+--regex-c=/DEFINE_(MUTEX|SEMAPHORE|SPINLOCK)\((\w*)/\2/v/
+--regex-c=/DEFINE_(RAW_SPINLOCK|RWLOCK|SEQLOCK)\((\w*)/\2/v/
+--regex-c=/DECLARE_(RWSEM|COMPLETION)\((\w*)/\2/v/
+--regex-c=/DECLARE_BITMAP\((\w*)/\1/v/
+--regex-c=/(^|\s)(|L|H)LIST_HEAD\((\w*)/\3/v/
+--regex-c=/(^|\s)RADIX_TREE\((\w*)/\2/v/
+--regex-c=/DEFINE_PER_CPU\(([^,]*,\s*)(\w*).*\)/\2/v/
+--regex-c=/DEFINE_PER_CPU_SHARED_ALIGNED\(([^,]*,\s*)(\w*).*\)/\2/v/
+--regex-c=/DECLARE_WAIT_QUEUE_HEAD\((\w*)/\1/v/
+--regex-c=/DECLARE_(TASKLET|WORK|DELAYED_WORK)\((\w*)/\2/v/
+--regex-c=/DEFINE_PCI_DEVICE_TABLE\((\w*)/\1/v/
+--regex-c=/(^\s)OFFSET\((\w*)/\2/v/
+--regex-c=/(^\s)DEFINE\((\w*)/\2/v/"
+
+--langdef=ruby
+--langmap=ruby:.rb
+--regex-ruby=/(^|[:;])[ \t]*([A-Z][[:alnum:]_]+) *=/\2/c,class,constant/
+--regex-ruby=/(^|;)[ \t]*(has_many|belongs_to|has_one|has_and_belongs_to_many)\(? *:([[:alnum:]_]+)/\3/f,association,Active Record association/
+--regex-ruby=/(^|;)[ \t]*(named_)?scope\(? *:([[:alnum:]_]+)/\3/f,scope,ActiveRecord scope/
+--regex-ruby=/(^|;)[ \t]*expose\(? *:([[:alnum:]_]+)/\2/f,function,exposure/
+--regex-ruby=/(^|;)[ \t]*event\(? *:([[:alnum:]_]+)/\2/f,function,aasm_event/
+--regex-ruby=/(^|;)[ \t]*event\(? *:([[:alnum:]_]+)/\2!/f,function,aasm_event/
+--regex-ruby=/(^|;)[ \t]*event\(? *:([[:alnum:]_]+)/\2?/f,function,aasm_event/
+--regex-ruby=/(^|;)[ \t]*(private|protected|public)(_class_method)?\(? def *(self.)?([[:alnum:]_]+)/\5/f,inline scoped method,inline scoped methods (Ruby 2.1+)/
+
+--langdef=typescript
+--langmap=typescript:.ts
+--regex-typescript=/^[ \t]*(export[ \t]*)?(default[ \t]*)?class[ \t]+([a-zA-Z0-9_]+)/\3/c,classes/
+--regex-typescript=/^[ \t]*(export[ \t]*)?(default[ \t]*)?module[ \t]+([a-zA-Z0-9_]+)/\3/n,modules/
+--regex-typescript=/^[ \t]*(export[ \t]*)?(default[ \t]*)?(async[ \t]*)?function[ \t]+([a-zA-Z0-9_]+)/\4/f,functions/
+--regex-typescript=/^[ \t]*(export[ \t]*)?(default[ \t]*)?var[ \t]+([a-zA-Z0-9_]+)/\3/v,variables/
+--regex-typescript=/^[ \t]*(export[ \t]*)?(default[ \t]*)?(async[ \t]*)?(public|private)?(async[ \t]*)?[ \t]+(static)?[ \t]*([a-zA-Z0-9_]+)/\7/m,members/
+--regex-typescript=/^[ \t]*(export[ \t]*)?(default[ \t]*)?interface[ \t]+([a-zA-Z0-9_]+)/\3/i,interfaces/
+--regex-typescript=/^[ \t]*(export[ \t]*)?(default[ \t]*)?enum[ \t]+([a-zA-Z0-9_]+)/\3/e,enums/
+--regex-typescript=/^[ \t]*(export[ \t]*)?(default[ \t]*)?type[ \t]+([a-zA-Z0-9_]+)/\3/t,typealias/
+--regex-typescript=/^[ \t]*(export[ \t]*)?(default[ \t]*)?namespace[ \t]+([a-zA-Z0-9_]+)/\3/N,namespace/
+--regex-typescript=/^[ \t]*import[ \t]+([a(default[ \t]*)?-zA-Z0-9_]+)/\1/I,imports/
+
+--langmap=javascript:.js.es6.es.jsx
+--javascript-kinds=-c-f-m-p-v
+
+--regex-C=/$x/x/x/e/ from https://github.com/romainl/ctags-patterns-for-javascript
+--regex-javascript=/^[ \t]*var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*\[/\1/A,Array,Arrays/b
+--regex-javascript=/^[ \t]*let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*\[/\1/A,Array,Arrays/b
+--regex-javascript=/^[ \t]*const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*\[/\1/A,Array,Arrays/b
+
+--regex-javascript=/^[ \t]*var[ \t]\{1,\}\([A-Z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*function/\1/C,Class,Classes/b
+--regex-javascript=/^[ \t]*let[ \t]\{1,\}\([A-Z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*function/\1/C,Class,Classes/b
+--regex-javascript=/^[ \t]*const[ \t]\{1,\}\([A-Z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*function/\1/C,Class,Classes/b
+--regex-javascript=/^[ \t]*class[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)/\1/C,Class,Classes/b
+
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}\({[ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\3/E,Export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}\({[ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\5/E,export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}\({[ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\7/E,Export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}var[ \t]\{1,\}\([A_Za-z0-9_$]\{1,\}\)/\1/E,Export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}let[ \t]\{1,\}\([A_Za-z0-9_$]\{1,\}\)/\1/E,Export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}const[ \t]\{1,\}\([A_Za-z0-9_$]\{1,\}\)/\1/E,Export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}var[ \t]\{1,\}\([A_Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A_Za-z0-9_$]\{1,\}\)/\2/E,Export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}let[ \t]\{1,\}\([A_Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A_Za-z0-9_$]\{1,\}\)/\2/E,Export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}const[ \t]\{1,\}\([A_Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A_Za-z0-9_$]\{1,\}\)/\2/E,Export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}var[ \t]\{1,\}\([A_Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A_Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A_Za-z0-9_$]\{1,\}\)/\3/E,Export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}let[ \t]\{1,\}\([A_Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A_Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A_Za-z0-9_$]\{1,\}\)/\3/E,Export,Exports/b
+--regex-javascript=/^[ \t]*export[ \t]\{1,\}const[ \t]\{1,\}\([A_Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A_Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A_Za-z0-9_$]\{1,\}\)/\3/E,Export,Exports/b
+
+--regex-javascript=/^[ \t]*function[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t(]/\1/F,Function,Functions/b
+--regex-javascript=/^[ \t]*[(]function[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t(]/\1/F,Function,Functions/b
+--regex-javascript=/^[ \t]*var[ \t]\{1,\}\([a-z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*function[^\*][^\*]/\1/F,Function,Functions/b
+--regex-javascript=/^[ \t]*let[ \t]\{1,\}\([a-z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*function[^\*][^\*]/\1/F,Function,Functions/b
+--regex-javascript=/^[ \t]*const[ \t]\{1,\}\([a-z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*function[^\*][^\*]/\1/F,Function,Functions/b
+--regex-javascript=/^[ \t]*var[ \t]\{1,\}\([a-z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*([^\*]/\1/F,Function,Functions/b
+--regex-javascript=/^[ \t]*let[ \t]\{1,\}\([a-z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*([^\*]/\1/F,Function,Functions/b
+--regex-javascript=/^[ \t]*const[ \t]\{1,\}\([a-z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*([^\*]/\1/F,Function,Functions/b
+
+--regex-javascript=/^[ \t]*function[ \t]*\*[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\1/G,Generator,Generators/b
+--regex-javascript=/^[ \t]*var[ \t]\{1,\}\([a-z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*function\([ \t]*\*\)/\1/G,Generator,Generators/b
+--regex-javascript=/^[ \t]*let[ \t]\{1,\}\([a-z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*function\([ \t]*\*\)/\1/G,Generator,Generators/b
+--regex-javascript=/^[ \t]*const[ \t]\{1,\}\([a-z][A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*function\([ \t]*\*\)/\1/G,Generator,Generators/b
+--regex-javascript=/^[ \t]*\(\*[ \t]\)\([A-Za-z0-9_$]\{1,\}\)[ \t]*(.*)[ \t]*[{]/\2/G,Generator,Generators/b
+
+--regex-javascript=/^[ \t]*import[ \t]\{1,\}\([{][ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\3/I,Import,Imports/b
+--regex-javascript=/^[ \t]*import[ \t]\{1,\}\([{][ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\5/I,Import,Imports/b
+--regex-javascript=/^[ \t]*import[ \t]\{1,\}\([{][ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\7/I,Import,Imports/b
+
+--regex-javascript=/^[ \t]*this\.\([A-Za-z0-9_$]\{1,\}\)[ \t]*=.*[{]$/\1/M,Method,Methods/b
+--regex-javascript=/^[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t]*[:=][ \t]*[(]*function[ \t]*(/\1/M,Method,Methods/b
+--regex-javascript=/^[ \t]*static[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*(/\1/M,Method,Methods/b
+--regex-javascript=/^[ \t]*\([A-Za-z0-9_$]\{1,\}\)(.*)[ \t]*[{]/\1/M,Method,Methods/b
+
+--regex-javascript=/^[ \t]*\(this\.\)*\([A-Za-z0-9_$]\{1,\}\)[ \t]*[:=].*[,;]*[^{]$/\2/P,Property,Properties/b
+
+--regex-javascript=/^[ \t]*var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*[{]/\1/O,Object,Objects/b
+--regex-javascript=/^[ \t]*let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*[{]/\1/O,Object,Objects/b
+--regex-javascript=/^[ \t]*const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*[{]/\1/O,Object,Objects/b
+
+--regex-javascript=/\/\/[ \t]*\(FIXME\)[ \t]*:*\(.*\)/\1/T,Tag,Tags/b
+--regex-javascript=/\/\/[ \t]*\(TODO\)[ \t]*:*\(.*\)/\1/T,Tag,Tags/b
+--regex-javascript=/\/\/[ \t]*\(BUG\)[ \t]*:*\(.*\)/\1/T,Tag,Tags/b
+--regex-javascript=/\/\/[ \t]*\(NOBUG\)[ \t]*:*\(.*\)/\1/T,Tag,Tags/b
+--regex-javascript=/\/\/[ \t]*\(???\)[ \t]*:*\(.*\)/\1/T,Tag,Tags/b
+--regex-javascript=/\/\/[ \t]*\(!!!\)[ \t]*:*\(.*\)/\1/T,Tag,Tags/b
+--regex-javascript=/\/\/[ \t]*\(HACK\)[ \t]*:*\(.*\)/\1/T,Tag,Tags/b
+--regex-javascript=/\/\/[ \t]*\(XXX\)[ \t]*:*\(.*\)/\1/T,Tag,Tags/b
+
+--regex-javascript=/^[ \t]*var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*[0-9\"'\/]/\1/V,Variable,Variables/b
+--regex-javascript=/^[ \t]*let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*[0-9\"'\/]/\1/V,Variable,Variables/b
+--regex-javascript=/^[ \t]*const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*[0-9\"'\/]/\1/V,Variable,Variables/b
+--regex-javascript=/^[ \t]*var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*new/\1/V,Variable,Variables/b
+--regex-javascript=/^[ \t]*let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*new/\1/V,Variable,Variables/b
+--regex-javascript=/^[ \t]*const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*=[ \t]*new/\1/V,Variable,Variables/b
+
+--langmap=Lisp:+.clj
+
+--langdef=haskell
+--langmap=haskell:.hs
+--regex-haskell=/^module[ \t]*([A-Z][a-zA-Z0-9'_.]*)/\1/m,module/
+--regex-haskell=/^(new)?type[ \t]*([A-Z][a-zA-Z0-9'_]*)./\2/t,type/
+--regex-haskell=/^class[ \t]*([A-Z][a-zA-Z0-9'_]*)/\1/c,class/
+--regex-haskell=/^data[ \t]*([A-Z][a-zA-Z0-9'_]*)/\1/d,data/
+--regex-haskell=/^([a-z_][a-zA-Z0-9'_]*).*=/\1/v,function/
+
+--langdef=coffee
+--langmap=coffee:.coffee
+--regex-coffee=/(^|=[ \t])*class ([A-Za-z.]+)( extends [A-Za-z.]+)?$/\2/c,class/
+--regex-coffee=/^[ \t]*(module\.)?(exports\.)?@?([A-Za-z.]+):.*[-=]>.*$/\3/f,function/
+--regex-coffee=/^[ \t]*(module\.)?(exports\.)?([A-Za-z.]+)[ \t]+=.*[-=]>.*$/\3/f,function/
+--regex-coffee=/^[ \t]*([A-Za-z.]+)[ \t]+=[^->\n]*$/\1/v,variable/
+
+--langdef=golang
+--langmap=golang:.go
+--regex-golang=/func([ \t]+\([^)]+\))?[ \t]+([a-zA-Z0-9_]+)/\2/d,func/
+--regex-golang=/var[ \t]+([a-zA-Z_][a-zA-Z0-9_]+)/\1/d,var/
+--regex-golang=/type[ \t]+([a-zA-Z_][a-zA-Z0-9_]+)/\1/d,type/
+
+--langdef=zcml
+--langmap=zcml:.zcml
+--regex-zcml=/.*name="(.*)"/\1/n,name/
+--regex-zcml=/.*for="(.*)"?/\1/f,for/
+--regex-zcml=/.*profile="(.*)"/\1/g,profile/
+--regex-zcml=/.*permission="(.*)"/\1/p,permission/
+--regex-zcml=/.*provides=".*\.(.[^"]*)"/\1/p,provides/
+--regex-zcml=/.*id="(.*)"/\1/i,id/
+--regex-zcml=/.*schema=".*\.(.[^"]*)"/\1/s,schema/
+--regex-zcml=/.*handler=".*\.(.[^"]*)"/\1/h,handler/
+--regex-zcml=/.*component=".*\.(.[^"]*)"/\1/m,component/
+--regex-zcml=/.*factory=".*\.(.[^"]*)"/\1/f,factory/
+--regex-zcml=/.*view=".*\.(.[^"]*)"/\1/v,view/
+--regex-zcml=/.*class=".*\.(.[^"]*)"/\1/c,class/
+--regex-zcml=/.*controller=".*\.(.[^"]*)"/\1/c,controller/
+--regex-zcml=/.*type=".*\.(.[^"]*)"/\1/t,type/
+--regex-zcml=/.*elector=".*\.(.[^"]*)"/\1/w,workflow/
+--regex-zcml=/.*content_types=".*\.(.[^"]*)"/\1/w,workflow/
+--regex-zcml=/.*initial_state=".*\.(.[^"]*)"/\1/w,workflow/
+--regex-zcml=/.*state_attr=".*\.(.[^"]*)"/\1/w,workflow/
+--regex-zcml=/.*permission_checker=".*\.(.[^"]*)"/\1/w,workflow/
+--regex-zcml=/.*callback=".*\.(.[^"]*)"/\1/w,workflow/
+--regex-zcml=/.*from_state=".*\.(.[^"]*)"/\1/w,workflow/
+--regex-zcml=/.*to_state=".*\.(.[^"]*)"/\1/w,workflow/
+--regex-zcml=/.*value=".*\.(.[^"]*)"/\1/w,workflow/
+--regex-zcml=/.*title=".*\.(.[^"]*)"/\1/w,workflow/
+
+--regex-python=/[ \t]*if[ \t]+__name__[ \t]*==[ \t]*["'](__main__)["'][ \t]*:/\1/e,entrypoint/
+--langmap=python:+.ptl
+--regex-python=/^ *([_A-Z0-9]+)[\t ]*=/\1/d,definition/e
+--python-kinds=-i
+
+--langdef=ini
+--langmap=ini:.cfg.ini
+--regex-ini=/^\[(.*)\]/\1/s,section/
+
+--langdef=markdown
+--langmap=markdown:.md.mdown.mkdown.markdown
+--regex-markdown=/^# (.*)(#)?/\1/1,header1/
+--regex-markdown=/^#{2} (.*)(#{2})?/\1/2,header2/
+--regex-markdown=/^#{3} (.*)(#{3})?/\1/3,header3/
+--regex-markdown=/^#{4} (.*)(#{4})?/\1/4,header4/
+--regex-markdown=/^#{5} (.*)(#{5})?/\1/5,header5/
+--regex-markdown=/^#{6} (.*)(#{6})?/\1/6,header6/
+--regex-markdown=/^#{7} (.*)(#{7})?/\1/7,header7/
+
+--langdef=ansible
+--langmap=ansible:.yml.yaml
+--regex-ansible=/^[ \t]*-[ \t]*name:[ \t]*(.+)/\1/k,tasks/
+
+--langdef=Rust
+--langmap=Rust:.rs
+--regex-Rust=/fn +([a-zA-Z0-9_]+) *[(<{]/\1/f,functions,function definitions/
+--regex-Rust=/(type|enum|struct|trait)[ \t]+([a-zA-Z0-9_]+) *[<{(;]/\2/T,types,type definitions/
+--regex-Rust=/mod[ \t]+([a-zA-Z0-9_]+) *[<{(;]/\1/M,modules,module definitions/
+--regex-Rust=/(static|const) +([a-zA-Z0-9_]+) *[:=]/\2/c,consts,static constants/
+--regex-Rust=/macro_rules! +([a-zA-Z0-9_]+) *[{]/\1/d,macros,macro definitions/
+--regex-Rust=/impl([ \t\n]*<[^>]*>)?[ \t]+(([a-zA-Z0-9_:]+)[ \t]*(<[^>]*>)?[ \t]+(for)[ \t]+)?([a-zA-Z0-9_]+)/\6/i,impls,trait implementations/
+
+
+--langdef=groovy
+--langmap=groovy:.groovy
+--regex-groovy=/^[ \t]*[(static|private|public|protected) \t]*(def|[A-Za-z0-9_.]+)[ \t]+([A-Za-z0-9_]+)[ \t]*\(/\2/f,function,functions/
+--regex-groovy=/^[ \t]*private def[ \t]+([A-Za-z0-9_]+)[ \t]*/\1/v,private,private variables/
+--regex-groovy=/^[ \t]*public def[ \t]+([A-Za-z0-9_]+)[ \t]*/\1/u,public,public variables/
+--regex-groovy=/^[ \t]*[abstract ( \t)]*[(private|public) ( \t)]*class[ \t]+([A-Za-z0-9_]+)[ \t]*/\1/c,class,classes/
+--regex-groovy=/^[ \t]*[abstract ( \t)]*[(private|public) ( \t)]*enum[ \t]+([A-Za-z0-9_]+)[ \t]*/\1/c,class,classes/

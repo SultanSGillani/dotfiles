@@ -1,0 +1,6 @@
+---
+rbenv_pkgs:
+  - libcurl4-openssl-dev
+  - libxslt1-dev
+
+rbenv_shell: "{{ rbenv_root }}/bin/rbenv"

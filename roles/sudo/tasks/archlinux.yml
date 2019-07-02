@@ -1,0 +1,7 @@
+---
+- name: install sudo
+  package:
+    name: sudo
+    state: present
+  become: yes
+  become_user: root

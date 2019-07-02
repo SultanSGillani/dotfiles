@@ -1,0 +1,29 @@
+---
+- name: Tap yabai
+  homebrew_tap:
+    name: koekeishiya/formulae
+    state: present
+  tags:
+    - initial
+
+- name: Install yabai
+  homebrew:
+    name: yabai
+    state: present
+  tags:
+    - initial
+
+- name: Install scripting add [Macos]
+  command: yabai --install-sa
+  become: yes
+  become_user: root
+  tags:
+    - initial
+
+- name: Write yabai config
+  template:
+    src: yabairc
+    dest: "{{ dotfiles_user_home }}/.yabairc"
+    mode: 0755
+  tags:
+    - update

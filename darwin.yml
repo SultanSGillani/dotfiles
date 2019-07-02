@@ -1,0 +1,29 @@
+- name: Ansible Dev & Dotfiles Setup
+  vars_files:
+    - group_vars/all/main.yml
+  hosts: all
+  gather_facts: no
+  become: yes
+  become_user: "{{ zsh_user }}"
+  tasks:
+    - block:
+        - import_role:
+            name: skhd
+          tags:
+            - skhd
+        - import_role:
+            name: yabai
+          tags:
+            - yabai
+        - import_role:
+            name: ubersicht
+          tags:
+            - ubersicht
+            - uber
+            - pecan
+        - import_role:
+            name: iterm
+          tags:
+            - iterm
+            - iterm2
+            - iterm2-nightly

@@ -1,0 +1,4 @@
+[submodule "library/ansible-aur"]
+	path = library/ansible-aur
+	url = https://gitlab.com/sultangillani/ansible-aur
+	branch = master

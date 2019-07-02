@@ -1,0 +1,2 @@
+---
+fzf_dir: "{{ dotfiles_user_home }}/.fzf"

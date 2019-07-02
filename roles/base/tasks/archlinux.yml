@@ -1,0 +1,17 @@
+---
+- name: install base-devel
+  pacman:
+    name: base-devel
+    state: present
+    update_cache: yes
+  become: yes
+  become_user: root
+
+- name: install universal ctags
+  aur:
+    name: universal-ctags-git
+    use: yay
+  become: yes
+  become_user: "{{ aur_user }}"
+  tags:
+    - initial

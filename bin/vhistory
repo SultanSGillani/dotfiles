@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+TMPLOG=$(pwd)/tmp-project-log.csv;
+echo "project,timestamp" > $TMPLOG;
+for i in *; do;
+   if [ -d $i ] && [ -d $i/.git ]; then;
+      cd $i;
+      git log --since='last 2 months' --author="$(git config --get user.name)" --pretty=format:"$i,%ai" >> $TMPLOG;
+      echo "" >> $TMPLOG;
+      cd ..;
+   fi;
+done;
+grep . $TMPLOG > project-logs.csv;
+rm $TMPLOG;

@@ -1,0 +1,9 @@
+---
+- name: Arch Pkgs | Install Bat
+  package:
+    name: bat
+    state: present
+  become: yes
+  become_user: root
+  tags:
+    - initial
