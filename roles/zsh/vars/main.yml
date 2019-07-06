@@ -53,14 +53,14 @@ zsh_aliases:
   ### Tmux ###
   - { alias: 'tmux', action: 'tmux -2' }
   ### Rsync ###
-  - { alias: 'rsync', action: 'noglob rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system --acls --xattrs --crtimes --fileflags --protect-decmpfs --force-change' }
+  - { alias: 'rsync', action: 'noglob rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system --acls --xattrs' }
   - { alias: 'rsync-copy', action: 'rsync' }
   - { alias: 'rsync-move', action: 'rsync --remove-source-files' }
   - { alias: 'nodenv', action: 'nocorrect nodenv' }
   - { alias: 'rbenv', action: 'nocorrect rbenv' }
   - { alias: 'rsync-update', action: 'rsync --update' }
   - { alias: 'rsync-synchronize', action: 'rsync --update --delete' }
-  - { alias: 'cpv', action: 'command rsync --human-readable --progress --archive --hard-links --acls --protect-decmpfs --crtimes --rsh=/dev/null --one-file-system --backup --backup-dir=/tmp/rsync --' }
+  - { alias: 'cpv', action: 'command rsync --' }
   - { alias: 'visudo', action: 'sudo EDITOR=/usr/bin/nvim visudo' }
   - { alias: '', action: '' }
 
