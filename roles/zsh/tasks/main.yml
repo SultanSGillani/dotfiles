@@ -62,7 +62,7 @@
 - name: Set zsh as default shell
   user:
     name: "{{ zsh_user }}"
-    shell: "/bin/zsh"
+    shell: "{{ zsh_shell }}"
   become: yes
   become_user: root
   tags:

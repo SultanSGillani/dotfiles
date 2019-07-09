@@ -9,9 +9,4 @@ export GIT_EDITOR=${EDITOR}
 export PAGER='less'
 {%  if ansible_os_family|lower != 'darwin' %}[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx{% else %}{% endif %}
 
-# annoying macos
-{% if ansible_os_family|lower == 'darwin' %}
-export SHELL=/usr/local/bin/zsh
-{% else %}
-export SHELL=/bin/zsh
-{% endif %}
+export SHELL={{ zsh_shell }}
