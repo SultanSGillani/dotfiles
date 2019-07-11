@@ -98,14 +98,6 @@ if [ -f ${HOME}/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh ]
     source ${HOME}/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh
 fi
 
-zplugin ice wait"2" lucid as"program" atclone'perl Makefile.PL PREFIX=$ZPFX' atpull'%atclone' \
-            make'install' pick"$ZPFX/bin/git-cal"
-zplugin light k4rthik/git-cal
-
-zplugin ice wait "0" lucid from"gh"
-zplugin light zdharma/history-search-multi-word
-
-
 ## fzf
 # Install `fzf` bynary and tmux helper script
 zcommand from"gh-r";         zload junegunn/fzf-bin
@@ -140,10 +132,34 @@ zplugin creinstall -q  /usr/local/share/zsh/site-functions
 zplugin ice wait"0" lucid blockf
 zplugin light zsh-users/zsh-completions
 
-# auto suggestions
-ZSH_AUTOSUGGEST_USE_ASYNC=true
-zplugin ice wait"1" lucid atload"_zsh_autosuggest_start"
-zplugin light zsh-users/zsh-autosuggestions
 
-zplugin ice wait"0" lucid atinit"zpcompinit; zpcdreplay"
-zplugin light zdharma/fast-syntax-highlighting
+
+#################################################################
+# IMPORTANT PLUGINS
+#
+
+# Additional completion definitions
+turbo0 blockf
+zload zsh-users/zsh-completions
+
+# History search by `Ctrl+R`
+turbo1; zload zdharma/history-search-multi-word
+
+# Syntax highlighting
+# (compinit without `-i` spawns warning on `sudo -s`)
+turbo0 atinit"ZPLGM[COMPINIT_OPTS]='-i' zpcompinit; zpcdreplay"
+    zload zdharma/fast-syntax-highlighting
+
+# Autosuggestions
+# Note: should go _after_ syntax highlighting plugin
+turbo0 atload"_zsh_autosuggest_start"; zload zsh-users/zsh-autosuggestions
+export ZSH_AUTOSUGGEST_USE_ASYNC=1
+export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+
+#################################################################
+# REMOVE TEMPORARY FUNCTIONS
+#
+unset -f turbo0
+unset -f zload
+unset -f zsnippet
