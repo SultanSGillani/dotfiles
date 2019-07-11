@@ -30,20 +30,11 @@ zsh_aliases:
   ### Bat ###
   - { alias: 'cat', action: 'bat' }
   ### Exa ###
-  - { alias: 'l', action: 'exa' }
-  - { alias: 'ls', action: 'exa -a --group-directories-first --color-scale' }
-  - { alias: 'la', action: 'exa -alF --group-directories-first --color-scale' }
-  - { alias: 'll', action: 'exa -aFG --group-directories-first --color-scale' }
-  - { alias: 'lg', action: 'exa -alFG --group-directories-first --color-scale' }
-  - { alias: 'lh', action: 'exa -abFgGhlSu --group-directories-first --color-scale' }
-  - { alias: 'lr', action: 'exa -alr --group-directories-first --color-scale' }
-  - { alias: 'lt', action: 'exa -alFs time --color-scale' }
-  - { alias: 'lk', action: 'exa -als extension --group-directories-first --color-scale' }
-  - { alias: 'lS', action: 'exa -alFs size --group-directories-first --color-scale' }
-  - { alias: 'lR', action: 'exa -R --group-directories-first' }
-  - { alias: 'lT', action: 'exa -T' }
-  - { alias: 'l.', action: 'exa -adl .* --color-scale' }
-  - { alias: 'tree', action: 'exa --tree' }
+  - { alias: 'ls', action: 'exa -bh ${${${ABSD#0}:+-G}:---color=auto}' }
+  - { alias: 'l', action: 'ls' }
+  - { alias: 'l.', action: 'ls -d .*' } 
+  - { alias: 'la', action: 'ls -a' }
+  - { alias: 'll', action: 'ls -lbt created' }
   ### Git ###
   - { alias: 'git', action: 'hub' }
   ### Gpg ###

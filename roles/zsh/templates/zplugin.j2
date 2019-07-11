@@ -73,15 +73,6 @@ turbo0
 zsnippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
 {% endif %}
 
-############### History Substring
-# bind UP and DOWN keys
-bindkey "${terminfo[kcuu1]}" history-substring-search-up
-bindkey "${terminfo[kcud1]}" history-substring-search-down
-
-# Utilities & enhancements
-turbo0
-zl "zsh-users/zsh-history-substring-search"
-
 zplugin ice wait"2" lucid as"program" pick"$ZPFX/bin/git-now" make"prefix=$ZPFX install"
 zl iwata/git-now
 
@@ -113,6 +104,9 @@ zl b4b4r07/enhancd
 turbo0
 zl djui/alias-tips
 
+zt 0a make
+zl sei40kr/zsh-fast-alias-tips
+
 # Install local completions quietly
 
 turbo0
@@ -126,13 +120,16 @@ zcr /usr/local/share/zsh/site-functions
 #################################################################
 # IMPORTANT PLUGINS
 #
+zt 0c atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
+zl zsh-users/zsh-history-substring-search
 
 # Additional completion definitions
 zt 0a blockf atpull'zcr .'
 zl zsh-users/zsh-completions
 
 # History search by `Ctrl+R`
-turbo1; zl zdharma/history-search-multi-word
+zt 0b compile'{hsmw-*,test/*}'
+z zdharma/history-search-multi-word
 
 # Syntax highlighting
 # (compinit without `-i` spawns warning on `sudo -s`)
@@ -141,7 +138,8 @@ turbo0 atinit"ZPLGM[COMPINIT_OPTS]='-i' zpcompinit; zpcdreplay"
 
 # Autosuggestions
 # Note: should go _after_ syntax highlighting plugin
-turbo0 atload"_zsh_autosuggest_start"; zl zsh-users/zsh-autosuggestions
+zt 0b compile'{src/*.zsh,src/strategies/*}' atload'_zsh_autosuggest_start' 
+zl zsh-users/zsh-autosuggestions
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
