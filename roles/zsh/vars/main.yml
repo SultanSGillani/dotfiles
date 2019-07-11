@@ -96,7 +96,7 @@ zsh_misc_aliases:
   - { alias: '..', action: 'cd ..' }
   - { alias: 'compfuckyou', action: 'compaudit | xargs chmod g-w' }
   - { alias: 'cputemp', action: 'sensors | grep Core' }
-  - { alias: 'find_big_files', action: 'du -a / | sort -n -r | head -n 10 $1 }
+  - { alias: 'find_big_files', action: 'du -a / | sort -n -r | head -n 10 $1' }
   - { alias: 'mkcd', action: '_(){ mkdir -p $1; cd $1; }; _' }
   - { alias: 'rd', action: 'rmdir' }
   - { alias: 'suser', action: 'su -' }
