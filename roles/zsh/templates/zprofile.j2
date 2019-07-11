@@ -8,5 +8,6 @@ export VISUAL=${EDITOR}
 export GIT_EDITOR=${EDITOR}
 export PAGER='less'
 {%  if ansible_os_family|lower != 'darwin' %}[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx{% else %}{% endif %}
-
+{%  if ansible_os_family|lower == 'darwin' %}
 export SHELL={{ zsh_shell }}
+{% endif %}
