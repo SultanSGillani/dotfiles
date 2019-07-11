@@ -107,7 +107,7 @@ zturbo1 has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf
 zlight laggardkernel/git-ignore
 
 zturbo0 make
-zlight sei40kr/zsh-zfast-alias-tips
+zlight sei40kr/zsh-fast-alias-tips
 
 # Install local completions quietly
 
@@ -131,12 +131,12 @@ zlight zsh-users/zsh-completions
 
 # History search by `Ctrl+R`
 zturbo1 compile'{hsmw-*,test/*}'
-z zdharma/history-search-multi-word
+zlight zdharma/history-search-multi-word
 
 # Syntax highlighting
 # (compinit without `-i` spawns warning on `sudo -s`)
 zturbo0 atinit"ZPLGM[COMPINIT_OPTS]='-i' zpcompinit; zpcdreplay"
-    zlight zdharma/zfast-syntax-highlighting
+    zlight zdharma/fast-syntax-highlighting
 
 # Autosuggestions
 # Note: should go _after_ syntax highlighting plugin
