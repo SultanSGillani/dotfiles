@@ -10,7 +10,7 @@ zload()    { zplugin load                           "${@}"; }
 zsnippet() { zplugin snippet                        "${@}"; }
 
 zt() { zplugin ice wait"${1}" lucid               "${@:2}"; } # Turbo
-z()  { [ -z $2 ] && zplugin light "${@}" || zplugin "${@}"; } # zplugin
+zl()  { [ -zl $2 ] && zplugin light "${@}" || zplugin "${@}"; } # zplugin
 
 # oh-my-zsh
 zt 0a
@@ -21,62 +21,49 @@ zt 0a
 zplugin ice svn; zsnippet OMZ::plugins/python
 zt 0a
 zplugin ice svn; zsnippet OMZ::plugins/virtualenv
-zplugin ice wait"0" lucid
+turbo0
 zplugin ice svn; zsnippet OMZ::plugins/git
-zplugin ice wait"0" lucid
+turbo0
 zplugin ice svn; zsnippet OMZ::plugins/archlinux
-zplugin ice wait"0" lucid
+turbo0
 zplugin ice svn; zsnippet OMZ::plugins/tmux
-zplugin ice wait"0" lucid
+turbo0
 zplugin ice svn; zsnippet OMZ::plugins/urltools
 
-zplugin ice wait '0' lucid compile"*.lzui"
-zplugin light zdharma/zui
+turbo0 compile"*.lzui"
+zl zdharma/zui
 
 zplugin ice wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
-zplugin light zdharma/zplugin-crasis
-
-#
-# Prezto Tmux
-#
-
-# Auto start a session when Zsh is launched in a local terminal.
-# zstyle ':prezto:module:tmux:auto-start' local 'yes'
-
-# Auto start a session when Zsh is launched in a SSH connection.
-# zstyle ':prezto:module:tmux:auto-start' remote 'yes'
-
-# Integrate with iTerm2.
-# zstyle ':prezto:module:tmux:iterm' integrate 'yes'
+zl zdharma/zplugin-crasis
 
 zt 0a svn
 zsnippet PZT::modules/tmux
 ## Prompt
 
 {% if zsh_prompt == 'agkozak' %}
-zload agkozak/agkozak-zsh-prompt
+zl agkozak/agkozak-zsh-prompt
 {% elif zsh_prompt == 'powerlevel10k' %}
-zload romkatv/powerlevel10k
+zl romkatv/powerlevel10k
 {% elif zsh_prompt == 'alien' %}
 turbo0 pick"alien.zsh" multisrc'modules/{async,git,init,prompt,python,svn,system,theme}.zsh'
-zload eendroroy/alien
+zl eendroroy/alien
 {% endif %}
 zplugin ice as"command" cp"httpstat.sh -> httpstat" pick"httpstat"
-zplugin light b4b4r07/httpstat
+zl b4b4r07/httpstat
 
-zt 0a as"program" pick"zsh-better-npm-completion.plugin.zsh"; zplugin light lukechilds/zsh-better-npm-completion
+zt 0a as"program" pick"zsh-better-npm-completion.plugin.zsh"; zl lukechilds/zsh-better-npm-completion
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
 zplugin ice svn; zsnippet PZT::modules/osx
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "debian" %}
-zplugin ice wait '0' lucid
+turbo0
 zsnippet OMZ::plugins/debian/debian.plugin.zsh
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "ubuntu" %}
-zplugin ice wait "0" lucid
+turbo0
 zsnippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
 {% endif %}
 
@@ -86,14 +73,14 @@ bindkey "${terminfo[kcuu1]}" history-substring-search-up
 bindkey "${terminfo[kcud1]}" history-substring-search-down
 
 # Utilities & enhancements
-zplugin ice wait"0" lucid
-zplugin light "zsh-users/zsh-history-substring-search"
+turbo0
+zl "zsh-users/zsh-history-substring-search"
 
 zplugin ice wait"2" lucid as"program" pick"$ZPFX/bin/git-now" make"prefix=$ZPFX install"
-zplugin light iwata/git-now
+zl iwata/git-now
 
 zplugin ice wait"2" lucid as"program" pick"$ZPFX/bin/git-alias" make"PREFIX=$ZPFX" nocompile
-zplugin light tj/git-extras
+zl tj/git-extras
 
 if [ -f ${HOME}/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh ]; then
     source ${HOME}/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh
@@ -101,39 +88,37 @@ fi
 
 ## fzf
 # Install `fzf` bynary and tmux helper script
-zcommand from"gh-r";         zload junegunn/fzf-bin
-zcommand pick"bin/fzf-tmux"; zload junegunn/fzf
+zcommand from"gh-r";         zl junegunn/fzf-bin
+zcommand pick"bin/fzf-tmux"; zl junegunn/fzf
 # Create and bind multiple widgets using fzf
 turbo0 multisrc"shell/{completion,key-bindings}.zsh" \
         id-as"junegunn/fzf_completions" pick"/dev/null"
-    zload junegunn/fzf
+    zl junegunn/fzf
 
-zplugin ice wait"0" lucid
-zplugin light skx/sysadmin-util
+turbo0
+zl skx/sysadmin-util
 
-zplugin ice wait"0" lucid
-zplugin light rimraf/k
+turbo0
+zl rimraf/k
 
-zplugin ice wait"0" lucid
-zplugin light b4b4r07/enhancd
+turbo0
+zl b4b4r07/enhancd
 
-zplugin ice wait"0" lucid
-zplugin light djui/alias-tips
+turbo0
+zl djui/alias-tips
 
 # Install local completions quietly
 
-zplugin ice wait"0"
+turbo0
 zplugin creinstall -q $ZSH/roles/zsh/completions
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
-zplugin ice wait"0"
+turbo0
 zplugin creinstall -q  /usr/local/share/zsh/site-functions
 {% endif %}
 
-zplugin ice wait"0" lucid blockf
-zplugin light zsh-users/zsh-completions
-
-
+turbo0 blockf
+zl zsh-users/zsh-completions
 
 #################################################################
 # IMPORTANT PLUGINS
@@ -141,19 +126,19 @@ zplugin light zsh-users/zsh-completions
 
 # Additional completion definitions
 turbo0 blockf
-zload zsh-users/zsh-completions
+zl zsh-users/zsh-completions
 
 # History search by `Ctrl+R`
-turbo1; zload zdharma/history-search-multi-word
+turbo1; zl zdharma/history-search-multi-word
 
 # Syntax highlighting
 # (compinit without `-i` spawns warning on `sudo -s`)
 turbo0 atinit"ZPLGM[COMPINIT_OPTS]='-i' zpcompinit; zpcdreplay"
-    zload zdharma/fast-syntax-highlighting
+    zl zdharma/fast-syntax-highlighting
 
 # Autosuggestions
 # Note: should go _after_ syntax highlighting plugin
-turbo0 atload"_zsh_autosuggest_start"; zload zsh-users/zsh-autosuggestions
+turbo0 atload"_zsh_autosuggest_start"; zl zsh-users/zsh-autosuggestions
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
@@ -163,4 +148,6 @@ export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 #
 unset -f turbo0
 unset -f zload
+unset -f zl
+unset -f zt
 unset -f zsnippet
