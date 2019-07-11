@@ -9,23 +9,26 @@ zcommand() { zplugin ice wait"0b" lucid as"command" "${@}"; }
 zload()    { zplugin load                           "${@}"; }
 zsnippet() { zplugin snippet                        "${@}"; }
 
+zt() { zplugin ice wait"${1}" lucid               "${@:2}"; } # Turbo
+z()  { [ -z $2 ] && zplugin light "${@}" || zplugin "${@}"; } # zplugin
+
 # oh-my-zsh
-zplugin ice wait'0' lucid
-zplugin ice svn; zplugin snippet OMZ::plugins/emoji
-zplugin ice wait'0' lucid
-zplugin ice svn; zplugin snippet OMZ::plugins/pip
-zplugin ice wait'0' lucid
-zplugin ice svn; zplugin snippet OMZ::plugins/python
-zplugin ice wait'0' lucid
-zplugin ice svn; zplugin snippet OMZ::plugins/virtualenv
+zt 0a
+zplugin ice svn; zsnippet OMZ::plugins/emoji
+zt 0a
+zplugin ice svn; zsnippet OMZ::plugins/pip
+zt 0a
+zplugin ice svn; zsnippet OMZ::plugins/python
+zt 0a
+zplugin ice svn; zsnippet OMZ::plugins/virtualenv
 zplugin ice wait"0" lucid
-zplugin ice svn; zplugin snippet OMZ::plugins/git
+zplugin ice svn; zsnippet OMZ::plugins/git
 zplugin ice wait"0" lucid
-zplugin ice svn; zplugin snippet OMZ::plugins/archlinux
+zplugin ice svn; zsnippet OMZ::plugins/archlinux
 zplugin ice wait"0" lucid
-zplugin ice svn; zplugin snippet OMZ::plugins/tmux
+zplugin ice svn; zsnippet OMZ::plugins/tmux
 zplugin ice wait"0" lucid
-zplugin ice svn; zplugin snippet OMZ::plugins/urltools
+zplugin ice svn; zsnippet OMZ::plugins/urltools
 
 zplugin ice wait '0' lucid compile"*.lzui"
 zplugin light zdharma/zui
@@ -46,8 +49,8 @@ zplugin light zdharma/zplugin-crasis
 # Integrate with iTerm2.
 # zstyle ':prezto:module:tmux:iterm' integrate 'yes'
 
-zplugin ice wait'0' lucid svn
-zplugin snippet PZT::modules/tmux
+zt 0a svn
+zsnippet PZT::modules/tmux
 ## Prompt
 
 {% if zsh_prompt == 'agkozak' %}
@@ -61,20 +64,20 @@ zload eendroroy/alien
 zplugin ice as"command" cp"httpstat.sh -> httpstat" pick"httpstat"
 zplugin light b4b4r07/httpstat
 
-zplugin ice wait'0' lucid as"program" pick"zsh-better-npm-completion.plugin.zsh"; zplugin light lukechilds/zsh-better-npm-completion
+zt 0a as"program" pick"zsh-better-npm-completion.plugin.zsh"; zplugin light lukechilds/zsh-better-npm-completion
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
-zplugin ice svn; zplugin snippet PZT::modules/osx
+zplugin ice svn; zsnippet PZT::modules/osx
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "debian" %}
 zplugin ice wait '0' lucid
-zplugin snippet OMZ::plugins/debian/debian.plugin.zsh
+zsnippet OMZ::plugins/debian/debian.plugin.zsh
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "ubuntu" %}
 zplugin ice wait "0" lucid
-zplugin snippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
+zsnippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
 {% endif %}
 
 ############### History Substring
