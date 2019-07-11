@@ -1,83 +1,82 @@
 #################################################################
-# FUNCTIONS TO MAKE CONFIGURATION LESS VERBOSE
+# ZPLUGIN FUNCTIONS TO REDUCE VERBOSITY
 #
 
-turbo0()   { zplugin ice wait"0a" lucid             "${@}"; }
-turbo1()   { zplugin ice wait"0b" lucid             "${@}"; }
-turbo2()   { zplugin ice wait"0c" lucid             "${@}"; }
+zturbo0()   { zplugin ice wait"0a" lucid             "${@}"; }
+zturbo1()   { zplugin ice wait"0b" lucid             "${@}"; }
+zturbo2()   { zplugin ice wait"0c" lucid             "${@}"; }
 zcommand() { zplugin ice wait"0b" lucid as"command" "${@}"; }
-zload()    { zplugin load                           "${@}"; }
+zlight()  { [ -zlight $2 ] && zplugin light "${@}" || zplugin "${@}"; }
 zsnippet() { zplugin snippet                        "${@}"; }
 zsvn() { zplugin ice svn                        "${@}"; }
 zcr() { zplugin creinstall -q "${@}"; }
 
-zt() { zplugin ice wait"${1}" lucid               "${@:2}"; } # Turbo
-zl()  { [ -zl $2 ] && zplugin light "${@}" || zplugin "${@}"; } # zplugin
 
 ################################################################
 
 # PROMPT
 
 {% if zsh_prompt == 'agkozak' %}
-zl agkozak/agkozak-zsh-prompt
+zlight agkozak/agkozak-zsh-prompt
 {% elif zsh_prompt == 'powerlevel10k' %}
-zl romkatv/powerlevel10k
+zlight romkatv/powerlevel10k
 {% elif zsh_prompt == 'alien' %}
-turbo0 pick"alien.zsh" multisrc'modules/{async,git,init,prompt,python,svn,system,theme}.zsh'
-zl eendroroy/alien
+zturbo0 pick"alien.zsh" multisrc'modules/{async,git,init,prompt,python,svn,system,theme}.zsh'
+zlight eendroroy/alien
 {% endif %}
 
 # oh-my-zsh
-zt 0a
+zturbo0
 zsvn; zsnippet OMZ::plugins/emoji
-zt 0a
+zturbo0
 zsvn; zsnippet OMZ::plugins/pip
-zt 0a
+zturbo0
 zsvn; zsnippet OMZ::plugins/python
-zt 0a
+zturbo0
 zsvn; zsnippet OMZ::plugins/virtualenv
-turbo0
+zturbo0
 zsvn; zsnippet OMZ::plugins/git
-turbo0
+zturbo0
 zsvn; zsnippet OMZ::plugins/archlinux
-turbo0
+zturbo0
 zsvn; zsnippet OMZ::plugins/tmux
-turbo0
+zturbo0
 zsvn; zsnippet OMZ::plugins/urltools
 
-turbo0 compile"*.lzui"
-zl zdharma/zui
+zturbo1 compile"*.lzui"
+zlight zdharma/zui
 
 zplugin ice wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
-zl zdharma/zplugin-crasis
+zlight zdharma/zplugin-crasis
 
-zt 0a svn
+zturbo0 svn
 zsnippet PZT::modules/tmux
 
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
-zl b4b4r07/httpstat
+zlight b4b4r07/httpstat
 
-zt 0a as"program" pick"zsh-better-npm-completion.plugin.zsh"; zl lukechilds/zsh-better-npm-completion
+zturbo1 as"program" pick"zsh-better-npm-completion.plugin.zsh"; zlight lukechilds/zsh-better-npm-completion
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
-zsvn; zsnippet PZT::modules/osx
+zturbo0
+zsnippet PZT::modules/osx
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "debian" %}
-turbo0
+zturbo0
 zsnippet OMZ::plugins/debian/debian.plugin.zsh
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "ubuntu" %}
-turbo0
+zturbo0
 zsnippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
 {% endif %}
 
-zplugin ice wait"2" lucid as"program" pick"$ZPFX/bin/git-now" make"prefix=$ZPFX install"
-zl iwata/git-now
+zturbo2 as"program" pick"$ZPFX/bin/git-now" make"prefix=$ZPFX install"
+zlight iwata/git-now
 
-zplugin ice wait"2" lucid as"program" pick"$ZPFX/bin/git-alias" make"PREFIX=$ZPFX" nocompile
-zl tj/git-extras
+zturbo2 as"program" pick"$ZPFX/bin/git-alias" make"PREFIX=$ZPFX" nocompile
+zlight tj/git-extras
 
 if [ -f ${HOME}/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh ]; then
     source ${HOME}/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh
@@ -85,64 +84,64 @@ fi
 
 ## fzf
 # Install `fzf` bynary and tmux helper script
-zcommand from"gh-r";         zl junegunn/fzf-bin
-zcommand pick"bin/fzf-tmux"; zl junegunn/fzf
+zcommand from"gh-r";         zlight junegunn/fzf-bin
+zcommand pick"bin/fzf-tmux"; zlight junegunn/fzf
 # Create and bind multiple widgets using fzf
-turbo0 multisrc"shell/{completion,key-bindings}.zsh" \
+zturbo0 multisrc"shell/{completion,key-bindings}.zsh" \
         id-as"junegunn/fzf_completions" pick"/dev/null"
-    zl junegunn/fzf
+    zlight junegunn/fzf
 
-turbo0
-zl skx/sysadmin-util
+zturbo0
+zlight skx/sysadmin-util
 
-turbo0
-zl rimraf/k
+zturbo0
+zlight rimraf/k
 
-zt 0a has'systemctl'
+zturbo0 has'systemctl'
 zsnippet OMZ::plugins/systemd/systemd.plugin.zsh
 
-zt 0b
-zl ael-code/zsh-colored-man-pages
+zturbo1
+zlight ael-code/zsh-colored-man-pages
 
-zt 0b has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf
-zl laggardkernel/git-ignore
+zturbo1 has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf
+zlight laggardkernel/git-ignore
 
-zt 0a make
-zl sei40kr/zsh-fast-alias-tips
+zturbo0 make
+zlight sei40kr/zsh-zfast-alias-tips
 
 # Install local completions quietly
 
-turbo0
+zturbo1
 zcr $ZSH/roles/zsh/completions
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
-turbo0
+zturbo0
 zcr /usr/local/share/zsh/site-functions
 {% endif %}
 
 #################################################################
 # IMPORTANT PLUGINS
 #
-zt 0c atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
-zl zsh-users/zsh-history-substring-search
+zturbo2 atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
+zlight zsh-users/zsh-history-substring-search
 
 # Additional completion definitions
-zt 0a blockf atpull'zcr .'
-zl zsh-users/zsh-completions
+zturbo0 blockf atpull'zcr .'
+zlight zsh-users/zsh-completions
 
 # History search by `Ctrl+R`
-zt 0b compile'{hsmw-*,test/*}'
+zturbo1 compile'{hsmw-*,test/*}'
 z zdharma/history-search-multi-word
 
 # Syntax highlighting
 # (compinit without `-i` spawns warning on `sudo -s`)
-turbo0 atinit"ZPLGM[COMPINIT_OPTS]='-i' zpcompinit; zpcdreplay"
-    zl zdharma/fast-syntax-highlighting
+zturbo0 atinit"ZPLGM[COMPINIT_OPTS]='-i' zpcompinit; zpcdreplay"
+    zlight zdharma/zfast-syntax-highlighting
 
 # Autosuggestions
 # Note: should go _after_ syntax highlighting plugin
-zt 0b compile'{src/*.zsh,src/strategies/*}' atload'_zsh_autosuggest_start' 
-zl zsh-users/zsh-autosuggestions
+zturbo1 compile'{src/*.zsh,src/strategies/*}' atload'_zsh_autosuggest_start' 
+zlight zsh-users/zsh-autosuggestions
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
@@ -150,8 +149,11 @@ export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 #################################################################
 # REMOVE TEMPORARY FUNCTIONS
 #
-unset -f turbo0
-unset -f zload
-unset -f zl
-unset -f zt
+unset -f zturbo0
+unset -f zturbo1
+unset -f zturbo2
+unset -f zlight
+unset -f zcommand
+unset -f zsvn
 unset -f zsnippet
+unset -f zcr
