@@ -27,17 +27,17 @@ fzf_widgets: ytet5uy4/fzf-widgets
 
 # Zsh Aliases
 zsh_aliases:
+  ### Git ###
+  - { alias: 'git', action: 'hub' }
   ### Bat ###
   - { alias: 'cat', action: 'bat' }
   ### Exa ###
   - { alias: 'ls', action: 'exa -bh ${${${ABSD#0}:+-G}:---color=auto}' }
   - { alias: 'l', action: 'ls' }
-  - { alias: 'l.', action: 'ls -d .*' } 
+  - { alias: 'l.', action: 'ls -d .*' }
   - { alias: 'lA', action: 'ls -a' }
   - { alias: 'la', action: 'ls -a' }
   - { alias: 'll', action: 'ls -lbt created' }
-  ### Git ###
-  - { alias: 'git', action: 'hub' }
   ### Gpg ###
   - { alias: 'gpg', action: 'gpg2' }
   ### Neovim ###

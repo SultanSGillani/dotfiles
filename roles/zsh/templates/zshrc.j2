@@ -253,6 +253,11 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 zstyle ':completion:*' insert-tab pending
 
+
+if [ -f ${HOME}/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh ]; then
+    source ${HOME}/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh
+fi
+
 unset config_files
 
 ##############################################################

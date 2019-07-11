@@ -29,13 +29,9 @@ zlight eendroroy/alien
 zturbo0
 zsvn; zsnippet OMZ::plugins/emoji
 zturbo0
-zsvn; zsnippet OMZ::plugins/pip
-zturbo0
 zsvn; zsnippet OMZ::plugins/python
 zturbo0
 zsvn; zsnippet OMZ::plugins/virtualenv
-zturbo0
-zsvn; zsnippet OMZ::plugins/git
 zturbo0
 zsvn; zsnippet OMZ::plugins/archlinux
 zturbo0
@@ -55,11 +51,12 @@ zsnippet PZT::modules/tmux
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zlight b4b4r07/httpstat
 
-zturbo1 as"program" pick"zsh-better-npm-completion.plugin.zsh"; zlight lukechilds/zsh-better-npm-completion
+zturbo1 as"program" pick"zsh-better-npm-completion.plugin.zsh"
+zlight lukechilds/zsh-better-npm-completion
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
-zturbo0
-zsnippet PZT::modules/osx
+zsvn
+zsnippet OMZ::plugins/osx
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "debian" %}
@@ -72,15 +69,19 @@ zturbo0
 zsnippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
 {% endif %}
 
-zturbo2 as"program" pick"$ZPFX/bin/git-now" make"prefix=$ZPFX install"
+zturbo0 as"program" pick"$ZPFX/bin/git-now" make"prefix=$ZPFX install"
 zlight iwata/git-now
 
-zturbo2 as"program" pick"$ZPFX/bin/git-alias" make"PREFIX=$ZPFX" nocompile
+zturbo0 as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
 zlight tj/git-extras
 
-if [ -f ${HOME}/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh ]; then
-    source ${HOME}/.zplugin/plugins/tj---git-extras/etc/git-extras-completion.zsh
-fi
+# docker-compose
+zplugin ice as"completion"
+zsnippet https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose
+
+# docker
+zplugin ice as"completion"
+zsnippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
 ## fzf
 # Install `fzf` bynary and tmux helper script
@@ -90,6 +91,12 @@ zcommand pick"bin/fzf-tmux"; zlight junegunn/fzf
 zturbo0 multisrc"shell/{completion,key-bindings}.zsh" \
         id-as"junegunn/fzf_completions" pick"/dev/null"
     zlight junegunn/fzf
+
+# fzy
+zcommand make"!PREFIX=$ZPFX install" \
+    atclone"cp contrib/fzy-* $ZPFX/bin/" \
+    pick"$ZPFX/bin/fzy*"
+zlight jhawthorn/fzy
 
 zturbo0
 zlight skx/sysadmin-util
@@ -140,7 +147,7 @@ zturbo0 atinit"ZPLGM[COMPINIT_OPTS]='-i' zpcompinit; zpcdreplay"
 
 # Autosuggestions
 # Note: should go _after_ syntax highlighting plugin
-zturbo1 compile'{src/*.zsh,src/strategies/*}' atload'_zsh_autosuggest_start' 
+zturbo1 compile'{src/*.zsh,src/strategies/*}' atload'_zsh_autosuggest_start'
 zlight zsh-users/zsh-autosuggestions
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
