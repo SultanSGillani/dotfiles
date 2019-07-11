@@ -8,27 +8,30 @@ turbo2()   { zplugin ice wait"0c" lucid             "${@}"; }
 zcommand() { zplugin ice wait"0b" lucid as"command" "${@}"; }
 zload()    { zplugin load                           "${@}"; }
 zsnippet() { zplugin snippet                        "${@}"; }
+zsvn() { zplugin ice svn                        "${@}"; }
 
 zt() { zplugin ice wait"${1}" lucid               "${@:2}"; } # Turbo
 zl()  { [ -zl $2 ] && zplugin light "${@}" || zplugin "${@}"; } # zplugin
 
+################################################################
+
 # oh-my-zsh
 zt 0a
-zplugin ice svn; zsnippet OMZ::plugins/emoji
+zsvn; zsnippet OMZ::plugins/emoji
 zt 0a
-zplugin ice svn; zsnippet OMZ::plugins/pip
+zsvn; zsnippet OMZ::plugins/pip
 zt 0a
-zplugin ice svn; zsnippet OMZ::plugins/python
+zsvn; zsnippet OMZ::plugins/python
 zt 0a
-zplugin ice svn; zsnippet OMZ::plugins/virtualenv
+zsvn; zsnippet OMZ::plugins/virtualenv
 turbo0
-zplugin ice svn; zsnippet OMZ::plugins/git
+zsvn; zsnippet OMZ::plugins/git
 turbo0
-zplugin ice svn; zsnippet OMZ::plugins/archlinux
+zsvn; zsnippet OMZ::plugins/archlinux
 turbo0
-zplugin ice svn; zsnippet OMZ::plugins/tmux
+zsvn; zsnippet OMZ::plugins/tmux
 turbo0
-zplugin ice svn; zsnippet OMZ::plugins/urltools
+zsvn; zsnippet OMZ::plugins/urltools
 
 turbo0 compile"*.lzui"
 zl zdharma/zui
@@ -48,13 +51,13 @@ zl romkatv/powerlevel10k
 turbo0 pick"alien.zsh" multisrc'modules/{async,git,init,prompt,python,svn,system,theme}.zsh'
 zl eendroroy/alien
 {% endif %}
-zplugin ice as"command" cp"httpstat.sh -> httpstat" pick"httpstat"
+zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zl b4b4r07/httpstat
 
 zt 0a as"program" pick"zsh-better-npm-completion.plugin.zsh"; zl lukechilds/zsh-better-npm-completion
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
-zplugin ice svn; zsnippet PZT::modules/osx
+zsvn; zsnippet PZT::modules/osx
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "debian" %}
