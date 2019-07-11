@@ -6,6 +6,7 @@
 .DS_Store
 *.retry
 tests/*.retry
+*.iml
 
 #### Ctags
 tags

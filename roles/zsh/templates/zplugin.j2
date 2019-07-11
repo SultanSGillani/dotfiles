@@ -5,6 +5,8 @@
 zturbo0()   { zplugin ice wait"0a" lucid             "${@}"; }
 zturbo1()   { zplugin ice wait"0b" lucid             "${@}"; }
 zturbo2()   { zplugin ice wait"0c" lucid             "${@}"; }
+zturbow0()   { zplugin ice wait"0" lucid             "${@}"; }
+zturbow1()   { zplugin ice wait"1" lucid             "${@}"; }
 zcommand() { zplugin ice wait"0b" lucid as"command" "${@}"; }
 zlight()  { [ -zlight $2 ] && zplugin light "${@}" || zplugin "${@}"; }
 zsnippet() { zplugin snippet                        "${@}"; }
@@ -36,6 +38,8 @@ zturbo0
 zsvn; zsnippet OMZ::plugins/tmux
 zturbo0
 zsvn; zsnippet OMZ::plugins/urltools
+zturbo0 has'systemctl'
+zsnippet OMZ::plugins/systemd/systemd.plugin.zsh
 
 zturbo1 compile"*.lzui"
 zlight zdharma/zui
@@ -105,9 +109,6 @@ zlight skx/sysadmin-util
 zturbo0
 zlight rimraf/k
 
-zturbo0 has'systemctl'
-zsnippet OMZ::plugins/systemd/systemd.plugin.zsh
-
 zturbo1
 zlight ael-code/zsh-colored-man-pages
 
@@ -142,19 +143,21 @@ zturbo1 compile'{hsmw-*,test/*}'
 zlight zdharma/history-search-multi-word
 
 # Autosuggestions & fast-syntax-highlighting
-zplugin ice wait"0" atload"_zsh_autosuggest_start" lucid
-zplugin load zsh-users/zsh-autosuggestions
-zplugin ice wait"1" atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" lucid
-zplugin load zdharma/fast-syntax-highlighting
+zturbow0 atload"_zsh_autosuggest_start"
+zlight zsh-users/zsh-autosuggestions
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
+zturbow1 atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
+zlight zdharma/fast-syntax-highlighting
 
 #################################################################
 # REMOVE TEMPORARY FUNCTIONS
 #
 unset -f zturbo0
+unset -f zturbow0
 unset -f zturbo1
+unset -f zturbow1
 unset -f zturbo2
 unset -f zlight
 unset -f zcommand
