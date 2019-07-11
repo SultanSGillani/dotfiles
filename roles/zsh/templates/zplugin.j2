@@ -51,14 +51,12 @@ zplugin snippet PZT::modules/tmux
 ## Prompt
 
 {% if zsh_prompt == 'agkozak' %}
-zplugin ice wait '0' lucid
-zplugin light agkozak/agkozak-zsh-prompt
+zload agkozak/agkozak-zsh-prompt
 {% elif zsh_prompt == 'powerlevel10k' %}
-zplugin ice wait '0' lucid
-zplugin light romkatv/powerlevel10k
+zload romkatv/powerlevel10k
 {% elif zsh_prompt == 'alien' %}
-zplugin ice wait '0' lucid pick"alien.zsh" multisrc'modules/{async,git,init,prompt,python,svn,system,theme}.zsh'
-zplugin load eendroroy/alien
+turbo0 pick"alien.zsh" multisrc'modules/{async,git,init,prompt,python,svn,system,theme}.zsh'
+zload eendroroy/alien
 {% endif %}
 zplugin ice as"command" cp"httpstat.sh -> httpstat" pick"httpstat"
 zplugin light b4b4r07/httpstat
