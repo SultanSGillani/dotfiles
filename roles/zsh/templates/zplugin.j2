@@ -9,11 +9,23 @@ zcommand() { zplugin ice wait"0b" lucid as"command" "${@}"; }
 zload()    { zplugin load                           "${@}"; }
 zsnippet() { zplugin snippet                        "${@}"; }
 zsvn() { zplugin ice svn                        "${@}"; }
+zcr() { zplugin creinstall -q "${@}"; }
 
 zt() { zplugin ice wait"${1}" lucid               "${@:2}"; } # Turbo
 zl()  { [ -zl $2 ] && zplugin light "${@}" || zplugin "${@}"; } # zplugin
 
 ################################################################
+
+# PROMPT
+
+{% if zsh_prompt == 'agkozak' %}
+zl agkozak/agkozak-zsh-prompt
+{% elif zsh_prompt == 'powerlevel10k' %}
+zl romkatv/powerlevel10k
+{% elif zsh_prompt == 'alien' %}
+turbo0 pick"alien.zsh" multisrc'modules/{async,git,init,prompt,python,svn,system,theme}.zsh'
+zl eendroroy/alien
+{% endif %}
 
 # oh-my-zsh
 zt 0a
@@ -41,16 +53,7 @@ zl zdharma/zplugin-crasis
 
 zt 0a svn
 zsnippet PZT::modules/tmux
-## Prompt
 
-{% if zsh_prompt == 'agkozak' %}
-zl agkozak/agkozak-zsh-prompt
-{% elif zsh_prompt == 'powerlevel10k' %}
-zl romkatv/powerlevel10k
-{% elif zsh_prompt == 'alien' %}
-turbo0 pick"alien.zsh" multisrc'modules/{async,git,init,prompt,python,svn,system,theme}.zsh'
-zl eendroroy/alien
-{% endif %}
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zl b4b4r07/httpstat
 
@@ -113,11 +116,11 @@ zl djui/alias-tips
 # Install local completions quietly
 
 turbo0
-zplugin creinstall -q $ZSH/roles/zsh/completions
+zcr $ZSH/roles/zsh/completions
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
 turbo0
-zplugin creinstall -q  /usr/local/share/zsh/site-functions
+zcr /usr/local/share/zsh/site-functions
 {% endif %}
 
 #################################################################
@@ -125,7 +128,7 @@ zplugin creinstall -q  /usr/local/share/zsh/site-functions
 #
 
 # Additional completion definitions
-turbo0 blockf
+zt 0a blockf atpull'zcr .'
 zl zsh-users/zsh-completions
 
 # History search by `Ctrl+R`
