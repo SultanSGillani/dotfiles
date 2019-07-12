@@ -164,3 +164,30 @@ unset -f zcommand
 unset -f zsvn
 unset -f zsnippet
 unset -f zcr
+
+### After the last of the compdefs
+
+{ # idea totally stolen from prezto
+  # Compile the completion dump to increase startup speed.
+  zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+  if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
+    zcompile "$zcompdump"
+  fi
+} &!
+
+# EOF
+ZSHRC_LOADED=true
+
+(( ${+_ZSHRC_ZPROF} )) && {
+  float -g _ZSHRC_ZPROF_EPOCH_DIFF="$(( EPOCHREALTIME - _ZSHRC_ZPROF_TIME_BEGINS ))"
+  builtin printf '%b\n' "\033[0;94mZSHRC_ZPROF: total millis time, avg millis time / call, percentage time\033[0;0m"
+  zprof | head -12
+  echo
+  builtin printf '%b ' "\033[0;31mZSHRC: Done Profiling!\033[0;0m"
+  builtin print -f 'Load time: %.6f\n' "${_ZSHRC_ZPROF_EPOCH_DIFF}"
+  (( ${+functions[zplugin]} )) && {
+    builtin printf '%b ' "\033[0;31mZSHRC: Zplugin non-async plugins:\033[0;0m"
+    zplugin times
+  }
+}
+
