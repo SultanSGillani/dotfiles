@@ -22,7 +22,7 @@ start_common ()
     xrandr --dpi 220
     xrandr --output HDMI-3 --scale 1.5x1.5 --output DP-1 --scale 1.5x1.5
     {% elif ansible_facts['hostname'] == 'linuxserver' %}
-    xrandr --output DVI-I-1 --scale 1.5x1.5 --output HDMI-0 --scale 1.5x1.5
+    xrandr --output DVI-I-0 --off --output DVI-I-1 --mode 1920x1080 --pos 0x0 --rotate normal --scale 1.5x1.5 --output HDMI-0 --primary --mode 1920x1080 --pos 2880x0 --rotate normal --scale 1.5x1.5 --output DP-0 --off --output DVI-D-0 --off --output DP-1 --off
     {% endif %}
     # Use my .Xresources file
     xrdb -merge ~/.Xresources

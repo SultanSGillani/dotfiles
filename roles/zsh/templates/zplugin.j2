@@ -2,11 +2,24 @@
 # ZPLUGIN FUNCTIONS TO REDUCE VERBOSITY
 #
 
-zturbo0()   { zplugin ice wait"0a" lucid             "${@}"; }
-zturbo1()   { zplugin ice wait"0b" lucid             "${@}"; }
-zturbo2()   { zplugin ice wait"0c" lucid             "${@}"; }
-zturbow0()   { zplugin ice wait"0" lucid             "${@}"; }
-zturbow1()   { zplugin ice wait"1" lucid             "${@}"; }
+zturbo0a()   { zplugin ice wait"0a" lucid             "${@}"; }
+zturbo0b()   { zplugin ice wait"0b" lucid             "${@}"; }
+zturbo0c()   { zplugin ice wait"0c" lucid             "${@}"; }
+zturbo0()   { zplugin ice wait"0" lucid             "${@}"; }
+zturbo1a()   { zplugin ice wait"1a" lucid             "${@}"; }
+zturbo1b()   { zplugin ice wait"1b" lucid             "${@}"; }
+zturbo1c()   { zplugin ice wait"1c" lucid             "${@}"; }
+zturbo1d()   { zplugin ice wait"1d" lucid             "${@}"; }
+zturbo1e()   { zplugin ice wait"1e" lucid             "${@}"; }
+zturbo1f()   { zplugin ice wait"1f" lucid             "${@}"; }
+zturbo1()   { zplugin ice wait"1" lucid             "${@}"; }
+zturbo2a()   { zplugin ice wait"2a" lucid             "${@}"; }
+zturbo2b()   { zplugin ice wait"2b" lucid             "${@}"; }
+zturbo2c()   { zplugin ice wait"2c" lucid             "${@}"; }
+zturbo2d()   { zplugin ice wait"2d" lucid             "${@}"; }
+zturbo2e()   { zplugin ice wait"2e" lucid             "${@}"; }
+zturbo2f()   { zplugin ice wait"2f" lucid             "${@}"; }
+zturbo2()   { zplugin ice wait"2" lucid             "${@}"; }
 zcommand() { zplugin ice wait"0b" lucid as"command" "${@}"; }
 zlight()  { [ -zlight $2 ] && zplugin light "${@}" || zplugin "${@}"; }
 zsnippet() { zplugin snippet                        "${@}"; }
@@ -46,7 +59,7 @@ zsnippet OMZ::plugins/systemd/systemd.plugin.zsh
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zlight b4b4r07/httpstat
 
-zturbo1 as"program" pick"zsh-better-npm-completion.plugin.zsh"
+zturbo0a as"program" pick"zsh-better-npm-completion.plugin.zsh"
 zlight lukechilds/zsh-better-npm-completion
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
@@ -87,16 +100,20 @@ zcommand make"!PREFIX=$ZPFX install" \
     pick"$ZPFX/bin/fzy*"
 zlight jhawthorn/fzy
 
+# enhancd
+zturbo2f lucid pick"init.sh"
+zpl light "b4b4r07/enhancd"
+
 zturbo0
 zlight skx/sysadmin-util
 
 zturbo0
 zlight rimraf/k
 
-zturbo1
+zturbo0a
 zlight ael-code/zsh-colored-man-pages
 
-zturbo1 has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf
+zturbo0a has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf
 zlight laggardkernel/git-ignore
 
 zturbo0 make
@@ -104,7 +121,7 @@ zlight sei40kr/zsh-fast-alias-tips
 
 # Install local completions quietly
 
-zturbo1
+zturbo0a
 zcr $ZSH/roles/zsh/completions
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
@@ -115,7 +132,7 @@ zcr /usr/local/share/zsh/site-functions
 #################################################################
 # IMPORTANT PLUGINS
 #
-zturbo2 atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
+zturbo0b atload'bindkey "$terminfo[kcuu1]" history-substring-search-up; bindkey "$terminfo[kcud1]" history-substring-search-down'
 zlight zsh-users/zsh-history-substring-search
 
 # Additional completion definitions
@@ -123,25 +140,38 @@ zturbo0 blockf atpull'zcr .'
 zlight zsh-users/zsh-completions
 
 # History search by `Ctrl+R`
-zturbo1 compile'{hsmw-*,test/*}'
+zturbo0a compile'{hsmw-*,test/*}'
 zlight zdharma/history-search-multi-word
 
 # Autosuggestions & fast-syntax-highlighting
-zturbow0 atload"_zsh_autosuggest_start"
+zturbo0b atload'_zsh_autosuggest_start'
 zlight zsh-users/zsh-autosuggestions
 export ZSH_AUTOSUGGEST_USE_ASYNC=1
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
-zturbow1 atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
+zturbo0b atinit"ZPLGM[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
 zlight zdharma/fast-syntax-highlighting
 
 #################################################################
 # REMOVE TEMPORARY FUNCTIONS
 #
 unset -f zturbo0
-unset -f zturbow0
+unset -f zturbo0a
+unset -f zturbo0b
+unset -f zturbo0c
+unset -f zturbo1a
+unset -f zturbo1b
+unset -f zturbo1c
+unset -f zturbo1d
+unset -f zturbo1e
+unset -f zturbo1f
 unset -f zturbo1
-unset -f zturbow1
+unset -f zturbo2a
+unset -f zturbo2b
+unset -f zturbo2c
+unset -f zturbo2d
+unset -f zturbo2e
+unset -f zturbo2f
 unset -f zturbo2
 unset -f zlight
 unset -f zcommand

@@ -65,24 +65,10 @@
   tags:
     - initial
 
-- name: aur-builder sudo access
-  lineinfile:
-    path: /etc/sudoers.d/11-install-aur_builder
-    line: "{{ aur_user }} ALL=(ALL) NOPASSWD: /usr/bin/pacman"
-    create: yes
-    validate: "visudo -cf %s"
-  become: yes
-  become_user: root
-  tags:
-    - initial
-
-
 - name: Install yay with makepkg
   aur:
     name: yay
     use: makepkg
-  become: yes
-  become_user: "{{ aur_user }}"
   tags:
     - initial
 
@@ -102,5 +88,4 @@
   tags:
     - initial
     - aur_install
-  become: yes
-  become_user: "{{ aur_user }}"
+

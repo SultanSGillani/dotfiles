@@ -3,7 +3,5 @@
   aur:
     name: rclone
     use: yay
-  become: yes
-  become_user: "{{ aur_user }}"
   tags:
     - initial

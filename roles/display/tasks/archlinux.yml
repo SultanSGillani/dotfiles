@@ -17,15 +17,13 @@
   aur:
     name: lightdm-webkit-theme-aether
     use: yay
-  become: yes
-  become_user: "{{ aur_user }}"
+
 
 - name: Install kvantum | aur
   aur:
     name: kvantum-qt5-git
     use: yay
-  become: yes
-  become_user: "{{ aur_user }}"
+
 
 - name: install remaining x packages
   package:

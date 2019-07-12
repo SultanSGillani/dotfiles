@@ -3,7 +3,5 @@
   aur:
     name: "{{ pyenv_pkgs }}"
     use: yay
-  become: yes
-  become_user: "{{ aur_user }}"
   tags:
     - initial
