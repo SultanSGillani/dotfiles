@@ -35,23 +35,13 @@ zsvn; zsnippet OMZ::plugins/virtualenv
 zturbo0
 zsvn; zsnippet OMZ::plugins/archlinux
 zturbo0
+zsvn; zsnippet OMZ::plugins/git
+zturbo0
 zsvn; zsnippet OMZ::plugins/tmux
 zturbo0
 zsvn; zsnippet OMZ::plugins/urltools
 zturbo0 has'systemctl'
 zsnippet OMZ::plugins/systemd/systemd.plugin.zsh
-
-zturbo1 compile"*.lzui"
-zlight zdharma/zui
-
-zplugin ice wait'[[ -n ${ZLAST_COMMANDS[(r)cras*]} ]]'
-zlight zdharma/zplugin-crasis
-
-zturbo0 svn
-zsnippet PZT::modules/tmux
-
-zturbo0 svn
-zsnippet PZT::modules/git
 
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zlight b4b4r07/httpstat
@@ -73,12 +63,6 @@ zsnippet OMZ::plugins/debian/debian.plugin.zsh
 zturbo0
 zsnippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
 {% endif %}
-
-zturbo0 as"program" pick"$ZPFX/bin/git-now" make"prefix=$ZPFX install"
-zlight iwata/git-now
-
-zturbo0 as"program" pick"$ZPFX/bin/git-*" make"PREFIX=$ZPFX"
-zlight tj/git-extras
 
 # docker-compose
 zplugin ice as"completion"
