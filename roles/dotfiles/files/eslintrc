@@ -1,11 +1,14 @@
 {
   "extends": "airbnb",
   "parser": "babel-eslint",
-    "ecmaFeatures": {
-      "classes": true
-  },
   "rules": {
     "func-names": ["error", "never"]
+  }
+  "parserOptions": {
+     "ecmaFeatures": {
+        "legacyDecorators": true,
+        "classes": true
+    }
   }
 }
 
