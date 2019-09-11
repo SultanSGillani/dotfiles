@@ -1,14 +1,16 @@
 {
   "extends": "airbnb",
   "parser": "babel-eslint",
-  "rules": {
-    "func-names": ["error", "never"]
-  }
   "parserOptions": {
-     "ecmaFeatures": {
-        "legacyDecorators": true,
-        "classes": true
+    "ecmaVersion": 7,
+    "ecmaFeatures": {
+      "legacyDecorators": true,
+      "classes": true
     }
+  },
+  "rules": {
+    "react/static-property-placement": "off",
+    "func-names": ["error", "never"]
   }
 }
 
