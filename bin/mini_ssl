@@ -1,0 +1,35 @@
+#!/usr/bin/python3
+
+import os
+from mininet.net import Mininet
+from mininet.node import Controller, RemoteController
+from mininet.cli import CLI
+from mininet.log import setLogLevel, info
+
+
+def emptyNet():
+    private_key = os.environ.get('OVS_PRIV_KEY', '/etc/openvswitch/privkey.pem')
+    cert = os.environ.get('OVS_CERT', '/etc/openvswitch/cert.pem')
+    ca_cert = os.environ.get('OVS_CA_CERT', '/etc/openvswitch/cacert.pem')
+    vcontroller = input("Enter the Ipaddress and port number of your controller:")
+    net = Mininet(
+        controller=lambda name:
+        RemoteController(name, defaultIP=vcontroller))
+    net.addController('c0')
+    h1 = net.addHost('h1')
+    h2 = net.addHost('h2')
+    s1 = net.addSwitch('s1')
+    net.addLink(h1, s1)
+    net.addLink(h2, s1)
+
+    net.start()
+    s1.cmd(f'ovs-vsctl set-ssl {private_key} {cert} {ca_cert}')
+    s1.cmd(f'ovs-vsctl set-controller s1 ssl:{vcontroller}')
+
+    CLI(net)
+    net.stop()
+
+
+if __name__ == '__main__':
+    setLogLevel('info')
+emptyNet()

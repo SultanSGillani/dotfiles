@@ -1,5 +1,9 @@
 {
   "extends": "airbnb",
+  "parser": "babel-eslint",
+    "ecmaFeatures": {
+      "classes": true
+  },
   "rules": {
     "func-names": ["error", "never"]
   }

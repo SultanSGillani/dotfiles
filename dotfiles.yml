@@ -80,10 +80,6 @@
           tags:
             - slack
         - import_role:
-            name: docker
-          tags:
-            - docker
-        - import_role:
             name: fd
           tags:
             - fd
@@ -99,21 +95,6 @@
             name: hub
           tags:
             - hub
-        - import_role:
-            name: pycharm
-          tags:
-            - jetbrains
-            - pycharm
-        - import_role:
-            name: webstorm
-          tags:
-            - jetbrains
-            - webstorm
-        - import_role:
-            name: intellij
-          tags:
-            - jetbrains
-            - intellij
         - import_role:
             name: rubymine
           tags:

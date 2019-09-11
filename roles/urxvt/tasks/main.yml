@@ -1,4 +1,12 @@
 ---
+- name: Install apt deps
+  apt:
+    state: present
+    name: libperl-dev
+  become: yes
+  become_user: root
+  when: ansible_facts['os_family']|lower == 'debian'
+
 - name: Create config directory if it doesnt exist
   file:
     path: "{{ dotfiles_user_home }}/.urxvt/ext"

@@ -8,6 +8,13 @@
   tags:
     - initial
 
+- name: install some deps
+  package:
+    name: libpam0g-dev
+    state: present
+  become: yes
+  become_user: root
+
 - name: run autogen on screen
   command: "{{ dotfiles_user_home }}/screen/src/autogen.sh"
   args:

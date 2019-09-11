@@ -6,6 +6,8 @@ zsh_term: xterm-256color
 zsh_rbenv_root: "export RBENV_ROOT=${HOME}/.rbenv"
 zsh_debian_path: ${HOME}/bin:/snap/bin
 
+touchpad_speed: .85
+
 zsh_mac_path: "$(ruby -e 'puts Gem.user_dir')/bin"
 zsh_arch_path: "/usr/lib/ccache/bin"
 zsh_mac_exports: "export GROOVY_HOME=/usr/local/opt/groovy/libexec"

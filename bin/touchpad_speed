@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+touchpad_driver=$(grep DRIVER /sys/class/input/mouse0/device/device/uevent | sed 's/DRIVER=//g')
+touchpad_id=$(xinput --list | grep -iE "(Touchpad|$touchpad_driver)" | xargs -n 1 | grep "id=" | sed 's/id=//g')
+
+accel_speed_code=$(xinput --list-props "$touchpad_id" | awk '/Accel Speed \(/ {print $4}' | grep -o '[0-9]\+')
+current_speed=$(xinput --list-props "$touchpad_id" | awk '/Accel Speed \(/ {print $5}')
+
+speed="$@"
+
+xinput --set-prop "$touchpad_id" "$accel_speed_code" "$speed"

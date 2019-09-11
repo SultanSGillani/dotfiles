@@ -13,7 +13,6 @@
 set $mod Mod4
 set $altmod Mod1
 set $term urxvt
-
 set $tterm termite -e tmux
 
 # Compton
@@ -22,6 +21,9 @@ exec_always --no-startup-id "killall -q compton; compton  --config {{ dotfiles_u
 exec_always --no-startup-id xrdb -merge ~/.Xresources
 {% if ansible_facts['hostname'] == 'linuxlaptop' %}
 exec_always --no-startup-id xrandr --output eDP-1 --scale 0.9999x0.9999
+{% elif ansible_facts['hostname'] == 'sultanubuntu' %}
+# exec_always --no-startup-id xrandr --output HDMI1 --scale 0.9999x0.9999
+exec_always --no-startup-id xrandr --output HDMI1 --primary --mode 3440x1440 --pos 0x0 --rotate normal --output VIRTUAL1 --off --output eDP1 --off
 {% endif %}
 
 exec_always --no-startup-id feh --bg-scale {{ wallpaper_file }}

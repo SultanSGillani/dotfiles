@@ -4,8 +4,6 @@ debian_packages:
   - bzip2
   - ca-certificates
   - network-manager
-  - network-manager-gnome
-  - network-manager-openvpn
   - curl
   - dash
   - grep

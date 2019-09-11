@@ -55,6 +55,8 @@ let:
   - g:go_highlight_types = 1
   - g:go_list_type = "quickfix"
   - g:javascript_enable_domhtmlcss = 1
+  - g:syntastic_javascript_checkers = ['eslint']
+  - g:syntastic_javascript_eslint_exe = '~/.nodenv/shims/eslint'
   - g:jedi#completions_command = "<C-Space>"
   - g:jedi#documentation_command = "K"
   - g:jedi#goto_assignments_command = "<leader>g"
