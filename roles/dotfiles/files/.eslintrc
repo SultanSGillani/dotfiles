@@ -1,0 +1,69 @@
+{
+  "plugins": [
+    "react-redux",
+    "react",
+    "redux-saga"
+  ],
+  "globals": {
+    "document": false,
+    "window": false,
+    "getElementById": false
+  },
+  "extends": [ "airbnb", "eslint:recommended", "plugin:react/recommended", "plugin:react-redux/recommended", "plugin:redux-saga/recommended" ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+       "ecmaFeatures": {
+            "legacyDecorators": true,
+            "classes": true,
+            "jsx": true
+    },
+    "ecmaVersion": 7
+  },
+  "rules": {
+    "func-names": ["error", "never"],
+    "import/extensions": "warn",
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/label-has-associated-control": "warn",
+    "jsx-a11y/label-has-for": [ 2, {
+      "components": [ "Label" ],
+      "required": {
+        "some": [ "nesting", "id" ]
+      },
+      "allowChildren": false
+    }],
+    "jsx-a11y/no-autofocus": "warn",
+    "jsx-a11y/no-noninteractive-tabindex": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
+    "keyword-spacing": "warn",
+    "max-len": [2, 120, 4],
+    "no-console": "off",
+    "no-multi-spaces": "warn",
+    "object-curly-spacing": [1, "never"],
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
+        "message": "Unexpected property on console object was called"
+      }
+    ],
+    "no-unused-vars": "warn",
+    "no-use-before-define": ["error", { "variables": false }],
+    "padded-blocks": "warn",
+    "prefer-const": "warn",
+    "quotes": ["warn", "single"],
+    "react-redux/no-unused-prop-types": "error",
+    "react/button-has-type": "warn",
+    "react/destructuring-assignment": "warn",
+    "react/jsx-filename-extension": "off",
+    "react/jsx-indent": "warn",
+    "react/jsx-tag-spacing": "warn",
+    "react/no-unused-prop-types": "off",
+    "react/prop-types": "off",
+    "react/static-property-placement": "off",
+    "semi": "warn",
+    "space-before-blocks": "warn",
+    "spaced-comment": "warn"
+  }
+}
+

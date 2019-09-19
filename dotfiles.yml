@@ -96,6 +96,10 @@
           tags:
             - hub
         - import_role:
+            name: webstorm
+          tags:
+            - webstorm
+        - import_role:
             name: rubymine
           tags:
             - jetbrains

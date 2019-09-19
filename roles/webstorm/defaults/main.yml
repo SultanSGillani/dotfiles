@@ -1,6 +1,5 @@
 ---
-webstorm_version: "2019.1.3"
-webstorm_edition: 'professional'
-webstorm_install_dir: /opt/webstorm/webstorm-{{ webstorm_edition }}-{{ webstorm_version }}
-webstorm_filename: "webstorm-{{ webstorm_edition }}-{{ webstorm_version }}.tar.gz"
-webstorm_mirror: "http://download.jetbrains.com/python"
+webstorm_version: "2019.2.2"
+webstorm_install_dir: /opt/webstorm/webstorm-{{ webstorm_version }}
+webstorm_filename: "WebStorm-{{ webstorm_version }}.tar.gz"
+webstorm_mirror: "http://download.jetbrains.com/webstorm"

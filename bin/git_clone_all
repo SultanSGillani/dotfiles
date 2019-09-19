@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+DIR=${HOME}/projects/veracity
+
+readarray array <<< $( cat "$@" )
+
+if [ ! -f "${DIR}" ]; then
+    mkdir -p ${DIR}
+fi
+
+cd ${DIR}
+
+for element in ${array[@]}
+do
+  echo "clonning $element"
+  git clone $element
+done
