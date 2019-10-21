@@ -13,11 +13,6 @@ shift + alt - j : yabai -m window --swap south
 shift + alt - k : yabai -m window --swap north
 shift + alt - l : yabai -m window --swap east
 
-# swap display
-cmd - 1 : yabai -m window --display 1 --swap
-cmd - 2 : yabai -m window --display 2 --swap
-cmd - 3 : yabai -m window --display 3 --swap
-
 # move window
 shift + cmd - h : yabai -m window --warp west
 shift + cmd - j : yabai -m window --warp south

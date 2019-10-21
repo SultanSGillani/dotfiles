@@ -4,8 +4,8 @@
 yabai -m config status_bar                   on
 yabai -m config status_bar_text_font         "Hack Nerd Font Mono:Bold:12.0"
 yabai -m config status_bar_icon_font         "Hack Nerd Font:Regular:12.0"
-yabai -m config status_bar_background_color  0xaa{{ base16.theme[default_theme]['base00_hex'] }}
-yabai -m config status_bar_foreground_color  0xff{{ base16.theme[default_theme]['base05_hex'] }}
+yabai -m config status_bar_background_color  0xaa282a36
+yabai -m config status_bar_foreground_color  0xffe2e4e5
 yabai -m config status_bar_space_icon_strip           
 yabai -m config status_bar_power_icon_strip   
 yabai -m config status_bar_space_icon        
@@ -20,12 +20,12 @@ yabai -m config window_opacity               on
 yabai -m config window_shadow                off
 yabai -m config window_border                on
 yabai -m config window_border_width          3
-yabai -m config active_window_border_color   0xff{{ base16.theme[default_theme]['base0E_hex'] }}
-yabai -m config normal_window_border_color   0xaa{{ base16.theme[default_theme]['base00_hex'] }}
+yabai -m config active_window_border_color   0xffff6ac1
+yabai -m config normal_window_border_color   0xaa282a36
 yabai -m config insert_window_border_color   0xffd75f5f
 yabai -m config active_window_opacity        1.0
-yabai -m config normal_window_opacity        0.80
-yabai -m config split_ratio                  0.80
+yabai -m config normal_window_opacity        0.90
+yabai -m config split_ratio                  0.90
 yabai -m config auto_balance                 off
 yabai -m config mouse_modifier               fn
 yabai -m config mouse_action1                move
@@ -43,6 +43,7 @@ yabai -m config window_gap                   10
 yabai -m rule --add app=Firefox space=1
 yabai -m rule --add app=Safari space=1
 yabai -m rule --add app=PyCharm space=3
+yabai -m rule --add app=Webstorm space=5
 yabai -m rule --add app=Slack space=4
 yabai -m rule --add app=Spotify space=6
 yabai -m rule --add app="IntelliJ IDEA" space=7
