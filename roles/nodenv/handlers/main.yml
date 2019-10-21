@@ -1,5 +1,0 @@
----
-- name: rehash nodenv
-  command: "{{ nodenv.path }}/bin/nodenv rehash"
-  environment:
-    NODENV_ROOT: '{{ nodenv.path }}'

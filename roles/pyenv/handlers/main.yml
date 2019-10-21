@@ -1,6 +1,0 @@
----
-# handlers file for pyenv
-- name: rehash pyenv
-  command: "{{ pyenv_shell }} rehash"
-  environment:
-    PYENV_ROOT: '{{ pyenv_path }}'

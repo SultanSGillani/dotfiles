@@ -22,28 +22,18 @@ done
 export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib
 export MAKEFLAGS="-j9 -l8"
 {% endif %}
-{% if ansible_facts['os_family']|lower == "darwin" %}
-export JAVA_HOME=$(/usr/libexec/java_home)
-{% endif %}
-# Python
-export PYENV_ROOT=${HOME}/.pyenv
-export PYTHONSTARTUP="${HOME}/.pyrc.py"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 
-# Pyenvvirtualenvwrapper
-export WORKON_HOME=${HOME}/.projs
-export PROJECT_HOME=${HOME}/projects
-export PROJECTS=${HOME}/projects
+. ${HOME}/.asdf/asdf.sh
+. ${HOME}/.asdf/plugins/java/set-java-home.sh
 
-# nodenv
-if [ -s /usr/local/bin/nodenv ]; then
-  eval "$(/usr/local/bin/nodenv init -)"
-else
-  export PATH=${HOME}/.nodenv/bin:${HOME}/.nodenv/shims:$PATH
+asdf current groovy 2>&1 > /dev/null
+if [[ "$?" -eq 0 ]]
+then
+    export GROOVY_HOME=$(asdf where groovy)
 fi
 
-# Rbenv
-{{ zsh_rbenv_root }}
+# Python
+export PYTHONSTARTUP="${HOME}/.pyrc.py"
 
 # Gpg2
 export GPG_TTY=$(tty)
@@ -54,7 +44,6 @@ fast-theme default 2> /dev/null
 export _Z_CMD=z
 . $ZSH/roles/z/z.sh
 {% if ansible_facts['os_family']|lower == "darwin" %}
-{{ zsh_mac_exports }}
 export PATH="{{ zsh_path | join(":") }}:{{ zsh_mac_path }}:$PATH"
 {% endif %}
 {% if ansible_facts['os_family']|lower == "debian" %}
@@ -140,27 +129,6 @@ export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat 
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
 export FZF_TMUX_HEIGHT="30%"
 
-# Asdf
-
-{% if ansible_facts['os_family']|lower == "debian" %}
-. ${HOME}/.asdf/asdf.sh
-{% endif %}
-
-# rbenv
-eval "$(rbenv init -)"
-
-# pyenv
-eval "$(pyenv init -)"
-
-{% if ansible_facts['os_family']|lower == "darwin" %}
-if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
-{% endif %}
-{% if ansible_facts['os_family']|lower == "archlinux" %}
-. ${HOME}/.local/bin/virtualenvwrapper_lazy.sh
-{% else %}
-pyenv virtualenvwrapper_lazy
-{% endif %}
-
 # ssh_agent
 eval "$(ssh-agent -s)" >/dev/null
 ssh-add 2> /dev/null
@@ -194,6 +162,12 @@ fi
 {% for alias in zsh_aliases %}
 {% if alias.alias != '' %}
 alias '{{ alias.alias }}'="{{ alias.action }}"
+{% endif %}
+{% endfor %}
+
+{% for alias in multi_aliases %}
+{% if alias.alias != '' %}
+alias {{ alias.alias }}={{ alias.action }}
 {% endif %}
 {% endfor %}
 

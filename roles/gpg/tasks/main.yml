@@ -5,7 +5,7 @@
     state: directory
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
-    mode: 0755
+    mode: 0700
     recurse: yes
   tags:
     - initial

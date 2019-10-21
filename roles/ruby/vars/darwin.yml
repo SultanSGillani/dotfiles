@@ -1,6 +1,0 @@
----
-rbenv_pkgs:
-  - openssl
-  - libyaml
-
-rbenv_shell: /usr/local/bin/rbenv

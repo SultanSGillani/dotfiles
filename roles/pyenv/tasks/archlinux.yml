@@ -1,7 +1,0 @@
----
-- name: install pyenv | Archlinux
-  aur:
-    name: "{{ pyenv_pkgs }}"
-    use: yay
-  tags:
-    - initial

@@ -1,4 +1,82 @@
 ---
-- name: include os specific tasks
+- name: Read vars from first file found, use 'vars/' relative subdir
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - '{{ ansible_facts["os_family"]|lower }}.yml'
+        - default.yml
+      paths:
+        - 'vars'
+
+- name: Include os specific tasks
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
-  when: ansible_facts['os_family']|lower is defined
+  when: "ansible_facts['os_family']|lower is defined"
+
+- name: Install asdf
+  git:
+    repo: "https://github.com/asdf-vm/asdf.git"
+    dest: "{{ dotfiles_user_home }}/.asdf"
+    update: yes
+    accept_hostkey: yes
+    version: master
+  tags:
+    - initial
+
+- name: Stat Nodejs Plugin Path
+  stat:
+    path: "{{ dotfiles_user_home }}/.asdf/plugins/nodejs"
+  register: nodejs_plugin_path
+
+- name: add nodejs pgp keys
+  command: "{{ dotfiles_user_home }}/.asdf/plugins/nodejs/bin/import-release-team-keyring"
+  when: nodejs_plugin_path is not defined
+  tags:
+    - initial
+
+- name: copy package files and configs
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ dotfiles_user_home }}/{{ item.dest }}"
+  loop: "{{ asdf_dots }}"
+  become: yes
+  become_user: "{{ zsh_user }}"
+  tags:
+    - update
+
+- name: install plugins
+  command: "{{ asdf_executable }} plugin-add {{ item.name }} {{ item.repository | default() }}"
+  args:
+    creates: "{{ dotfiles_user_home }}/.asdf/plugins/{{ item.name }}"
+    chdir: "{{ dotfiles_user_home }}"
+  with_items: "{{ asdf_plugins }}"
+  when: asdf_plugins|length > 0
+  become: True
+  become_user: "{{ zsh_user }}"
+
+- name: install plugin versions
+  command: "{{ asdf_executable }} install {{ item.0.name }} {{ item.1 }}"
+  args:
+    creates: "{{ dotfiles_user_home }}/.asdf/installs/{{ item.0.name }}/{{ item.1 }}"
+    chdir: "{{ dotfiles_user_home }}"
+  with_subelements:
+    - "{{ asdf_plugins }}"
+    - versions
+    - flags:
+      skip_missing: True
+  when: asdf_plugins|length > 0
+  become: True
+  become_user: "{{ zsh_user }}"
+
+- name: set global plugin versions
+  command: "{{ asdf_executable }} global {{ item.name }} {{ item.global | default(item.versions[0]) }}"
+  args:
+    chdir: "{{ dotfiles_user_home }}"
+  notify: reshim asdf
+  when: item.versions is defined
+  loop: "{{ asdf_plugins }}"
+  become: True
+  become_user: "{{ zsh_user }}"
+
+- name: Include pip package installs
+  import_tasks: pip.yml

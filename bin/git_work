@@ -1,9 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env bash
 #
 # clone multiple repos in one directory
 #
 #
 # Example:
 #   git_work repo1 repo2 repo3
-git clone git@work:sultangillani3/${@}.git
+for i in "${1}"; do
+    cd ../ && git clone git@work:sultangillani3/"${i}".git
+done
 

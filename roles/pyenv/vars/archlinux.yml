@@ -1,7 +1,0 @@
----
-pyenv_shell: "/usr/bin/pyenv"
-
-pyenv_pkgs:
-  - pyenv
-  - pyenv-virtualenv
-  - pyenv-virtualenvwrapper

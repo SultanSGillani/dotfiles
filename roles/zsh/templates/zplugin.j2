@@ -87,6 +87,7 @@ zsnippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docke
 
 ## fzf
 # Install `fzf` bynary and tmux helper script
+
 zcommand from"gh-r";         zlight junegunn/fzf-bin
 zcommand pick"bin/fzf-tmux"; zlight junegunn/fzf
 # Create and bind multiple widgets using fzf
@@ -99,10 +100,6 @@ zcommand make"!PREFIX=$ZPFX install" \
     atclone"cp contrib/fzy-* $ZPFX/bin/" \
     pick"$ZPFX/bin/fzy*"
 zlight jhawthorn/fzy
-
-# enhancd
-zturbo2f lucid pick"init.sh"
-zpl light "b4b4r07/enhancd"
 
 zturbo0
 zlight skx/sysadmin-util
@@ -142,6 +139,22 @@ zlight zsh-users/zsh-completions
 # History search by `Ctrl+R`
 zturbo0a compile'{hsmw-*,test/*}'
 zlight zdharma/history-search-multi-word
+
+function cd_with_mkdir() {
+  if [[ ! "$@" =~ "^$|^-$" ]] && [ ! -d "$@" ]; then
+    echo "$@ not exists"
+    execute_with_confirm "mkdir -p \"$@\""
+  fi
+
+  __enhancd::cd "$@"
+}
+
+export ENHANCD_FILTER=filter
+
+zplugin ice pick"init.sh" lucid \
+  atload'alias cd="cd_with_mkdir";export ENHANCD_FILTER="fzf --height 50% --reverse --ansi";export ENHANCD_DOT_SHOW_FULLPATH=1'
+zplugin light "b4b4r07/enhancd"
+
 
 # Autosuggestions & fast-syntax-highlighting
 zturbo0b atload'_zsh_autosuggest_start'
@@ -189,19 +202,5 @@ unset -f zcr
   fi
 } &!
 
-# EOF
-ZSHRC_LOADED=true
-
-(( ${+_ZSHRC_ZPROF} )) && {
-  float -g _ZSHRC_ZPROF_EPOCH_DIFF="$(( EPOCHREALTIME - _ZSHRC_ZPROF_TIME_BEGINS ))"
-  builtin printf '%b\n' "\033[0;94mZSHRC_ZPROF: total millis time, avg millis time / call, percentage time\033[0;0m"
-  zprof | head -12
-  echo
-  builtin printf '%b ' "\033[0;31mZSHRC: Done Profiling!\033[0;0m"
-  builtin print -f 'Load time: %.6f\n' "${_ZSHRC_ZPROF_EPOCH_DIFF}"
-  (( ${+functions[zplugin]} )) && {
-    builtin printf '%b ' "\033[0;31mZSHRC: Zplugin non-async plugins:\033[0;0m"
-    zplugin times
-  }
-}
+cd_to_most_recently_opened_directory
 

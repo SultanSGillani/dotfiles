@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+(cd "${1}" && tar cf - .) | (cd "${2}" && tar xpf -)
+
+

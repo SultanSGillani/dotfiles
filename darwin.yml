@@ -16,12 +16,6 @@
           tags:
             - yabai
         - import_role:
-            name: ubersicht
-          tags:
-            - ubersicht
-            - uber
-            - pecan
-        - import_role:
             name: iterm
           tags:
             - iterm

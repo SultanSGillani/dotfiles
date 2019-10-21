@@ -75,10 +75,10 @@
           tags:
             - firefox
             - firefox_uri
-        - import_role:
-            name: slack
-          tags:
-            - slack
+#        - import_role:
+#            name: slack
+#          tags:
+#            - slack
         - import_role:
             name: fd
           tags:
@@ -87,6 +87,13 @@
             name: asdf
           tags:
             - asdf
+            - python
+            - ruby
+            - nodejs
+            - npm
+            - node
+            - java
+            - groovy
         - import_role:
             name: fzf
           tags:
@@ -115,22 +122,6 @@
             - vim
             - nvim
         - import_role:
-            name: nodenv
-          tags:
-            - node
-            - nodejs
-            - nodenv
-            - npm
-        - import_role:
-            name: pyenv
-          tags:
-            - python
-            - pyenv
-        - import_role:
-            name: pip
-          tags:
-            - pip
-        - import_role:
             name: rclone
           tags:
             - rclone
@@ -139,11 +130,6 @@
           tags:
             - rg
             - ripgrep
-        - import_role:
-            name: ruby
-          tags:
-            - ruby
-            - rbenv
         - import_role:
             name: rust
           tags:

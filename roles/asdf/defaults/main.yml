@@ -1,0 +1,59 @@
+---
+plugins:
+  - nodejs
+  - ruby
+  - python
+  - groovy
+
+asdf_plugins:
+  - name: "nodejs"
+    versions:
+      - 10.16.3
+    global: 10.16.3
+  - name: "python"
+    versions:
+      - 3.8.0
+      - 3.7.5
+    global: 3.7.5
+  - name: "ruby"
+    versions:
+      - 2.4.2
+    global: 2.4.2
+  - name: "java"
+    repository: "https://github.com/halcyon/asdf-java.git"
+    versions:
+      - adopt-openjdk-11.0.5+10
+  - name: "groovy"
+    versions:
+      - apache-groovy-binary-2.5.8
+    global: apache-groovy-binary-2.5.8
+
+asdf_executable: "{{ dotfiles_user_home }}/.asdf/bin/asdf"
+
+asdf_dots:
+  - { src: 'default-gems', dest: '.default-gems' }
+  - { src: 'package.json', dest: 'package.json' }
+  - { src: 'asdfrc', dest: '.asdfrc' }
+
+java_pkgs:
+  - jq
+  - sha256sum
+
+pip_packages:
+  - ansible-lint
+  - cryptography
+  - django
+  - docker
+  - flake8
+  - jedi
+  - jmespath
+  - mkdocs
+  - neovim
+  - powerline-status
+  - pylint
+  - tmuxp
+  - virtualenv
+  - virtualenvwrapper
+  - yamllint
+  - yapf
+  - pyvmomi

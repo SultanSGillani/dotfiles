@@ -105,13 +105,6 @@
             - vim
             - nvim
         - import_role:
-            name: nodenv
-          tags:
-            - node
-            - nodejs
-            - nodenv
-            - npm
-        - import_role:
             name: rclone
           tags:
             - rclone

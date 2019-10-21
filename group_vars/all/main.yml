@@ -3,12 +3,14 @@ ansible_distribution_release:
   '{{ ansible_facts["distribution_major_version"].split("/")[0]
   if (ansible_facts["distribution_major_version"].split("/") | length) > 1
   else ansible_facts["distribution_release"] }}'
-ansible_python_interpreter: "/usr/bin/python3"
+ansible_python_interpreter: "/usr/local/bin/python3"
 zsh_user: "{{ lookup('pipe', 'whoami') }}"
 zsh_user_group: "{{ lookup('pipe','id -g') }}"
 dotfiles_user_home: "{{ '~' | expanduser }}"
-pyenv_path: "{{ dotfiles_user_home }}/.pyenv"
-pip_executable: "{{ pyenv_path }}/shims/pip"
+asdf_path: "{{ dotfiles_user_home }}/.asdf"
+pip_executable: "{{ asdf_path }}/shims/pip"
+npm_executable: "{{ asdf_path }}/shims/npm"
+gem_executable: "{{ asdf_path }}/shims/gem"
 cargo_home: "{{ dotfiles_user_home }}/.cargo"
 rustup_home: "{{ dotfiles_user_home }}/.rustup"
 dotfiles_dir: "{{ dotfiles_user_home }}/dotfiles"

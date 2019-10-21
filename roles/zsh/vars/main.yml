@@ -3,26 +3,24 @@
 zsh_editor: nvim
 zsh_term: xterm-256color
 
-zsh_rbenv_root: "export RBENV_ROOT=${HOME}/.rbenv"
 zsh_debian_path: ${HOME}/bin:/snap/bin
 
 touchpad_speed: .85
 
 zsh_mac_path: "$(ruby -e 'puts Gem.user_dir')/bin"
 zsh_arch_path: "/usr/lib/ccache/bin"
-zsh_mac_exports: "export GROOVY_HOME=/usr/local/opt/groovy/libexec"
 zsh_path:
   - ${ZSH}/bin
   - ${HOME}/.local/bin
   - /usr/local/bin
-  - ${RBENV_ROOT}/bin
+  - ${HOME}/.asdf/bin
   - /usr/sbin
   - /usr/bin
   - /sbin
   - /bin
-  - ${PYENV_ROOT}/bin
   - ${HOME}/.cargo/bin
   - ${JAVA_HOME}/bin
+  - ${GROOVY_HOME}/bin
   - /usr/local/sbin
 
 fzf_widgets: ytet5uy4/fzf-widgets
@@ -56,6 +54,9 @@ zsh_aliases:
   - { alias: 'rsync-synchronize', action: 'rsync --update --delete' }
   - { alias: 'cpv', action: 'command rsync --' }
   - { alias: 'visudo', action: 'sudo EDITOR=/usr/bin/nvim visudo' }
+
+multi_aliases:
+  - { alias: "{gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz,zst,zstd}", action: 'extract' }
   - { alias: '', action: '' }
 
 zsh_linux_aliases:
@@ -91,7 +92,6 @@ zsh_misc_aliases:
   - { alias: 'compfuckyou', action: 'compaudit | xargs chmod g-w' }
   - { alias: 'cputemp', action: 'sensors | grep Core' }
   - { alias: 'find_big_files', action: 'du -a / | sort -n -r | head -n 10 $1' }
-  - { alias: 'mkcd', action: '_(){ mkdir -p $1; cd $1; }; _' }
   - { alias: 'rd', action: 'rmdir' }
   - { alias: 'suser', action: 'su -' }
   - { alias: 'vlc', action: 'open -a vlc' }

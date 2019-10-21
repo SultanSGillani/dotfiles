@@ -1,8 +1,8 @@
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
 
 function compress() {
-	local tmpFile="${@%/}.tar";
-	tar -cvf "${tmpFile}" --exclude=".DS_Store" "${@}" || return 1;
+	local tmpFile="${*%/}.tar";
+	tar -cvf "${tmpFile}" --exclude=".DS_Store" --exclude="*.pyc" "${@}" || return 1;
 
 	size=$(
 		stat -f"%z" "${tmpFile}" 2> /dev/null; # macOS `stat`

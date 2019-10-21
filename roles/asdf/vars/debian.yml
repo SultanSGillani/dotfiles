@@ -1,7 +1,9 @@
 ---
-pyenv_shell: "{{ pyenv_path }}/bin/pyenv"
+ruby_pkgs:
+  - libcurl4-openssl-dev
+  - libxslt1-dev
 
-pyenv_pkgs:
+python_pkgs:
   - libbz2-dev
   - libffi-dev
   - libncurses5-dev
@@ -14,3 +16,7 @@ pyenv_pkgs:
   - tk-dev
   - xz-utils
   - zlib1g-dev
+
+debian_pip_packages:
+  - awscli
+  - docker-compose

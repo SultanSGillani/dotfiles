@@ -1,3 +1,0 @@
----
-ansible_python_interpreter: /usr/sbin/python3
-rbenv_shell: /usr/bin/rbenv

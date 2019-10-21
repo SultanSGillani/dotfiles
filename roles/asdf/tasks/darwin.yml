@@ -1,7 +1,21 @@
 ---
-- name: Install asdf | for osx
+- name: Install ruby dependencies with homebrew
   homebrew:
-    name: asdf
+    name: "{{ ruby_pkgs }}"
+    state: present
+  tags:
+    - initial
+
+- name: Install python dependencies with homebrew
+  homebrew:
+    name: "{{ python_pkgs }}"
+    state: present
+  tags:
+    - initial
+
+- name: Install java dependencies with homebrew
+  homebrew:
+    name: jq
     state: present
   tags:
     - initial

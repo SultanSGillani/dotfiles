@@ -1,3 +1,4 @@
+#!/usr/bin/env zsh
 # https://github.com/zulu-zsh/zulu/blob/master/src/commands/init.zsh
 # not all options (see git [TAB])
 

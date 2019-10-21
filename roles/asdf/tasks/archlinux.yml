@@ -1,7 +1,9 @@
 ---
-- name: install asdf | Archlinux
+- name: Install java pkgs
   aur:
-    name: asdf
+    name: "{{ java_pkgs }}"
     use: yay
+    skip_pgp_check: true
   tags:
     - initial
+    - java_packages

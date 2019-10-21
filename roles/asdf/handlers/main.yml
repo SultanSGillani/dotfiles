@@ -1,0 +1,4 @@
+---
+# handlers file for asdf
+- name: reshim asdf
+  command: "{{ asdf_executable }} reshim"

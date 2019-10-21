@@ -1,7 +1,0 @@
----
-- name: Install rbenv | Arch
-  aur:
-    name: rbenv
-    use: yay
-  tags:
-    - initial
