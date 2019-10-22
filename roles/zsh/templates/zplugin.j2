@@ -34,6 +34,7 @@ zcr() { zplugin creinstall -q "${@}"; }
 {% if zsh_prompt == 'agkozak' %}
 zlight agkozak/agkozak-zsh-prompt
 {% elif zsh_prompt == 'powerlevel10k' %}
+zplugin ice depth=1
 zlight romkatv/powerlevel10k
 {% elif zsh_prompt == 'alien' %}
 zturbo0 pick"alien.zsh" multisrc'modules/{async,git,init,prompt,python,svn,system,theme}.zsh'
