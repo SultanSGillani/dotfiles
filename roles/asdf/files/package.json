@@ -44,7 +44,7 @@
     "cross-env": "5.2.1",
     "fontfaceobserver": "2.1.0",
     "history": "4.10.1",
-    "lodash": "4.17.11",
+    "lodash": "4.17.15",
     "npm-install-peers": "^1.2.1",
     "prop-types": "15.7.2",
     "react": "^16.9.0",
