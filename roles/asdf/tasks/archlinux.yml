@@ -1,7 +1,7 @@
 ---
-- name: Install java pkgs
+- name: Install jq
   aur:
-    name: "{{ java_pkgs }}"
+    name: jq
     use: yay
     skip_pgp_check: true
   tags:

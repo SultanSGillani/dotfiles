@@ -17,9 +17,9 @@
   tags:
     - initial
 
-- name: Install java pkgs for debian
+- name: Install jq for debian
   package:
-    name: "{{ java_pkgs }}"
+    name: jq
     state: present
   become: yes
   become_user: root

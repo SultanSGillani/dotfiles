@@ -13,7 +13,6 @@ zsh_path:
   - ${ZSH}/bin
   - ${HOME}/.local/bin
   - /usr/local/bin
-  - ${HOME}/.asdf/bin
   - /usr/sbin
   - /usr/bin
   - /sbin

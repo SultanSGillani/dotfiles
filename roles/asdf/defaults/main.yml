@@ -35,10 +35,6 @@ asdf_dots:
   - { src: 'package.json', dest: 'package.json' }
   - { src: 'asdfrc', dest: '.asdfrc' }
 
-java_pkgs:
-  - jq
-  - sha256sum
-
 pip_packages:
   - ansible-lint
   - cryptography

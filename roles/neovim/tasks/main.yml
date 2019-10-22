@@ -49,6 +49,8 @@
     path: "{{ neovim_config_dir }}/plugs"
     state: directory
     recurse: yes
+  notify:
+    - Install plugins
   tags:
     - initial
 
@@ -72,7 +74,6 @@
     src: lightline_scheme
     dest: "{{ neovim_config_dir }}/plugged/lightline.vim/autoload/lightline/colorscheme/{{ lightline_scheme_name }}.vim"
   notify:
-    - Install plugins
     - Update plugins
     - Clean plugins
   tags:
