@@ -234,7 +234,6 @@ zsh_git_alias:
   - { alias: 'gd', action: 'git diff' }
   - { alias: 'gdca', action: 'git diff --cached' }
   - { alias: 'gdcw', action: 'git diff --cached --word-diff' }
-  - { alias: 'gdct', action: 'git describe --tags $(git rev-list --tags --max-count=1)' }
   - { alias: 'gds', action: 'git diff --staged' }
   - { alias: 'gdt', action: 'git diff-tree --no-commit-id --name-only -r' }
   - { alias: 'gdw', action: 'git diff --word-diff' }
@@ -247,8 +246,6 @@ zsh_git_alias:
   - { alias: 'ghh', action: 'git help' }
   - { alias: 'gignore', action: 'git update-index --assume-unchanged' }
   - { alias: 'git-svn-dcommit-push', action: 'git svn dcommit && git push github master:svntrunk' }
-  - { alias: 'gk', action: '\gitk --all --branches' }
-  - { alias: 'gke', action: '\gitk --all $(git log -g --pretty=%h)' }
   - { alias: 'gl', action: 'git pull' }
   - { alias: 'glg', action: 'git log --stat' }
   - { alias: 'glgp', action: 'git log --stat -p' }
@@ -290,7 +287,6 @@ zsh_git_alias:
   - { alias: 'grs', action: 'git restore' }
   - { alias: 'grset', action: 'git remote set-url' }
   - { alias: 'grss', action: 'git restore --source' }
-  - { alias: 'grt', action: 'cd "$(git rev-parse --show-toplevel || echo .)"' }
   - { alias: 'gru', action: 'git reset --' }
   - { alias: 'grup', action: 'git remote update' }
   - { alias: 'grv', action: 'git remote -v' }
@@ -314,7 +310,6 @@ zsh_git_alias:
   - { alias: 'gswc', action: 'git switch -c' }
   - { alias: 'gts', action: 'git tag -s' }
   - { alias: 'gtv', action: 'git tag | sort -V' }
-  - { alias: 'gtl', action: 'gtl(){ git tag --sort=-v:refname -n -l "${1}*" }; noglob gtl' }
   - { alias: 'gunignore', action: 'git update-index --no-assume-unchanged' }
   - { alias: 'gunwip', action: 'git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1' }
   - { alias: 'gup', action: 'git pull --rebase' }
@@ -323,5 +318,4 @@ zsh_git_alias:
   - { alias: 'gupav', action: 'git pull --rebase --autostash -v' }
   - { alias: 'glum', action: 'git pull upstream master' }
   - { alias: 'gwch', action: 'git whatchanged -p --abbrev-commit --pretty=medium' }
-  - { alias: 'gwip', action: 'git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"' }
   - { alias: '', action: '' }
