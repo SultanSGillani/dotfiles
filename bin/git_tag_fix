@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-
+cd ${2}
 git checkout "${1}"
 git tag -d "${1}"
 git push origin :refs/tags/"${1}"
-GIT_COMMITTER_DATE="$(git show --format=%aD | head -1)" git tag -a "${1}" -m"Tagging ${2} for ${1}"
+GIT_COMMITTER_DATE="$(git show --format=%aD | head -1)" git tag -a "${1}" -m"Release ${1} for ${3}"
 
 git push origin --tags

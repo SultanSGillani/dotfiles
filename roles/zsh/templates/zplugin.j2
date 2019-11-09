@@ -120,8 +120,14 @@ zplugin light asdf-vm/asdf
 
 # Install local completions quietly
 
+# Systemd or launchctl
+{% if ansible_facts['os_family']|lower == 'debian' %}
 zturbo0a
-zcr $ZSH/roles/zsh/completions
+zcr ${ZSH}/roles/zsh/completions/debian
+{% elif ansible_facts['os_family']|lower == 'darwin' %}
+zturbo0a
+zcr ${ZSH}/roles/zsh/completions/osx
+{% endif %}
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
 zturbo0
