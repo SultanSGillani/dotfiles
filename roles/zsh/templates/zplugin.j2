@@ -127,6 +127,9 @@ zcr ${ZSH}/roles/zsh/completions/debian
 {% elif ansible_facts['os_family']|lower == 'darwin' %}
 zturbo0a
 zcr ${ZSH}/roles/zsh/completions/osx
+
+zturbo0a
+zcr /usr/local/share/zsh/site-functions
 {% endif %}
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
