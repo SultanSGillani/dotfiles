@@ -26,6 +26,7 @@ exec_always --no-startup-id xrandr --output eDP-1 --scale 0.9999x0.9999
 exec_always --no-startup-id xrandr --output HDMI1 --primary --mode 3440x1440 --pos 0x0 --rotate normal --output VIRTUAL1 --off --output eDP1 --off
 {% endif %}
 
+exec_always --no-startup-id xinput set-prop 13 307 .90
 exec_always --no-startup-id feh --bg-scale {{ wallpaper_file }}
 
 exec --no-startup-id nm-applet
@@ -232,8 +233,8 @@ set $ws10 "10"
 assign [class="Firefox"] $ws1
 # assign [class="Google-chrome"] $ws1
 assign [class="jetbrains-pycharm"] $ws3
-assign [class="jetbrains-idea"] $ws8
-assign [class="jetbrains-rubymine"] $ws2
+assign [class="jetbrains-webstorm"] $ws8
+assign [class="jetbrains-rider"] $ws2
 assign [class="Slack"] $ws4
 
 # Set colors from Xresources
@@ -367,7 +368,7 @@ exec --no-startup-id pycharm
 # exec --no-startup-id rubymine
 {% else %}
 exec --no-startup-id pycharm-professional
-# exec --no-startup-id jetbrains-rubymine
+exec --no-startup-id jetbrains-rider
 {% endif %}
 exec --no-startup-id firefox
 # exec --no-startup-id $term

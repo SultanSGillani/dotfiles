@@ -2,7 +2,7 @@
 i3_aur:
   - i3-gaps
   - i3lock
-  - i3lock-fancy-multimonitor-git
+  - i3lock-fancy-dualmonitors-git
   - i3status
   - perl-anyevent-i3
 

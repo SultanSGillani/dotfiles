@@ -1,5 +1,5 @@
 ---
-pycharm_version: "2019.1.3"
+pycharm_version: "2019.3"
 pycharm_edition: 'professional'
 pycharm_install_dir: /opt/pycharm/pycharm-{{ pycharm_edition }}-{{ pycharm_version }}
 pycharm_filename: "pycharm-{{ pycharm_edition }}-{{ pycharm_version }}.tar.gz"

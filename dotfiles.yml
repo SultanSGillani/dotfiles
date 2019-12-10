@@ -107,10 +107,10 @@
           tags:
             - webstorm
         - import_role:
-            name: rubymine
+            name: pycharm
           tags:
             - jetbrains
-            - rubymine
+            - pycharm
         - import_role:
             name: neofetch
           tags:

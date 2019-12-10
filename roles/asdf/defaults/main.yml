@@ -3,7 +3,6 @@ plugins:
   - nodejs
   - ruby
   - python
-  - groovy
 
 asdf_plugins:
   - name: "nodejs"
@@ -19,14 +18,6 @@ asdf_plugins:
     versions:
       - 2.4.2
     global: 2.4.2
-  - name: "java"
-    repository: "https://github.com/halcyon/asdf-java.git"
-    versions:
-      - adopt-openjdk-11.0.5+10
-  - name: "groovy"
-    versions:
-      - apache-groovy-binary-2.5.8
-    global: apache-groovy-binary-2.5.8
 
 asdf_executable: "{{ dotfiles_user_home }}/.asdf/bin/asdf"
 

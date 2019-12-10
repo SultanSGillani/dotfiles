@@ -8,7 +8,6 @@ apt_packages:
 
 pacman_packages:
   - arandr
-  - gtk-xfce-engine
   - xfce4-appfinder
   - xfce4-artwork
   - xfce4-battery-plugin

@@ -14,6 +14,8 @@ MONITOR="eDP-1 DP-1"
 MONITOR="DVI-I-1 HDMI-0"
 {% elif ansible_facts['hostname'] == 'sultanubuntu' %}
 MONITOR="eDP1 HDMI1"
+{% else %}
+MONITOR="eDP-1"
 {% endif %}
 
 for m in $MONITOR; do
