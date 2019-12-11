@@ -54,6 +54,8 @@ zturbo0
 zsvn; zsnippet OMZ::plugins/urltools
 zturbo0 has'systemctl'
 zsnippet OMZ::plugins/systemd/systemd.plugin.zsh
+zturbo0
+zsnippet OMZ::plugins/kubectl/kubectl.plugin.zsh
 
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zlight b4b4r07/httpstat
@@ -79,6 +81,10 @@ zsnippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
 # docker-compose
 zplugin ice as"completion"
 zsnippet https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose
+
+# kubectl
+zplugin ice as"completion"
+zsnippet https://github.com/nnao45/zsh-kubectl-completion/blob/master/_kubectl
 
 # docker
 zplugin ice as"completion"

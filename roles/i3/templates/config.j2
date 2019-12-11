@@ -26,10 +26,15 @@ exec_always --no-startup-id xrandr --output eDP-1 --scale 0.9999x0.9999
 exec_always --no-startup-id xrandr --output HDMI1 --primary --mode 3440x1440 --pos 0x0 --rotate normal --output VIRTUAL1 --off --output eDP1 --off
 {% endif %}
 
+exec_always --no-startup-id google-chrome-stable --new-window --app=https://outlook.office365.com/owa/?realm=ntgfreight.com
 exec_always --no-startup-id xinput set-prop 13 307 .90
+exec_always --no-startup-id feh --bg-scale /home/sultan/wallpapers/comp.jpg
+exec_always --no-startup-id xinput set-prop 'SynPS/2 Synaptics TouchPad' 304 .95
+
 exec_always --no-startup-id feh --bg-scale {{ wallpaper_file }}
 
 exec --no-startup-id nm-applet
+exec_always --no-startup-id "autorandr -c"
 
 # gaps
 gaps inner 20
@@ -192,50 +197,40 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus
 
 #lock
-{% if ansible_os_family == "Archlinux" %}
-bindsym $altmod+l exec /usr/share/i3lock-fancy-multimonitor/lock -p
+{% if ansible_os_family == "Archlinux" %}#lock
+bindsym $mod+l exec bash -lc 'i3lock-fancy-dualmonitor lock'
 {% elif ansible_os_family == "Debian" %}
 bindsym $altmod+l exec {{ dotfiles_user_home }}/.config/i3/i3lock-fancy-multimonitor/lock -p
 {% endif %}
 
 # Define names for default workspaces for which we configure key bindings later on.
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
 
 # browser workspace
-#set $ws1 " "
+set $ws1 " "
 # ruby workspace
-#set $ws2 " "
+set $ws2 " "
 # python workspace
-#set $ws3 " "
+set $ws3 " "
 # gaming workspace
-#set $ws4 " "
-#set $ws5 " "
+set $ws4 " "
+set $ws5 " "
 # terminal workspace
-#set $ws6 " "
-#set $ws7 " "
+set $ws6 " "
+set $ws7 " "
 # mail workspace
-#set $ws8 " "
+set $ws8 " "
 # chat workspace
-#set $ws9 " "
+set $ws9 " "
 # music workspace
-#set $ws10 " "
+set $ws10 " "
 
 # Assign Workspaces:
 assign [class="Firefox"] $ws1
-# assign [class="Google-chrome"] $ws1
 assign [class="jetbrains-pycharm"] $ws3
 assign [class="jetbrains-webstorm"] $ws8
 assign [class="jetbrains-rider"] $ws2
 assign [class="Slack"] $ws4
+assign [class="Google-chrome"] $ws1
 
 # Set colors from Xresources
 # Change 'color7' and 'color2' to whatever colors you want i3 to use
@@ -367,10 +362,10 @@ bindsym $mod+Shift+h exec --no-startup-id dmenu_hotkeys i3 --menu rofi
 exec --no-startup-id pycharm
 # exec --no-startup-id rubymine
 {% else %}
-exec --no-startup-id pycharm-professional
+#exec --no-startup-id pycharm-professional
 exec --no-startup-id jetbrains-rider
 {% endif %}
-exec --no-startup-id firefox
+#AutoTermiteart
 # exec --no-startup-id $term
 exec --no-startup-id slack
 exec --no-startup-id dunst

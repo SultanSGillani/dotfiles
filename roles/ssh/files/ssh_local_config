@@ -15,10 +15,10 @@ HostName github.com
 User git
 IdentityFile ~/.ssh/id_ecdsa
 
-Host work
-HostName github.com
-user git
-IdentityFile ~/.ssh/id_ecdsa_work
+Host vs-ssh.visualstudio.com
+HostName vs-ssh.visualstudio.com
+user ntgfreight
+IdentityFile ~/.ssh/id_rsa_work
 
 Host 10.10.0.45
 Hostname 10.10.0.45
