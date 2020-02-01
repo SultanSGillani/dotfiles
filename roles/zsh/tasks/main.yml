@@ -3,26 +3,80 @@
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
   when: "ansible_facts['os_family']|lower is defined"
 
-- name: install zplugin
+- name: install zinit
   git:
-    repo: "https://github.com/zdharma/zplugin.git"
-    dest: "{{ dotfiles_user_home }}/.zplugin/bin"
+    repo: "https://github.com/zdharma/zinit.git"
+    dest: "{{ dotfiles_user_home }}/.zinit/bin"
     update: no
     version: master
   tags:
     - initial
 
-- name: Zplugin permissions
+- name: zinit permissions
   file:
-    dest: "{{ dotfiles_user_home }}/.zplugin"
+    dest: "{{ dotfiles_user_home }}/.zinit"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     mode: "u=rwX,g=rX,o=rX"
 
-- name: Write .zshrc config
+- name: Create zdot directory if it doesnt exist
+  file:
+    path: "{{ zdot_dir }}"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
+    recurse: no
+  tags:
+    - initial
+
+- name: Create completions directory if it doesnt exist
+  file:
+    path: "{{ zdot_dir }}/completions"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
+    recurse: no
+  tags:
+    - initial
+
+- name: Create functions directory if it doesnt exist
+  file:
+    path: "{{ zdot_dir }}/functions"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
+    recurse: no
+  tags:
+    - initial
+
+- name: Create opts directory if it doesnt exist
+  file:
+    path: "{{ zdot_dir }}/opts"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
+    recurse: no
+  tags:
+    - initial
+
+- name: Write .zshenv config
   template:
-    src: zshrc.j2
-    dest: "{{ dotfiles_user_home }}/.zshrc"
+    src: zshenv.zsh
+    dest: "{{ dotfiles_user_home }}/.zshenv"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    backup: no
+  tags:
+    - update
+
+- name: Write zshrc config
+  template:
+    src: zshrc.zsh
+    dest: "{{ zdot_dir }}/.zshrc"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: no
@@ -31,18 +85,8 @@
 
 - name: Write .zprofile config
   template:
-    src: zprofile.j2
-    dest: "{{ dotfiles_user_home }}/.zprofile"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
-    backup: no
-  tags:
-    - update
-
-- name: Write zplugin.zsh config file
-  template:
-    src: zplugin.j2
-    dest: "{{ dotfiles_user_home }}/zplugin.zsh"
+    src: zprofile.zsh
+    dest: "{{ zdot_dir }}/.zprofile"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: no
@@ -51,13 +95,48 @@
 
 - name: Write theme config file
   template:
-    src: "{{ zsh_prompt }}.j2"
-    dest: "{{ dotfiles_user_home }}/.prompt"
+    src: "{{ zsh_prompt }}.zsh"
+    dest: "{{ zdot_dir }}/prompt.zsh"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: no
   tags:
     - update
+
+- name: write completions
+  copy:
+    src: "{{ item }}"
+    dest: "{{ zdot_dir }}/completions/"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+  with_fileglob:
+    - completions/*
+
+- name: write functions
+  copy:
+    src: "{{ item }}"
+    dest: "{{ zdot_dir }}/functions/"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+  with_fileglob:
+    - functions/*
+
+- name: write opts
+  copy:
+    src: "{{ item }}"
+    dest: "{{ zdot_dir }}/opts/"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+  with_fileglob:
+    - opts/*
+
+- name: write z.sh
+  copy:
+    src: z.sh
+    dest: "{{ zdot_dir }}/z.sh"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
 
 - name: Set zsh as default shell
   user:

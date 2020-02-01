@@ -1,6 +1,6 @@
 ### Configures history options
 
-HISTFILE="${HOME}/.zhistory"
+HISTFILE="${ZDOTDIR}/.zhistory"
 
 HISTSIZE=1000000
 SAVEHIST=$HISTSIZE

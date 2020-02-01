@@ -1,0 +1,47 @@
+# Local GitConfig
+
+Host github.com
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_rsa
+
+Host gitlab.com
+HostName gitlab.com
+User git
+IdentityFile ~/.ssh/id_ed25519
+
+Host personal
+HostName github.com
+User git
+IdentityFile ~/.ssh/id_ecdsa
+
+Host vs-ssh.visualstudio.com
+HostName vs-ssh.visualstudio.com
+user ntgfreight
+IdentityFile ~/.ssh/id_rsa_work
+
+Host 10.10.0.45
+Hostname 10.10.0.45
+user sultan
+IdentityFile ~/.ssh/id_rsa_office
+
+Host 10.0.75.20
+Hostname 10.0.75.20
+user devops
+IdentityFile ~/.ssh/id_ecdsa_devops
+
+Host * (asterisk for all hosts or add specific host)
+  Protocol 2
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_rsa
+  IdentityFile ~/.ssh/id_ed25519
+  IdentityFile ~/.ssh/id_ecdsa
+  IdentityFile ~/.ssh/id_rsa_work
+  IdentityFile ~/.ssh/id_rsa_office
+  IdentityFile ~/.ssh/id_rsa
+  IdentityFile ~/.ssh/id_rsa
+  Compression yes
+
+
+

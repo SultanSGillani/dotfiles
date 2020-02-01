@@ -70,11 +70,11 @@
           tags:
             - screen
             - term
-        - import_role:
-            name: firefox
-          tags:
-            - firefox
-            - firefox_uri
+#        - import_role:
+#            name: firefox
+#          tags:
+#            - firefox
+#            - firefox_uri
 #        - import_role:
 #            name: slack
 #          tags:
@@ -102,15 +102,15 @@
             name: hub
           tags:
             - hub
-        - import_role:
-            name: webstorm
-          tags:
-            - webstorm
-        - import_role:
-            name: pycharm
-          tags:
-            - jetbrains
-            - pycharm
+#        - import_role:
+#            name: webstorm
+#          tags:
+#            - webstorm
+#        - import_role:
+#            name: pycharm
+#          tags:
+#            - jetbrains
+#            - pycharm
         - import_role:
             name: neofetch
           tags:

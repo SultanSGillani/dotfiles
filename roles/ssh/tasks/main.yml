@@ -11,8 +11,8 @@
     - initial
 
 - name: copy Local Config
-  copy:
-    src: ssh_local_config
+  template:
+    src: ssh_local_config.j2
     dest: "{{ dotfiles_user_home }}/.ssh/config"
     mode: 0644
   loop: "{{ ssh_config }}"

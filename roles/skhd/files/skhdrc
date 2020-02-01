@@ -1,5 +1,5 @@
 # open terminal
-cmd - return : /Applications/iTerm.app/Contents/MacOS/iTerm2 --single-instance -d ~
+cmd - return : "${HOME}"/open_iterm.sh
 
 # focus window
 alt - h : yabai -m window --focus west
@@ -8,10 +8,10 @@ alt - k : yabai -m window --focus north
 alt - l : yabai -m window --focus east
 
 # swap window
-shift + alt - h : yabai -m window --swap west
-shift + alt - j : yabai -m window --swap south
-shift + alt - k : yabai -m window --swap north
-shift + alt - l : yabai -m window --swap east
+shift + cmd - left : yabai -m window --swap west
+shift + cmd - down : yabai -m window --swap south
+shift + cmd - up : yabai -m window --swap north
+shift + cmd - right : yabai -m window --swap east
 
 # move window
 shift + cmd - h : yabai -m window --warp west

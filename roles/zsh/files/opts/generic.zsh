@@ -21,3 +21,5 @@ setopt NO_BG_NICE
 setopt NO_CHECK_JOBS
 
 setopt NO_HUP
+
+setopt completealiases

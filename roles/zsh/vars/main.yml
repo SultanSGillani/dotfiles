@@ -104,7 +104,7 @@ zsh_misc_aliases:
   # remove broken symlinks
   - { alias: 'clsym', action: 'find -L . -name . -o -type d -prune -o -type l -exec rm {} +' }
   # File Size
-  - { alias: 'fs', action: 'stat -f \"%z bytes\"' }
+  - { alias: 'fsize', action: 'stat -f \"%z bytes\"' }
   # ROT13-encode text. Works for decoding, too! ;)
   - { alias: 'rot13', action: 'tr a-zA-Z n-za-mN-ZA-M' }
   - { alias: '', action: '' }
