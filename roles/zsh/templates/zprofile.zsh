@@ -55,7 +55,7 @@ fi
 
 path=( "${HOME}/.local/bin" "${path[@]}" )
 fpath=( "${ZDOTDIR}/functions"
-        "${ZDOTDIR}/roles/zsh/completions"
+        "${ZDOTDIR}/completions"
         "${fpath[@]}" )
 
 export PATH
