@@ -14,7 +14,7 @@
   tags:
     - update
 
-- name: Write sxhkd config
+- name: Write iterm config
   copy:
     src: open_iterm.sh
     dest: "{{ dotfiles_user_home }}/open_iterm.sh"

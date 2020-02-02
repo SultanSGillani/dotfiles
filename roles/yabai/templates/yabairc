@@ -1,12 +1,28 @@
 #!/usr/bin/env sh
 
+# set names for spaces
+yabai -m space 1 --label i
+yabai -m space 2 --label ii
+yabai -m space 3 --label iii
+yabai -m space 4 --label iv
+yabai -m space 5 --label v
+yabai -m space 6 --label vi
+yabai -m space 7 --label vii
+yabai -m space 8 --label viii
+yabai -m space 9 --label ix
+yabai -m space 10 --label x
+
+yabai -m display 1 --label i
+yabai -m display 2 --label ii
+yabai -m display 3 --label iii
+
 # bar settings
 yabai -m config status_bar                   off
 yabai -m config status_bar_text_font         "Hack Nerd Font Mono:Bold:12.0"
 yabai -m config status_bar_icon_font         "Hack Nerd Font:Regular:12.0"
 yabai -m config status_bar_background_color  0xaa282a36
 yabai -m config status_bar_foreground_color  0xffe2e4e5
-yabai -m config status_bar_space_icon_strip           
+yabai -m config status_bar_space_icon_strip  i ii iii iv v vi vii viii ix x
 yabai -m config status_bar_power_icon_strip   
 yabai -m config status_bar_space_icon        
 yabai -m config status_bar_clock_icon        
@@ -40,14 +56,23 @@ yabai -m config right_padding                20
 yabai -m config window_gap                   10
 
 # window rules
-yabai -m rule --add app=Firefox space=1
-yabai -m rule --add app=Safari space=1
-yabai -m rule --add app=Chrome space=1
-yabai -m rule --add app=Webstorm space=5
-yabai -m rule --add app=Slack space=4
-yabai -m rule --add app=Spotify space=6
-yabai -m rule --add app=RubyMine space=2
-yabai -m rule --add app="Microsoft Outlook" space=7
+yabai -m rule --add app=Firefox space=i
+yabai -m rule --add app=Safari space=i
+yabai -m rule --add app=Chrome space=i
+yabai -m rule --add app=Pycharm space=iii
+yabai -m rule --add app=Webstorm space=v
+yabai -m rule --add app=Slack space=iv
+yabai -m rule --add app=Spotify space=vi
+yabai -m rule --add app=RubyMine space=ii
+yabai -m rule --add app="Microsoft Outlook" space=vii
 yabai -m rule --add app="^System Preferences$" manage=off
+
+# refresh primary display workspaces
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-primary-jsx\"'"
+
+# refresh secondary display workspaces
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-secondary-jsx\"'"
 
 echo "yabai configuration loaded.."
