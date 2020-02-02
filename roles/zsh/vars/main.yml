@@ -55,7 +55,7 @@ zsh_aliases:
   - { alias: 'visudo', action: 'sudo EDITOR=/usr/bin/nvim visudo' }
 
 multi_aliases:
-  - { alias: "{gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz,zst,zstd}", action: 'extract' }
+  - { alias: "{gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,zst,zstd}", action: 'extract' }
   - { alias: '', action: '' }
 
 zsh_linux_aliases:
