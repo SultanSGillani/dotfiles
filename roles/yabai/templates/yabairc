@@ -69,10 +69,22 @@ yabai -m rule --add app="^System Preferences$" manage=off
 
 # refresh primary display workspaces
 yabai -m signal --add event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-primary-jsx\"'"
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-background-jsx\"'"
 
 # refresh secondary display workspaces
 yabai -m signal --add event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"nibar-spaces-secondary-jsx\"'"
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-battery-jsx\"'"
+
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-clock-jsx\"'"
+
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-date-jsx\"'"
+
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-network-jsx\"'"
+
+yabai -m signal --add event=space_changed \
+    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-workspace-jsx\"'"
 
 echo "yabai configuration loaded.."

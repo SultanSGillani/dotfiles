@@ -9,24 +9,36 @@
     name: ifstat
     state: present
 
-- name: clone pecan bar
-  git:
-    repo: https://github.com/zzzeyez/pecan.git
-    dest: " {{ dotfiles_user_home }}/Library/Application Support/Übersicht/widgets/pecan"
-    version: master
+- name: Create pecan directory if it doesnt exist
+  file:
+    path: "{{ widgets_dir }}/pecan"
+    state: directory
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    mode: 0755
+    recurse: yes
   tags:
     - initial
 
+- name: write pecan files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ widgets_dir }}/pecan/"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+  with_fileglob:
+    - pecan/*
+
 - name: link pecan widget
   file:
-    src: "{{ dotfiles_user_home }}/Library/Application Support/Übersicht/widgets/pecan/pecan-style"
+    src: "{{ widgets_dir }}/pecan/pecan-style"
     dest: /usr/local/bin/pecan-style
     state: link
 
 - name: copy pecan ws script file
   template:
     src: ws
-    dest: "{{ dotfiles_user_home }}/Library/Application Support/Übersicht/widgets/pecan/scripts/ws"
+    dest: "{{ widgets_dir }}/pecan/scripts/ws"
     mode: 0755
 
 - name: start pecan⁩
