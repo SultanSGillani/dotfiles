@@ -256,6 +256,8 @@ zturbo0a
 zsvn; zsnippet OMZ::plugins/urltools
 zturbo0a
 zsnippet OMZ::plugins/kubectl/kubectl.plugin.zsh
+zturbo0b
+zsnippet OMZ::plugins/git/git.plugin.zsh
 
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zlight b4b4r07/httpstat
@@ -280,19 +282,15 @@ zsnippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
 
 # Completion for Docker
 zinit ice wait lucid as'completion'
-zinit snippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
+zsnippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
 # Docker Compose
 zinit ice wait lucid as'completion'
-zinit snippet https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose
+zsnippet https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose
 
 # kubectl
-zinit ice as"completion" silent
+zinit ice wait lucid as'completion'
 zsnippet https://github.com/nnao45/zsh-kubectl-completion/blob/master/_kubectl
-
-# docker
-zinit ice as"completion" silent
-zsnippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
 ## fzf
 # Install `fzf` bynary and tmux helper script
@@ -332,9 +330,11 @@ zlight sei40kr/zsh-fast-alias-tips
 zinit ice wait silent ver"master" pick"completions/asdf.bash" nocompletions id-as"asdf-completion"
 zinit light asdf-vm/asdf
 
-zt 0b has'git-extras'
-z snippet 'https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh'
+zturbo0b has'git-extras'
+zsnippet https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
 
+zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
+zinit light zdharma/zsh-diff-so-fancy
 #################################################################
 # IMPORTANT PLUGINS
 
