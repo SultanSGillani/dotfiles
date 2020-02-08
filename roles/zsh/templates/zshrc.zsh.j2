@@ -260,8 +260,24 @@ zturbo0a
 zsvn; zsnippet OMZ::plugins/urltools
 zturbo0a
 zsnippet OMZ::plugins/kubectl/kubectl.plugin.zsh
-zturbo0b
-zsnippet OMZ::plugins/git/git.plugin.zsh
+
+# Options for forgit (interactive git)
+forgit_log=iglo
+forgit_diff=igd
+forgit_add=iga
+forgit_reset_head=igrh
+forgit_ignore=igi
+forgit_restore=igcf
+forgit_clean=igclean
+forgit_stash_show=igss
+
+# fzf git awesomeness
+zplugin light 'wfxr/forgit'
+
+zplugin ice wait"0b" lucid
+zplugin snippet OMZ::lib/git.zsh
+zplugin ice wait"0b" atload"unalias grv" lucid
+zplugin snippet OMZ::plugins/git/git.plugin.zsh
 
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zlight b4b4r07/httpstat
