@@ -23,7 +23,11 @@ zlight()  { [ -zlight $2 ] && zinit light "${@}" || zinit "${@}"; }
 zsnippet() { zinit snippet                        "${@}"; }
 zsvn() { zinit ice svn                        "${@}"; }
 zcr() { zinit creinstall -q "${@}"; }
-zt() { zinit ice wait"${1}" lucid                            "${@:2}"; } # Turbo
+zt()  { zinit depth'3' lucid ${1/#[0-9][a-c]/wait"$1"} "${@:2}"; }
+zct() { .zinit-ice load"[[ \${MYPROMPT} = ${1} ]]" unload"[[ \${MYPROMPT} != ${1} ]]" \
+atinit'[ -f "${thmf}/${MYPROMPT}-pre" ] && source "${thmf}/${MYPROMPT}-pre"' \
+atload'![ -f "${thmf}/${MYPROMPT}-post" ] && source "${thmf}/${MYPROMPT}-post"'; \
+ZINIT_ICE+=( "${(kv)ZINIT_ICES[@]}"); }
 ze() { zinit ice lucid                                         "${@}"; } # Regular Ice
 z()  { if [ -z $2 ]; then zinit light "${@}"; else zinit "${@}"; fi; } # zinit
 
@@ -314,11 +318,7 @@ zlight skx/sysadmin-util
 zturbo0a
 zlight rimraf/k
 
-zt 0b has'man'; z ael-code/zsh-colored-man-pages
-
-# diff-so-fancy
-zinit ice wait lucid as'program' pick'bin/git-dsf'
-zinit load zdharma/zsh-diff-so-fancy
+zturbo0b has'man'; z ael-code/zsh-colored-man-pages
 
 zturbo0a has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf
 zlight laggardkernel/git-ignore
@@ -348,7 +348,7 @@ zinit ice pick"init.sh" silent \
 atload'export ENHANCD_FILTER="fzf --height 50% --reverse --ansi";export ENHANCD_DOT_SHOW_FULLPATH=1'
 zinit light "b4b4r07/enhancd"
 
-zt 0b has'notify-send' atload'
+zturbo0b has'notify-send' atload'
 AUTO_NOTIFY_THRESHOLD=300;
 AUTO_NOTIFY_IGNORE+=(
 "cht.sh"
@@ -492,7 +492,7 @@ unset -f zcommand
 unset -f zsvn
 unset -f zsnippet
 unset -f zcr
-unset -f zturbo0 zturbo0a zturbo0b zturbo0c zt ze z
+unset -f zturbo0 zturbo0a zturbo0b zturbo0c zt zct ze z
 
 # load the opts files
 for file in ${ZDOTDIR}/opts/*.zsh; do
