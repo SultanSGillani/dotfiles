@@ -48,7 +48,7 @@ load(){
 		name="$(/bin/ls -1 "$dir" | sed -ne "${rand_num}p")"
 	fi
 	cp "$themes/$name/style.css" "$pecan/style.css" &&
-	cp "$themes/$name/style.scss" "$pecan/scss/style.scss" &&
+#	cp "$themes/$name/style.scss" "$pecan/scss/style.scss" &&
 	echo "$name" > "$cache"
 }
 

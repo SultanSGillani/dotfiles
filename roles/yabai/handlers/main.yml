@@ -1,0 +1,6 @@
+---
+- name: Restart Yabai
+  command:
+    cmd: brew services restart yabai
+  become: "{{ (zsh_user != ansible_user_id) | bool }}"
+  become_user: "{{ zsh_user }}"

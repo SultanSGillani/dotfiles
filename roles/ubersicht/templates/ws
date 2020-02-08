@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-# Display spaces using in a bar that accepts stdout
-yabai=/usr/local/bin/yabai
-jq=/usr/local/bin/jq
-
-active=$($yabai -m query --spaces --space | $jq '.index')
-
-echo "$active"

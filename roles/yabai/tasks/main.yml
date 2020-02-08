@@ -25,5 +25,6 @@
     src: yabairc
     dest: "{{ dotfiles_user_home }}/.yabairc"
     mode: 0755
+  notify: Restart Yabai
   tags:
     - update

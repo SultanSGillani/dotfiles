@@ -1,7 +1,8 @@
 ---
 - name: Install | osx
   homebrew:
-    name: exa
+    name: "{{ item }}"
     state: present
+  loop: "{{ darwin_packages }}"
   tags:
     - initial

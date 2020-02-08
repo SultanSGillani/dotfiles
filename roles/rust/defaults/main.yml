@@ -21,3 +21,7 @@ cargo_items:
     binary: cargo-deb
 
 rustup_url: '{{ rustup_mirror }}/{{ rustup_platform }}/rustup-init'
+
+darwin_packages:
+  - rust
+  - exa

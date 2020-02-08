@@ -1,0 +1,6 @@
+---
+- name: Restart skhd
+  command:
+    cmd: brew services restart skhd
+  become: "{{ (zsh_user != ansible_user_id) | bool }}"
+  become_user: "{{ zsh_user }}"

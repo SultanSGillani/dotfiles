@@ -7,8 +7,10 @@ zsh_debian_path: ${HOME}/bin:/snap/bin
 
 touchpad_speed: .85
 
-zsh_mac_path: "$(ruby -e 'puts Gem.user_dir')/bin"
-zsh_arch_path: "/usr/lib/ccache/bin"
+zsh_mac_path:
+  - "$(ruby -e 'puts Gem.user_dir')/bin"
+zsh_arch_path:
+  - "/usr/lib/ccache/bin"
 zsh_path:
   - ${ZSH}/bin
   - ${HOME}/.local/bin
@@ -17,10 +19,10 @@ zsh_path:
   - /usr/bin
   - /sbin
   - /bin
-  - ${HOME}/.cargo/bin
-  - ${JAVA_HOME}/bin
-  - ${GROOVY_HOME}/bin
+  - ${ZDOTDIR}/z.sh
   - /usr/local/sbin
+  - ${HOME}/.asdf/asdf.sh
+  - ${KREW_ROOT:-$HOME/.krew}/bin
 
 fzf_widgets: ytet5uy4/fzf-widgets
 
@@ -41,22 +43,14 @@ zsh_aliases:
   - { alias: 'gpg', action: 'gpg2' }
   ### Neovim ###
   - { alias: 'vim', action: 'nvim' }
-  ### Tmux ###
-  - { alias: 'tmux', action: 'tmux -2' }
   ### Rsync ###
   - { alias: 'rsync', action: 'noglob rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system --acls --xattrs' }
   - { alias: 'rsync-copy', action: 'rsync' }
   - { alias: 'rsync-move', action: 'rsync --remove-source-files' }
-  - { alias: 'nodenv', action: 'nocorrect nodenv' }
-  - { alias: 'rbenv', action: 'nocorrect rbenv' }
   - { alias: 'rsync-update', action: 'rsync --update' }
   - { alias: 'rsync-synchronize', action: 'rsync --update --delete' }
   - { alias: 'cpv', action: 'command rsync --' }
   - { alias: 'visudo', action: 'sudo EDITOR=/usr/bin/nvim visudo' }
-
-multi_aliases:
-  - { alias: "{gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,zst,zstd}", action: 'extract' }
-  - { alias: '', action: '' }
 
 zsh_linux_aliases:
   - { alias: 'apt-update-list-upgrade', action: 'apt update && apt upgrade --dry-run | grep Inst | sort | fzf && apt upgrade' }
@@ -186,136 +180,4 @@ zsh_ruby_aliases:
   - { alias: 'urldecode_json', action: 'ruby -e "require \"uri\"; puts URI.unescape(STDIN.read)"' }
   - { alias: 'pp_json', action: 'ruby -e "require \"json\"; require \"yaml\"; puts JSON.parse(STDIN.read).to_yaml"' }
   - { alias: 'is_json', action: 'ruby -e "require \"json\"; begin; JSON.parse(STDIN.read); puts true; rescue Exception => e; puts false; end"' }
-  - { alias: '', action: '' }
-
-zsh_git_alias:
-  - { alias: 'g', action: 'git' }
-  - { alias: 'ga', action: 'git add' }
-  - { alias: 'gaa', action: 'git add --all' }
-  - { alias: 'gapa', action: 'git add --patch' }
-  - { alias: 'gau', action: 'git add --update' }
-  - { alias: 'gav', action: 'git add --verbose' }
-  - { alias: 'gap', action: 'git apply' }
-  - { alias: 'gb', action: 'git branch' }
-  - { alias: 'gba', action: 'git branch -a' }
-  - { alias: 'gbd', action: 'git branch -d' }
-  - { alias: 'gbD', action: 'git branch -D' }
-  - { alias: 'gbl', action: 'git blame -b -w' }
-  - { alias: 'gbnm', action: 'git branch --no-merged' }
-  - { alias: 'gbr', action: 'git branch --remote' }
-  - { alias: 'gbs', action: 'git bisect' }
-  - { alias: 'gbsb', action: 'git bisect bad' }
-  - { alias: 'gbsg', action: 'git bisect good' }
-  - { alias: 'gbsr', action: 'git bisect reset' }
-  - { alias: 'gbss', action: 'git bisect start' }
-  - { alias: 'gc', action: 'git commit -v' }
-  - { alias: 'gc!', action: 'git commit -v --amend' }
-  - { alias: 'gcn!', action: 'git commit -v --no-edit --amend' }
-  - { alias: 'gca', action: 'git commit -v -a' }
-  - { alias: 'gca!', action: 'git commit -v -a --amend' }
-  - { alias: 'gcan!', action: 'git commit -v -a --no-edit --amend' }
-  - { alias: 'gcans!', action: 'git commit -v -a -s --no-edit --amend' }
-  - { alias: 'gcam', action: 'git commit -a -m' }
-  - { alias: 'gcsm', action: 'git commit -s -m' }
-  - { alias: 'gcb', action: 'git checkout -b' }
-  - { alias: 'gcf', action: 'git config --list' }
-  - { alias: 'gcl', action: 'git clone --recurse-submodules' }
-  - { alias: 'gclean', action: 'git clean -id' }
-  - { alias: 'gpristine', action: 'git reset --hard && git clean -dfx' }
-  - { alias: 'gcm', action: 'git checkout master' }
-  - { alias: 'gcd', action: 'git checkout develop' }
-  - { alias: 'gcmsg', action: 'git commit -m' }
-  - { alias: 'gco', action: 'git checkout' }
-  - { alias: 'gcount', action: 'git shortlog -sn' }
-  - { alias: 'gcp', action: 'git cherry-pick' }
-  - { alias: 'gcpa', action: 'git cherry-pick --abort' }
-  - { alias: 'gcpc', action: 'git cherry-pick --continue' }
-  - { alias: 'gcs', action: 'git commit -S' }
-  - { alias: 'gd', action: 'git diff' }
-  - { alias: 'gdca', action: 'git diff --cached' }
-  - { alias: 'gdcw', action: 'git diff --cached --word-diff' }
-  - { alias: 'gds', action: 'git diff --staged' }
-  - { alias: 'gdt', action: 'git diff-tree --no-commit-id --name-only -r' }
-  - { alias: 'gdw', action: 'git diff --word-diff' }
-  - { alias: 'gf', action: 'git fetch' }
-  - { alias: 'gfa', action: 'git fetch --all --prune' }
-  - { alias: 'gfo', action: 'git fetch origin' }
-  - { alias: 'gfg', action: 'git ls-files | grep' }
-  - { alias: 'gg', action: 'git gui citool' }
-  - { alias: 'gga', action: 'git gui citool --amend' }
-  - { alias: 'ghh', action: 'git help' }
-  - { alias: 'gignore', action: 'git update-index --assume-unchanged' }
-  - { alias: 'git-svn-dcommit-push', action: 'git svn dcommit && git push github master:svntrunk' }
-  - { alias: 'gl', action: 'git pull' }
-  - { alias: 'glg', action: 'git log --stat' }
-  - { alias: 'glgp', action: 'git log --stat -p' }
-  - { alias: 'glgg', action: 'git log --graph' }
-  - { alias: 'glgga', action: 'git log --graph --decorate --all' }
-  - { alias: 'glgm', action: 'git log --graph --max-count=10' }
-  - { alias: 'glo', action: 'git log --oneline --decorate' }
-  - { alias: 'glog', action: 'git log --oneline --decorate --graph' }
-  - { alias: 'gloga', action: 'git log --oneline --decorate --graph --all' }
-  - { alias: 'gm', action: 'git merge' }
-  - { alias: 'gmom', action: 'git merge origin/master' }
-  - { alias: 'gmt', action: 'git mergetool --no-prompt' }
-  - { alias: 'gmtvim', action: 'git mergetool --no-prompt --tool=vimdiff' }
-  - { alias: 'gmum', action: 'git merge upstream/master' }
-  - { alias: 'gma', action: 'git merge --abort' }
-  - { alias: 'gp', action: 'git push' }
-  - { alias: 'gpd', action: 'git push --dry-run' }
-  - { alias: 'gpf', action: 'git push --force-with-lease' }
-  - { alias: 'gpf!', action: 'git push --force' }
-  - { alias: 'gpoat', action: 'git push origin --all && git push origin --tags' }
-  - { alias: 'gpu', action: 'git push upstream' }
-  - { alias: 'gpv', action: 'git push -v' }
-  - { alias: 'gr', action: 'git remote' }
-  - { alias: 'gra', action: 'git remote add' }
-  - { alias: 'grb', action: 'git rebase' }
-  - { alias: 'grba', action: 'git rebase --abort' }
-  - { alias: 'grbc', action: 'git rebase --continue' }
-  - { alias: 'grbd', action: 'git rebase develop' }
-  - { alias: 'grbi', action: 'git rebase -i' }
-  - { alias: 'grbm', action: 'git rebase master' }
-  - { alias: 'grbs', action: 'git rebase --skip' }
-  - { alias: 'grev', action: 'git revert' }
-  - { alias: 'grh', action: 'git reset' }
-  - { alias: 'grhh', action: 'git reset --hard' }
-  - { alias: 'grm', action: 'git rm' }
-  - { alias: 'grmc', action: 'git rm --cached' }
-  - { alias: 'grmv', action: 'git remote rename' }
-  - { alias: 'grrm', action: 'git remote remove' }
-  - { alias: 'grs', action: 'git restore' }
-  - { alias: 'grset', action: 'git remote set-url' }
-  - { alias: 'grss', action: 'git restore --source' }
-  - { alias: 'gru', action: 'git reset --' }
-  - { alias: 'grup', action: 'git remote update' }
-  - { alias: 'grv', action: 'git remote -v' }
-  - { alias: 'gsb', action: 'git status -sb' }
-  - { alias: 'gsd', action: 'git svn dcommit' }
-  - { alias: 'gsh', action: 'git show' }
-  - { alias: 'gsi', action: 'git submodule init' }
-  - { alias: 'gsps', action: 'git show --pretty=short --show-signature' }
-  - { alias: 'gsr', action: 'git svn rebase' }
-  - { alias: 'gss', action: 'git status -s' }
-  - { alias: 'gst', action: 'git status' }
-  - { alias: 'gstaa', action: 'git stash apply' }
-  - { alias: 'gstc', action: 'git stash clear' }
-  - { alias: 'gstd', action: 'git stash drop' }
-  - { alias: 'gstl', action: 'git stash list' }
-  - { alias: 'gstp', action: 'git stash pop' }
-  - { alias: 'gsts', action: 'git stash show --text' }
-  - { alias: 'gstall', action: 'git stash --all' }
-  - { alias: 'gsu', action: 'git submodule update' }
-  - { alias: 'gsw', action: 'git switch' }
-  - { alias: 'gswc', action: 'git switch -c' }
-  - { alias: 'gts', action: 'git tag -s' }
-  - { alias: 'gtv', action: 'git tag | sort -V' }
-  - { alias: 'gunignore', action: 'git update-index --no-assume-unchanged' }
-  - { alias: 'gunwip', action: 'git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1' }
-  - { alias: 'gup', action: 'git pull --rebase' }
-  - { alias: 'gupv', action: 'git pull --rebase -v' }
-  - { alias: 'gupa', action: 'git pull --rebase --autostash' }
-  - { alias: 'gupav', action: 'git pull --rebase --autostash -v' }
-  - { alias: 'glum', action: 'git pull upstream master' }
-  - { alias: 'gwch', action: 'git whatchanged -p --abbrev-commit --pretty=medium' }
   - { alias: '', action: '' }

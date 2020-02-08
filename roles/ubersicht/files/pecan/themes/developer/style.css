@@ -3,8 +3,8 @@
 /* import colors */
 :root {
   /* background colors */
-  --pecan-bg: #202020;
-  --pecan-bg-pecanworkspace: #202020;
+  --pecan-bg: 0 #282936;
+  --pecan-bg-pecanworkspace: 0 #282936;
   --pecan-bg-pecannetwork: var(--pecan-bg-pecanworkspace);
   --pecan-bg-pecandate: var(--pecan-bg-pecanworkspace);
   --pecan-bg-pecanbattery: var(--pecan-bg-pecanworkspace);
@@ -12,16 +12,15 @@
   --pecan-xanthia-bg: var(--pecan-bg-pecanworkspace);
   --pecan-xanthia-image-bg: var(--pecan-bg-pecanworkspace);
   /* foreground colors */
-  --pecan-fg-pecanworkspace: #fafafa;
+  --pecan-fg-pecanworkspace: #e9e9f4;
   --pecan-fg-pecannetwork: var(--pecan-fg-pecanworkspace);
   --pecan-fg-pecandate: var(--pecan-fg-pecanworkspace);
   --pecan-fg-pecanbattery: var(--pecan-fg-pecanworkspace);
   --pecan-fg-pecanclock: var(--pecan-fg-pecanworkspace);
   --pecan-xanthia-fg: var(--pecan-fg-pecanworkspace);
   /* size */
-  --pecan-height: 30px;
+  --pecan-height: 15px;
   /* no variables accepted for chunk */
-  --pecan-chunkwm-bar: 35px;
   --pecan-chunkwm-gaps: 5px;
   --pecan-xanthia-max-width: none;
   --pecan-xanthia-max-height: none;
@@ -29,11 +28,11 @@
   --pecan-xanthia-min-height: calc(var(--pecan-height) - calc(var(--pecan-border) * 2));
   /* --pecan-xanthia-image-size: calc(var(--pecan-height) - calc(var(--pecan-border) * 2)); */
   --pecan-xanthia-image-size: 0px;
-  --pecan-chunkwm-bar: 20px;
+  --pecan-chunkwm-bar: 15px;
   /* opacity */
-  --pecan-opacity: 1;
+  --pecan-opacity: .85;
   /* this value affects --pecan-border */
-  --pecan-opacity-inner: 1;
+  --pecan-opacity-inner: .85;
   --pecan-opacity-center: 0;
   --pecan-xanthia-opacity: 1;
   --pecan-xanthia-image-opacity: 1;
@@ -59,8 +58,8 @@
   --pecan-xanthia-image-padding-v: var(--pecan-xanthia-padding-v);
   --pecan-xanthia-image-padding-h: calc(var(--pecan-padding-right) + calc(var(--pecan-text-padding) * 4) + 14ch + calc(3 * var(--pecan-border)));
   /* shadow */
-  --pecan-shadow: 0px 4px 10px 4px rgba(0,0,0,0.0);
-  --pecan-shadow-inner: 0px 1px 1px 1px rgba(0,0,0,0.0);
+  --pecan-shadow: 0px 4px 10px 4px rgba(0, 0, 0, 0.0);
+  --pecan-shadow-inner: 0px 1px 1px 1px rgba(0, 0, 0, 0.0);
   --pecan-xanthia-shadow: var(--pecan-shadow-inner);
   --pecan-xanthia-image-shadow: var(--pecan-shadow-inner);
   /* border */
@@ -105,17 +104,11 @@
   right: var(--pecan-alignment-right);
   bottom: var(--pecan-alignment-bottom);
   left: var(--pecan-alignment-left);
-  margin-top: var(--pecan-padding-v);
-  margin-right: var(--pecan-padding-right);
-  margin-bottom: var(--pecan-padding-v);
-  margin-left: var(--pecan-padding-left);
+  margin: var(--pecan-padding-v) var(--pecan-padding-right) var(--pecan-padding-v) var(--pecan-padding-left);
   opacity: var(--pecan-opacity);
   z-index: -1;
   box-shadow: var(--pecan-shadow);
-  border-top-left-radius: var(--pecan-border-radius);
-  border-top-right-radius: var(--pecan-border-radius);
-  border-bottom-right-radius: var(--pecan-border-radius);
-  border-bottom-left-radius: var(--pecan-border-radius);
+  border-radius: var(--pecan-border-radius);
 }
 
 /* invisible container to align center element */
@@ -128,10 +121,7 @@
   right: var(--pecan-alignment-right);
   bottom: var(--pecan-alignment-bottom);
   left: var(--pecan-alignment-left);
-  margin-top: var(--pecan-padding-v);
-  margin-right: var(--pecan-padding-right);
-  margin-bottom: var(--pecan-padding-v);
-  margin-left: var(--pecan-padding-left);
+  margin: var(--pecan-padding-v) var(--pecan-padding-right) var(--pecan-padding-v) var(--pecan-padding-left);
 }
 
 /* workspace indicator -- far left */
@@ -152,10 +142,7 @@
   margin-bottom: calc(var(--pecan-padding-v) + var(--pecan-border));
   margin-left: calc(var(--pecan-padding-left) + var(--pecan-border));
   line-height: var(--pecan-line-height);
-  border-top-left-radius: var(--pecan-border-radius-inner);
-  border-top-right-radius: var(--pecan-border-radius-inner);
-  border-bottom-right-radius: var(--pecan-border-radius-inner);
-  border-bottom-left-radius: var(--pecan-border-radius-inner);
+  border-radius: var(--pecan-border-radius-inner);
   box-shadow: var(--pecan-shadow-inner);
 }
 
@@ -171,16 +158,13 @@
   top: var(--pecan-alignment-top);
   right: auto;
   bottom: var(--pecan-alignment-bottom);
-  left: 0px;
+  left: 0;
   padding: 0 var(--pecan-text-padding);
   margin-top: calc(var(--pecan-border) + var(--pecan-padding-v));
   margin-bottom: calc(var(--pecan-border) + var(--pecan-padding-v));
   margin-left: calc(var(--pecan-padding-left) + calc(var(--pecan-text-padding) * 2) + 1ch + calc(var(--pecan-border) * 2));
   line-height: var(--pecan-line-height);
-  border-top-left-radius: var(--pecan-border-radius-inner);
-  border-top-right-radius: var(--pecan-border-radius-inner);
-  border-bottom-right-radius: var(--pecan-border-radius-inner);
-  border-bottom-left-radius: var(--pecan-border-radius-inner);
+  border-radius: var(--pecan-border-radius-inner);
   box-shadow: var(--pecan-shadow-inner);
 }
 
@@ -202,10 +186,7 @@
   margin: calc(var(--pecan-padding-v) + var(--pecan-border));
   line-height: var(--pecan-line-height);
   text-align: center;
-  border-top-left-radius: var(--pecan-border-radius-inner);
-  border-top-right-radius: var(--pecan-border-radius-inner);
-  border-bottom-right-radius: var(--pecan-border-radius-inner);
-  border-bottom-left-radius: var(--pecan-border-radius-inner);
+  border-radius: var(--pecan-border-radius-inner);
   box-shadow: var(--pecan-shadow-inner);
 }
 
@@ -227,10 +208,7 @@
   margin-right: calc(var(--pecan-padding-right) + calc(var(--pecan-text-padding) * 2) + 9ch + calc(var(--pecan-border) * 2));
   margin-bottom: calc(var(--pecan-padding-v) + var(--pecan-border));
   line-height: var(--pecan-line-height);
-  border-top-left-radius: var(--pecan-border-radius-inner);
-  border-top-right-radius: var(--pecan-border-radius-inner);
-  border-bottom-right-radius: var(--pecan-border-radius-inner);
-  border-bottom-left-radius: var(--pecan-border-radius-inner);
+  border-radius: var(--pecan-border-radius-inner);
   box-shadow: var(--pecan-shadow-inner);
 }
 
@@ -253,9 +231,8 @@
   margin-right: calc(var(--pecan-border) + var(--pecan-padding-right));
   margin-bottom: calc(var(--pecan-padding-v) + var(--pecan-border));
   line-height: var(--pecan-line-height);
-  border-top-left-radius: var(--pecan-border-radius-inner);
-  border-top-right-radius: var(--pecan-border-radius-inner);
-  border-bottom-right-radius: var(--pecan-border-radius-inner);
-  border-bottom-left-radius: var(--pecan-border-radius-inner);
+  border-radius: var(--pecan-border-radius-inner);
   box-shadow: var(--pecan-shadow-inner);
 }
+
+/*# sourceMappingURL=style.css.map */

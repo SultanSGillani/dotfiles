@@ -3,7 +3,7 @@ projects_dir: "{{ dotfiles_user_home }}/projects"
 python_env_dir: "{{ dotfiles_user_home }}/.projs"
 ssh_dir: "{{ dotfiles_user_home }}/.ssh"
 login_shell: /usr/local/bin/zsh
-finder_new_window_path: file://"{{ dotfiles_user_home }}"
+finder_new_window_path: "file://{{ dotfiles_user_home }}"
 screenshots_dir: "{{ dotfiles_user_home }}/screenshots"
 mac_files_dir: "{{ dotfiles_dir }}/roles/osx/files"
 
@@ -11,6 +11,74 @@ dmg_files:
   - Sblack
 
 brew_packages:
+  - ansible
+  - autoconf
+  - automake
+  - awk
+  - bash-snippets
+  - bat
+  - coffeescript
+  - convmv
+  - coreutils
+  - ctop
+  - datawire/blackbird/telepresence
+  - derailed/k9s/k9s
+  - derailed/popeye/popeye
+  - diff-so-fancy
+  - dive
+  - docker-compose
+  - exa
+  - fd
+  - fzf
+  - gettext
+  - git
+  - gnupg
+  - helm
+  - htop
+  - hub
+  - ifstat
+  - jq
+  - koekeishiya/formulae/skhd
+  - koekeishiya/formulae/yabai
+  - krew
+  - kube-ps1
+  - kubectx
+  - kubernetes-cli
+  - kubespy
+  - libsass
+  - libtool
+  - libxslt
+  - mas
+  - neofetch
+  - neovim
+  - ngrep
+  - nmap
+  - openssl@1.1
+  - pkg-config
+  - python
+  - python@2
+  - readline
+  - ripgrep
+  - rsync
+  - rust
+  - sassc
+  - screen
+  - shellcheck
+  - sqlite
+  - stern
+  - subversion
+  - terminal-notifier
+  - terraform
+  - terraformer
+  - tldr
+  - tmux
+  - unixodbc
+  - vim
+  - wallpaper
+  - wget
+  - xz
+  - zlib
+  - zsh
   - autoconf
   - automake
   - bash-snippets
@@ -40,6 +108,9 @@ brew_packages:
   - zlib
 
 brew_taps:
+  - datawire/blackbird
+  - derailed/k9s
+  - derailed/popeye
   - homebrew/bundle
   - homebrew/cask
   - homebrew/cask-fonts
@@ -49,6 +120,34 @@ brew_taps:
   - koekeishiya/formulae
 
 brew_casks:
+  - alfred
+  - appcleaner
+  - bettertouchtool
+  - daisydisk
+  - dash
+  - docker
+  - drawio
+  - evernote
+  - font-cousine
+  - font-hack-nerd-font
+  - google-chrome
+  - google-cloud-sdk
+  - gpg-suite
+  - insomnia
+  - iterm2
+  - kitty
+  - microsoft-office
+  - mono-mdk
+  - osxfuse
+  - postman
+  - pycharm
+  - rider
+  - slack
+  - sourcetree
+  - spotify
+  - tunnelblick
+  - vagrant
+  - webstorm
   - appcleaner
   - daisydisk
   - docker
@@ -59,6 +158,11 @@ brew_casks:
   - tunnelblick
   - vagrant
   - webstorm
+
+mas:
+  - { name: "Magnet", id: 441258766 }
+  - { name: "Microsoft Outlook", id: 985367838 }
+  - { name: "Microsoft Remote Desktop", id: 1295203466 }
 
 homebrew_clear_cache: yes
 

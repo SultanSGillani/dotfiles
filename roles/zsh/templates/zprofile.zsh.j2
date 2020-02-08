@@ -1,0 +1,15 @@
+### Browser ###
+{% if ansible_facts['os_family']|lower == "darwin" %}
+export BROWSER='open'
+{% endif %}
+
+export MANPAGER="nvim +Man!"
+
+### Temporary Files ###
+
+if [[ ! -d "${TMPDIR}" ]]; then
+export TMPDIR="/tmp/${LOGNAME}"
+mkdir -p -m 700 "${TMPDIR}"
+fi
+
+TMPPREFIX="${TMPDIR%/}/zsh"

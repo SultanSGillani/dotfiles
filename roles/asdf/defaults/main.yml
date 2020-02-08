@@ -3,21 +3,47 @@ plugins:
   - nodejs
   - ruby
   - python
+  - dotnet-core
+  - golang
+  - groovy
 
 asdf_plugins:
   - name: "nodejs"
+    repository: "https://github.com/asdf-vm/asdf-nodejs.git"
     versions:
       - 10.16.3
     global: 10.16.3
   - name: "python"
+    repository: "https://github.com/danhper/asdf-python.git"
     versions:
       - 3.8.0
       - 3.7.5
     global: 3.7.5
   - name: "ruby"
+    repository: "https://github.com/asdf-vm/asdf-ruby.git"
     versions:
-      - 2.4.2
-    global: 2.4.2
+      - 2.4.6
+    global: 2.4.6
+  - name: "dotnet-core"
+    repository: "https://github.com/emersonsoares/asdf-dotnet-core.git"
+    versions:
+      - 3.0.100
+    global: 3.0.100
+  - name: "golang"
+    repository: "https://github.com/kennyp/asdf-golang.git"
+    versions:
+      - 1.13.7
+    global: 1.13.7
+  - name: "k9s"
+    repository: "https://github.com/looztra/asdf-k9s.git"
+    versions:
+      - v0.13.8
+    global: v0.13.8
+  - name: "skaffold"
+    repository: "https://github.com/kristoflemmens/asdf-skaffold.git"
+    versions:
+      - 1.3.1
+    global: 1.3.1
 
 asdf_executable: "{{ dotfiles_user_home }}/.asdf/bin/asdf"
 

@@ -65,18 +65,8 @@
 
 - name: Write .zshenv config
   template:
-    src: zshenv.zsh
+    src: zshenv.zsh.j2
     dest: "{{ dotfiles_user_home }}/.zshenv"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
-    backup: no
-  tags:
-    - update
-
-- name: Write zshrc config
-  template:
-    src: zshrc.zsh
-    dest: "{{ zdot_dir }}/.zshrc"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: no
@@ -85,8 +75,18 @@
 
 - name: Write .zprofile config
   template:
-    src: zprofile.zsh
-    dest: "{{ zdot_dir }}/.zprofile"
+    src: zprofile.zsh.j2
+    dest: "{{ dotfiles_user_home }}/.zprofile"
+    owner: "{{ zsh_user }}"
+    group: "{{ zsh_user_group }}"
+    backup: no
+  tags:
+    - update
+
+- name: Write zshrc config
+  template:
+    src: zshrc.zsh.j2
+    dest: "{{ zdot_dir }}/.zshrc"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     backup: no
@@ -94,7 +94,7 @@
     - update
 
 - name: Write theme config file
-  template:
+  copy:
     src: "{{ zsh_prompt }}.zsh"
     dest: "{{ zdot_dir }}/prompt.zsh"
     owner: "{{ zsh_user }}"

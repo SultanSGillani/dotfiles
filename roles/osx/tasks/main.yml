@@ -44,7 +44,7 @@
     state: present
   become: no
   tags:
-    - initial
+    - brew
 
 - name: Install brew programs
   homebrew:
@@ -52,7 +52,7 @@
     state: present
   become: no
   tags:
-    - initial
+    - brew
 
 - name: upgrade brew programs
   homebrew:
@@ -60,6 +60,7 @@
   become: no
   tags:
     - upgrade
+    - brew
 
 - name: update brew programs
   homebrew:
@@ -68,6 +69,7 @@
   become: no
   tags:
     - update
+    - brew
 
 - name: Install Cask Packages
   homebrew_cask:
@@ -75,16 +77,17 @@
     state: present
     accept_external_apps: yes
   tags:
-    - initial
     - cask
+    - brew
 
 - name: upgrade Cask programs
   homebrew_cask:
     upgrade: yes
   tags:
     - upgrade
+    - brew
 
-- name: shell | make Homebrew shell defsult
+- name: shell | make Homebrew shell default
   osx_defaults:
     domain: com.apple.Terminal
     key:    Shell

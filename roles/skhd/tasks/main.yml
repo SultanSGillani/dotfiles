@@ -6,18 +6,19 @@
   tags:
     - initial
 
-- name: Write sxhkd config
-  copy:
-    src: skhdrc
-    dest: "{{ dotfiles_user_home }}/.skhdrc"
-    mode: 0755
-  tags:
-    - update
-
 - name: Write iterm config
   copy:
     src: open_iterm.sh
     dest: "{{ dotfiles_user_home }}/open_iterm.sh"
     mode: 0755
+  tags:
+    - update
+
+- name: Write skhd config
+  copy:
+    src: skhdrc
+    dest: "{{ dotfiles_user_home }}/.skhdrc"
+    mode: 0755
+  notify: Restart skhd
   tags:
     - update
