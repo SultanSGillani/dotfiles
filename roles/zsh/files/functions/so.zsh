@@ -1,5 +1,5 @@
 
-# StackOverflow bash search function  | Usage: so <foo>
+# StackOverflow bash search  | Usage: so <foo>
 so() {
     search=""
     for term in $*; do

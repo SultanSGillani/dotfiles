@@ -40,7 +40,7 @@
     domain: com.apple.LaunchServices
     key:    LSQuarantine
     type:   bool
-    value:  false
+    value:  true
 
 - name: general | disable the crash reporter
   osx_defaults:
@@ -233,12 +233,19 @@
 
 #=== Finder
 #==============================================================================================
-- name: finder | show hidden files by default
+#- name: finder | show hidden files by default
+#  osx_defaults:
+#    domain: com.apple.finder
+#    key:    AppleShowAllFiles
+#    type:   bool
+#    value:  true
+
+- name: Finder | show hidden files by default
   osx_defaults:
-    domain: com.apple.finder
+    domain: com.apple.Finder
     key:    AppleShowAllFiles
-    type:   bool
-    value:  true
+    type:   string
+    value:  1
 
 - name: finder | show all filename extensions
   osx_defaults:
@@ -249,21 +256,21 @@
 
 - name: finder | show status bar
   osx_defaults:
-    domain: com.apple.finder
+    domain: com.apple.Finder
     key:    ShowStatusBar
     type:   bool
     value:  true
 
 - name: finder | show path bar
   osx_defaults:
-    domain: com.apple.finder
+    domain: com.apple.Finder
     key:    ShowPathbar
     type:   bool
     value:  true
 
 - name: finder | allow text selection in Quick Look
   osx_defaults:
-    domain: com.apple.finder
+    domain: com.apple.Finder
     key:    QLEnableTextSelection
     type:   bool
     value:  true
@@ -310,7 +317,7 @@
     domain: com.apple.dock
     key:    tilesize
     type:   float
-    value:  16.0
+    value:  25.0
 
 - name: dock | minimize windows into their application's icon
   osx_defaults:
@@ -368,7 +375,7 @@
     type:   bool
     value:  false
 
-- name: # Don't animate opening applications.
+- name: dock | Dont animate opening applications.
   osx_defaults:
     domain: com.apple.dock
     key:    launchanim
@@ -389,3 +396,13 @@
     key:    showhidden
     type:   bool
     value:  true
+
+#============ Safari
+#===================================================================
+- name: Safari | Show debug menu
+  osx_defaults:
+    domain: com.apple.Safari
+    key: IncludeInternalDebugMenu
+    type: bool
+    value: true
+    state: present

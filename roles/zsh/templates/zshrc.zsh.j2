@@ -247,19 +247,28 @@ setopt promptsubst
 zinit ice depth=1 atload'!source ${ZDOTDIR}/prompt.zsh; _p9k_precmd' nocd
 zinit light romkatv/powerlevel10k
 
-# oh-my-zsh
-zturbo0a
-zsvn; zsnippet OMZ::plugins/python
-zturbo0a
-zsvn; zsnippet OMZ::plugins/virtualenv
-zturbo0a
-zsvn; zsnippet OMZ::plugins/archlinux
-zturbo0a
-zsvn; zsnippet OMZ::plugins/tmux
-zturbo0a
-zsvn; zsnippet OMZ::plugins/urltools
-zturbo0a
-zsnippet OMZ::plugins/kubectl/kubectl.plugin.zsh
+zt 0a light-mode for \
+        OMZ::plugins/python/python.plugin.zsh \
+        OMZ::plugins/virtualenv/virtualenv.plugin.zsh \
+        OMZ::plugins/archlinux/archlinux.plugin.zsh \
+        OMZ::plugins/urltools/urltools.plugin.zsh \
+        OMZ::plugins/nmap/nmap.plugin.zsh \
+        OMZ::plugins/kubectl/kubectl.plugin.zsh \
+        OMZ::plugins/asdf/asdf.plugin.zsh \
+    as"program" pick"zsh-better-npm-completion.plugin.zsh" \
+        lukechilds/zsh-better-npm-completion \
+    trigger-load'!x' \
+        OMZ::plugins/extract/extract.plugin.zsh \
+        OMZ::plugins/tmux/tmux.plugin.zsh \
+        skx/sysadmin-util \
+        rimraf/k \
+    compile'{hsmw-*,test/*}' \
+        zdharma/history-search-multi-word
+
+zt 0b light-mode for \
+        OMZ::lib/git.zsh \
+    atload"unalias grv" lucid \
+        OMZ::plugins/git/git.plugin.zsh
 
 # Options for forgit (interactive git)
 forgit_log=iglo
@@ -274,16 +283,8 @@ forgit_stash_show=igss
 # fzf git awesomeness
 zplugin light 'wfxr/forgit'
 
-zplugin ice wait"0b" lucid
-zplugin snippet OMZ::lib/git.zsh
-zplugin ice wait"0b" atload"unalias grv" lucid
-zplugin snippet OMZ::plugins/git/git.plugin.zsh
-
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zlight b4b4r07/httpstat
-
-zturbo0a as"program" pick"zsh-better-npm-completion.plugin.zsh"
-zlight lukechilds/zsh-better-npm-completion
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
 zsvn
@@ -328,12 +329,6 @@ atclone"cp contrib/fzy-* $ZPFX/bin/" \
 pick"$ZPFX/bin/fzy*"
 zlight jhawthorn/fzy
 
-zturbo0a
-zlight skx/sysadmin-util
-
-zturbo0a
-zlight rimraf/k
-
 zturbo0b has'man'; z ael-code/zsh-colored-man-pages
 
 zturbo0a has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf
@@ -343,9 +338,6 @@ zturbo0a make!"!PREFIX=$ZPFX" \
 atclone"cp build/def-* $ZPFX/bin/"
 zlight sei40kr/zsh-fast-alias-tips
 
-zinit ice wait silent ver"master" pick"completions/asdf.bash" nocompletions id-as"asdf-completion"
-zinit light asdf-vm/asdf
-
 zturbo0b has'git-extras'
 zsnippet https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
 
@@ -353,10 +345,6 @@ zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
 zinit light zdharma/zsh-diff-so-fancy
 #################################################################
 # IMPORTANT PLUGINS
-
-# History search by `Ctrl+R`
-zturbo0a compile'{hsmw-*,test/*}'
-zlight zdharma/history-search-multi-word
 
 export ENHANCD_FILTER=filter
 
@@ -441,13 +429,6 @@ fi
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 alias "$method"="lwp-request -m '$method'"
 done
-
-# nmap aliases
-{% for alias in zsh_nmap_aliases %}
-    {% if alias.alias != '' %}
-        alias '{{ alias.alias }}'="{{ alias.action }}"
-    {% endif %}
-{% endfor %}
 
 # ruby aliases
 {% for alias in zsh_ruby_aliases %}

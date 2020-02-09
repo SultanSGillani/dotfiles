@@ -1,5 +1,5 @@
 
 # SSH and attach tmux session
-function sst() {
+sst() {
     ssh "$1" -t tmux attach
 }

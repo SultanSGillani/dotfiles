@@ -1,6 +1,6 @@
 
 # get gzipped size
-function gz() {
+gz() {
     echo "orig size    (bytes): "
     cat "$1" | wc -c
     echo "gzipped size (bytes): "

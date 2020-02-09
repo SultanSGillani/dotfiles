@@ -1,4 +1,4 @@
 
-function where (){
+where (){
     find . -name "$1*";
 }

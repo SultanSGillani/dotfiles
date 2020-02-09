@@ -1,5 +1,5 @@
 
-function build-readme() {
+build-readme() {
     if [[ -e README.html ]]; then
         rm README.html
     fi

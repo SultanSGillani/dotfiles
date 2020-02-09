@@ -1,6 +1,6 @@
 
 #internetinfo | Usage: ii
-function ii()   # get current host related info
+ii()   # get current host related info
 {
     echo -e "\n${RED}Kernel Information:$NC " ; uname -a
     echo -e "\n${RED}Users logged on:$NC " ; w -h

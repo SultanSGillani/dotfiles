@@ -2,7 +2,7 @@
 # Syntax-highlight text from clipboard
 # Requires highlight: brew install highlight
 # Usage: hit js
-function hit() {
+hit() {
     if [ -z "$2" ]
     then src="pbpaste"
     else

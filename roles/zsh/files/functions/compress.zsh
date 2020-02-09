@@ -1,6 +1,6 @@
 # Create a .tar.gz archive, using `zopfli`, `pigz` or `gzip` for compression
 
-function compress() {
+compress() {
 	local tmpFile="${*%/}.tar";
 	tar -cvf "${tmpFile}" --exclude=".DS_Store" --exclude="*.pyc" "${@}" || return 1;
 

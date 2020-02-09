@@ -1,6 +1,6 @@
 
 # Decode \x{ABCD}-style Unicode escape sequences
-function unidecode() {
+unidecode() {
     perl -e "binmode(STDOUT, ':utf8'); print \"$@\""
     echo # newline
 }

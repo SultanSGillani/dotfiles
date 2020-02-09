@@ -1,6 +1,6 @@
 
 #Sprunge Paste | Usage: sprunge <file>
-function sprunge() {
+sprunge() {
   if (($#)); then
 if [[ -f $1 && -r $1 ]]; then
 curl -F 'sprunge=<-' http://sprunge.us < "$1"

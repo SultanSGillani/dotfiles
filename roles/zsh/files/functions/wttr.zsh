@@ -1,6 +1,6 @@
 
-# wttr weather function | usage wttr
+# wttr weather | usage wttr
 
 wttr () {
-curl http://wttr.in/$1
+curl http://wttr.in/"$1"
 }

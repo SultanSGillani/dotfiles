@@ -2,5 +2,5 @@
 # set volume
 vol ()
 {
-    pactl set-sink-volume 5 $1% ;
+    pactl set-sink-volume 5 "$1"% ;
 }
