@@ -34,11 +34,6 @@ asdf_plugins:
     versions:
       - 1.13.7
     global: 1.13.7
-  - name: "k9s"
-    repository: "https://github.com/looztra/asdf-k9s.git"
-    versions:
-      - 0.13.8
-    global: 0.13.8
   - name: "skaffold"
     repository: "https://github.com/kristoflemmens/asdf-skaffold.git"
     versions:
