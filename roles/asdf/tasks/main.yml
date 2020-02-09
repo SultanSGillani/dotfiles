@@ -45,7 +45,7 @@
     - update
 
 - name: install plugins
-  command: "{{ asdf_executable }} plugin-add {{ item.name }} {{ item.repository | default() }}"
+  command: "{{ asdf_executable }} plugin-add {{ item.name }} {{ item.repository }}"
   args:
     creates: "{{ dotfiles_user_home }}/.asdf/plugins/{{ item.name }}"
     chdir: "{{ dotfiles_user_home }}"
