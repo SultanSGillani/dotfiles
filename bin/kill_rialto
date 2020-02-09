@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-for each in `ps -eo pid,command | grep ruby | grep -v grep | awk '{print $1}' `; do sudo kill -9 $each;done
-sudo killall −9 ruby
-sudo pkill -9 ruby
-pidof ruby | xargs sudo kill -9
-ps aux | grep sidekiq | awk '{print $2}' | xargs sudo kill
-
