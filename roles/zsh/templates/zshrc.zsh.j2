@@ -237,7 +237,15 @@ source ${ZINIT_PATH}/bin/zinit.zsh
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-# PROMPT
+# compinit
+zinit cdreplay -q
+
+# local snippets
+
+zinit wait"2b" lucid multisrc'(bindings|generic|history|dir|completions).zsh'
+zinit snippet ${ZDOTDIR}
+
+zinit ice wait'2c' lucid atinit'local file; for file in *.zsh; do source "$file"; done'; zinit light ${ZDOTDIR}/functions
 
 # Do not load the prompt asynchronously since it's super fast anyways!
 # Theme options
@@ -474,16 +482,6 @@ unset -f zsvn
 unset -f zsnippet
 unset -f zcr
 unset -f zturbo0 zturbo0a zturbo0b zturbo0c zt zct ze z
-
-# load the opts files
-for file in ${ZDOTDIR}/opts/*.zsh; do
-    source "$file"
-done
-
-# load everything but the opts and completion files
-for file in ${ZDOTDIR}/functions/*.zsh; do
-    source "$file"
-done
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.

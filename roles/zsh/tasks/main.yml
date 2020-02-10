@@ -103,32 +103,38 @@
   tags:
     - update
 
-- name: write completions
+- name: Write config files
   copy:
-    src: "{{ item }}"
-    dest: "{{ zdot_dir }}/completions/"
+    src: "{{ item }}.zsh"
+    dest: "{{ zdot_dir }}/{{ item }}.zsh"
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
-  with_fileglob:
-    - completions/*
+    backup: no
+  loop:
+    - bindings
+    - completions
+    - dir
+    - generic
+    - history
+  tags:
+    - update
 
-- name: write functions
-  copy:
-    src: "{{ item }}"
-    dest: "{{ zdot_dir }}/functions/"
+- name: Synchronize and delete files in dest for functions
+  synchronize:
+    src: functions
+    dest: "{{ zdot_dir }}/functions"
     owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
-  with_fileglob:
-    - functions/*
+    delete: yes
+    recursive: yes
 
-- name: write opts
-  copy:
-    src: "{{ item }}"
-    dest: "{{ zdot_dir }}/opts/"
+- name: Synchronize and delete files in dest for completions
+  synchronize:
+    src: completions
+    dest: "{{ zdot_dir }}/completions"
     owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
-  with_fileglob:
-    - opts/*
+    delete: yes
+    recursive: yes
+  when: ansible_facts['os_family'] != "Darwin"
 
 - name: write z.sh
   copy:
