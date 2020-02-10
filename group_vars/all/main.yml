@@ -28,7 +28,7 @@ vcenter_hostname: "{{ lookup('env','VMWARE_IP') }}"
 vcenter_username: "{{ lookup('env','VMWARE_USERNAME') }}"
 vcenter_password: "{{ lookup('env','VMWARE_PASS') }}"
 esxi_hostname: "{{ lookup('env','VMWARE_HOSTNAME') }}"
-wallpaper_file: "{{ dotfiles_user_home }}/wallpapers/comp.jpg"
+wallpaper_file: "{{ dotfiles_user_home }}/wallpapers/atari_dracula.png"
 
 ## Base16 Theme Vars for xresources and i3
 default_theme: dracula
