@@ -56,7 +56,6 @@ brew_packages:
   - openssl@1.1
   - pkg-config
   - python
-  - python@2
   - readline
   - ripgrep
   - rsync
@@ -98,7 +97,6 @@ brew_packages:
   - nmap
   - openssl
   - pkg-config
-  - python@2
   - rsync
   - subversion
   - terminal-notifier

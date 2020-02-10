@@ -14,7 +14,7 @@ HOSTS=${HOME}/dotfiles/inventory.yml
 
 HOST_OS=$(uname)
 
-cd ${ZSH} && git pull
+cd ${ZSH}
 
 echo "Running dotfiles Playbook for ${HOST_OS}"
 if [[ ! -f ~/.vault_password.txt ]]; then

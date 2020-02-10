@@ -121,20 +121,24 @@
 
 - name: Synchronize and delete files in dest for functions
   synchronize:
-    src: functions
-    dest: "{{ zdot_dir }}/functions"
-    owner: "{{ zsh_user }}"
+    src: functions/
+    dest: "{{ zdot_dir }}/functions/"
+    owner: yes
     delete: yes
     recursive: yes
+  tags:
+    - update
 
 - name: Synchronize and delete files in dest for completions
   synchronize:
-    src: completions
-    dest: "{{ zdot_dir }}/completions"
-    owner: "{{ zsh_user }}"
+    src: completions/
+    dest: "{{ zdot_dir }}/completions/"
+    owner: yes
     delete: yes
     recursive: yes
   when: ansible_facts['os_family'] != "Darwin"
+  tags:
+    - update
 
 - name: write z.sh
   copy:
@@ -143,6 +147,8 @@
     owner: "{{ zsh_user }}"
     group: "{{ zsh_user_group }}"
     mode: 0755
+  tags:
+    - update
 
 - name: Set zsh as default shell
   user:

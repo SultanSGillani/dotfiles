@@ -1,23 +1,5 @@
 #!/usr/bin/env zsh
 
-zturbo0a()   { zinit ice wait"0a" silent             "${@}"; }
-zturbo0b()   { zinit ice wait"0b" silent             "${@}"; }
-zturbo0c()   { zinit ice wait"0c" silent             "${@}"; }
-zturbo0()   { zinit ice wait"0" silent             "${@}"; }
-zturbo1a()   { zinit ice wait"1a" silent             "${@}"; }
-zturbo1b()   { zinit ice wait"1b" silent             "${@}"; }
-zturbo1c()   { zinit ice wait"1c" silent             "${@}"; }
-zturbo1d()   { zinit ice wait"1d" silent             "${@}"; }
-zturbo1e()   { zinit ice wait"1e" silent             "${@}"; }
-zturbo1f()   { zinit ice wait"1f" silent             "${@}"; }
-zturbo1()   { zinit ice wait"1" silent             "${@}"; }
-zturbo2a()   { zinit ice wait"2a" silent             "${@}"; }
-zturbo2b()   { zinit ice wait"2b" silent             "${@}"; }
-zturbo2c()   { zinit ice wait"2c" silent             "${@}"; }
-zturbo2d()   { zinit ice wait"2d" silent             "${@}"; }
-zturbo2e()   { zinit ice wait"2e" silent             "${@}"; }
-zturbo2f()   { zinit ice wait"2f" silent             "${@}"; }
-zturbo2()   { zinit ice wait"2" silent             "${@}"; }
 zcommand() { zinit ice wait"0b" silent as"command" "${@}"; }
 zlight()  { [ -zlight $2 ] && zinit light "${@}" || zinit "${@}"; }
 zsnippet() { zinit snippet                        "${@}"; }
@@ -146,9 +128,6 @@ fast-theme default 2> /dev/null
 # Z
 export _Z_CMD=z
 
-# GO
-export GOBIN=${HOME}/.asdf/shims
-
 # GCLOUD
 export CLOUDSDK_PYTHON=python3
 
@@ -237,16 +216,6 @@ source ${ZINIT_PATH}/bin/zinit.zsh
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 
-# compinit
-zinit cdreplay -q
-
-# local snippets
-
-zinit wait"2b" lucid multisrc'(bindings|generic|history|dir|completions).zsh'
-zinit snippet ${ZDOTDIR}
-
-zinit ice wait'2c' lucid atinit'local file; for file in *.zsh; do source "$file"; done'; zinit light ${ZDOTDIR}/functions
-
 # Do not load the prompt asynchronously since it's super fast anyways!
 # Theme options
 
@@ -255,6 +224,7 @@ setopt promptsubst
 zinit ice depth=1 atload'!source ${ZDOTDIR}/prompt.zsh; _p9k_precmd' nocd
 zinit light romkatv/powerlevel10k
 
+# Turbo 0a
 zt 0a light-mode for \
         OMZ::plugins/python/python.plugin.zsh \
         OMZ::plugins/virtualenv/virtualenv.plugin.zsh \
@@ -267,127 +237,125 @@ zt 0a light-mode for \
         lukechilds/zsh-better-npm-completion \
         skx/sysadmin-util \
         rimraf/k \
+    has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf \
+        laggardkernel/git-ignore \
+    make!"!PREFIX=$ZPFX" \
+    atclone"cp build/def-* $ZPFX/bin/" \
+        sei40kr/zsh-fast-alias-tips \
     compile'{hsmw-*,test/*}' \
-        zdharma/history-search-multi-word
+        zdharma/history-search-multi-word \
+    has'git-extras' \
+        https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
 
 zinit svn wait"0a" lucid for \
     OMZ::plugins/tmux \
     OMZ::plugins/extract \
     OMZ::plugins/command-not-found
 
-
+# Turbo 0b
 zt 0b light-mode for \
         OMZ::lib/git.zsh \
     atload"unalias grv" lucid \
-        OMZ::plugins/git/git.plugin.zsh
+        OMZ::plugins/git/git.plugin.zsh \
+    has'man' \
+        ael-code/zsh-colored-man-pages \
+    has'notify-send' atload' \
+    AUTO_NOTIFY_THRESHOLD=300; \
+    AUTO_NOTIFY_IGNORE+=( \
+    "cht.sh" \
+    "cht" \
+    "lazydocker" \
+    "lazygit" \
+    "tmux" \
+    "yarn" \
+    "vagrant ssh" \
+    ) \
+    ' \
+        z MichaelAquilina/zsh-auto-notify \
+    as"program" pick"bin/git-dsf" \
+        zdharma/zsh-diff-so-fancy \
+    as'program' pick"$ZPFX/bin/(fzf|fzf-tmux)" \
+    atclone"cp shell/completion.zsh _fzf_completion; \
+    cp bin/(fzf|fzf-tmux) $ZPFX/bin; \
+    PREFIX=$ZPFX ./install" \
+    atload"source $HOME/.fzf.zsh" \
+        junegunn/fzf \
+    multisrc'(bindings|generic|history|dir|completions).zsh' pick'/dev/null' \
+        ${ZDOTDIR} \
+    pick"init.sh" \
+    atload"export ENHANCD_FILTER='fzf --height 50% --reverse --ansi'" \
+    atinit="export ENHANCD_DOT_SHOW_FULLPATH=1; export ENHANCD_FILTER=filter" \
+        b4b4r07/enhancd
+
+# Turbo 0c and OS dependent
+{% if ansible_facts['os_family']|lower == "darwin" %}
+    zinit svn wait"0c" lucid
+    zinit snippet OMZ::plugins/osx
+{% endif %}
+
+{% if ansible_facts['distribution']|lower == "debian" %}
+    zinit wait"0c" lucid
+    zinit snippet OMZ::plugins/debian/debian.plugin.zsh
+{% endif %}
+
+{% if ansible_facts['distribution']|lower == "ubuntu" %}
+    zinit wait"0c" lucid
+    zinit snippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
+{% endif %}
+
+# fzy
+
+zinit wait"1" lucid as"program" pick"$ZPFX/bin/fzy*" \
+atclone"cp contrib/fzy-* $ZPFX/bin/" \
+make"!PREFIX=$ZPFX install" for \
+jhawthorn/fzy
 
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zlight b4b4r07/httpstat
 
-{% if ansible_facts['os_family']|lower == "darwin" %}
-zsvn
-zsnippet OMZ::plugins/osx
-{% endif %}
-
-{% if ansible_facts['distribution']|lower == "debian" %}
-zturbo0
-zsnippet OMZ::plugins/debian/debian.plugin.zsh
-{% endif %}
-
-{% if ansible_facts['distribution']|lower == "ubuntu" %}
-zturbo0
-zsnippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
-{% endif %}
-
+#### COMPLETION SNIPPETS
+#######################################################################################################
 # Completion for Docker
-zinit ice wait lucid as'completion'
+zinit ice wait"2a" lucid as'completion'
 zsnippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
 # Docker Compose
-zinit ice wait lucid as'completion'
+zinit ice wait"2a" lucid as'completion'
 zsnippet https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose
 
 # kubectl
-zinit ice wait lucid as'completion'
+zinit ice wait"2a" lucid as'completion' for \
 zsnippet https://github.com/nnao45/zsh-kubectl-completion/blob/master/_kubectl
 
-## fzf
-# Install `fzf` bynary and tmux helper script
+#######################################################################################################
 
-zinit ice wait lucid as'program' pick"$ZPFX/bin/(fzf|fzf-tmux)" \
-atclone"cp shell/completion.zsh _fzf_completion; \
-cp bin/(fzf|fzf-tmux) $ZPFX/bin; \
-PREFIX=$ZPFX ./install" \
-atload"source $HOME/.fzf.zsh"
-zinit light junegunn/fzf
+# local snippets
+zinit ice wait'2b' lucid atinit'local file; for file in *.zsh; do source "$file"; done'
+zinit light ${ZDOTDIR}/functions
 
-# fzy
-zcommand make"!PREFIX=$ZPFX install" \
-atclone"cp contrib/fzy-* $ZPFX/bin/" \
-pick"$ZPFX/bin/fzy*"
-zlight jhawthorn/fzy
-
-zturbo0b has'man'; z ael-code/zsh-colored-man-pages
-
-zturbo0a has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf
-zlight laggardkernel/git-ignore
-
-zturbo0a make!"!PREFIX=$ZPFX" \
-atclone"cp build/def-* $ZPFX/bin/"
-zlight sei40kr/zsh-fast-alias-tips
-
-zturbo0b has'git-extras'
-zsnippet https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
-
-zinit ice wait"2" lucid as"program" pick"bin/git-dsf"
-zinit light zdharma/zsh-diff-so-fancy
 #################################################################
 # IMPORTANT PLUGINS
 
-export ENHANCD_FILTER=filter
-
-zinit ice pick"init.sh" silent \
-atload'export ENHANCD_FILTER="fzf --height 50% --reverse --ansi";export ENHANCD_DOT_SHOW_FULLPATH=1'
-zinit light "b4b4r07/enhancd"
-
-zturbo0b has'notify-send' atload'
-AUTO_NOTIFY_THRESHOLD=300;
-AUTO_NOTIFY_IGNORE+=(
-"cht.sh"
-"cht"
-"lazydocker"
-"lazygit"
-"tmux"
-"yarn"
-"vagrant ssh"
-)
-'
-z MichaelAquilina/zsh-auto-notify
-
-# fast-syntax-highlighting
-zinit ice wait lucid atinit'zpcompinit; zpcdreplay' nocd
-zinit light zdharma/fast-syntax-highlighting
-
-zinit ice wait lucid blockf atpull'zinit creinstall -q .'
-zinit light zsh-users/zsh-completions
+# Fast-syntax-highlighting & autosuggestions
+zinit wait'2c' lucid for \
+    atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" \
+        zdharma/fast-syntax-highlighting \
+    atload"!_zsh_autosuggest_start" \
+    atinit"export ZSH_AUTOSUGGEST_USE_ASYNC=1; export ZSH_AUTOSUGGEST_MANUAL_REBIND=1; export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20" \
+        zsh-users/zsh-autosuggestions \
+    blockf \
+        zsh-users/zsh-completions
 
 # history-substring-search for smarter up/down arrow
 # MUST be after fast-syntax-highlighting
-zinit ice wait lucid atload'setup_history_substring_search' nocd
+zinit wait'2d' lucid atload'setup_history_substring_search' nocd
 zinit light zsh-users/zsh-history-substring-search
+
 setup_history_substring_search() {
-export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND=''
-bindkey "$terminfo[kcuu1]" history-substring-search-up
-bindkey "$terminfo[kcud1]" history-substring-search-down
+    export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND=''
+    bindkey "$terminfo[kcuu1]" history-substring-search-up
+    bindkey "$terminfo[kcud1]" history-substring-search-down
 }
-
-# Autosuggestions
-zinit ice wait lucid atload'_zsh_autosuggest_start' nocd
-zinit light zsh-users/zsh-autosuggestions
-export ZSH_AUTOSUGGEST_USE_ASYNC=1
-export ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/path.zsh.inc'; fi
@@ -396,12 +364,12 @@ if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/bin
 if [ -f '/usr/local/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/completion.zsh.inc'; fi
 
 if (( ${+ztermtitle} )); then
-case ${TERM} in
-xterm*|*st)
-precmd() { print -Pn "\e]0;${ztermtitle}\a" }
-precmd  # we execute it once to initialize the window title
-;;
-esac
+    case ${TERM} in
+        xterm*|*st)
+        precmd() { print -Pn "\e]0;${ztermtitle}\a" }
+        precmd  # we execute it once to initialize the window title
+        ;;
+    esac
 fi
 
 # aliases
@@ -419,7 +387,7 @@ fi
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-alias "$method"="lwp-request -m '$method'"
+    alias "$method"="lwp-request -m '$method'"
 done
 
 # ruby aliases
@@ -462,26 +430,12 @@ zstyle ':completion:*' insert-tab pending
 #################################################################
 # REMOVE TEMPORARY FUNCTIONS
 #
-unset -f zturbo1a
-unset -f zturbo1b
-unset -f zturbo1c
-unset -f zturbo1d
-unset -f zturbo1e
-unset -f zturbo1f
-unset -f zturbo1
-unset -f zturbo2a
-unset -f zturbo2b
-unset -f zturbo2c
-unset -f zturbo2d
-unset -f zturbo2e
-unset -f zturbo2f
-unset -f zturbo2
 unset -f zlight
 unset -f zcommand
 unset -f zsvn
 unset -f zsnippet
 unset -f zcr
-unset -f zturbo0 zturbo0a zturbo0b zturbo0c zt zct ze z
+unset -f zt zct ze z
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
