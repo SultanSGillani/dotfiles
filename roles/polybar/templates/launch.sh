@@ -15,7 +15,7 @@ MONITOR="DVI-I-1 HDMI-0"
 {% elif ansible_facts['hostname'] == 'sultanubuntu' %}
 MONITOR="eDP1 HDMI1"
 {% elif ansible_facts['hostname'] == 'sultan-archlinux' %}
-MONITOR="DP2-3 eDP-1 eDP1 DP2-2-8 DP2-2"
+MONITOR="DP2-3 eDP-1 eDP1 DP2-2-8 DP2-2 DP1 DP2 DP3"
 {% else %}
 MONITOR="eDP-1"
 {% endif %}

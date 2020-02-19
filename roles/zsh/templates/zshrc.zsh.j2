@@ -233,6 +233,9 @@ zt 0a light-mode for \
         OMZ::plugins/nmap/nmap.plugin.zsh \
         OMZ::plugins/kubectl/kubectl.plugin.zsh \
         OMZ::plugins/asdf/asdf.plugin.zsh \
+        OMZ::plugins/tmux/tmux.plugin.zsh \
+        OMZ::plugins/extract/extract.plugin.zsh \
+        OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
     as"program" pick"zsh-better-npm-completion.plugin.zsh" \
         lukechilds/zsh-better-npm-completion \
         skx/sysadmin-util \
@@ -246,11 +249,6 @@ zt 0a light-mode for \
         zdharma/history-search-multi-word \
     has'git-extras' \
         https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
-
-zinit svn wait"0a" lucid for \
-    OMZ::plugins/tmux \
-    OMZ::plugins/extract \
-    OMZ::plugins/command-not-found
 
 # Turbo 0b
 zt 0b light-mode for \
@@ -271,7 +269,7 @@ zt 0b light-mode for \
     "vagrant ssh" \
     ) \
     ' \
-        z MichaelAquilina/zsh-auto-notify \
+        MichaelAquilina/zsh-auto-notify \
     as"program" pick"bin/git-dsf" \
         zdharma/zsh-diff-so-fancy \
     as'program' pick"$ZPFX/bin/(fzf|fzf-tmux)" \
@@ -326,6 +324,11 @@ zsnippet https://github.com/docker/compose/blob/master/contrib/completion/zsh/_d
 # kubectl
 zinit ice wait"2a" lucid as'completion' for \
 zsnippet https://github.com/nnao45/zsh-kubectl-completion/blob/master/_kubectl
+
+# completion for extract
+zinit ice wait"2a" lucid as'completion'
+zsnippet https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/extract/_extract
+
 
 #######################################################################################################
 
@@ -452,3 +455,4 @@ if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdu
 fi
 } &!
 
+(( ! ${+functions[p10k]} )) || p10k finalize

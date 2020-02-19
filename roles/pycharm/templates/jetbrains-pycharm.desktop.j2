@@ -1,13 +1,11 @@
-
-{{ ansible_managed | comment }}
-
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name={{ pycharm_application_name }}
-Icon={{ pycharm_install_dir }}/bin/pycharm.png
-Exec="{{ pycharm_install_dir }}/bin/pycharm.sh" %f
+Name=Pycharm Professional
+
+Icon=/opt/pycharm-2019.3.3/bin/pycharm.png
+Exec="/opt/pycharm-2019.3.3/bin/pycharm.sh" %f
 Comment=Pycharm foo!
 Categories=Development;IDE;
 Terminal=false
-StartupWMClass={{ pycharm_startup_wm_class }}
+StartupWMClass=jetbrains-pycharm

@@ -33,7 +33,9 @@ IdentityFile ~/.ssh/id_ecdsa_devops
 Host * (asterisk for all hosts or add specific host)
   Protocol 2
   AddKeysToAgent yes
+{% if ansible_facts['os_family'] == "Darwin" %}
   UseKeychain yes
+{% endif %}
   IdentityFile ~/.ssh/id_rsa
   IdentityFile ~/.ssh/id_ed25519
   IdentityFile ~/.ssh/id_ecdsa

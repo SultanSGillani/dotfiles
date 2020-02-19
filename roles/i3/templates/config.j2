@@ -26,9 +26,8 @@ exec_always --no-startup-id xrandr --output eDP-1 --scale 0.9999x0.9999
 exec_always --no-startup-id xrandr --output HDMI1 --primary --mode 3440x1440 --pos 0x0 --rotate normal --output VIRTUAL1 --off --output eDP1 --off
 {% endif %}
 
-exec_always --no-startup-id google-chrome-stable --new-window --app=https://outlook.office365.com/owa/?realm=ntgfreight.com
+exec_always --no-startup-id firefox --new-window --app=https://outlook.office365.com/owa/?realm=ntgfreight.com
 exec_always --no-startup-id xinput set-prop 13 307 .90
-exec_always --no-startup-id feh --bg-scale /home/sultan/wallpapers/comp.jpg
 exec_always --no-startup-id xinput set-prop 'SynPS/2 Synaptics TouchPad' 304 .95
 
 exec_always --no-startup-id feh --bg-scale {{ wallpaper_file }}
@@ -48,7 +47,7 @@ smart_borders on
 for_window [class="^.*"] border pixel 0
 for_window [floating] border pixel 3
 
-font pango:Hack Nerd Font Mono 11
+font pango:Hack Nerd Font 12
 
 ## Base16 {{ base16.theme[default_theme]['scheme_name'] }}
 # Author: {{ base16.theme[default_theme]['scheme_author'] }}
@@ -159,10 +158,10 @@ bindsym $mod+Shift+l move up
 bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
+bindsym $mod+Ctrl+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Ctrl+Right move right
 
 # Move the current workspace to the next output
 # (effectively toggles when you only have two outputs)
@@ -205,32 +204,26 @@ bindsym $altmod+l exec {{ dotfiles_user_home }}/.config/i3/i3lock-fancy-multimon
 
 # Define names for default workspaces for which we configure key bindings later on.
 
-# browser workspace
-set $ws1 " "
-# ruby workspace
-set $ws2 " "
-# python workspace
-set $ws3 " "
-# gaming workspace
-set $ws4 " "
-set $ws5 " "
-# terminal workspace
-set $ws6 " "
-set $ws7 " "
-# mail workspace
-set $ws8 " "
-# chat workspace
-set $ws9 " "
-# music workspace
-set $ws10 " "
+set $ws1 "1: "
+set $ws2 "2: "
+set $ws3 "3: "
+set $ws4 "4: "
+set $ws5 "5: "
+set $ws6 "6: "
+set $ws7 "7: "
+set $ws8 "8: "
+set $ws9 "9: "
+set $ws10 "10: "
 
 # Assign Workspaces:
 assign [class="Firefox"] $ws1
-assign [class="jetbrains-pycharm"] $ws3
-assign [class="jetbrains-webstorm"] $ws8
 assign [class="jetbrains-rider"] $ws2
+assign [class="jetbrains-pycharm"] $ws3
 assign [class="Slack"] $ws4
-assign [class="Google-chrome"] $ws1
+assign [class="Google-chrome"] $ws5
+assign [class="ranger"] $ws7
+assign [class="jetbrains-webstorm"] $ws9
+assign [class="apple music"] $ws10
 
 # Set colors from Xresources
 # Change 'color7' and 'color2' to whatever colors you want i3 to use
@@ -253,8 +246,8 @@ client.background       $bg
 bindsym $altmod+d exec dmenu_run -nb "$fg" -nf "$bg" -sb "$bg" -sf "$fg"
 
 #toggle workspace's display screen
-bindsym $mod+less move workspace to output right
-bindsym $mod+Shift+less move workspace to output up
+bindsym $mod+Shift+Right move workspace to output right
+bindsym $mod+Shift+left move workspace to output left
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1

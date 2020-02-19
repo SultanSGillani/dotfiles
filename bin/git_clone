@@ -1,8 +1,22 @@
 #!/usr/bin/env bash
 
-REPO=git@work:VeracitySI
+WORK_DIR=${PROJECT}/work/ntg
+RHINO_REPO=vs-ssh.visualstudio.com:v3/ntgfreight/RhinoVision2.0
+INFRA_REPO=vs-ssh.visualstudio.com:v3/ntgfreight/NTGCoreInfrastructure
+NTG_REPO=vs-ssh.visualstudio.com:v3/ntgfreight/NTG%20Core%20Services
 
-for i in basil Presentation hudsucker juris vtools rialto ham quickinstall cerebellum-builds; do
-    cd ${PWD} && git clone $REPO/${i}.git
+if [ ! -d "$WORK_DIR" ]; then
+  mkdir -p "${WORK_DIR}"
+fi
+
+for i in rv-core-services rv-client security-token-service; do
+  cd "${WORK_DIR}" && git clone ntgfreight@$RHINO_REPO/${i}
 done
 
+for i in deployments terraform k6-scripts; do
+    cd "${WORK_DIR}" && git clone ntgfreight@"$INFRA_REPO"/${i}
+done
+
+cd "${WORK_DIR}" && git clone ntgfreight@$NTG_REPO/NTG%20Core%20Services NTGCoreServices
+
+cd "${WORK_DIR}" && git clone ntgfreight@"$NTG_REPO"/communication-service
