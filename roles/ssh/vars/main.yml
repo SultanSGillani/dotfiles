@@ -1,3 +1,2 @@
----
 ssh_config:
-    - { path: 'ssh_local_config.j2', dest: 'config' }
+- {path: ssh_local_config.j2, dest: config}

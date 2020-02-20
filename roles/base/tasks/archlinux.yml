@@ -1,4 +1,3 @@
----
 - name: install base-devel
   pacman:
     name: base-devel
@@ -12,4 +11,4 @@
     name: universal-ctags-git
     use: yay
   tags:
-    - initial
+  - initial

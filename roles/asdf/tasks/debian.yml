@@ -1,21 +1,20 @@
----
 - name: Install apt items
   package:
-    name: "{{ ruby_pkgs }}"
+    name: '{{ ruby_pkgs }}'
     state: present
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Install python pkgs for debian
   package:
-    name: "{{ python_pkgs }}"
+    name: '{{ python_pkgs }}'
     state: present
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Install jq for debian
   package:
@@ -24,4 +23,4 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial

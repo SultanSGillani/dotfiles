@@ -1,19 +1,18 @@
----
 - name: include os specific tasks
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
   when: ansible_facts['os_family']|lower is defined
 
 - name: Create compton config directory if it doesnt exist
   file:
-    path: "{{ dotfiles_user_home }}/.config/compton"
+    path: '{{ dotfiles_user_home }}/.config/compton'
     state: directory
     recurse: yes
   tags:
-    - initial
+  - initial
 
 - name: Write compton config
   template:
     src: compton.j2
-    dest: "{{ dotfiles_user_home }}/.config/compton/compton.conf"
+    dest: '{{ dotfiles_user_home }}/.config/compton/compton.conf'
   tags:
-    - update
+  - update

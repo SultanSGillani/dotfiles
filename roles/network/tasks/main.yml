@@ -1,4 +1,3 @@
----
 - name: copy resolv.conf
   template:
     src: resolv.conf.j2
@@ -6,4 +5,4 @@
   become: yes
   become_user: root
   tags:
-    - update
+  - update

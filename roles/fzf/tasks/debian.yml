@@ -1,11 +1,10 @@
----
 - name: Install fzf | Debian
   git:
-    repo: "https://github.com/junegunn/fzf.git"
-    dest: "{{ fzf_dir }}"
+    repo: https://github.com/junegunn/fzf.git
+    dest: '{{ fzf_dir }}'
     update: no
     accept_hostkey: yes
     version: master
     depth: 1
   tags:
-    - initial
+  - initial

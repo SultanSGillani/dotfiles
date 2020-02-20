@@ -1,4 +1,3 @@
----
 - name: Install docker packages [Archlinux]
   package:
     name: docker
@@ -6,7 +5,7 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Install docker-compose packages [Archlinux]
   package:
@@ -15,4 +14,4 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial

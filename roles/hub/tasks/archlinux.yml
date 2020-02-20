@@ -1,7 +1,6 @@
----
 - name: install hub | Archlinux
   aur:
     name: hub
     use: yay
   tags:
-    - initial
+  - initial

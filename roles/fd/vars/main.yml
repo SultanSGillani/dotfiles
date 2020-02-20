@@ -1,4 +1,3 @@
----
 fd_release_url: https://github.com/sharkdp/fd/releases/download
 fd_version: v7.2.0
 fd_dpkg_file: fd_7.2.0_amd64.deb

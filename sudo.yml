@@ -1,18 +1,17 @@
----
 - name: Ansible Dev & Dotfiles Setup
   hosts: all
   gather_facts: yes
   vars_files:
-    - group_vars/all/main.yml
+  - group_vars/all/main.yml
   become: yes
   become_user: root
   tasks:
-    - import_role:
-        name: sudo
-      tags:
-        - sudo
-        - nopass
-        - in
+  - import_role:
+      name: sudo
+    tags:
+    - sudo
+    - nopass
+    - in
 - import_playbook: dotfiles.yml
   tags:
-    - bootstrap
+  - bootstrap

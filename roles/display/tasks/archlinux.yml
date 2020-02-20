@@ -1,4 +1,3 @@
----
 - name: Install lightdm package
   package:
     name: lightdm
@@ -25,7 +24,7 @@
 
 - name: install remaining x packages
   package:
-    name: "{{ pacman_packages }}"
+    name: '{{ pacman_packages }}'
     state: present
   become: yes
   become_user: root

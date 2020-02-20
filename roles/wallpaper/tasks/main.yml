@@ -1,24 +1,23 @@
----
 - name: Create wallpaper Dir if it doesn't Exist
   file:
-    path: "{{ dotfiles_user_home }}/wallpapers"
+    path: '{{ dotfiles_user_home }}/wallpapers'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
     recurse: yes
   tags:
-    - initial
+  - initial
 
 - name: copy wallpapers
   copy:
-    src: "{{ item }}"
-    dest: "{{ dotfiles_user_home }}/wallpapers"
+    src: '{{ item }}'
+    dest: '{{ dotfiles_user_home }}/wallpapers'
   with_fileglob:
-    - wallpapers/*
+  - wallpapers/*
   tags:
-    - initial
+  - initial
 
 - name: import macos stuff
   include_tasks: darwin.yml
-  when: "ansible_facts['os_family']|lower == 'darwin'"
+  when: ansible_facts['os_family']|lower == 'darwin'

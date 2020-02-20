@@ -1,7 +1,6 @@
----
 - name: OSX | Install Bat
   homebrew:
     name: bat
     state: present
   tags:
-    - initial
+  - initial

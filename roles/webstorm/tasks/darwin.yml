@@ -1,7 +1,6 @@
----
 - name: Install jetbrains | Macos
   homebrew_cask:
     name: webstorm
     state: present
   tags:
-    - initial
+  - initial

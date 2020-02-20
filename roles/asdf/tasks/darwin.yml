@@ -1,21 +1,20 @@
----
 - name: Install ruby dependencies with homebrew
   homebrew:
-    name: "{{ ruby_pkgs }}"
+    name: '{{ ruby_pkgs }}'
     state: present
   tags:
-    - initial
+  - initial
 
 - name: Install python dependencies with homebrew
   homebrew:
-    name: "{{ python_pkgs }}"
+    name: '{{ python_pkgs }}'
     state: present
   tags:
-    - initial
+  - initial
 
 - name: Install java dependencies with homebrew
   homebrew:
     name: jq
     state: present
   tags:
-    - initial
+  - initial

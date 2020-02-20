@@ -1,12 +1,11 @@
----
 apt_packages:
-  - arandr
-  - imagemagick
-  - lxappearance
-  - scrot
-  - texinfo
+- arandr
+- imagemagick
+- lxappearance
+- scrot
+- texinfo
 
 pacman_packages:
-  - arandr
-  - xfdesktop
-  - xfwm4-themes
+- arandr
+- xfdesktop
+- xfwm4-themes

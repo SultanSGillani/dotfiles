@@ -1,7 +1,6 @@
----
 - name: install zsh | OSX
   homebrew:
     name: zsh
     state: present
   tags:
-    - initial
+  - initial

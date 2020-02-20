@@ -1,7 +1,6 @@
----
 - name: install slack-desktop
   aur:
     name: slack-desktop
     use: yay
   tags:
-    - initial
+  - initial

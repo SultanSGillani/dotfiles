@@ -1,65 +1,66 @@
----
 plugins:
-  - 'itchyny/lightline.vim'
-  - 'airblade/vim-gitgutter'
-  - 'artur-shaik/vim-javacomplete2'
-  - 'bronson/vim-trailing-whitespace'
-  - 'chriskempson/base16-vim'
-  - 'ctrlpvim/ctrlp.vim'
-  - 'ecomba/vim-ruby-refactoring'
-  - 'edkolev/tmuxline.vim'
-  - 'gabesoft/vim-ags'
-  - 'hail2u/vim-css3-syntax'
-  - 'honza/vim-snippets'
-  - 'junegunn/fzf.vim'
-  - 'lepture/vim-jinja'
-  - 'majutsushi/tagbar'
-  - 'martinda/Jenkinsfile-vim-syntax'
-  - 'mboughaba/i3config.vim'
-  - 'mike-hearn/base16-vim-lightline'
-  - 'phenomenes/ansible-snippets'
-  - 'rust-lang/rust.vim'
-  - 'sbdchd/neoformat'
-  - 'scrooloose/syntastic'
-  - 'sheerun/vim-polyglot'
-  - 'Shougo/deol.nvim'
-  - 'Shougo/unite.vim'
-  - 'Shougo/vimfiler.vim'
-  - 'SirVer/ultisnips'
-  - 'superevilmegaco/OpenUrl.nvim'
-  - 'tmhedberg/SimpylFold'
-  - 'tmux-plugins/vim-tmux'
-  - 'tpope/vim-bundler'
-  - 'tpope/vim-commentary'
-  - 'tpope/vim-fugitive'
-  - 'tpope/vim-rails'
-  - 'tpope/vim-rake'
-  - 'tpope/vim-rbenv'
-  - 'vim-perl/vim-perl'
-  - 'vim-ruby/vim-ruby'
-  - 'vim-scripts/grep.vim'
-  - 'vim-scripts/groovy.vim'
-  - 'xolox/vim-misc'
-  - 'xolox/vim-session'
-  - 'Yggdroot/indentLine'
-  - 'davidhalter/jedi-vim'
-  - 'vim-scripts/indentpython.vim'
-  - 'nvie/vim-flake8'
-  - 'kh3phr3n/python-syntax'
-  - 'scrooloose/nerdtree'
-  - 'jistr/vim-nerdtree-tabs'
+- itchyny/lightline.vim
+- airblade/vim-gitgutter
+- artur-shaik/vim-javacomplete2
+- bronson/vim-trailing-whitespace
+- chriskempson/base16-vim
+- ctrlpvim/ctrlp.vim
+- ecomba/vim-ruby-refactoring
+- edkolev/tmuxline.vim
+- gabesoft/vim-ags
+- hail2u/vim-css3-syntax
+- honza/vim-snippets
+- junegunn/fzf.vim
+- lepture/vim-jinja
+- majutsushi/tagbar
+- martinda/Jenkinsfile-vim-syntax
+- mboughaba/i3config.vim
+- mike-hearn/base16-vim-lightline
+- phenomenes/ansible-snippets
+- rust-lang/rust.vim
+- sbdchd/neoformat
+- scrooloose/syntastic
+- sheerun/vim-polyglot
+- Shougo/deol.nvim
+- Shougo/unite.vim
+- Shougo/vimfiler.vim
+- SirVer/ultisnips
+- superevilmegaco/OpenUrl.nvim
+- tmhedberg/SimpylFold
+- tmux-plugins/vim-tmux
+- tpope/vim-bundler
+- tpope/vim-commentary
+- tpope/vim-fugitive
+- tpope/vim-rails
+- tpope/vim-rake
+- tpope/vim-rbenv
+- vim-perl/vim-perl
+- vim-ruby/vim-ruby
+- vim-scripts/grep.vim
+- vim-scripts/groovy.vim
+- xolox/vim-misc
+- xolox/vim-session
+- Yggdroot/indentLine
+- davidhalter/jedi-vim
+- vim-scripts/indentpython.vim
+- nvie/vim-flake8
+- kh3phr3n/python-syntax
+- scrooloose/nerdtree
+- jistr/vim-nerdtree-tabs
 
 extra_plugs:
-  - { name: 'fatih/vim-go', extra: "{'do': ':GoInstallBinaries'}" }
-  - { name: 'junegunn/fzf', extra: "{ 'dir': '~/.fzf', 'do': './install --all' }" }
-  - { name: 'pearofducks/ansible-vim', extra: "{ 'do': 'cd ./UltiSnips; ./generate.py' }" }
-  - { name: 'python-mode/python-mode', extra: "{ 'for': 'python', 'branch': 'develop'}" }
-  - { name: 'autozimu/LanguageClient-neovim', extra: "{ 'branch': 'next', 'do': 'bash install.sh', }" }
-  - { name: 'raimon49/requirements.txt.vim', extra: "{'for': 'requirements'}" }
-  - { name: 'vim-scripts/c.vim', extra: "{'for': ['c', 'cpp']}" }
-  - { name: 'neoclide/coc.nvim', extra: "{'branch': 'release'}" }
-  - { name: 'neoclide/coc-python', extra: "{'do': 'yarn install --frozen-lockfile'}" }
-  - { name: 'neoclide/coc-json', extra: "{'do': 'yarn install --frozen-lockfile'}" }
-  - { name: 'neoclide/coc-solargraph', extra: "{'do': 'yarn install --frozen-lockfile'}" }
-  - { name: 'dracula/vim', extra: "{ 'as': 'dracula' }" }
-  - { name: 'mads-hartmann/bash-language-server', extra: "{'do': 'yarn install --frozen-lockfile'}" }
+- {name: fatih/vim-go, extra: "{'do': ':GoInstallBinaries'}"}
+- {name: junegunn/fzf, extra: "{ 'dir': '~/.fzf', 'do': './install --all' }"}
+- {name: pearofducks/ansible-vim, extra: "{ 'do': 'cd ./UltiSnips; ./generate.py'\
+    \ }"}
+- {name: python-mode/python-mode, extra: "{ 'for': 'python', 'branch': 'develop'}"}
+- {name: autozimu/LanguageClient-neovim, extra: "{ 'branch': 'next', 'do': 'bash install.sh',\
+    \ }"}
+- {name: raimon49/requirements.txt.vim, extra: "{'for': 'requirements'}"}
+- {name: vim-scripts/c.vim, extra: "{'for': ['c', 'cpp']}"}
+- {name: neoclide/coc.nvim, extra: "{'branch': 'release'}"}
+- {name: neoclide/coc-python, extra: "{'do': 'yarn install --frozen-lockfile'}"}
+- {name: neoclide/coc-json, extra: "{'do': 'yarn install --frozen-lockfile'}"}
+- {name: neoclide/coc-solargraph, extra: "{'do': 'yarn install --frozen-lockfile'}"}
+- {name: dracula/vim, extra: "{ 'as': 'dracula' }"}
+- {name: mads-hartmann/bash-language-server, extra: "{'do': 'yarn install --frozen-lockfile'}"}

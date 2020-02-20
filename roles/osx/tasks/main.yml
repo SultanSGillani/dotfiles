@@ -1,16 +1,15 @@
----
 - name: Import Defaults
   import_tasks: defaults.yml
   tags:
-    - defaults
+  - defaults
 
 - name: Check that command line tools are installed
-  command: "/usr/bin/xcode-select -print-path"
+  command: /usr/bin/xcode-select -print-path
   register: xcode_select_res
   ignore_errors: true
   changed_when: false
   tags:
-    - update
+  - update
 
 - name: Prepare to install Command Line Tools
   file:
@@ -18,7 +17,7 @@
     state: touch
   when: xcode_select_res.stdout|length == 0
   tags:
-    - update
+  - update
 
 - name: Check for Command Line Tools in Software Update list
   shell: |
@@ -29,38 +28,38 @@
   changed_when: false
   failed_when: su_list.rc != 0 or su_list.stdout|length == 0
   tags:
-    - update
+  - update
 
 - name: Install Command Line Tools
   command: softwareupdate -i '{{ su_list.stdout }}'
   when: xcode_select_res.stdout|length == 0
   notify:
-    - Cleanup
-    - update
+  - Cleanup
+  - update
 
 - name: Tap Casks
   homebrew_tap:
-    name: "{{ brew_taps }}"
+    name: '{{ brew_taps }}'
     state: present
   become: no
   tags:
-    - brew
+  - brew
 
 - name: Install brew programs
   homebrew:
-    name: "{{ brew_packages }}"
+    name: '{{ brew_packages }}'
     state: present
   become: no
   tags:
-    - brew
+  - brew
 
 - name: upgrade brew programs
   homebrew:
     upgrade: yes
   become: no
   tags:
-    - upgrade
-    - brew
+  - upgrade
+  - brew
 
 - name: update brew programs
   homebrew:
@@ -68,31 +67,31 @@
     update_homebrew: yes
   become: no
   tags:
-    - update
-    - brew
+  - update
+  - brew
 
 - name: Install Cask Packages
   homebrew_cask:
-    name: "{{ brew_casks }}"
+    name: '{{ brew_casks }}'
     state: present
     accept_external_apps: yes
   tags:
-    - cask
-    - brew
+  - cask
+  - brew
 
 - name: upgrade Cask programs
   homebrew_cask:
     upgrade: yes
   tags:
-    - upgrade
-    - brew
+  - upgrade
+  - brew
 
 - name: shell | make Homebrew shell default
   osx_defaults:
     domain: com.apple.Terminal
-    key:    Shell
-    type:   string
-    value:  "/usr/local/bin/zsh"
+    key: Shell
+    type: string
+    value: /usr/local/bin/zsh
   tags:
-    - initial
-    - zsh
+  - initial
+  - zsh

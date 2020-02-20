@@ -1,15 +1,14 @@
----
 - name: Install packages | [Archlinux]
   block:
-    - name: Install Pacman Packages
-      package:
-        name: "{{ i3_pac }}"
-        state: present
-      become: yes
-      become_user: root
-    - name: install i3 packages | Archlinux
-      aur:
-        name: "{{ i3_aur }}"
-        use: yay
+  - name: Install Pacman Packages
+    package:
+      name: '{{ i3_pac }}'
+      state: present
+    become: yes
+    become_user: root
+  - name: install i3 packages | Archlinux
+    aur:
+      name: '{{ i3_aur }}'
+      use: yay
   tags:
-    - initial
+  - initial

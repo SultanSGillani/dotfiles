@@ -1,7 +1,6 @@
----
 - name: FZF | OSX install
   homebrew:
     name: fzf
     state: present
   tags:
-    - initial
+  - initial

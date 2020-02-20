@@ -1,19 +1,18 @@
----
 - name: Create gpg directory if it doesnt exist
   file:
-    path: "{{ dotfiles_user_home }}/.gnupg"
+    path: '{{ dotfiles_user_home }}/.gnupg'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0700
     recurse: yes
   tags:
-    - initial
+  - initial
 
 - name: copy Local gpg config
   copy:
     src: gpg
-    dest: "{{ dotfiles_user_home }}/.gnupg/gpg.conf"
+    dest: '{{ dotfiles_user_home }}/.gnupg/gpg.conf'
     mode: 0644
   tags:
-    - update
+  - update

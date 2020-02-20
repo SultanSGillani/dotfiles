@@ -1,22 +1,21 @@
----
 - name: include os specific tasks
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
   when: ansible_facts['os_family']|lower is defined
 
 - name: Create bat directory if it doesnt exist
   file:
-    path: "{{ dotfiles_user_home }}/.config/bat"
+    path: '{{ dotfiles_user_home }}/.config/bat'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0700
     recurse: yes
   tags:
-    - initial
+  - initial
 
 - name: copy batrc file
   copy:
     src: batrc
-    dest: "{{ dotfiles_user_home }}/.config/bat/config"
+    dest: '{{ dotfiles_user_home }}/.config/bat/config'
   tags:
-    - update
+  - update

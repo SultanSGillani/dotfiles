@@ -1,31 +1,31 @@
----
 autocmd:
-  - BufEnter * :syntax sync maxlines=200
-  - BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
-  - BufNewFile,BufRead *.rb,*.rbw,*.gemspec setlocal filetype=ruby
-  - BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
-  - BufRead,BufNewFile *.txt call s:setupWrapping()
-  - BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-  - BufWritePost *.c,*.cpp call s:syntastic()
-  - BufWritePre *.py normal match %s/\s\+$//e
-  - FileType c setlocal tabstop=4 shiftwidth=4 expandtab
-  - FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
-  - FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  - FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  - FileType htmldjango inoremap {{ '{#' }} {{ '{#' }}  {{ '#}' }}<left><left><left>
-  - FileType htmldjango inoremap {{ '{%' }} {{ '{%' }}  {{ '%}' }}<left><left><left>
-  - FileType htmldjango inoremap {{ '{{' }} {{ '{{' }} {{ '}}' }}<left><left><left>
-  - FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  - FileType java setlocal omnifunc=javacomplete#Complete
-  - FileType javascript setl tabstop=4|setl shiftwidth=4|setl expandtab softtabstop=4
-  - FileType make setlocal noexpandtab
-  - FileType ruby set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
-  - FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
-  - FileType json syntax match Comment +\/\/.\+$+
-  - CursorHold * silent call CocActionAsync('highlight')
-  - FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  - User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+- BufEnter * :syntax sync maxlines=200
+- BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=4
+- BufNewFile,BufRead *.rb,*.rbw,*.gemspec setlocal filetype=ruby
+- BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
+- BufRead,BufNewFile *.txt call s:setupWrapping()
+- BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\""
+  | endif
+- BufWritePost *.c,*.cpp call s:syntastic()
+- BufWritePre *.py normal match %s/\s\+$//e
+- FileType c setlocal tabstop=4 shiftwidth=4 expandtab
+- FileType cpp setlocal tabstop=4 shiftwidth=4 expandtab
+- FileType css setlocal shiftwidth=2 tabstop=2 softtabstop=2
+- FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+- FileType htmldjango inoremap {{ '{#' }} {{ '{#' }}  {{ '#}' }}<left><left><left>
+- FileType htmldjango inoremap {{ '{%' }} {{ '{%' }}  {{ '%}' }}<left><left><left>
+- FileType htmldjango inoremap {{ '{{' }} {{ '{{' }} {{ '}}' }}<left><left><left>
+- FileType htmldjango setlocal shiftwidth=2 tabstop=2 softtabstop=2
+- FileType java setlocal omnifunc=javacomplete#Complete
+- FileType javascript setl tabstop=4|setl shiftwidth=4|setl expandtab softtabstop=4
+- FileType make setlocal noexpandtab
+- FileType ruby set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+- FileType xml setlocal shiftwidth=2 tabstop=2 softtabstop=2
+- FileType json syntax match Comment +\/\/.\+$+
+- CursorHold * silent call CocActionAsync('highlight')
+- FileType typescript,json setl formatexpr=CocAction('formatSelected')
+- User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
 autocommand:
-  - bufwritepost .nvimrc source %
-  - bufwritepost nvimrc source %
+- bufwritepost .nvimrc source %
+- bufwritepost nvimrc source %

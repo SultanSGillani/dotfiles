@@ -1,40 +1,39 @@
----
 - name: Create config directory if it doesnt exist
   file:
-    path: "{{ dotfiles_user_home }}/.config"
+    path: '{{ dotfiles_user_home }}/.config'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
     recurse: no
   tags:
-    - initial
+  - initial
 
 - name: Create ctags directory if it doesnt exist
   file:
-    path: "{{ dotfiles_user_home }}/.ctags.d"
+    path: '{{ dotfiles_user_home }}/.ctags.d'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
     recurse: no
   tags:
-    - initial
+  - initial
 
 - name: Nano highlighting files
   git:
-    repo: "https://github.com/scopatz/nanorc.git"
-    dest: "{{ dotfiles_user_home }}/.nano"
+    repo: https://github.com/scopatz/nanorc.git
+    dest: '{{ dotfiles_user_home }}/.nano'
     update: no
     accept_hostkey: yes
     version: master
   tags:
-    - initial
+  - initial
 
 - name: copy Dotfiles
   copy:
-    src: "{{ item.path }}"
-    dest: "{{ dotfiles_user_home }}/{{ item.dest }}"
-  loop: "{{ zsh_dotfiles }}"
+    src: '{{ item.path }}'
+    dest: '{{ dotfiles_user_home }}/{{ item.dest }}'
+  loop: '{{ zsh_dotfiles }}'
   tags:
-    - update
+  - update

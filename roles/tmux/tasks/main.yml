@@ -1,42 +1,41 @@
----
 - name: include os specific tasks
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
-  when: 'ansible_facts["os_family"]|lower is defined'
+  when: ansible_facts["os_family"]|lower is defined
 
 - name: Create tmux config directory if it doesnt exist
   file:
-    path: "{{ dotfiles_user_home }}/.tmux/plugins"
+    path: '{{ dotfiles_user_home }}/.tmux/plugins'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
     recurse: yes
   tags:
-    - initial
+  - initial
 
 - name: copy conf
   template:
     src: tmux.conf.j2
-    dest: "{{ dotfiles_user_home }}/.tmux.conf"
+    dest: '{{ dotfiles_user_home }}/.tmux.conf'
   tags:
-    - update
+  - update
 
 - name: make theme
   template:
-    src: "{{ item }}.tmuxtheme.j2"
-    dest: "{{ dotfiles_user_home }}/.tmux/{{ item }}.tmuxtheme"
+    src: '{{ item }}.tmuxtheme.j2'
+    dest: '{{ dotfiles_user_home }}/.tmux/{{ item }}.tmuxtheme'
     mode: 0755
   loop:
-    - pimux_bluish
-    - powerline
+  - pimux_bluish
+  - powerline
   tags:
-    - update
+  - update
 
 - name: Install tpm
   git:
     repo: https://github.com/tmux-plugins/tpm.git
-    dest: "{{ dotfiles_user_home }}/.tmux/plugins/tpm"
+    dest: '{{ dotfiles_user_home }}/.tmux/plugins/tpm'
     update: no
     version: master
   tags:
-    - initial
+  - initial

@@ -1,8 +1,7 @@
----
 - name: Install slack for debian
   apt:
     deb: https://downloads.slack-edge.com/linux_releases/slack-desktop-3.4.0-amd64.deb
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial

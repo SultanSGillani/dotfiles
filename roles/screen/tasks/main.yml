@@ -1,4 +1,3 @@
----
 - name: include os specific tasks
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
   when: ansible_facts['os_family']|lower is defined
@@ -6,6 +5,6 @@
 - name: Write screen config
   template:
     src: screen.j2
-    dest: "{{ dotfiles_user_home }}/.screenrc"
+    dest: '{{ dotfiles_user_home }}/.screenrc'
   tags:
-    - update
+  - update

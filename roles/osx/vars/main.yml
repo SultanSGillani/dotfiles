@@ -1,169 +1,168 @@
----
-projects_dir: "{{ dotfiles_user_home }}/projects"
-python_env_dir: "{{ dotfiles_user_home }}/.projs"
-ssh_dir: "{{ dotfiles_user_home }}/.ssh"
+projects_dir: '{{ dotfiles_user_home }}/projects'
+python_env_dir: '{{ dotfiles_user_home }}/.projs'
+ssh_dir: '{{ dotfiles_user_home }}/.ssh'
 login_shell: /usr/local/bin/zsh
-finder_new_window_path: "file://{{ dotfiles_user_home }}"
-screenshots_dir: "{{ dotfiles_user_home }}/screenshots"
-mac_files_dir: "{{ dotfiles_dir }}/roles/osx/files"
+finder_new_window_path: file://{{ dotfiles_user_home }}
+screenshots_dir: '{{ dotfiles_user_home }}/screenshots'
+mac_files_dir: '{{ dotfiles_dir }}/roles/osx/files'
 
 dmg_files:
-  - Sblack
+- Sblack
 
 brew_packages:
-  - ansible
-  - autoconf
-  - automake
-  - awk
-  - bash-snippets
-  - bat
-  - coffeescript
-  - convmv
-  - coreutils
-  - ctop
-  - datawire/blackbird/telepresence
-  - derailed/k9s/k9s
-  - derailed/popeye/popeye
-  - diff-so-fancy
-  - dive
-  - docker-compose
-  - exa
-  - fd
-  - fzf
-  - gettext
-  - git
-  - gnupg
-  - helm
-  - htop
-  - hub
-  - ifstat
-  - jq
-  - koekeishiya/formulae/skhd
-  - koekeishiya/formulae/yabai
-  - krew
-  - kube-ps1
-  - kubectx
-  - kubernetes-cli
-  - kubespy
-  - libsass
-  - libtool
-  - libxslt
-  - mas
-  - neofetch
-  - neovim
-  - ngrep
-  - nmap
-  - openssl@1.1
-  - pkg-config
-  - python
-  - readline
-  - ripgrep
-  - rsync
-  - rust
-  - sassc
-  - screen
-  - shellcheck
-  - sqlite
-  - stern
-  - subversion
-  - terminal-notifier
-  - terraform
-  - terraformer
-  - tldr
-  - tmux
-  - unixodbc
-  - vim
-  - wallpaper
-  - wget
-  - xz
-  - zlib
-  - zsh
-  - autoconf
-  - automake
-  - bash-snippets
-  - convmv
-  - coreutils
-  - ctop
-  - diff-so-fancy
-  - docker-compose
-  - gnupg
-  - gpg
-  - htop
-  - libtool
-  - libxslt
-  - libyaml
-  - mas
-  - ngrep
-  - nmap
-  - openssl
-  - pkg-config
-  - rsync
-  - subversion
-  - terminal-notifier
-  - tldr
-  - unixodbc
-  - wget
-  - zlib
+- ansible
+- autoconf
+- automake
+- awk
+- bash-snippets
+- bat
+- coffeescript
+- convmv
+- coreutils
+- ctop
+- datawire/blackbird/telepresence
+- derailed/k9s/k9s
+- derailed/popeye/popeye
+- diff-so-fancy
+- dive
+- docker-compose
+- exa
+- fd
+- fzf
+- gettext
+- git
+- gnupg
+- helm
+- htop
+- hub
+- ifstat
+- jq
+- koekeishiya/formulae/skhd
+- koekeishiya/formulae/yabai
+- krew
+- kube-ps1
+- kubectx
+- kubernetes-cli
+- kubespy
+- libsass
+- libtool
+- libxslt
+- mas
+- neofetch
+- neovim
+- ngrep
+- nmap
+- openssl@1.1
+- pkg-config
+- python
+- readline
+- ripgrep
+- rsync
+- rust
+- sassc
+- screen
+- shellcheck
+- sqlite
+- stern
+- subversion
+- terminal-notifier
+- terraform
+- terraformer
+- tldr
+- tmux
+- unixodbc
+- vim
+- wallpaper
+- wget
+- xz
+- zlib
+- zsh
+- autoconf
+- automake
+- bash-snippets
+- convmv
+- coreutils
+- ctop
+- diff-so-fancy
+- docker-compose
+- gnupg
+- gpg
+- htop
+- libtool
+- libxslt
+- libyaml
+- mas
+- ngrep
+- nmap
+- openssl
+- pkg-config
+- rsync
+- subversion
+- terminal-notifier
+- tldr
+- unixodbc
+- wget
+- zlib
 
 brew_taps:
-  - datawire/blackbird
-  - derailed/k9s
-  - derailed/popeye
-  - homebrew/bundle
-  - homebrew/cask
-  - homebrew/cask-fonts
-  - homebrew/cask-versions
-  - homebrew/core
-  - homebrew/services
-  - koekeishiya/formulae
+- datawire/blackbird
+- derailed/k9s
+- derailed/popeye
+- homebrew/bundle
+- homebrew/cask
+- homebrew/cask-fonts
+- homebrew/cask-versions
+- homebrew/core
+- homebrew/services
+- koekeishiya/formulae
 
 brew_casks:
-  - alfred
-  - appcleaner
-  - bettertouchtool
-  - daisydisk
-  - dash
-  - docker
-  - drawio
-  - evernote
-  - font-cousine
-  - font-hack-nerd-font
-  - google-chrome
-  - google-cloud-sdk
-  - gpg-suite
-  - insomnia
-  - iterm2
-  - kitty
-  - microsoft-office
-  - mono-mdk
-  - osxfuse
-  - postman
-  - pycharm
-  - rider
-  - slack
-  - sourcetree
-  - spotify
-  - tunnelblick
-  - vagrant
-  - webstorm
-  - appcleaner
-  - daisydisk
-  - docker
-  - evernote
-  - font-cousine
-  - font-hack-nerd-font
-  - microsoft-office
-  - tunnelblick
-  - vagrant
-  - webstorm
+- alfred
+- appcleaner
+- bettertouchtool
+- daisydisk
+- dash
+- docker
+- drawio
+- evernote
+- font-cousine
+- font-hack-nerd-font
+- google-chrome
+- google-cloud-sdk
+- gpg-suite
+- insomnia
+- iterm2
+- kitty
+- microsoft-office
+- mono-mdk
+- osxfuse
+- postman
+- pycharm
+- rider
+- slack
+- sourcetree
+- spotify
+- tunnelblick
+- vagrant
+- webstorm
+- appcleaner
+- daisydisk
+- docker
+- evernote
+- font-cousine
+- font-hack-nerd-font
+- microsoft-office
+- tunnelblick
+- vagrant
+- webstorm
 
 mas:
-  - { name: "Magnet", id: 441258766 }
-  - { name: "Microsoft Outlook", id: 985367838 }
-  - { name: "Microsoft Remote Desktop", id: 1295203466 }
+- {name: Magnet, id: 441258766}
+- {name: Microsoft Outlook, id: 985367838}
+- {name: Microsoft Remote Desktop, id: 1295203466}
 
 homebrew_clear_cache: yes
 
 homebrew_prefix: /usr/local
-homebrew_install_path: "{{ homebrew_prefix }}/Homebrew"
-homebrew_brew_bin_path: "{{ homebrew_prefix }}/bin"
+homebrew_install_path: '{{ homebrew_prefix }}/Homebrew'
+homebrew_brew_bin_path: '{{ homebrew_prefix }}/bin'

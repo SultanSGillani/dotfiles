@@ -1,7 +1,6 @@
----
 - name: Install termite packages [Archlinux]
   aur:
     name: termite
     use: yay
   tags:
-    - initial
+  - initial

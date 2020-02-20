@@ -1,4 +1,3 @@
----
 - name: install rofi | Arch
   package:
     name: rofi
@@ -6,4 +5,4 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial

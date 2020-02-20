@@ -1,4 +1,3 @@
----
 - name: install ubersicht
   homebrew_cask:
     name: ubersicht
@@ -11,80 +10,80 @@
 
 - name: Create pecan directories if it doesnt exist
   file:
-    path: "{{ item }}"
+    path: '{{ item }}'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
     recurse: yes
   loop:
-    - "{{ widgets_dir }}/pecan"
-    - "{{ widgets_dir }}/pecan/scss"
-    - "{{ widgets_dir }}/pecan/themes/developer"
+  - '{{ widgets_dir }}/pecan'
+  - '{{ widgets_dir }}/pecan/scss'
+  - '{{ widgets_dir }}/pecan/themes/developer'
   tags:
-    - initial
+  - initial
 
 - name: write pecan jsx
   copy:
-    src: "{{ item }}"
-    dest: "{{ widgets_dir }}/pecan/"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    src: '{{ item }}'
+    dest: '{{ widgets_dir }}/pecan/'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
   with_fileglob:
-    - pecan/jsx/*
+  - pecan/jsx/*
   tags:
-    - update
+  - update
 
 - name: write pecan developer
   copy:
-    src: "{{ item }}"
-    dest: "{{ widgets_dir }}/pecan/themes/developer/"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    src: '{{ item }}'
+    dest: '{{ widgets_dir }}/pecan/themes/developer/'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
   with_fileglob:
-    - pecan/themes/developer/*
+  - pecan/themes/developer/*
   tags:
-    - update
+  - update
 
 - name: write pecan scripts
   copy:
-    src: "{{ item }}"
-    dest: "/usr/local/bin/"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    src: '{{ item }}'
+    dest: /usr/local/bin/
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
   become: yes
   become_user: root
   with_fileglob:
-    - scripts/*
+  - scripts/*
   tags:
-    - update
+  - update
 
 - name: write pecan style
   copy:
-    src: "pecan/{{ item }}"
-    dest: "{{ widgets_dir }}/pecan/{{ item }}"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    src: pecan/{{ item }}
+    dest: '{{ widgets_dir }}/pecan/{{ item }}'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
   become: yes
   become_user: root
   loop:
-    - wal-set
-    - pecan-style
+  - wal-set
+  - pecan-style
   tags:
-    - update
+  - update
 
 - name: start pecan⁩
-  command: "{{ widgets_dir }}/pecan/pecan-style --load developer"
+  command: '{{ widgets_dir }}/pecan/pecan-style --load developer'
   changed_when: false
   tags:
-    - update
+  - update
 
 - name: wal-set
   command:
-    chdir: "{{ widgets_dir }}/pecan"
-    cmd: "{{ widgets_dir }}/pecan/wal-set"
+    chdir: '{{ widgets_dir }}/pecan'
+    cmd: '{{ widgets_dir }}/pecan/wal-set'
   changed_when: false
   tags:
-    - update
+  - update

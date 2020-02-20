@@ -1,8 +1,7 @@
----
 highlights:
-  - Comment gui=bold
-  - LineNr guibg=NONE ctermbg=NONE
-  - NonText guibg=none
-  - Normal gui=none
-  - Normal guibg=NONE ctermbg=NONE
-  - Pmenu guibg=white guifg=black gui=bold
+- Comment gui=bold
+- LineNr guibg=NONE ctermbg=NONE
+- NonText guibg=none
+- Normal gui=none
+- Normal guibg=NONE ctermbg=NONE
+- Pmenu guibg=white guifg=black gui=bold

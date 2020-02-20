@@ -1,12 +1,11 @@
----
 abbr:
-  - Q q
-  - Q! q!
-  - Qall qall
-  - Qall! qall!
-  - W w
-  - W! w!
-  - Wa wa
-  - Wq wq
-  - wQ wq
-  - WQ wq
+- Q q
+- Q! q!
+- Qall qall
+- Qall! qall!
+- W w
+- W! w!
+- Wa wa
+- Wq wq
+- wQ wq
+- WQ wq

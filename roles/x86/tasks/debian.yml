@@ -1,11 +1,10 @@
----
 - name: install apt pkgs
   package:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
   loop:
-    - pulseaudio-utils
-    - gnome-power-manager
-    - numlockx
+  - pulseaudio-utils
+  - gnome-power-manager
+  - numlockx
   become: yes
   become_user: root

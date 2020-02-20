@@ -1,4 +1,3 @@
----
 - name: install rclone
   package:
     name: rclone
@@ -6,4 +5,4 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial

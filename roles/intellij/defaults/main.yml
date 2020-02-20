@@ -1,6 +1,5 @@
----
-intellij_version: "2019.1.3"
-intellij_edition: 'ultimate'
+intellij_version: 2019.1.3
+intellij_edition: ultimate
 intellij_install_dir: /opt/idea/idea-{{ intellij_edition }}-{{ intellij_version }}
-intellij_filename: "ideaIU-{{ intellij_version }}.tar.gz"
-intellij_mirror: "http://download.jetbrains.com/idea"
+intellij_filename: ideaIU-{{ intellij_version }}.tar.gz
+intellij_mirror: http://download.jetbrains.com/idea

@@ -1,13 +1,12 @@
----
 - name: check if rustup is installed
   command: ls "{{ dotfiles_user_home }}/.rustup"
   register: rustup_check
   become: yes
-  become_user: "{{ zsh_user }}"
+  become_user: '{{ zsh_user }}'
   changed_when: false
   failed_when: false
   tags:
-    - initial
+  - initial
 
 - name: get rust version
   shell: |
@@ -15,66 +14,67 @@
     "{{ dotfiles_user_home }}/.cargo/bin/rustc --version | awk '{print $2}'"
   register: rust_check
   become: yes
-  become_user: "{{ zsh_user }}"
+  become_user: '{{ zsh_user }}'
   changed_when: false
   failed_when: false
   tags:
-    - initial
+  - initial
 
 - name: detect facts
   set_fact:
-    rustup_installed: "{{ rustup_check.rc == 0 }}"
-    rust_installed: "{{ rust_check.rc == 0 }}"
-    rust_detected_version: "{{ None if rust_check.rc > 0 else rust_check.stdout }}"
+    rustup_installed: '{{ rustup_check.rc == 0 }}'
+    rust_installed: '{{ rust_check.rc == 0 }}'
+    rust_detected_version: '{{ None if rust_check.rc > 0 else rust_check.stdout }}'
   tags:
-    - initial
+  - initial
 
 - name: detect whether correct version of rust
   set_fact:
-    rust_version_changed: "{{ rust_version != 'stable' and rust_version != rust_detected_version }}"
+    rust_version_changed: "{{ rust_version != 'stable' and rust_version != rust_detected_version\
+      \ }}"
   tags:
-    - initial
+  - initial
 
 - name: fetch rustup installer
   get_url:
     url: https://sh.rustup.rs
-    dest: "{{ rustup_tmp_installer }}"
-    mode: "0755"
+    dest: '{{ rustup_tmp_installer }}'
+    mode: '0755'
   when: not rustup_installed
   tags:
-    - initial
+  - initial
 
 - name: install rustup as the user
-  command: "{{ rustup_tmp_installer }} -y"
+  command: '{{ rustup_tmp_installer }} -y'
   become: yes
-  become_user: "{{ zsh_user }}"
+  become_user: '{{ zsh_user }}'
   when: not rustup_installed
   tags:
-    - initial
+  - initial
 
 - name: Create cargo directory if it doesn't exist
   file:
-    path: "{{ cargo_home }}"
+    path: '{{ cargo_home }}'
     state: directory
     mode: 0755
   tags:
-    - initial
+  - initial
 
 - name: set default toolchain
-  command: "{{ rustup_shell | quote }} default stable"
+  command: '{{ rustup_shell | quote }} default stable'
   environment:
-    PATH: "{{ rustup_home }}"
+    PATH: '{{ rustup_home }}'
   when: not rustup_installed
   tags:
-    - initial
+  - initial
 
-- name: "Rust | Install Cargo packages"
-  command: "{{ cargo_home | quote }}/bin/cargo install {{ packages.name | quote }}"
+- name: Rust | Install Cargo packages
+  command: '{{ cargo_home | quote }}/bin/cargo install {{ packages.name | quote }}'
   args:
-    creates: "{{ cargo_home }}/bin/{{ packages.name }}"
-  loop: "{{ cargo_items }}"
+    creates: '{{ cargo_home }}/bin/{{ packages.name }}'
+  loop: '{{ cargo_items }}'
   loop_control:
     loop_var: packages
   register: cargo_result
   tags:
-    - update
+  - update

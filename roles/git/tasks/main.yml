@@ -1,18 +1,17 @@
----
 - name: include os specific tasks
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
-  when: "ansible_facts['os_family']|lower is defined"
+  when: ansible_facts['os_family']|lower is defined
 
 - name: Link global gitignore files
   template:
     src: gitignore_global.j2
-    dest: "{{ dotfiles_user_home }}/.gitignore_global"
+    dest: '{{ dotfiles_user_home }}/.gitignore_global'
   tags:
-    - update
+  - update
 
 - name: Make sure gitconfig is up to date
   template:
     src: gitconfig.j2
-    dest: "{{ dotfiles_user_home }}/.gitconfig"
+    dest: '{{ dotfiles_user_home }}/.gitconfig'
   tags:
-    - update
+  - update

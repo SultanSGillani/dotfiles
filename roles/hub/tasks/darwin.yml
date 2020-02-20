@@ -1,7 +1,6 @@
----
 - name: OSX | Install hub
   homebrew:
     name: hub
     state: present
   tags:
-    - initial
+  - initial

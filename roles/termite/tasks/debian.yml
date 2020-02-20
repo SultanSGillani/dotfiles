@@ -1,4 +1,3 @@
----
 - name: check if termite is installed
   command: which termite
   changed_when: false
@@ -7,17 +6,17 @@
 
 - name: Debian | Install apt termite dependencies
   package:
-    name: "{{ termite_packages }}"
+    name: '{{ termite_packages }}'
     state: present
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: clone termite
   git:
     repo: https://github.com/thestinger/termite.git
-    dest: "{{ dotfiles_user_home }}/termite"
+    dest: '{{ dotfiles_user_home }}/termite'
     update: no
     version: master
   when: termite_installed.rc == 1
@@ -25,7 +24,7 @@
 - name: clone vte-ng
   git:
     repo: https://github.com/thestinger/vte-ng.git
-    dest: "{{ dotfiles_user_home }}/vte-ng"
+    dest: '{{ dotfiles_user_home }}/vte-ng'
     update: no
     version: 0.56.2-ng
   when: termite_installed.rc == 1
@@ -33,20 +32,20 @@
 - name: autogen vte-ng
   command: ./autogen.sh
   args:
-    chdir: "{{ dotfiles_user_home }}/vte-ng"
+    chdir: '{{ dotfiles_user_home }}/vte-ng'
   environment:
-    LIBRARY_PATH: "/usr/include/gtk-3.0:{{ ansible_env.PATH }}"
+    LIBRARY_PATH: /usr/include/gtk-3.0:{{ ansible_env.PATH }}
   when: termite_installed.rc == 1
 
 - name: make vte-ng
   make:
-    chdir: "{{ dotfiles_user_home }}/vte-ng"
+    chdir: '{{ dotfiles_user_home }}/vte-ng'
     target:
   when: termite_installed.rc == 1
 
 - name: make vte-ng
   make:
-    chdir: "{{ dotfiles_user_home }}/vte-ng"
+    chdir: '{{ dotfiles_user_home }}/vte-ng'
     target: install
   become: yes
   become_user: root
@@ -54,13 +53,13 @@
 
 - name: make termite
   make:
-    chdir: "{{ dotfiles_user_home }}/termite"
+    chdir: '{{ dotfiles_user_home }}/termite'
     target:
   when: termite_installed.rc == 1
 
 - name: make install termite
   make:
-    chdir: "{{ dotfiles_user_home }}/termite"
+    chdir: '{{ dotfiles_user_home }}/termite'
     target: install
   become: yes
   become_user: root
@@ -75,16 +74,16 @@
 
 - name: remove termite repo dir
   file:
-    path: "{{ dotfiles_user_home }}/termite"
+    path: '{{ dotfiles_user_home }}/termite'
     state: absent
   tags:
-    - initial
+  - initial
   when: termite_installed.rc == 1
 
 - name: remove vte-ng repo dir
   file:
-    path: "{{ dotfiles_user_home }}/vte-ng"
+    path: '{{ dotfiles_user_home }}/vte-ng'
     state: absent
   tags:
-    - initial
+  - initial
   when: termite_installed.rc == 1

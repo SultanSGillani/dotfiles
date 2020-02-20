@@ -1,16 +1,17 @@
----
 - name: include debian tasks
-  include_tasks: "{{ ansible_facts['distribution']|lower }}-{{ ansible_distribution_release }}.yml"
+  include_tasks: "{{ ansible_facts['distribution']|lower }}-{{ ansible_distribution_release\
+    \ }}.yml"
   when: ansible_distribution_release is defined
 
-- name: Install i3, i3-gaps and its dependencies | "{{ ansible_facts['distribution']|lower }}"
+- name: Install i3, i3-gaps and its dependencies | "{{ ansible_facts['distribution']|lower
+    }}"
   package:
-    name: "{{ i3_debian }}"
+    name: '{{ i3_debian }}'
     state: present
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Add playerctl deb file
   apt:
@@ -18,43 +19,43 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: run i3 block for debian
   block:
-    - name: clone i3-gaps
-      git:
-        repo: https://github.com/Airblader/i3.git
-        dest: /tmp/i3-gaps
-        update: no
-        accept_hostkey: yes
-        version: gaps-next
-    - name: run autoreconf and create build dir
-      shell: |
-        cd /tmp/i3-gaps
-        autoreconf --force --install
-        rm -rf build/
-        mkdir -p build && cd build/
-        ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-    - name: make i3-gaps
-      make:
-        chdir: /tmp/i3-gaps/build
-        target:
-    - name: Install i3-gaps
-      make:
-        chdir: /tmp/i3-gaps/build
-        target: install
+  - name: clone i3-gaps
+    git:
+      repo: https://github.com/Airblader/i3.git
+      dest: /tmp/i3-gaps
+      update: no
+      accept_hostkey: yes
+      version: gaps-next
+  - name: run autoreconf and create build dir
+    shell: |
+      cd /tmp/i3-gaps
+      autoreconf --force --install
+      rm -rf build/
+      mkdir -p build && cd build/
+      ../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
+  - name: make i3-gaps
+    make:
+      chdir: /tmp/i3-gaps/build
+      target:
+  - name: Install i3-gaps
+    make:
+      chdir: /tmp/i3-gaps/build
+      target: install
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Clone i3lock-fancy-monitor to the i3 config
   git:
     repo: https://github.com/guimeira/i3lock-fancy-multimonitor.git
-    dest: "{{ dotfiles_user_home }}/.config/i3/i3lock-fancy-multimonitor"
+    dest: '{{ dotfiles_user_home }}/.config/i3/i3lock-fancy-multimonitor'
     update: no
     accept_hostkey: yes
     version: master
   tags:
-    - initial
+  - initial

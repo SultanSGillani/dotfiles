@@ -1,3 +1,2 @@
----
 gpg_config:
-    - { path: 'gpg', dest: 'gpg.conf' }
+- {path: gpg, dest: gpg.conf}

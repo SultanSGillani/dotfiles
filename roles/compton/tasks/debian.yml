@@ -1,4 +1,3 @@
----
 - name: check if compton is installed
   command: which compton
   changed_when: false
@@ -7,35 +6,35 @@
 
 - name: Debian | Install apt compton dependencies
   package:
-    name: "{{ compton_packages }}"
+    name: '{{ compton_packages }}'
     state: present
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: clone compton tyrone
   git:
     repo: https://github.com/tryone144/compton.git
-    dest: "{{ dotfiles_user_home }}/compton"
+    dest: '{{ dotfiles_user_home }}/compton'
     update: no
     version: dual_kawase
 
 - name: make compton
   make:
-    chdir: "{{ dotfiles_user_home }}/compton"
+    chdir: '{{ dotfiles_user_home }}/compton'
     target:
 
 - name: make install compton
   make:
-    chdir: "{{ dotfiles_user_home }}/compton"
+    chdir: '{{ dotfiles_user_home }}/compton'
     target: install
   become: yes
   become_user: root
 
 - name: remove compton repo dir
   file:
-    path: "{{ dotfiles_user_home }}/compton"
+    path: '{{ dotfiles_user_home }}/compton'
     state: absent
   tags:
-    - initial
+  - initial

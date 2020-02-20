@@ -1,8 +1,7 @@
----
 - name: Install Git on Mac
   homebrew:
     name: git
     state: present
   become: no
   tags:
-    - initial
+  - initial

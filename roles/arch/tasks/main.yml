@@ -1,4 +1,3 @@
----
 - name: update package cache
   pacman:
     upgrade: no
@@ -6,7 +5,7 @@
   become: yes
   become_user: root
   tags:
-    - update
+  - update
 
 - name: install packages for makepkg.conf
   package:
@@ -15,7 +14,7 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: install packages for makepkg.conf
   package:
@@ -24,7 +23,7 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Write makepkg config
   template:
@@ -33,18 +32,18 @@
   become: yes
   become_user: root
   tags:
-    - update
+  - update
 
 - name: Install pacman packages [Archlinux]
   package:
-    name: "{{ pacman_packages }}"
+    name: '{{ pacman_packages }}'
     state: present
     update_cache: yes
   become: yes
   become_user: root
   tags:
-    - initial
-    
+  - initial
+
 - name: Install sudo for pacman
   pacman:
     name: sudo
@@ -53,24 +52,24 @@
   become: yes
   become_user: root
   tags:
-    - initial
-    - sudo
+  - initial
+  - sudo
 
 - name: create aur user and give sudo
   user:
-    name: "{{ aur_user }}"
+    name: '{{ aur_user }}'
     group: wheel
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Install yay with makepkg
   aur:
     name: yay
     use: makepkg
   tags:
-    - initial
+  - initial
 
 - name: upgrade packages [Archlinux]
   pacman:
@@ -78,14 +77,13 @@
   become: yes
   become_user: root
   tags:
-    - upgrade
+  - upgrade
 
 - name: install aur packages [Archlinux]
   aur:
-    name: "{{ yay_packages }}"
+    name: '{{ yay_packages }}'
     use: yay
     skip_pgp_check: true
   tags:
-    - initial
-    - aur_install
-
+  - initial
+  - aur_install

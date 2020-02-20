@@ -1,5 +1,4 @@
----
 ssh_config:
-  - { path: '', dest: '' }
+- {path: '', dest: ''}
 
-ssh_directory: "{{ dotfiles_dir }}/roles/ssh"
+ssh_directory: '{{ dotfiles_dir }}/roles/ssh'

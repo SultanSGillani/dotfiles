@@ -1,78 +1,77 @@
----
 - name: Ansible Dev & Dotfiles Setup for linux
   vars_files:
-    - group_vars/all/main.yml
+  - group_vars/all/main.yml
   hosts: all
   gather_facts: no
   become: yes
-  become_user: "{{ zsh_user }}"
+  become_user: '{{ zsh_user }}'
   tasks:
-    - block:
-        - import_role:
-            name: display
-          tags:
-            - display
-            - xfce
-            - gnome
-        - import_role:
-            name: x
-          tags:
-            - x
-            - xorg
-            - xinit
-        - import_role:
-            name: gtk
-          tags:
-            - gtk
-            - 3
-        - import_role:
-            name: urxvt
-          tags:
-            - urxvt
-            - terminal
-        - import_role:
-            name: network
-          tags:
-            - network
-            - resolv
-        - import_role:
-            name: ranger
-          tags:
-            - ranger
-            - rifle
-        - import_role:
-            name: compton
-          tags:
-            - compton
-        - import_role:
-            name: i3
-          tags:
-            - i3
-            - i3-wm
-        - import_role:
-            name: polybar
-          tags:
-            - polybar
-        - import_role:
-            name: dunst
-          tags:
-            - dunst
-        - import_role:
-            name: x86
-          tags:
-            - x86
-        - import_role:
-            name: st
-          tags:
-            - st
-            - terminal
-        - import_role:
-            name: termite
-          tags:
-            - termite
-            - terminal
-        - import_role:
-            name: rofi
-          tags:
-            - rofi
-            - dmenu
+  - block:
+    - import_role:
+        name: display
+      tags:
+      - display
+      - xfce
+      - gnome
+    - import_role:
+        name: x
+      tags:
+      - x
+      - xorg
+      - xinit
+    - import_role:
+        name: gtk
+      tags:
+      - gtk
+      - 3
+    - import_role:
+        name: urxvt
+      tags:
+      - urxvt
+      - terminal
+    - import_role:
+        name: network
+      tags:
+      - network
+      - resolv
+    - import_role:
+        name: ranger
+      tags:
+      - ranger
+      - rifle
+    - import_role:
+        name: compton
+      tags:
+      - compton
+    - import_role:
+        name: i3
+      tags:
+      - i3
+      - i3-wm
+    - import_role:
+        name: polybar
+      tags:
+      - polybar
+    - import_role:
+        name: dunst
+      tags:
+      - dunst
+    - import_role:
+        name: x86
+      tags:
+      - x86
+    - import_role:
+        name: st
+      tags:
+      - st
+      - terminal
+    - import_role:
+        name: termite
+      tags:
+      - termite
+      - terminal
+    - import_role:
+        name: rofi
+      tags:
+      - rofi
+      - dmenu

@@ -1,4 +1,3 @@
----
 - name: install screen
   homebrew:
     name: screen

@@ -1,12 +1,11 @@
----
 - name: clone screen
   git:
     repo: https://git.savannah.gnu.org/git/screen.git
-    dest: "{{ dotfiles_user_home }}/screen"
+    dest: '{{ dotfiles_user_home }}/screen'
     update: no
     version: master
   tags:
-    - initial
+  - initial
 
 - name: install some deps
   package:
@@ -16,12 +15,12 @@
   become_user: root
 
 - name: run autogen on screen
-  command: "{{ dotfiles_user_home }}/screen/src/autogen.sh"
+  command: '{{ dotfiles_user_home }}/screen/src/autogen.sh'
   args:
-    chdir: "{{ dotfiles_user_home }}/screen/src"
-    creates: "{{ dotfiles_user_home }}/screen/src/configure"
+    chdir: '{{ dotfiles_user_home }}/screen/src'
+    creates: '{{ dotfiles_user_home }}/screen/src/configure'
   tags:
-    - initial
+  - initial
 
 - name: configure screen
   command: |
@@ -38,45 +37,45 @@
     --with-pty-group=5 \
     --with-pty-rofs="yes"
   args:
-    chdir: "{{ dotfiles_user_home }}/screen/src"
-    creates: "{{ dotfiles_user_home }}/screen/src/Makefile"
+    chdir: '{{ dotfiles_user_home }}/screen/src'
+    creates: '{{ dotfiles_user_home }}/screen/src/Makefile'
   tags:
-    - initial
+  - initial
 
 - name: make screen
   make:
-    chdir: "{{ dotfiles_user_home }}/screen/src"
+    chdir: '{{ dotfiles_user_home }}/screen/src'
     target:
   tags:
-    - initial
+  - initial
 
 - name: make install screen
   make:
-    chdir: "{{ dotfiles_user_home }}/screen/src"
+    chdir: '{{ dotfiles_user_home }}/screen/src'
     target: install
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: copy pam.d and tmpfiles.d
   copy:
-    src: "{{ item.name }}"
-    dest: "{{ item.dest }}"
+    src: '{{ item.name }}'
+    dest: '{{ item.dest }}'
     mode: 0644
   loop:
-    - { name: pam.d, dest: /etc/pam.d/screen }
-    - { name: tmpfiles.d, dest: /usr/lib/tmpfiles.d/screen.conf }
-    - { name: "{{ dotfiles_user_home }}/screen/src/etc/etcscreenrc", dest: /etc/screenrc }
-    - { name: "{{ dotfiles_user_home }}/screen/src/etc/screenrc", dest: /etc/skel/.screenrc }
+  - {name: pam.d, dest: /etc/pam.d/screen}
+  - {name: tmpfiles.d, dest: /usr/lib/tmpfiles.d/screen.conf}
+  - {name: '{{ dotfiles_user_home }}/screen/src/etc/etcscreenrc', dest: /etc/screenrc}
+  - {name: '{{ dotfiles_user_home }}/screen/src/etc/screenrc', dest: /etc/skel/.screenrc}
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: remove screen repo dir
   file:
-    path: "{{ dotfiles_user_home }}/screen"
+    path: '{{ dotfiles_user_home }}/screen'
     state: absent
   tags:
-    - initial
+  - initial

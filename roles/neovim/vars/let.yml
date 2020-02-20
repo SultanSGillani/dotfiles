@@ -1,120 +1,101 @@
----
 let:
-  - mapleader=","
-  - "g:ctrlp_status_func = {
-    \ 'main': 'CtrlPStatusFunc_1',
-    \ 'prog': 'CtrlPStatusFunc_2',
-    \ }"
-  - "g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }"
-  - "g:tagbar_status_func = 'TagbarStatusFunc'"
-  - "g:tagbar_type_groovy = {
-    \ 'ctagstype': 'groovy',
-    \ 'kinds': [
-      \ 'p:package',
-      \ 'c:class',
-      \ 'i:interface',
-      \ 'f:function',
-      \ 'v:variables',
-      \ ]
-    \ }"
-  - "g:tagbar_type_ruby = {
-    \ 'kinds': [
-      \ 'm:modules',
-      \ 'c:classes',
-      \ 'd:describes',
-      \ 'C:contexts',
-      \ 'f:methods',
-      \ 'F:singleton methods'
-        \ ]
-    \ }"
-  - $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
-  - $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  - '&t_8b = "\<Esc>[48;2;%lu;%lu;%lum"'
-  - '&t_8f = "\<Esc>[38;2;%lu;%lu;%lum"'
-  - base16colorspace=256
-  - g:ansible_attribute_highlight = "ob"
-  - g:ansible_extra_keywords_highlight = 1
-  - g:ansible_name_highlight = 'd'
-  - g:ansible_normal_keywords_highlight = 'Constant'
-  - g:ansible_yamlKeyName = 'yamlKey'
-  - g:C_SourceCodeExtensions  = 'h cc cp cxx cpp CPP c++ C i ii'
-  - g:fuf_splitPathMatching=1
-  - g:go_fmt_command = "goimports"
-  - g:go_fmt_fail_silently = 1
-  - g:go_highlight_array_whitespace_error = 0
-  - g:go_highlight_build_constraints = 1
-  - g:go_highlight_extra_types = 1
-  - g:go_highlight_fields = 1
-  - g:go_highlight_functions = 1
-  - g:go_highlight_generate_tags = 1
-  - g:go_highlight_methods = 1
-  - g:go_highlight_operators = 1
-  - g:go_highlight_space_tab_error = 0
-  - g:go_highlight_structs = 1
-  - g:go_highlight_trailing_whitespace_error = 0
-  - g:go_highlight_types = 1
-  - g:go_list_type = "quickfix"
-  - g:javascript_enable_domhtmlcss = 1
-  - g:syntastic_javascript_checkers = ['eslint']
-  - g:syntastic_javascript_eslint_exe = '~/.nodenv/shims/eslint'
-  - g:jedi#completions_command = "<C-Space>"
-  - g:jedi#documentation_command = "K"
-  - g:jedi#goto_assignments_command = "<leader>g"
-  - g:jedi#goto_definitions_command = "<leader>d"
-  - g:jedi#popup_on_dot = 0
-  - g:jedi#rename_command = "<leader>r"
-  - g:jedi#show_call_signatures = "0"
-  - g:jedi#smart_auto_mappings = 0
-  - g:jedi#usages_command = "<leader>n"
-  - g:make = 'gmake'
-  - g:nerdtree_tabs_focus_on_files=1
-  - g:NERDTreeChDirMode=2
-  - g:NERDTreeDirArrowCollapsible = '↡'
-  - g:NERDTreeDirArrowExpandable = '↠'
-  - g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
-  - g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
-  - g:NERDTreeShowBookmarks=1
-  - g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
-  - g:NERDTreeWinSize = 50
-  - g:polyglot_disabled = ['python']
-  - g:pymode_options_max_line_length = 109
-  - g:pymode_python = 'python3'
-  - g:pymode_syntax_all = 1
-  - g:pymode_virtualenv = 1
-  - g:session_autoload = "no"
-  - g:session_autosave = "no"
-  - g:session_command_aliases = 1
-  - g:session_directory = "{{ neovim_config_dir }}/session"
-  - g:SimpylFold_docstring_preview=1
-  - g:snippetsEmu_key = "<S-Tab>"
-  - g:syntastic_aggregate_errors = 1
-  - g:syntastic_always_populate_loc_list=1
-  - g:syntastic_auto_loc_list=1
-  - g:syntastic_error_symbol='✗'
-  - g:syntastic_go_checkers = ['golint', 'govet']
-  - g:syntastic_python_checkers=['python', 'flake8']
-  - g:syntastic_style_error_symbol = '✗'
-  - g:syntastic_style_warning_symbol = '⚠'
-  - g:syntastic_warning_symbol='⚠'
-  - g:syntastic_yaml_yamllint_args = '-c ' . shellescape($HOME . '/.yamllint')
-  - g:tagbar_autofocus = 1
-  - g:tagbar_iconchars = ['↠', '↡']
-  - g:tagbar_width = 30
-  - g:theme_name = 'base16-snazzy'
-  - g:UltiSnipsEditSplit="vertical"
-  - "g:LanguageClient_serverCommands = { 'sh': ['bash-language-server', 'start'] }"
-  - g:UltiSnipsExpandTrigger="<tab>"
-  - g:UltiSnipsJumpBackwardTrigger="<c-b>"
-  - g:UltiSnipsJumpForwardTrigger="<tab>"
-  - g:unite_force_overwrite_statusline = 0
-  - g:vimfiler_force_overwrite_statusline = 0
-  - g:vimshell_force_overwrite_statusline = 0
-  - g:vimshell_prompt =  '$ '
-  - g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-  - Grep_Default_Options = '-IR'
-  - Grep_Skip_Dirs = '.git node_modules'
-  - Grep_Skip_Files = '*.log *.db'
-  - NERDTreeShowHidden=1
-  - no_buffers_menu=1
-  - python_highlight_all = 1
-  - Tlist_Ctags_Cmd = 'ctags'
+- mapleader=","
+- "g:ctrlp_status_func = {  'main': 'CtrlPStatusFunc_1',  'prog': 'CtrlPStatusFunc_2',\
+  \  }"
+- "g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }"
+- g:tagbar_status_func = 'TagbarStatusFunc'
+- "g:tagbar_type_groovy = {  'ctagstype': 'groovy',  'kinds': [  'p:package',  'c:class',\
+  \  'i:interface',  'f:function',  'v:variables',  ]  }"
+- "g:tagbar_type_ruby = {  'kinds': [  'm:modules',  'c:classes',  'd:describes',\
+  \  'C:contexts',  'f:methods',  'F:singleton methods'  ]  }"
+- $FZF_DEFAULT_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
+- $NVIM_TUI_ENABLE_TRUE_COLOR=1
+- '&t_8b = "\<Esc>[48;2;%lu;%lu;%lum"'
+- '&t_8f = "\<Esc>[38;2;%lu;%lu;%lum"'
+- base16colorspace=256
+- g:ansible_attribute_highlight = "ob"
+- g:ansible_extra_keywords_highlight = 1
+- g:ansible_name_highlight = 'd'
+- g:ansible_normal_keywords_highlight = 'Constant'
+- g:ansible_yamlKeyName = 'yamlKey'
+- g:C_SourceCodeExtensions  = 'h cc cp cxx cpp CPP c++ C i ii'
+- g:fuf_splitPathMatching=1
+- g:go_fmt_command = "goimports"
+- g:go_fmt_fail_silently = 1
+- g:go_highlight_array_whitespace_error = 0
+- g:go_highlight_build_constraints = 1
+- g:go_highlight_extra_types = 1
+- g:go_highlight_fields = 1
+- g:go_highlight_functions = 1
+- g:go_highlight_generate_tags = 1
+- g:go_highlight_methods = 1
+- g:go_highlight_operators = 1
+- g:go_highlight_space_tab_error = 0
+- g:go_highlight_structs = 1
+- g:go_highlight_trailing_whitespace_error = 0
+- g:go_highlight_types = 1
+- g:go_list_type = "quickfix"
+- g:javascript_enable_domhtmlcss = 1
+- g:syntastic_javascript_checkers = ['eslint']
+- g:syntastic_javascript_eslint_exe = '~/.nodenv/shims/eslint'
+- g:jedi#completions_command = "<C-Space>"
+- g:jedi#documentation_command = "K"
+- g:jedi#goto_assignments_command = "<leader>g"
+- g:jedi#goto_definitions_command = "<leader>d"
+- g:jedi#popup_on_dot = 0
+- g:jedi#rename_command = "<leader>r"
+- g:jedi#show_call_signatures = "0"
+- g:jedi#smart_auto_mappings = 0
+- g:jedi#usages_command = "<leader>n"
+- g:make = 'gmake'
+- g:nerdtree_tabs_focus_on_files=1
+- g:NERDTreeChDirMode=2
+- g:NERDTreeDirArrowCollapsible = '↡'
+- g:NERDTreeDirArrowExpandable = '↠'
+- g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
+- g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
+- g:NERDTreeShowBookmarks=1
+- g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
+- g:NERDTreeWinSize = 50
+- g:polyglot_disabled = ['python']
+- g:pymode_options_max_line_length = 109
+- g:pymode_python = 'python3'
+- g:pymode_syntax_all = 1
+- g:pymode_virtualenv = 1
+- g:session_autoload = "no"
+- g:session_autosave = "no"
+- g:session_command_aliases = 1
+- g:session_directory = "{{ neovim_config_dir }}/session"
+- g:SimpylFold_docstring_preview=1
+- g:snippetsEmu_key = "<S-Tab>"
+- g:syntastic_aggregate_errors = 1
+- g:syntastic_always_populate_loc_list=1
+- g:syntastic_auto_loc_list=1
+- g:syntastic_error_symbol='✗'
+- g:syntastic_go_checkers = ['golint', 'govet']
+- g:syntastic_python_checkers=['python', 'flake8']
+- g:syntastic_style_error_symbol = '✗'
+- g:syntastic_style_warning_symbol = '⚠'
+- g:syntastic_warning_symbol='⚠'
+- g:syntastic_yaml_yamllint_args = '-c ' . shellescape($HOME . '/.yamllint')
+- g:tagbar_autofocus = 1
+- g:tagbar_iconchars = ['↠', '↡']
+- g:tagbar_width = 30
+- g:theme_name = 'base16-snazzy'
+- g:UltiSnipsEditSplit="vertical"
+- "g:LanguageClient_serverCommands = { 'sh': ['bash-language-server', 'start'] }"
+- g:UltiSnipsExpandTrigger="<tab>"
+- g:UltiSnipsJumpBackwardTrigger="<c-b>"
+- g:UltiSnipsJumpForwardTrigger="<tab>"
+- g:unite_force_overwrite_statusline = 0
+- g:vimfiler_force_overwrite_statusline = 0
+- g:vimshell_force_overwrite_statusline = 0
+- g:vimshell_prompt =  '$ '
+- g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+- Grep_Default_Options = '-IR'
+- Grep_Skip_Dirs = '.git node_modules'
+- Grep_Skip_Files = '*.log *.db'
+- NERDTreeShowHidden=1
+- no_buffers_menu=1
+- python_highlight_all = 1
+- Tlist_Ctags_Cmd = 'ctags'

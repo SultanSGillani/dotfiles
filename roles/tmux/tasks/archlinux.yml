@@ -1,7 +1,6 @@
----
 - name: install tmux packages | Arch
   aur:
     name: tmux
     use: yay
   tags:
-    - initial
+  - initial

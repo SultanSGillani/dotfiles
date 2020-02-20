@@ -1,61 +1,60 @@
----
 set:
-  - autoread
-  - background=dark
-  - backspace=indent,eol,start
-  - nobackup
-  - nowritebackup
-  - binary
-  - cmdheight=2
-  - updatetime=300
-  - shortmess+=c
-  - signcolumn=yes
-  - bomb
-  - complete=.,t
-  - clipboard^=unnamedplus,unnamed
-  - display+=lastline
-  - expandtab
-  - fileencoding=utf-8
-  - fileencodings=utf-8
-  - fileformats=unix,dos,mac
-  - formatoptions=n
-  - gcr=a:blinkon0
-  - grepprg=rg\ --vimgrep
-  - hidden
-  - hlsearch
-  - ignorecase
-  - incsearch
-  - laststatus=2
-  - list listchars=tab:▷⋅,trail:⋅,nbsp:⋅"
-  - modeline
-  - mouse=a
-  - mousemodel=popup
-  - noswapfile
-  - nowrap
-  - number
-  - numberwidth=1
-  - nrformats-=octal
-  - pastetoggle=<leader>z
-  - ruler
-  - scrolloff=3
-  - shell=$SHELL
-  - shiftround
-  - shiftwidth=4
-  - smartcase
-  - smarttab
-  - softtabstop=4
-  - sessionoptions-=options
-  - t_Co=256
-  - t_ut=
-  - tabstop=4
-  - tags+=.tags
-  - termguicolors
-  - textwidth=109
-  - titleold="Terminal"
-  - titlestring+=%f
-  - titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}/
-  - undodir=./.vim-undo,~/tmp/vim,~/.tmp,~/tmp,/tmp
-  - visualbell t_vb=
-  - wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
-  - wildmode=list:longest,list:full
-  - wildmenu
+- autoread
+- background=dark
+- backspace=indent,eol,start
+- nobackup
+- nowritebackup
+- binary
+- cmdheight=2
+- updatetime=300
+- shortmess+=c
+- signcolumn=yes
+- bomb
+- complete=.,t
+- clipboard^=unnamedplus,unnamed
+- display+=lastline
+- expandtab
+- fileencoding=utf-8
+- fileencodings=utf-8
+- fileformats=unix,dos,mac
+- formatoptions=n
+- gcr=a:blinkon0
+- grepprg=rg\ --vimgrep
+- hidden
+- hlsearch
+- ignorecase
+- incsearch
+- laststatus=2
+- list listchars=tab:▷⋅,trail:⋅,nbsp:⋅"
+- modeline
+- mouse=a
+- mousemodel=popup
+- noswapfile
+- nowrap
+- number
+- numberwidth=1
+- nrformats-=octal
+- pastetoggle=<leader>z
+- ruler
+- scrolloff=3
+- shell=$SHELL
+- shiftround
+- shiftwidth=4
+- smartcase
+- smarttab
+- softtabstop=4
+- sessionoptions-=options
+- t_Co=256
+- t_ut=
+- tabstop=4
+- tags+=.tags
+- termguicolors
+- textwidth=109
+- titleold="Terminal"
+- titlestring+=%f
+- titlestring=%{substitute(getcwd(),\ $HOME,\ '~',\ '')}/
+- undodir=./.vim-undo,~/tmp/vim,~/.tmp,~/tmp,/tmp
+- visualbell t_vb=
+- wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
+- wildmode=list:longest,list:full
+- wildmenu

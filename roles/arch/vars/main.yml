@@ -1,41 +1,40 @@
----
 pacman_packages:
-  - boost
-  - ccache
-  - cmatrix
-  - cronie
-  - expac
-  - gimp
-  - inkscape
-  - intel-ucode
-  - iputils
-  - jfsutils
-  - logrotate
-  - man-db
-  - man-pages
-  - mousepad
-  - mpd
-  - nano
-  - netctl
-  - network-manager-applet
-  - networkmanager
-  - nmap
-  - openvpn
-  - orage
-  - packer
-  - parole
-  - powerline
-  - print-manager
-  - reiserfsprogs
-  - ristretto
-  - the_silver_searcher
-  - tree
-  - unrar
-  - usbutils
-  - vi
-  - xfburn
-  - zopfli
+- boost
+- ccache
+- cmatrix
+- cronie
+- expac
+- gimp
+- inkscape
+- intel-ucode
+- iputils
+- jfsutils
+- logrotate
+- man-db
+- man-pages
+- mousepad
+- mpd
+- nano
+- netctl
+- network-manager-applet
+- networkmanager
+- nmap
+- openvpn
+- orage
+- packer
+- parole
+- powerline
+- print-manager
+- reiserfsprogs
+- ristretto
+- the_silver_searcher
+- tree
+- unrar
+- usbutils
+- vi
+- xfburn
+- zopfli
 
 yay_packages:
-  - downgrade
-  - networkmanager-openvpn
+- downgrade
+- networkmanager-openvpn

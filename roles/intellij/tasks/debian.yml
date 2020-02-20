@@ -1,7 +1,6 @@
----
 - name: create (download) directory
   file:
-    path: "{{ intellij_download_dir }}"
+    path: '{{ intellij_download_dir }}'
     state: directory
     owner: root
     group: root
@@ -9,12 +8,12 @@
   become: yes
   become_user: root
   tags:
-    - configuration
+  - configuration
 
 - name: download
   get_url:
-    url: "{{ intellij_mirror }}/{{ intellij_filename }}"
-    dest: "{{ intellij_download_dir }}/{{ intellij_filename }}"
+    url: '{{ intellij_mirror }}/{{ intellij_filename }}'
+    dest: '{{ intellij_download_dir }}/{{ intellij_filename }}'
     owner: root
     group: root
     mode: 0644
@@ -26,7 +25,7 @@
     state: directory
     owner: root
     group: root
-    mode: 'u=rwx,go=rx'
+    mode: u=rwx,go=rx
     dest: '{{ intellij_install_dir }}'
   become: yes
   become_user: root
@@ -35,7 +34,7 @@
   unarchive:
     src: '{{ intellij_download_dir }}/{{ intellij_filename }}'
     remote_src: yes
-    extra_opts: '--strip-components=1'
+    extra_opts: --strip-components=1
     dest: '{{ intellij_install_dir }}'
     owner: root
     group: root
@@ -50,16 +49,16 @@
     state: link
     owner: root
     group: root
-    mode: 'u=rwx,go=rx'
+    mode: u=rwx,go=rx
   become: yes
   become_user: root
 
 - name: install IntelliJ IDEA desktop file
   template:
     src: jetbrains-idea.desktop.j2
-    dest: '/usr/share/applications/{{ intellij_desktop_filename }}'
+    dest: /usr/share/applications/{{ intellij_desktop_filename }}
     owner: root
     group: root
-    mode: 'u=rw,go=r'
+    mode: u=rw,go=r
   become: yes
   become_user: root

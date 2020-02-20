@@ -1,7 +1,6 @@
----
 - name: install rg | Arch
   aur:
     name: ripgrep
     use: yay
   tags:
-    - initial
+  - initial

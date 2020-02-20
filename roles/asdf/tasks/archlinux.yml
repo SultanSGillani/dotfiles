@@ -1,9 +1,8 @@
----
 - name: Install jq
   aur:
     name: jq
     use: yay
     skip_pgp_check: true
   tags:
-    - initial
-    - java_packages
+  - initial
+  - java_packages

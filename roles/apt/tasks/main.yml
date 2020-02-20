@@ -1,4 +1,3 @@
----
 - name: update apt packages.
   apt:
     upgrade: no
@@ -6,7 +5,7 @@
   become: yes
   become_user: root
   tags:
-    - update
+  - update
 
 - name: Upgrade APT to the latest packages
   apt:
@@ -14,8 +13,8 @@
   become: yes
   become_user: root
   tags:
-    - dist_upgrade
-    - upgrade
+  - dist_upgrade
+  - upgrade
 
 - name: Upgrade apt packages.
   apt:
@@ -24,13 +23,13 @@
   become: yes
   become_user: root
   tags:
-    - upgrade
+  - upgrade
 
 - name: Install Debian apt modules
   apt:
-    name: "{{ debian_packages }}"
+    name: '{{ debian_packages }}'
     state: present
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial

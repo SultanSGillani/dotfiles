@@ -1,11 +1,10 @@
----
 debian_packages:
-  - libasound2-dev
-  - libiw-dev
-  - libjsoncpp-dev
-  - libmpdclient-dev
-  - libnl-genl-3-dev
-  - libpulse-dev
-  - libxcb-ewmh-dev
-  - python-xcbgen
-  - xcb-proto
+- libasound2-dev
+- libiw-dev
+- libjsoncpp-dev
+- libmpdclient-dev
+- libnl-genl-3-dev
+- libpulse-dev
+- libxcb-ewmh-dev
+- python-xcbgen
+- xcb-proto

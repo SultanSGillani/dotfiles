@@ -1,28 +1,27 @@
----
 colorscheme:
-  - '{{ vim_theme }}'
+- '{{ vim_theme }}'
 
 color:
-  - '{{ vim_theme }}'
+- '{{ vim_theme }}'
 
 filetype:
-  - "on"
-  - plugin indent on
+- on
+- plugin indent on
 
 neovim_config_dir: '{{ dotfiles_user_home }}/.config/nvim'
 
 snippet_files:
-  - 'c'
-  - 'global'
-  - 'html'
-  - 'python'
-  - 'ruby'
-  - 'sh'
-  - 'zsh'
+- c
+- global
+- html
+- python
+- ruby
+- sh
+- zsh
 
 syntax:
-  - "on"
+- on
 
 vim_packages:
-  - neovim
-  - vim
+- neovim
+- vim

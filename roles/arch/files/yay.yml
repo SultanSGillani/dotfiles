@@ -1,41 +1,41 @@
   # yamllint disable
-  - asdf
-  - asoundconf
-  - brightness-controller-git
-  - conky-lua-nv
-  - devtools-git
-  - downgrade
-  - dunst-git
-  - google-chrome
-  - hadolint-bin
-  - hardcode-fixer-git
-  - hplip-plugin
-  - i3lock-fancy-multimonitor-git
-  - intellij-idea-ultimate-edition
-  - jetbrains-toolbox
-  - kvantum-qt5-git
-  - lightdm-webkit-theme-aether
-  - mvnsh
-  - nerd-fonts-git
-  - nvm
-  - papirus-folders-git
-  - polybar-git
-  - powerline-fonts-git
-  - py3status-git
-  - pycharm-professional
-  - pyenv-virtualenv
-  - pyenv-virtualenvwrapper
-  - rbenv
-  - rofi-dmenu
-  - ruby-build
-  - rubymine
-  - siji-git
-  - slack
-  - st-git
-  - ttf-nerd-fonts-hack-complete-git
-  - ttf-unifont
-  - vmware-workstation
-  - xcb-proto-git
-  - xinit-xsession
-  - yay
-  - zsh-zplugin-git
+- asdf
+- asoundconf
+- brightness-controller-git
+- conky-lua-nv
+- devtools-git
+- downgrade
+- dunst-git
+- google-chrome
+- hadolint-bin
+- hardcode-fixer-git
+- hplip-plugin
+- i3lock-fancy-multimonitor-git
+- intellij-idea-ultimate-edition
+- jetbrains-toolbox
+- kvantum-qt5-git
+- lightdm-webkit-theme-aether
+- mvnsh
+- nerd-fonts-git
+- nvm
+- papirus-folders-git
+- polybar-git
+- powerline-fonts-git
+- py3status-git
+- pycharm-professional
+- pyenv-virtualenv
+- pyenv-virtualenvwrapper
+- rbenv
+- rofi-dmenu
+- ruby-build
+- rubymine
+- siji-git
+- slack
+- st-git
+- ttf-nerd-fonts-hack-complete-git
+- ttf-unifont
+- vmware-workstation
+- xcb-proto-git
+- xinit-xsession
+- yay
+- zsh-zplugin-git

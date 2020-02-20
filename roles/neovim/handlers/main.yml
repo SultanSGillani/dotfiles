@@ -1,22 +1,20 @@
----
 - name: Install plugins
   command: nvim +PlugInstall +qall
   no_log: true
   tags:
-    - skip_ansible_lint
-    - initial
+  - skip_ansible_lint
+  - initial
 
 - name: Update plugins
   command: nvim +PlugUpdate +qall
   no_log: true
   tags:
-    - update
-    - skip_ansible_lint
+  - update
+  - skip_ansible_lint
 
 - name: Clean plugins
   command: nvim +PlugClean! +qall
   no_log: true
   tags:
-    - update
-    - skip_ansible_lint
-
+  - update
+  - skip_ansible_lint

@@ -1,38 +1,37 @@
----
 - name: include os specific tasks
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
   when: ansible_facts['os_family']|lower is defined
 
 - name: Create polybar config directory if it doesnt exist
   file:
-    path: "{{ dotfiles_user_home }}/.config/polybar"
+    path: '{{ dotfiles_user_home }}/.config/polybar'
     state: directory
     recurse: yes
   tags:
-    - initial
+  - initial
 
 - name: Write polybar config
   template:
     src: config.ini
-    dest: "{{ dotfiles_user_home }}/.config/polybar/config"
+    dest: '{{ dotfiles_user_home }}/.config/polybar/config'
   tags:
-    - update
+  - update
 
 - name: Write polybar launch file
   template:
     src: launch.sh
-    dest: "{{ dotfiles_user_home }}/.config/polybar/launch.sh"
+    dest: '{{ dotfiles_user_home }}/.config/polybar/launch.sh'
     mode: 0755
   tags:
-    - update
+  - update
 
 - name: copy scripts
   copy:
-    src: "{{ item }}"
-    dest: "{{ dotfiles_user_home }}/.config/polybar/{{ item }}"
+    src: '{{ item }}'
+    dest: '{{ dotfiles_user_home }}/.config/polybar/{{ item }}'
     mode: 0755
   loop:
-    - pavolume.sh
-    - spotify_status.py
+  - pavolume.sh
+  - spotify_status.py
   tags:
-    - update
+  - update

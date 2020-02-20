@@ -1,27 +1,26 @@
----
 # Rust
 rust_version: stable
 rustup_tmp_installer: /tmp/rustup.sh
 
 rustup_toolchains:
-  - stable
-  - beta
+- stable
+- beta
 
-rustup_shell: "{{ cargo_home }}/bin/rustup"
+rustup_shell: '{{ cargo_home }}/bin/rustup'
 
-rustup_install_dir: "{{ rustup_home }}"
+rustup_install_dir: '{{ rustup_home }}'
 
 # Cargo
 cargo_items:
-  - name: exa
-    binary: exa
-  - name: bat
-    binary: bat
-  - name: cargo-deb
-    binary: cargo-deb
+- name: exa
+  binary: exa
+- name: bat
+  binary: bat
+- name: cargo-deb
+  binary: cargo-deb
 
 rustup_url: '{{ rustup_mirror }}/{{ rustup_platform }}/rustup-init'
 
 darwin_packages:
-  - rust
-  - exa
+- rust
+- exa

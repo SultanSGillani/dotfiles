@@ -1,7 +1,6 @@
----
 - name: install apt packages
   apt:
-    name: "{{ apt_packages }}"
+    name: '{{ apt_packages }}'
     state: present
     update_cache: no
   become: yes

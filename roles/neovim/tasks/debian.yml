@@ -1,9 +1,8 @@
----
 - name: Apt | Install neovim
   package:
-    name: "{{ vim_packages }}"
+    name: '{{ vim_packages }}'
     state: present
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial

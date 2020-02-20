@@ -1,160 +1,159 @@
----
 - name: include os specific tasks
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
-  when: "ansible_facts['os_family']|lower is defined"
+  when: ansible_facts['os_family']|lower is defined
 
 - name: install zinit
   git:
-    repo: "https://github.com/zdharma/zinit.git"
-    dest: "{{ dotfiles_user_home }}/.zinit/bin"
+    repo: https://github.com/zdharma/zinit.git
+    dest: '{{ dotfiles_user_home }}/.zinit/bin'
     update: no
     version: master
   tags:
-    - initial
+  - initial
 
 - name: zinit permissions
   file:
-    dest: "{{ dotfiles_user_home }}/.zinit"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
-    mode: "u=rwX,g=rX,o=rX"
+    dest: '{{ dotfiles_user_home }}/.zinit'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
+    mode: u=rwX,g=rX,o=rX
 
 - name: Create zdot directory if it doesnt exist
   file:
-    path: "{{ zdot_dir }}"
+    path: '{{ zdot_dir }}'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
     recurse: no
   tags:
-    - initial
+  - initial
 
 - name: Create completions directory if it doesnt exist
   file:
-    path: "{{ zdot_dir }}/completions"
+    path: '{{ zdot_dir }}/completions'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
     recurse: no
   tags:
-    - initial
+  - initial
 
 - name: Create functions directory if it doesnt exist
   file:
-    path: "{{ zdot_dir }}/functions"
+    path: '{{ zdot_dir }}/functions'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
     recurse: no
   tags:
-    - initial
+  - initial
 
 - name: Create opts directory if it doesnt exist
   file:
-    path: "{{ zdot_dir }}/opts"
+    path: '{{ zdot_dir }}/opts'
     state: directory
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
     recurse: no
   tags:
-    - initial
+  - initial
 
 - name: Write .zshenv config
   template:
     src: zshenv.zsh.j2
-    dest: "{{ dotfiles_user_home }}/.zshenv"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    dest: '{{ dotfiles_user_home }}/.zshenv'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     backup: no
   tags:
-    - update
+  - update
 
 - name: Write .zprofile config
   template:
     src: zprofile.zsh.j2
-    dest: "{{ dotfiles_user_home }}/.zprofile"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    dest: '{{ dotfiles_user_home }}/.zprofile'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     backup: no
   tags:
-    - update
+  - update
 
 - name: Write zshrc config
   template:
     src: zshrc.zsh.j2
-    dest: "{{ zdot_dir }}/.zshrc"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    dest: '{{ zdot_dir }}/.zshrc'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     backup: no
   tags:
-    - update
+  - update
 
 - name: Write theme config file
   copy:
-    src: "{{ zsh_prompt }}.zsh"
-    dest: "{{ zdot_dir }}/prompt.zsh"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    src: '{{ zsh_prompt }}.zsh'
+    dest: '{{ zdot_dir }}/prompt.zsh'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     backup: no
   tags:
-    - update
+  - update
 
 - name: Write config files
   copy:
-    src: "{{ item }}.zsh"
-    dest: "{{ zdot_dir }}/{{ item }}.zsh"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    src: '{{ item }}.zsh'
+    dest: '{{ zdot_dir }}/{{ item }}.zsh'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     backup: no
   loop:
-    - bindings
-    - completions
-    - dir
-    - generic
-    - history
+  - bindings
+  - completions
+  - dir
+  - generic
+  - history
   tags:
-    - update
+  - update
 
 - name: Synchronize and delete files in dest for functions
   synchronize:
     src: functions/
-    dest: "{{ zdot_dir }}/functions/"
+    dest: '{{ zdot_dir }}/functions/'
     owner: yes
     delete: yes
     recursive: yes
   tags:
-    - update
+  - update
 
 - name: Synchronize and delete files in dest for completions
   synchronize:
     src: completions/
-    dest: "{{ zdot_dir }}/completions/"
+    dest: '{{ zdot_dir }}/completions/'
     owner: yes
     delete: yes
     recursive: yes
   when: ansible_facts['os_family'] != "Darwin"
   tags:
-    - update
+  - update
 
 - name: write z.sh
   copy:
     src: z.sh
-    dest: "{{ zdot_dir }}/z.sh"
-    owner: "{{ zsh_user }}"
-    group: "{{ zsh_user_group }}"
+    dest: '{{ zdot_dir }}/z.sh'
+    owner: '{{ zsh_user }}'
+    group: '{{ zsh_user_group }}'
     mode: 0755
   tags:
-    - update
+  - update
 
 - name: Set zsh as default shell
   user:
-    name: "{{ zsh_user }}"
-    shell: "{{ zsh_shell }}"
+    name: '{{ zsh_user }}'
+    shell: '{{ zsh_shell }}'
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial

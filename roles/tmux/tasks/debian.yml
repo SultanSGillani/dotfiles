@@ -1,4 +1,3 @@
----
 - name: Install | Debian
   package:
     name: tmux
@@ -6,4 +5,4 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial

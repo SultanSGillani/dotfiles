@@ -1,39 +1,38 @@
----
 compton_packages:
-  - asciidoc
-  - libconfig-dev
-  - libdbus-1-dev
-  - libdrm-dev
-  - libgl-dev
-  - libgl1-mesa-dev
-  - libpcre2-dev
-  - libpixman-1-dev
-  - libx11-dev
-  - libxcb-composite0-dev
-  - libxcb-damage0-dev
-  - libxcb-image0-dev
-  - libxcb-present-dev
-  - libxcb-cursor-dev
-  - libxcb-icccm4-dev
-  - libxcb-keysyms1-dev
-  - libxcb-randr0-dev
-  - libxcb-shape0-dev
-  - libxcb-util0-dev
-  - libxcb-xinerama0-dev
-  - libxcb-xkb-dev
-  - libxcb-xrm-dev
-  - libxcb-xrm0
-  - libxcb1-dev
-  - xcb
-  - libxcomposite-dev
-  - libxdamage-dev
-  - libxext-dev
-  - libxfixes-dev
-  - libxinerama-dev
-  - libxrandr-dev
-  - libxrender-dev
-  - meson
-  - ninja-build
-  - pkg-config
-  - uthash-dev
-  - x11proto-dev
+- asciidoc
+- libconfig-dev
+- libdbus-1-dev
+- libdrm-dev
+- libgl-dev
+- libgl1-mesa-dev
+- libpcre2-dev
+- libpixman-1-dev
+- libx11-dev
+- libxcb-composite0-dev
+- libxcb-damage0-dev
+- libxcb-image0-dev
+- libxcb-present-dev
+- libxcb-cursor-dev
+- libxcb-icccm4-dev
+- libxcb-keysyms1-dev
+- libxcb-randr0-dev
+- libxcb-shape0-dev
+- libxcb-util0-dev
+- libxcb-xinerama0-dev
+- libxcb-xkb-dev
+- libxcb-xrm-dev
+- libxcb-xrm0
+- libxcb1-dev
+- xcb
+- libxcomposite-dev
+- libxdamage-dev
+- libxext-dev
+- libxfixes-dev
+- libxinerama-dev
+- libxrandr-dev
+- libxrender-dev
+- meson
+- ninja-build
+- pkg-config
+- uthash-dev
+- x11proto-dev

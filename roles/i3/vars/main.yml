@@ -1,25 +1,24 @@
----
 i3_aur:
-  - i3-gaps
-  - i3lock
-  - i3status
-  - perl-anyevent-i3
+- i3-gaps
+- i3lock
+- i3status
+- perl-anyevent-i3
 
 i3_pac:
-  - feh
-  - gnome-screenshot
-  - scrot
+- feh
+- gnome-screenshot
+- scrot
 
 i3_debian:
-  - autoconf
-  - dh-autoreconf
-  - gnome-screenshot
-  - i3lock
-  - i3status
-  - libev-dev
-  - libstartup-notification0-dev
-  - libtool
-  - libxkbcommon-dev
-  - libxkbcommon-x11-dev
-  - libyajl-dev
-  - xutils-dev
+- autoconf
+- dh-autoreconf
+- gnome-screenshot
+- i3lock
+- i3status
+- libev-dev
+- libstartup-notification0-dev
+- libtool
+- libxkbcommon-dev
+- libxkbcommon-x11-dev
+- libyajl-dev
+- xutils-dev

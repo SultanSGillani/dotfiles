@@ -1,7 +1,6 @@
----
 - name: Install slack | Macos
   homebrew_cask:
     name: slack
     state: present
   tags:
-    - initial
+  - initial

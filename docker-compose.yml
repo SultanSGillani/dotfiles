@@ -1,5 +1,4 @@
----
-version: "3.7"
+version: '3.7'
 
 services:
   test_debian:
@@ -7,55 +6,55 @@ services:
     tty: true
     container_name: test_debian
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${PWD}:/etc/ansible/roles/roles_to_test
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ${PWD}:/etc/ansible/roles/roles_to_test
     environment:
-      - ANSIBLE_LIBRARY=$ANSIBLE_LIBRARY
-      - ANSIBLE_VERBOSITY=$ANSIBLE_VERBOSITY
-      - ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH
-      - ANSIBLE_HOST_KEY_CHECKING=$ANSIBLE_HOST_KEY_CHECKING
-      - ANSIBLE_LOG_PATH=$ANSIBLE_LOG_PATH
-      - ANSIBLE_EXECUTABLE=$ANSIBLE_EXECUTABLE
-      - ANSIBLE_BECOME=$ANSIBLE_BECOME
-      - ANSIBLE_BECOME_USER=$ANSIBLE_BECOME_USER
-      - ANSIBLE_PIPELINING=$ANSIBLE_PIPELINING
-      - ANSIBLE_INVENTORY=$ANSIBLE_INVENTORY
-      - ANSIBLE_INVENTORY_ENABLED=$ANSIBLE_INVENTORY_ENABLED
-      - TTY=xterm
+    - ANSIBLE_LIBRARY=$ANSIBLE_LIBRARY
+    - ANSIBLE_VERBOSITY=$ANSIBLE_VERBOSITY
+    - ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH
+    - ANSIBLE_HOST_KEY_CHECKING=$ANSIBLE_HOST_KEY_CHECKING
+    - ANSIBLE_LOG_PATH=$ANSIBLE_LOG_PATH
+    - ANSIBLE_EXECUTABLE=$ANSIBLE_EXECUTABLE
+    - ANSIBLE_BECOME=$ANSIBLE_BECOME
+    - ANSIBLE_BECOME_USER=$ANSIBLE_BECOME_USER
+    - ANSIBLE_PIPELINING=$ANSIBLE_PIPELINING
+    - ANSIBLE_INVENTORY=$ANSIBLE_INVENTORY
+    - ANSIBLE_INVENTORY_ENABLED=$ANSIBLE_INVENTORY_ENABLED
+    - TTY=xterm
   test_ubuntu:
     image: registry.gitlab.com/sultangillani/ansible-docker-ubuntu:disco
     tty: true
     container_name: test_ubuntu
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${PWD}:/etc/ansible/roles/roles_to_test
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ${PWD}:/etc/ansible/roles/roles_to_test
   test_arch:
     image: registry.gitlab.com/sultangillani/ansible-docker-archlinux:latest
     tty: true
     container_name: test_arch
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - ${PWD}:/etc/ansible/roles/roles_to_test
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ${PWD}:/etc/ansible/roles/roles_to_test
   yamllint:
     image: registry.gitlab.com/sultangillani/docker-yamllint:latest
     container_name: yamllint
     volumes:
-      - ${PWD}:/playbooks
+    - ${PWD}:/playbooks
   ansible-lint:
     image: registry.gitlab.com/sultangillani/docker-ansible-lint:latest
     container_name: ansible-lint
     environment:
-      - ANSIBLE_LIBRARY=/playbooks/library/ansible-aur
-      - ANSIBLE_VERBOSITY=$ANSIBLE_VERBOSITY
-      - ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH
-      - ANSIBLE_HOST_KEY_CHECKING=$ANSIBLE_HOST_KEY_CHECKING
-      - ANSIBLE_LOG_PATH=$ANSIBLE_LOG_PATH
-      - ANSIBLE_EXECUTABLE=$ANSIBLE_EXECUTABLE
-      - ANSIBLE_BECOME=$ANSIBLE_BECOME
-      - ANSIBLE_BECOME_USER=$ANSIBLE_BECOME_USER
-      - ANSIBLE_PIPELINING=$ANSIBLE_PIPELINING
-      - ANSIBLE_INVENTORY=/playbooks/inventory.yml
-      - ANSIBLE_INVENTORY_ENABLED=$ANSIBLE_INVENTORY_ENABLED
-      - TTY=xterm
+    - ANSIBLE_LIBRARY=/playbooks/library/ansible-aur
+    - ANSIBLE_VERBOSITY=$ANSIBLE_VERBOSITY
+    - ANSIBLE_ROLES_PATH=$ANSIBLE_ROLES_PATH
+    - ANSIBLE_HOST_KEY_CHECKING=$ANSIBLE_HOST_KEY_CHECKING
+    - ANSIBLE_LOG_PATH=$ANSIBLE_LOG_PATH
+    - ANSIBLE_EXECUTABLE=$ANSIBLE_EXECUTABLE
+    - ANSIBLE_BECOME=$ANSIBLE_BECOME
+    - ANSIBLE_BECOME_USER=$ANSIBLE_BECOME_USER
+    - ANSIBLE_PIPELINING=$ANSIBLE_PIPELINING
+    - ANSIBLE_INVENTORY=/playbooks/inventory.yml
+    - ANSIBLE_INVENTORY_ENABLED=$ANSIBLE_INVENTORY_ENABLED
+    - TTY=xterm
     volumes:
-      - ${PWD}:/playbooks
+    - ${PWD}:/playbooks

@@ -1,2 +1,1 @@
----
-fzf_dir: "{{ dotfiles_user_home }}/.fzf"
+fzf_dir: '{{ dotfiles_user_home }}/.fzf'

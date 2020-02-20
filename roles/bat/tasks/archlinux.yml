@@ -1,4 +1,3 @@
----
 - name: Arch Pkgs | Install Bat
   package:
     name: bat
@@ -6,4 +5,4 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial

@@ -1,7 +1,6 @@
----
 - name: install pacman packages for arch
   package:
-    name: "{{ pacman_packages }}"
+    name: '{{ pacman_packages }}'
     state: present
   become: yes
   become_user: root

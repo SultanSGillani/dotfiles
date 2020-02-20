@@ -1,10 +1,9 @@
----
 # rofi
 
-rofi_home: "{{ dotfiles_dir }}/roles/rofi/files"
+rofi_home: '{{ dotfiles_dir }}/roles/rofi/files'
 
 rofi_files:
-  - { path: 'dracula_config', dest: 'base16-dracula.config' }
-  - { path: 'dracula_theme', dest: 'base16-dracula.rasi' }
-  - { path: 'snazzy_config', dest: 'base16-snazzy.config' }
-  - { path: 'snazzy_theme', dest: 'base16-snazzy.rasi' }
+- {path: dracula_config, dest: base16-dracula.config}
+- {path: dracula_theme, dest: base16-dracula.rasi}
+- {path: snazzy_config, dest: base16-snazzy.config}
+- {path: snazzy_theme, dest: base16-snazzy.rasi}

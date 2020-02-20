@@ -1,7 +1,6 @@
----
 - name: install apt packages
   package:
-    name: "{{ apt_packages }}"
+    name: '{{ apt_packages }}'
     state: present
   become: yes
   become_user: root

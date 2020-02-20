@@ -1,5 +1,4 @@
----
-webstorm_version: "2019.3"
+webstorm_version: '2019.3'
 webstorm_install_dir: /opt/webstorm/webstorm-{{ webstorm_version }}
-webstorm_filename: "WebStorm-{{ webstorm_version }}.tar.gz"
-webstorm_mirror: "http://download.jetbrains.com/webstorm"
+webstorm_filename: WebStorm-{{ webstorm_version }}.tar.gz
+webstorm_mirror: http://download.jetbrains.com/webstorm

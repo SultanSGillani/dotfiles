@@ -1,4 +1,3 @@
----
 - name: include os specific tasks
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
-  when: "ansible_facts['os_family']|lower is defined"
+  when: ansible_facts['os_family']|lower is defined

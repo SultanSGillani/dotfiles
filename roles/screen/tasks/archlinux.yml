@@ -1,7 +1,6 @@
----
 - name: install screen-git | Archlinux
   aur:
     name: screen-git
     use: yay
   tags:
-    - initial
+  - initial

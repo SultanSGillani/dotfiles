@@ -1,18 +1,17 @@
----
 - name: Create gtk 3 directory if it doesnt exist
   file:
-    path: "{{ dotfiles_user_home }}/.config/gtk-3.0"
+    path: '{{ dotfiles_user_home }}/.config/gtk-3.0'
     state: directory
     recurse: yes
   tags:
-    - initial
+  - initial
 
 - name: Create gtk 4 directory if it doesnt exist
   file:
-    path: "{{ dotfiles_user_home }}/.config/gtk-4.0"
+    path: '{{ dotfiles_user_home }}/.config/gtk-4.0'
     state: directory
   tags:
-    - initial
+  - initial
 
 - name: Unarchive Flat Remix Theme
   unarchive:
@@ -22,7 +21,7 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Unarchive Flat Remix Icons
   unarchive:
@@ -32,7 +31,7 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Unarchive Capitaine cursors
   unarchive:
@@ -42,25 +41,25 @@
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Copy gtk3.0 settings
   copy:
     src: settings3.ini
-    dest: "{{ dotfiles_user_home }}/.config/gtk-3.0/settings.ini"
+    dest: '{{ dotfiles_user_home }}/.config/gtk-3.0/settings.ini'
   tags:
-    - update
+  - update
 
 - name: Copy gtk2.0 settings
   copy:
     src: gtk2
-    dest: "{{ dotfiles_user_home }}/.gtkrc-2.0"
+    dest: '{{ dotfiles_user_home }}/.gtkrc-2.0'
   tags:
-    - update
+  - update
 
 - name: Copy gtk4.0 settings
   copy:
     src: settings4.ini
-    dest: "{{ dotfiles_user_home }}/.config/gtk-4.0/settings.ini"
+    dest: '{{ dotfiles_user_home }}/.config/gtk-4.0/settings.ini'
   tags:
-    - update
+  - update

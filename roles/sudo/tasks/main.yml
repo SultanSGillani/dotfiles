@@ -1,4 +1,3 @@
----
 - name: include os specific tasks
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
   when: ansible_facts['os_family']|lower is defined
@@ -9,41 +8,41 @@
 
 - name: Make sure group is created
   group:
-    name: "{{ sudoers_group }}"
+    name: '{{ sudoers_group }}'
     state: present
   become: yes
   become_user: root
   tags:
-    - initial
+  - initial
 
 - name: Make sure user is added to sudoers group
   user:
-    name: "{{ zsh_user }}"
+    name: '{{ zsh_user }}'
     append: yes
-    groups: "{{ sudoers_group }}"
+    groups: '{{ sudoers_group }}'
   become: yes
   become_user: root
 
-- name: "Create or Update sudoers configuration in /etc/sudoers.d/{{ sudoers_file }}"
+- name: Create or Update sudoers configuration in /etc/sudoers.d/{{ sudoers_file }}
   template:
-    src: "etc/sudoers.d/ansible.j2"
-    dest: "/etc/sudoers.d/{{ sudoers_file }}"
-    validate: "visudo -cf %s"
+    src: etc/sudoers.d/ansible.j2
+    dest: /etc/sudoers.d/{{ sudoers_file }}
+    validate: visudo -cf %s
     owner: root
-    group: "{{ sudoers_group }}"
-    mode: "0440"
+    group: '{{ sudoers_group }}'
+    mode: '0440'
   become: yes
   become_user: root
   tags:
-    - update
+  - update
 
 - debug:
-    msg: "{{ purge_other_sudoers_files | bool }}"
+    msg: '{{ purge_other_sudoers_files | bool }}'
 
 - name: List files in /etc/sudoers.d
   find:
     paths: /etc/sudoers.d
-    patterns: "*"
+    patterns: '*'
   register: sudoers_contents
   changed_when: no
   when: purge_other_sudoers_files | bool == 'false'
@@ -52,13 +51,13 @@
 
 - name: Remove unmanaged /etc/sudoers.d/ files
   file:
-    path: "/etc/sudoers.d/{{ item.path|basename }}"
+    path: /etc/sudoers.d/{{ item.path|basename }}
     state: absent
-  loop: "{{ sudoers_contents.files }}"
+  loop: '{{ sudoers_contents.files }}'
   loop_control:
-    label: "{{ item.path }}"
+    label: '{{ item.path }}'
   when:
-    - purge_other_sudoers_files | bool == 'false'
-    - (item.path|basename) != sudoers_file
+  - purge_other_sudoers_files | bool == 'false'
+  - (item.path|basename) != sudoers_file
   become: yes
   become_user: root

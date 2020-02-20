@@ -1,4 +1,3 @@
----
 vim_packages: []
 
 neovim_config_dir: '{{ dotfiles_user_home }}/.config/nvim'

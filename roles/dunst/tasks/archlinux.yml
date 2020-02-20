@@ -1,7 +1,6 @@
----
 - name: install dunst | Archlinux
   aur:
     name: dunst
     use: yay
   tags:
-    - initial
+  - initial

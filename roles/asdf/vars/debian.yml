@@ -1,22 +1,21 @@
----
 ruby_pkgs:
-  - libcurl4-openssl-dev
-  - libxslt1-dev
+- libcurl4-openssl-dev
+- libxslt1-dev
 
 python_pkgs:
-  - libbz2-dev
-  - libffi-dev
-  - libncurses5-dev
-  - libreadline-dev
-  - libsqlite3-dev
-  - libssl-dev
-  - libxml2-dev
-  - libxmlsec1-dev
-  - llvm
-  - tk-dev
-  - xz-utils
-  - zlib1g-dev
+- libbz2-dev
+- libffi-dev
+- libncurses5-dev
+- libreadline-dev
+- libsqlite3-dev
+- libssl-dev
+- libxml2-dev
+- libxmlsec1-dev
+- llvm
+- tk-dev
+- xz-utils
+- zlib1g-dev
 
 debian_pip_packages:
-  - awscli
-  - docker-compose
+- awscli
+- docker-compose

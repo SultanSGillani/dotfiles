@@ -1,7 +1,6 @@
----
 - name: install rclone | osx
   homebrew:
     name: rclone
     state: present
   tags:
-    - initial
+  - initial
