@@ -2,11 +2,11 @@
 
 # bar settings
 yabai -m config status_bar                   on
-yabai -m config status_bar_text_font         "Hack Nerd Font Mono:Bold:12.0"
+yabai -m config status_bar_text_font         "Hack Nerd Font:Bold:12.0"
 yabai -m config status_bar_icon_font         "Hack Nerd Font:Regular:12.0"
 yabai -m config status_bar_background_color  0xaa282a36
 yabai -m config status_bar_foreground_color  0xffe2e4e5
-yabai -m config status_bar_space_icon_strip  1 2 3 4 5 6 7 8 9
+yabai -m config status_bar_space_icon_strip           
 yabai -m config status_bar_power_icon_strip   
 yabai -m config status_bar_space_icon        
 yabai -m config status_bar_clock_icon        
@@ -43,34 +43,16 @@ yabai -m config window_gap                   10
 yabai -m rule --add app=Firefox space=1
 yabai -m rule --add app=Safari space=1
 yabai -m rule --add app=Chrome space=1
+yabai -m rule --add app=RubyMine space=2
+yabai -m rule --add app="^Rider$" space=2
 yabai -m rule --add app="^PyCharm$" space=3
-yabai -m rule --add app="^JetBrains Rider$" space=7
-yabai -m rule --add app=Webstorm space=5
+yabai -m rule --add app="^JetBrains Rider$" space=2
+yabai -m rule --add app=Webstorm space=9
 yabai -m rule --add app=Slack space=4
 yabai -m rule --add app=Spotify space=6
-yabai -m rule --add app=RubyMine space=2
 yabai -m rule --add app="^Microsoft Outlook$" space=8
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^Messages$" manage=off
 
-# refresh primary display workspaces
-yabai -m signal --add event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-background-jsx\"'"
-
-# refresh secondary display workspaces
-yabai -m signal --add event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-battery-jsx\"'"
-
-yabai -m signal --add event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-clock-jsx\"'"
-
-yabai -m signal --add event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-date-jsx\"'"
-
-yabai -m signal --add event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-network-jsx\"'"
-
-yabai -m signal --add event=space_changed \
-    action="osascript -e 'tell application \"Übersicht\" to refresh widget id \"pecan-workspace-jsx\"'"
 
 echo "yabai configuration loaded.."
