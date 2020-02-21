@@ -25,11 +25,6 @@ Hostname 10.10.0.45
 user sultan
 IdentityFile ~/.ssh/id_rsa_office
 
-Host 10.0.75.20
-Hostname 10.0.75.20
-user devops
-IdentityFile ~/.ssh/id_ecdsa_devops
-
 Host * (asterisk for all hosts or add specific host)
   Protocol 2
   AddKeysToAgent yes
@@ -40,6 +35,7 @@ Host * (asterisk for all hosts or add specific host)
   GSSAPIDelegateCredentials yes
   IdentityFile ~/.ssh/id_rsa
   IdentityFile ~/.ssh/id_ed25519
+  IdentityFile ~/.ssh/id_ed25519_work
   IdentityFile ~/.ssh/id_ecdsa
   IdentityFile ~/.ssh/id_rsa_work
   IdentityFile ~/.ssh/id_rsa_office

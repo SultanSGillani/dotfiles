@@ -5,8 +5,6 @@ name = {{ full_name }}
 email = {{ git_email }}
 {% if ansible_os_family == 'Darwin' %}
 [credential]
-helper = osxkeychain
-{% else %}
 helper = cache
 {% endif %}
 
