@@ -37,6 +37,11 @@
       tags:
       - git
     - import_role:
+        name: gcloud
+      tags:
+      - gcloud
+      - google-sdk
+    - import_role:
         name: zsh
       tags:
       - zsh

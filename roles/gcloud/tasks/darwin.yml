@@ -1,0 +1,6 @@
+- name: OSX | Install gcloud
+  homebrew_cask:
+    name: google-cloud-sdk
+    state: present
+  tags:
+  - initial

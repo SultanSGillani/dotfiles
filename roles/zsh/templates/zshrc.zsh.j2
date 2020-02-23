@@ -2,16 +2,12 @@
 
 zcommand() { zinit ice wait"0b" silent as"command" "${@}"; }
 zlight()  { [ -zlight $2 ] && zinit light "${@}" || zinit "${@}"; }
-zsnippet() { zinit snippet                        "${@}"; }
-zsvn() { zinit ice svn                        "${@}"; }
-zcr() { zinit creinstall -q "${@}"; }
+zsnippet() { zinit snippet "${@}"; }
 zt()  { zinit depth'3' lucid ${1/#[0-9][a-c]/wait"$1"} "${@:2}"; }
 zct() { .zinit-ice load"[[ \${MYPROMPT} = ${1} ]]" unload"[[ \${MYPROMPT} != ${1} ]]" \
 atinit'[ -f "${thmf}/${MYPROMPT}-pre" ] && source "${thmf}/${MYPROMPT}-pre"' \
 atload'![ -f "${thmf}/${MYPROMPT}-post" ] && source "${thmf}/${MYPROMPT}-post"'; \
 ZINIT_ICE+=( "${(kv)ZINIT_ICES[@]}"); }
-ze() { zinit ice lucid                                         "${@}"; } # Regular Ice
-z()  { if [ -z $2 ]; then zinit light "${@}"; else zinit "${@}"; fi; } # zinit
 
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -109,9 +105,7 @@ export FZF_TMUX_HEIGHT="30%"
 # ssh_agent
 eval "$(ssh-agent -s)" >/dev/null
 
-for i in ecdsa ecdsa_work ed22519 rsa rsa_office rsa_personal rsa_work; do
-  ssh-add id_${i} 2> /dev/null
-done
+find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null
 
 WORDCHARS=${WORDCHARS//[\/]}
 
@@ -236,6 +230,7 @@ zt 0a light-mode for \
         OMZ::plugins/tmux/tmux.plugin.zsh \
         OMZ::plugins/extract/extract.plugin.zsh \
         OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
+        OMZ::plugins/gcloud/gcloud.plugin.zsh \
     as"program" pick"zsh-better-npm-completion.plugin.zsh" \
         lukechilds/zsh-better-npm-completion \
         skx/sysadmin-util \
@@ -360,11 +355,19 @@ setup_history_substring_search() {
     bindkey "$terminfo[kcud1]" history-substring-search-down
 }
 
+{% if ansible_facts['os_family'] == "Darwin" %}
+# The next line updates PATH for the Google Cloud SDK.
+. "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+
+# The next line enables shell command completion for gcloud.
+. "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+{% else %}
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/usr/local/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/completion.zsh.inc'; fi
+{% endif %}
 
 if (( ${+ztermtitle} )); then
     case ${TERM} in
@@ -435,10 +438,8 @@ zstyle ':completion:*' insert-tab pending
 #
 unset -f zlight
 unset -f zcommand
-unset -f zsvn
 unset -f zsnippet
-unset -f zcr
-unset -f zt zct ze z
+unset -f zt
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
