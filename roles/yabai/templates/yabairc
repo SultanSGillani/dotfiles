@@ -40,13 +40,12 @@ yabai -m config right_padding                20
 yabai -m config window_gap                   10
 
 # window rules
-yabai -m rule --add app=Firefox space=1
-yabai -m rule --add app=Safari space=1
-yabai -m rule --add app=Chrome space=1
+#yabai -m rule --add app=Firefox space=1
+#yabai -m rule --add app=Safari space=1
+#yabai -m rule --add app=Chrome space=1
 yabai -m rule --add app=RubyMine space=2
 yabai -m rule --add app="^Rider$" space=2
 yabai -m rule --add app="^PyCharm$" space=3
-yabai -m rule --add app="^JetBrains Rider$" space=2
 yabai -m rule --add app=Webstorm space=9
 yabai -m rule --add app=Slack space=4
 yabai -m rule --add app=Spotify space=6

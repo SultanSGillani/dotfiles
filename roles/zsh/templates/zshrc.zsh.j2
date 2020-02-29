@@ -104,8 +104,7 @@ export FZF_TMUX_HEIGHT="30%"
 
 # ssh_agent
 eval "$(ssh-agent -s)" >/dev/null
-
-find ~/.ssh/ -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null
+ssh-add -K &> /dev/null
 
 WORDCHARS=${WORDCHARS//[\/]}
 
