@@ -89,8 +89,11 @@ export ENHANCD_FILTER
 
 # ssh_agent
 eval "$(ssh-agent -s)" >/dev/null
+{% if ansible_facts['os_family'] == "Darwin" %}
 ssh-add -K &> /dev/null
-
+{% else %}
+ssh-add &> /dev/null
+{% endif %}
 WORDCHARS=${WORDCHARS//[\/]}
 
 export PAGER=less
