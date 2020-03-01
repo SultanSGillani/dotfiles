@@ -6,10 +6,15 @@ zsh_debian_path: ${HOME}/bin:/snap/bin
 
 touchpad_speed: .85
 
+brew_prefix: $(brew --prefix)
+
 zsh_mac_path:
 - $(ruby -e 'puts Gem.user_dir')/bin
+- "{{ brew_prefix }}"
+
 zsh_arch_path:
 - /usr/lib/ccache/bin
+
 zsh_path:
 - ${ZSH}/bin
 - ${HOME}/.local/bin
@@ -22,6 +27,15 @@ zsh_path:
 - /usr/local/sbin
 - ${HOME}/.asdf/asdf.sh
 - ${KREW_ROOT:-$HOME/.krew}/bin
+- ${HOME}/.local/bin
+
+zsh_man_path:
+- "{{ brew_prefix }}/share/man"
+- "{{ brew_prefix }}/opt/coreutils/libexec/gnuman"
+- "{{ brew_prefix }}/opt/findutils/libexec/gnuman"
+- "{{ brew_prefix }}/opt/gnu-sed/libexec/gnuman"
+- "{{ brew_prefix }}/opt/gnu-tar/libexec/gnuman"
+- "{{ brew_prefix }}/opt/grep/libexec/gnuman"
 
 fzf_widgets: ytet5uy4/fzf-widgets
 

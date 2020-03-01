@@ -11,44 +11,24 @@ ZINIT_ICE+=( "${(kv)ZINIT_ICES[@]}"); }
 z()  { [ -z $2 ] && zinit light "${@}" || zinit "${@}"; } # zplugin
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 fi
-
 
 # Load the secrets file
 if [ -e ${HOME}/.secrets ]; then
-source ${HOME}/.secrets
+    source ${HOME}/.secrets
 fi
 
-if [[ "$OSTYPE" == darwin* && -x /usr/libexec/path_helper ]]; then
+{% if ansible_facts['os_family'] == "Darwin" %}
 eval "$(/usr/libexec/path_helper -s)"
-fi
-
-typeset -U path
-typeset -U fpath
-typeset -U manpath
+{% endif %}
 
 # Homebrew
-if [[ "$OSTYPE" == darwin* && "${+commands[brew]}" == 1 ]]; then
-BREW_PREFIX="$(brew --prefix)"
-
-path=( "${BREW_PREFIX}/bin"
-"${BREW_PREFIX}/sbin"
-"${path[@]}" )
-
-fpath=( "${BREW_PREFIX}/share/zsh/site-functions"
-"${fpath[@]}" )
-
-manpath=( "${BREW_PREFIX}/share/man"
-"${BREW_PREFIX}/opt/coreutils/libexec/gnuman"
-"${BREW_PREFIX}/opt/findutils/libexec/gnuman"
-"${BREW_PREFIX}/opt/gnu-sed/libexec/gnuman"
-"${BREW_PREFIX}/opt/gnu-tar/libexec/gnuman"
-"${BREW_PREFIX}/opt/grep/libexec/gnuman"
-"${manpath[@]}" )
-fi
-
+{% if ansible_facts['os_family'] == "Darwin" %}
+BREW_PREFIX={{ brew_prefix }}
+export MANPATH="{{ zsh_man_path | join(":") }}:${MANPATH}"
+{% endif %}
 ##############################################################
 # GLOBAL CONFIG
 ##############################################################
@@ -107,9 +87,6 @@ ENHANCD_FILTER='fzf --height 50% --reverse --ansi'
 export ENHANCD_DOT_SHOW_FULLPATH=1;
 export ENHANCD_FILTER
 
-# delete fish extensions
-rm -rf $ZINIT[COMPLETIONS_DIR]/*.fish &> /dev/null
-
 # ssh_agent
 eval "$(ssh-agent -s)" >/dev/null
 ssh-add -K &> /dev/null
@@ -133,40 +110,18 @@ export _Z_CMD=z
 export CLOUDSDK_PYTHON=python3
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
-path=( {% for item in zsh_path %}
- "{{ item }}"
- {% endfor %}
- {% for item in zsh_mac_path %}
- "{{ item }}"
- {% endfor %}
- "${path[@]}" )
- {% endif %}
-
-{% if ansible_facts['os_family']|lower == "debian" %}
-path=( {% for item in zsh_path %}
- "{{ item }}"
- {% endfor %}
- {% for item in zsh_debian_path %}
- "{{ item }}"
- {% endfor %}
- "${path[@]}" )
- {% endif %}
-
-{% if ansible_facts['os_family']|lower == "archlinux" %}
+export PATH="{{ zsh_path | join(":") }}:{{ zsh_mac_path | join(":") }}:${PATH}"
+{% elif ansible_facts['os_family']|lower == "debian" %}
+export PATH="{{ zsh_path | join(":") }}:{{ zsh_debian_path | join(":") }}:${PATH}"
+{% elif ansible_facts['os_family']|lower == "archlinux" %}
 export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib
 export MAKEFLAGS="-j9 -l8"
-path=( {% for item in zsh_path %}
- "{{ item }}"
- {% endfor %}
- {% for item in zsh_arch_path %}
- "{{ item }}"
- {% endfor %}
- "${path[@]}" )
- {% endif %}
+export PATH="{{ zsh_path | join(":") }}:{{ zsh_arch_path | join(":") }}:${PATH}"
+{% endif %}
 
 # Rust
 export CARGO_HOME="${HOME}/.cargo"
-path=( "${CARGO_HOME}/bin" "${path[@]}" )
+export PATH="${CARGO_HOME}:${PATH}"
 if [[ "${+commands[rustc]}" == 1 ]]; then
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
@@ -175,28 +130,15 @@ fi
 export ASDF_ROOT="${HOME}/.asdf"
 export GOROOT="${HOME}/.asdf/installs/golang/1.13.7/go"
 export GOPATH="${HOME}/go"
-path=( "${GOROOT}/bin"
-"${ASDF_ROOT}/shims"
-"${GOROOT}/bin"
-"${path[@]}" )
+export PATH="${GOROOT}/bin:${ASDF_ROOT}/shims:${PATH}"
 
 
 # Google Cloud SDK
-if [[ -n "$BREW_PREFIX" ]]; then
-export CLOUDSDK_ROOT_DIR="${BREW_PREFIX}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
-fi
-if [[ -z "$CLOUDSDK_ROOT_DIR" && -d "$CLOUDSDK_ROOT_DIR" ]]; then
+{% if ansible_facts['os_family']|lower == "darwin" %}
+export CLOUDSDK_ROOT_DIR="{{ brew_prefix }}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
+{% else %}
 . "${CLOUDSDK_ROOT_DIR}/path.zsh.inc"
-fi
-
-path=( "${HOME}/.local/bin" "${path[@]}" )
-fpath=( "${ZDOTDIR}/functions"
-"${ZDOTDIR}/completions"
-"${fpath[@]}" )
-
-export PATH
-export FPATH
-export MANPATH
+{% endif %}
 
 ##############################################################
 # ZINIT https://github.com/zdharma/zinit
@@ -271,9 +213,10 @@ zt 0b light-mode for \
         junegunn/fzf
 
 zt 0b light-mode for \
-pick"init.sh" \
+    as"null" \
+    pick"init.sh" \
     atload"ENHANCD_FILTER='fzf --height 50% --reverse --ansi'" \
-    atinit="ENHANCD_DOT_SHOW_FULLPATH=1; export ENHANCD_FILTER; export ENHANCD_DOT_SHOW_FULLPATH" \
+    atinit"ENHANCD_DOT_SHOW_FULLPATH=1; export ENHANCD_FILTER; export ENHANCD_DOT_SHOW_FULLPATH" \
         b4b4r07/enhancd
 
 zinit ice wait'2b' lucid atinit'local file; for i in bindings generic history dir completions; do source "$i.zsh"; done'
@@ -380,13 +323,13 @@ fi
 # aliases
 {% for alias in zsh_aliases %}
     {% if alias.alias != '' %}
-        alias '{{ alias.alias }}'="{{ alias.action }}"
+alias '{{ alias.alias }}'="{{ alias.action }}"
     {% endif %}
 {% endfor %}
 
 {% for alias in zsh_misc_aliases %}
     {% if alias.alias != '' %}
-        alias '{{ alias.alias }}'="{{ alias.action }}"
+alias '{{ alias.alias }}'="{{ alias.action }}"
     {% endif %}
 {% endfor %}
 
@@ -398,31 +341,31 @@ done
 # ruby aliases
 {% for alias in zsh_ruby_aliases %}
     {% if alias.alias != '' %}
-        alias {{ alias.alias }}='{{ alias.action }}'
+alias {{ alias.alias }}='{{ alias.action }}'
     {% endif %}
 {% endfor %}
 
 # python aliases
 {% for alias in zsh_python_aliases %}
     {% if alias.alias != '' %}
-        alias {{ alias.alias }}='{{ alias.action }}'
+alias {{ alias.alias }}='{{ alias.action }}'
     {% endif %}
 {% endfor %}
 
 {% if ansible_facts['os_family']|lower == "archlinux" or  ansible_facts['os_family']|lower == "debian" %}
-    # linux only aliases
+# linux only aliases
     {% for alias in zsh_linux_aliases %}
         {% if alias.alias != '' %}
-            alias '{{ alias.alias }}'="{{ alias.action }}"
+alias '{{ alias.alias }}'="{{ alias.action }}"
         {% endif %}
     {% endfor %}
 {% endif %}
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
-    # mac only aliases
+# mac only aliases
     {% for alias in zsh_mac_aliases %}
         {% if alias.alias != '' %}
-            alias '{{ alias.alias }}'="{{ alias.action }}"
+alias '{{ alias.alias }}'="{{ alias.action }}"
         {% endif %}
     {% endfor %}
 {% endif %}
