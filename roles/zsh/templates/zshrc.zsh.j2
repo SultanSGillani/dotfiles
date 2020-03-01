@@ -137,8 +137,9 @@ export PATH="${GOROOT}/bin:${ASDF_ROOT}/shims:${PATH}"
 {% if ansible_facts['os_family']|lower == "darwin" %}
 export CLOUDSDK_ROOT_DIR="{{ brew_prefix }}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
 {% else %}
-. "${CLOUDSDK_ROOT_DIR}/path.zsh.inc"
+export CLOUDSDK_ROOT_DIR="/opt/google-cloud-sdk/latest/google-cloud-sdk"
 {% endif %}
+. "${CLOUDSDK_ROOT_DIR}/path.zsh.inc"
 
 ##############################################################
 # ZINIT https://github.com/zdharma/zinit
