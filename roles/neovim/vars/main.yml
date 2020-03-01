@@ -5,7 +5,7 @@ color:
 - '{{ vim_theme }}'
 
 filetype:
-- on
+- "on"
 - plugin indent on
 
 neovim_config_dir: '{{ dotfiles_user_home }}/.config/nvim'
@@ -20,7 +20,7 @@ snippet_files:
 - zsh
 
 syntax:
-- on
+- "on"
 
 vim_packages:
 - neovim
