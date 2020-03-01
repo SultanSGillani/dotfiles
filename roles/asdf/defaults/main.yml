@@ -1,6 +1,6 @@
 plugins:
 - nodejs
-#  - ruby
+- ruby
 - python
 - dotnet-core
 - golang
@@ -19,11 +19,11 @@ asdf_plugins:
   - 3.8.0
   - 3.7.5
   global: 3.7.5
-#  - name: "ruby"
-#    repository: "https://github.com/asdf-vm/asdf-ruby.git"
-#    versions:
-#      - 2.4.6
-#    global: 2.4.6
+- name: "ruby"
+  repository: "https://github.com/asdf-vm/asdf-ruby.git"
+  versions:
+    - 2.4.6
+  global: 2.4.6
 - name: dotnet-core
   repository: https://github.com/emersonsoares/asdf-dotnet-core.git
   versions:

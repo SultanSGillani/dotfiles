@@ -1,6 +1,6 @@
 - name: Install skhd | Macos
   homebrew:
-    name: skhd
+    name: koekeishiya/formulae/skhd
     state: present
   tags:
   - initial

@@ -75,7 +75,7 @@
 - name: Write .zprofile config
   template:
     src: zprofile.zsh.j2
-    dest: '{{ dotfiles_user_home }}/.zprofile'
+    dest: '{{ zdot_dir }}/.zprofile'
     owner: '{{ zsh_user }}'
     group: '{{ zsh_user_group }}'
     backup: no

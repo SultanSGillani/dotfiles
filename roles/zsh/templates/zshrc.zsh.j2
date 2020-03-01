@@ -8,7 +8,7 @@ zct() { .zinit-ice load"[[ \${MYPROMPT} = ${1} ]]" unload"[[ \${MYPROMPT} != ${1
 atinit'[ -f "${thmf}/${MYPROMPT}-pre" ] && source "${thmf}/${MYPROMPT}-pre"' \
 atload'![ -f "${thmf}/${MYPROMPT}-post" ] && source "${thmf}/${MYPROMPT}-post"'; \
 ZINIT_ICE+=( "${(kv)ZINIT_ICES[@]}"); }
-
+z()  { [ -z $2 ] && zinit light "${@}" || zinit "${@}"; } # zplugin
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
 source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -101,6 +101,14 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview' --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort' --header 'Press CTRL-Y to copy command into clipboard' --border"
 export FZF_TMUX_HEIGHT="30%"
+
+# Enhanced
+ENHANCD_FILTER='fzf --height 50% --reverse --ansi'
+export ENHANCD_DOT_SHOW_FULLPATH=1;
+export ENHANCD_FILTER
+
+# delete fish extensions
+rm -rf $ZINIT[COMPLETIONS_DIR]/*.fish &> /dev/null
 
 # ssh_agent
 eval "$(ssh-agent -s)" >/dev/null
@@ -230,10 +238,10 @@ zt 0a light-mode for \
         OMZ::plugins/extract/extract.plugin.zsh \
         OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
         OMZ::plugins/gcloud/gcloud.plugin.zsh \
-    as"program" pick"zsh-better-npm-completion.plugin.zsh" \
-        lukechilds/zsh-better-npm-completion \
         skx/sysadmin-util \
         rimraf/k \
+    as"program" pick"zsh-better-npm-completion.plugin.zsh" \
+        lukechilds/zsh-better-npm-completion \
     has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf \
         laggardkernel/git-ignore \
     make!"!PREFIX=$ZPFX" \
@@ -244,25 +252,14 @@ zt 0a light-mode for \
     has'git-extras' \
         https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
 
-# Turbo 0b
+## Turbo 0b
 zt 0b light-mode for \
         OMZ::lib/git.zsh \
     atload"unalias grv" lucid \
         OMZ::plugins/git/git.plugin.zsh \
     has'man' \
         ael-code/zsh-colored-man-pages \
-    has'notify-send' atload' \
-    AUTO_NOTIFY_THRESHOLD=300; \
-    AUTO_NOTIFY_IGNORE+=( \
-    "cht.sh" \
-    "cht" \
-    "lazydocker" \
-    "lazygit" \
-    "tmux" \
-    "yarn" \
-    "vagrant ssh" \
-    ) \
-    ' \
+    has'notify-send' atload'AUTO_NOTIFY_THRESHOLD=300; AUTO_NOTIFY_IGNORE+=( "cht.sh" "cht" "lazydocker" "lazygit" "tmux" "yarn" "vagrant ssh" )' \
         MichaelAquilina/zsh-auto-notify \
     as"program" pick"bin/git-dsf" \
         zdharma/zsh-diff-so-fancy \
@@ -271,28 +268,31 @@ zt 0b light-mode for \
     cp bin/(fzf|fzf-tmux) $ZPFX/bin; \
     PREFIX=$ZPFX ./install" \
     atload"source $HOME/.fzf.zsh" \
-        junegunn/fzf \
-    multisrc'(bindings|generic|history|dir|completions).zsh' pick'/dev/null' \
-        ${ZDOTDIR} \
-    pick"init.sh" \
-    atload"export ENHANCD_FILTER='fzf --height 50% --reverse --ansi'" \
-    atinit="export ENHANCD_DOT_SHOW_FULLPATH=1; export ENHANCD_FILTER=filter" \
+        junegunn/fzf
+
+zt 0b light-mode for \
+pick"init.sh" \
+    atload"ENHANCD_FILTER='fzf --height 50% --reverse --ansi'" \
+    atinit="ENHANCD_DOT_SHOW_FULLPATH=1; export ENHANCD_FILTER; export ENHANCD_DOT_SHOW_FULLPATH" \
         b4b4r07/enhancd
+
+zinit ice wait'2b' lucid atinit'local file; for i in bindings generic history dir completions; do source "$i.zsh"; done'
+zinit light ${ZDOTDIR}
 
 # Turbo 0c and OS dependent
 {% if ansible_facts['os_family']|lower == "darwin" %}
-    zinit svn wait"0c" lucid
-    zinit snippet OMZ::plugins/osx
+zinit svn wait"0c" lucid
+zinit snippet OMZ::plugins/osx
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "debian" %}
-    zinit wait"0c" lucid
-    zinit snippet OMZ::plugins/debian/debian.plugin.zsh
+zinit wait"0c" lucid
+zinit snippet OMZ::plugins/debian/debian.plugin.zsh
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "ubuntu" %}
-    zinit wait"0c" lucid
-    zinit snippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
+zinit wait"0c" lucid
+zinit snippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
 {% endif %}
 
 # fzy
@@ -439,6 +439,7 @@ unset -f zlight
 unset -f zcommand
 unset -f zsnippet
 unset -f zt
+unset -f z
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.

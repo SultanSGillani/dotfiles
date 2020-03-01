@@ -22,7 +22,7 @@
 - name: Check for Command Line Tools in Software Update list
   shell: |
     set -o pipefail
-    softwareupdate -l | grep -B 1 -E 'Command Line Tools' | awk -F'*' '/^ +\*/ {print $2}' | sed 's/^ *//' | head -n1
+    softwareupdate -l | grep -B 1 -E "Command Line Tools" | awk -F"*" "/^ +\*/ {print $2}" | sed "s/^ *//" | head -n1
   register: su_list
   when: xcode_select_res.stdout|length == 0
   changed_when: false
@@ -31,7 +31,7 @@
   - update
 
 - name: Install Command Line Tools
-  command: softwareupdate -i '{{ su_list.stdout }}'
+  command: softwareupdate -i "{{ su_list.stdout }}"
   when: xcode_select_res.stdout|length == 0
   notify:
   - Cleanup
@@ -39,7 +39,7 @@
 
 - name: Tap Casks
   homebrew_tap:
-    name: '{{ brew_taps }}'
+    name: "{{ brew_taps }}"
     state: present
   become: no
   tags:
@@ -47,7 +47,7 @@
 
 - name: Install brew programs
   homebrew:
-    name: '{{ brew_packages }}'
+    name: "{{ brew_packages }}"
     state: present
   become: no
   tags:
@@ -72,7 +72,7 @@
 
 - name: Install Cask Packages
   homebrew_cask:
-    name: '{{ brew_casks }}'
+    name: "{{ brew_casks }}"
     state: present
     accept_external_apps: yes
   tags:
