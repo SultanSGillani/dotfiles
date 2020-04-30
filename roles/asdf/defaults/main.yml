@@ -5,6 +5,7 @@ plugins:
 - dotnet-core
 - golang
 - groovy
+- java
 - shellcheck
 
 asdf_plugins:
@@ -35,6 +36,16 @@ asdf_plugins:
   versions:
   - 1.13.7
   global: 1.13.7
+- name: groovy
+  repository: https://github.com/weibemoura/asdf-groovy.git
+  versions:
+  - groovy-binary-2.4.3
+  global: groovy-binary-2.4.3
+- name: java
+  repository: https://github.com/halcyon/asdf-java.git
+  versions:
+  - adopt-openjdk-14.0.1+7_openj9-0.20.0
+  global: adopt-openjdk-14.0.1+7_openj9-0.20.0
 - name: skaffold
   repository: https://github.com/kristoflemmens/asdf-skaffold.git
   versions:

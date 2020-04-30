@@ -36,6 +36,8 @@ export MANPATH="{{ zsh_man_path | join(":") }}:${MANPATH}"
 # ASDF
 . ${HOME}/.asdf/asdf.sh
 
+[[ -f ${HOME}/.asdf/plugins/java/set-java-home.zsh ]] && . ${HOME}/.asdf/plugins/java/set-java-home.zsh
+
 # Homebrew options
 {% if ansible_facts['os_family']|lower == "darwin" %}
 export HOMEBREW_INSTALL_BADGE="⚗️"
@@ -112,6 +114,15 @@ export _Z_CMD=z
 # GCLOUD
 export CLOUDSDK_PYTHON=python3
 
+# ZDOT items
+for i in completions bindings generic history dir; do
+    source "${ZDOTDIR}/$i.zsh"
+done
+
+for f in $(ls "${ZDOTDIR}"/functions/*.zsh); do
+    source "${f}"
+done
+
 {% if ansible_facts['os_family']|lower == "darwin" %}
 export PATH="{{ zsh_path | join(":") }}:{{ zsh_mac_path | join(":") }}:${PATH}"
 {% elif ansible_facts['os_family']|lower == "debian" %}
@@ -168,22 +179,28 @@ autoload -Uz _zinit
 
 # PROMPT
 setopt promptsubst
-zinit ice depth=1 atload'!source ${ZDOTDIR}/prompt.zsh; _p9k_precmd' nocd
-zinit light romkatv/powerlevel10k
+
+zinit light-mode for \
+  atload'!source \
+    ${ZDOTDIR}/prompt.zsh' \
+  nocd \
+  romkatv/powerlevel10k
 
 # Turbo 0a
 zt 0a light-mode for \
-        OMZ::plugins/python/python.plugin.zsh \
-        OMZ::plugins/virtualenv/virtualenv.plugin.zsh \
-        OMZ::plugins/archlinux/archlinux.plugin.zsh \
-        OMZ::plugins/urltools/urltools.plugin.zsh \
-        OMZ::plugins/nmap/nmap.plugin.zsh \
-        OMZ::plugins/kubectl/kubectl.plugin.zsh \
-        OMZ::plugins/asdf/asdf.plugin.zsh \
-        OMZ::plugins/tmux/tmux.plugin.zsh \
-        OMZ::plugins/extract/extract.plugin.zsh \
-        OMZ::plugins/command-not-found/command-not-found.plugin.zsh \
-        OMZ::plugins/gcloud/gcloud.plugin.zsh \
+        OMZP::python \
+        OMZP::virtualenv \
+{% if ansible_facts['os_family']|lower == "archlinux" %}
+        OMZP::archlinux \
+{% endif %}
+        OMZP::urltools \
+        OMZP::nmap \
+        OMZP::kubectl \
+        OMZP::asdf \
+        OMZP::tmux \
+        OMZP::extract \
+        OMZP::command-not-found \
+        OMZP::gcloud \
         skx/sysadmin-util \
         rimraf/k \
     as"program" pick"zsh-better-npm-completion.plugin.zsh" \
@@ -199,10 +216,10 @@ zt 0a light-mode for \
         https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
 
 ## Turbo 0b
-zt 0b light-mode for \
-        OMZ::lib/git.zsh \
-    atload"unalias grv" lucid \
-        OMZ::plugins/git/git.plugin.zsh \
+zt 0b lucid light-mode for \
+        OMZL::git.zsh \
+    atload"unalias grv" \
+        OMZP::git \
     has'man' \
         ael-code/zsh-colored-man-pages \
     has'notify-send' atload'AUTO_NOTIFY_THRESHOLD=300; AUTO_NOTIFY_IGNORE+=( "cht.sh" "cht" "lazydocker" "lazygit" "tmux" "yarn" "vagrant ssh" )' \
@@ -223,65 +240,51 @@ zt 0b light-mode for \
     atinit"ENHANCD_DOT_SHOW_FULLPATH=1; export ENHANCD_FILTER; export ENHANCD_DOT_SHOW_FULLPATH" \
         b4b4r07/enhancd
 
-zinit ice wait'2b' lucid atinit'local file; for i in bindings generic history dir completions; do source "$i.zsh"; done'
-zinit light ${ZDOTDIR}
-
 # Turbo 0c and OS dependent
 {% if ansible_facts['os_family']|lower == "darwin" %}
-zinit svn wait"0c" lucid
-zinit snippet OMZ::plugins/osx
+zinit ice svn wait"0c" lucid
+zsnippet OMZP::osx
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "debian" %}
-zinit wait"0c" lucid
-zinit snippet OMZ::plugins/debian/debian.plugin.zsh
+zinit ice svn wait"0c" lucid
+zsnippet OMZP::debian
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "ubuntu" %}
-zinit wait"0c" lucid
-zinit snippet OMZ::plugins/ubuntu/ubuntu.plugin.zsh
+zinit ice svn wait"0c" lucid
+zsnippet OMZP::ubuntu
 {% endif %}
 
 # fzy
 
-zinit wait"1" lucid as"program" pick"$ZPFX/bin/fzy*" \
-atclone"cp contrib/fzy-* $ZPFX/bin/" \
-make"!PREFIX=$ZPFX install" for \
-jhawthorn/fzy
+zt 1a lucid light-mode for \
+    as"program" pick"$ZPFX/bin/fzy*" \
+    atclone"cp contrib/fzy-* $ZPFX/bin/" \
+    make"!PREFIX=$ZPFX install" \
+  jhawthorn/fzy
 
 zcommand cp"httpstat.sh -> httpstat" pick"httpstat"
 zlight b4b4r07/httpstat
 
 #### COMPLETION SNIPPETS
 #######################################################################################################
-# Completion for Docker
-zinit ice wait"2a" lucid as'completion'
-zsnippet https://github.com/docker/cli/blob/master/contrib/completion/zsh/_docker
 
-# Docker Compose
-zinit ice wait"2a" lucid as'completion'
-zsnippet https://github.com/docker/compose/blob/master/contrib/completion/zsh/_docker-compose
-
-# kubectl
-zinit ice wait"2a" lucid as'completion' for \
-zsnippet https://github.com/nnao45/zsh-kubectl-completion/blob/master/_kubectl
-
-# completion for extract
-zinit ice wait"2a" lucid as'completion'
-zsnippet https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/extract/_extract
-
-
-#######################################################################################################
-
-# local snippets
-zinit ice wait'2b' lucid atinit'local file; for file in *.zsh; do source "$file"; done'
-zinit light ${ZDOTDIR}/functions
+zt 2a lucid for \
+  as"completion" \
+        OMZP::docker/_docker \
+  as"completion" \
+        OMZP::docker/_extract \
+  as"completion" \
+        OMZP::docker/_kubectl \
+  as"completion" \
+        OMZP::docker/_docker-compose
 
 #################################################################
 # IMPORTANT PLUGINS
 
 # Fast-syntax-highlighting & autosuggestions
-zinit wait'2c' lucid for \
+zt 2c lucid for \
     atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" \
         zdharma/fast-syntax-highlighting \
     atload"!_zsh_autosuggest_start" \
@@ -292,8 +295,11 @@ zinit wait'2c' lucid for \
 
 # history-substring-search for smarter up/down arrow
 # MUST be after fast-syntax-highlighting
-zinit wait'2d' lucid atload'setup_history_substring_search' nocd
-zinit light zsh-users/zsh-history-substring-search
+
+zt 2c lucid light-mode for \
+  atload"setup_history_substring_search" \
+  nocd \
+    zsh-users/zsh-history-substring-search
 
 setup_history_substring_search() {
     export HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND=''
@@ -326,15 +332,15 @@ fi
 
 # aliases
 {% for alias in zsh_aliases %}
-    {% if alias.alias != '' %}
+  {% if alias.alias != '' %}
 alias '{{ alias.alias }}'="{{ alias.action }}"
-    {% endif %}
+  {% endif %}
 {% endfor %}
 
 {% for alias in zsh_misc_aliases %}
-    {% if alias.alias != '' %}
+  {% if alias.alias != '' %}
 alias '{{ alias.alias }}'="{{ alias.action }}"
-    {% endif %}
+  {% endif %}
 {% endfor %}
 
 # One of @janmoesen’s ProTip™s
@@ -344,40 +350,35 @@ done
 
 # ruby aliases
 {% for alias in zsh_ruby_aliases %}
-    {% if alias.alias != '' %}
+  {% if alias.alias != '' %}
 alias {{ alias.alias }}='{{ alias.action }}'
-    {% endif %}
+  {% endif %}
 {% endfor %}
 
 # python aliases
 {% for alias in zsh_python_aliases %}
-    {% if alias.alias != '' %}
+  {% if alias.alias != '' %}
 alias {{ alias.alias }}='{{ alias.action }}'
-    {% endif %}
+  {% endif %}
 {% endfor %}
 
 {% if ansible_facts['os_family']|lower == "archlinux" or  ansible_facts['os_family']|lower == "debian" %}
 # linux only aliases
-    {% for alias in zsh_linux_aliases %}
-        {% if alias.alias != '' %}
+  {% for alias in zsh_linux_aliases %}
+    {% if alias.alias != '' %}
 alias '{{ alias.alias }}'="{{ alias.action }}"
-        {% endif %}
-    {% endfor %}
+    {% endif %}
+  {% endfor %}
 {% endif %}
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
 # mac only aliases
-    {% for alias in zsh_mac_aliases %}
-        {% if alias.alias != '' %}
+  {% for alias in zsh_mac_aliases %}
+    {% if alias.alias != '' %}
 alias '{{ alias.alias }}'="{{ alias.action }}"
-        {% endif %}
-    {% endfor %}
+    {% endif %}
+  {% endfor %}
 {% endif %}
-
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
-
-zstyle ':completion:*' insert-tab pending
-
 
 #################################################################
 # REMOVE TEMPORARY FUNCTIONS

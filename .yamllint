@@ -22,7 +22,7 @@ rules:
     level: warning
   document-start: disable
   indentation: {
-    spaces: 2, indent-sequences: false
+    spaces: 4, indent-sequences: false
         }
   line-length: disable
   truthy: disable
