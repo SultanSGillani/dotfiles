@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+spacebar -m config text_font         "Hack Nerd Font:Bold:12.0"
+spacebar -m config icon_font         "Hack Nerd Font:Regular:12.0"
+spacebar -m config background_color  0xaa282a36
+spacebar -m config foreground_color  0xffe2e4e5
+spacebar -m config space_icon_strip           
+spacebar -m config power_icon_strip   
+spacebar -m config space_icon        
+spacebar -m config clock_icon        
+spacebar -m config clock_format      "%m/%d/%y %r"
+
+echo "spacebar configuration loaded.."

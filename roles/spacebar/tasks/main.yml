@@ -1,0 +1,15 @@
+- name: Install spacebar
+  homebrew:
+    name: somdoron/formulae/spacebar
+    state: present
+  tags:
+  - initial
+
+- name: Write spacebar config
+  template:
+    src: spacebarrc
+    dest: '{{ dotfiles_user_home }}/.spacebarrc'
+    mode: 0755
+  notify: Restart spacebar
+  tags:
+  - update

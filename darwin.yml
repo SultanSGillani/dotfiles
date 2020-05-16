@@ -12,6 +12,10 @@
       tags:
       - skhd
     - import_role:
+        name: spacebar
+      tags:
+        - spacebar
+    - import_role:
         name: yabai
       tags:
       - yabai

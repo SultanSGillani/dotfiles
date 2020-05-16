@@ -1,16 +1,5 @@
 #!/usr/bin/env sh
 
-# bar settings
-yabai -m config status_bar                   on
-yabai -m config status_bar_text_font         "Hack Nerd Font:Bold:12.0"
-yabai -m config status_bar_icon_font         "Hack Nerd Font:Regular:12.0"
-yabai -m config status_bar_background_color  0xaa282a36
-yabai -m config status_bar_foreground_color  0xffe2e4e5
-yabai -m config status_bar_space_icon_strip           
-yabai -m config status_bar_power_icon_strip   
-yabai -m config status_bar_space_icon        
-yabai -m config status_bar_clock_icon        
-
 # global settings
 yabai -m config mouse_follows_focus          on
 yabai -m config focus_follows_mouse          autofocus
@@ -33,7 +22,7 @@ yabai -m config mouse_action2                resize
 
 # general space settings
 yabai -m config layout                       bsp
-yabai -m config top_padding                  20
+yabai -m config top_padding                  26
 yabai -m config bottom_padding               20
 yabai -m config left_padding                 20
 yabai -m config right_padding                20
@@ -51,6 +40,8 @@ yabai -m rule --add app="^IntelliJ IDEA$" space=7
 yabai -m rule --add app=WebStorm space=9
 yabai -m rule --add app="^Slack$" space=4
 yabai -m rule --add app="^Microsoft Teams$" space=4
+yabai -m rule --add app="^Microsoft Remote Desktop$" space=6
+yabai -m rule --add app="^Parallels" space=7
 yabai -m rule --add app=Music space=10
 yabai -m rule --add app=Spotify space=6
 yabai -m rule --add app="^Microsoft Outlook$" space=8
