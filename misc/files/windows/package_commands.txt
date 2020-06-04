@@ -1,0 +1,49 @@
+iwr -useb get.scoop.sh | iex
+scoop install sudo
+sudo scoop install 7zip git openssh --global
+scoop install curl grep less nano
+scoop install neovim
+scoop install concfg
+sudo scoop install posh-git
+scoop install aria2
+scoop bucket add extras
+sudo scoop install posh-git
+sudo scoop install visual-studio-code
+sudo scoop install code
+scoop install code
+scoop bucket add nerd-fonts
+scoop update
+scoop install diff-so-fancy
+scoop install diff
+scoop install nodejs-lts
+scoop install nodejs-lts
+scoop install perl
+
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+choco
+choco install bash
+choco install redis-64 --version=2.8.4
+cd C:\ProgramData\chocolatey\lib\redis-64\
+choco install redis-64
+choco install redis-64 --force
+choco install redis-64 --force
+choco upgrade redis-64
+choco install scoop
+sudo choco install poshgit
+sudo choco feature enable -n allowGlobalConfirmation
+sudo choco delete poshgit
+sudo choco remove poshgit
+choco -?
+sudo choco uninstall poshgit
+cat (Get-PSReadlineOption).HistorySavePath | grep choco >~/Documents/package_commands.txt
+cat (Get-PSReadlineOption).HistorySavePath | grep choco >>\\Mac\Home\package_commands.txt
+cinst git
+cinst vim
+cinst vim
+cinst unzip
+cinst nuget
+cinst nugetcli
+cinst nugetrefreshenv
+cinst winfzf
+cinst fzf
+npm i -g diff-so-fancy
