@@ -46,6 +46,7 @@ export HOMEBREW_NO_ANALYTICS=1
 
 # FZF
 [[ -f ${HOME}/.fzf.zsh ]] && . ${HOME}/.fzf.zsh
+
 # Base16 {{ base16.theme[default_theme]['scheme_name'] }}
 # Author: {{ base16.theme[default_theme]['scheme_author'] }}
 
@@ -142,7 +143,7 @@ fi
 
 # Go
 export ASDF_ROOT="${HOME}/.asdf"
-export GOROOT="${HOME}/.asdf/installs/golang/1.13.7/go"
+export GOROOT="${HOME}/.asdf/installs/golang/1.14.4/go"
 export GOPATH="${HOME}/go"
 export PATH="${GOROOT}/bin:${ASDF_ROOT}/shims:${PATH}"
 
@@ -227,17 +228,15 @@ zt 0b lucid light-mode for \
     as"program" pick"bin/git-dsf" \
         zdharma/zsh-diff-so-fancy \
     as'program' pick"$ZPFX/bin/(fzf|fzf-tmux)" \
-    atclone"cp shell/completion.zsh _fzf_completion; \
-    cp bin/(fzf|fzf-tmux) $ZPFX/bin; \
-    PREFIX=$ZPFX ./install" \
-    atload"source $HOME/.fzf.zsh" \
+    atclone'cp "shell/completion.zsh" "_fzf_completion"; cp "bin/(fzf|fzf-tmux)" "$ZPFX/bin"; PREFIX=$ZPFX ./install' \
+    atload'source "$HOME/.fzf.zsh"' \
         junegunn/fzf
 
 zt 0b light-mode for \
     as"null" \
     pick"init.sh" \
-    atload"ENHANCD_FILTER='fzf --height 50% --reverse --ansi'" \
-    atinit"ENHANCD_DOT_SHOW_FULLPATH=1; export ENHANCD_FILTER; export ENHANCD_DOT_SHOW_FULLPATH" \
+    atload'ENHANCD_FILTER="fzf --height 50% --reverse --ansi"' \
+    atinit'ENHANCD_DOT_SHOW_FULLPATH=1; export ENHANCD_FILTER; export ENHANCD_DOT_SHOW_FULLPATH' \
         b4b4r07/enhancd
 
 # Turbo 0c and OS dependent
@@ -259,8 +258,8 @@ zsnippet OMZP::ubuntu
 # fzy
 
 zt 1a lucid light-mode for \
-    as"program" pick"$ZPFX/bin/fzy*" \
-    atclone"cp contrib/fzy-* $ZPFX/bin/" \
+    as'program' pick"$ZPFX/bin/fzy*" \
+    atclone'cp "contrib/fzy-*" "$ZPFX/bin/"' \
     make"!PREFIX=$ZPFX install" \
   jhawthorn/fzy
 
@@ -351,14 +350,14 @@ done
 # ruby aliases
 {% for alias in zsh_ruby_aliases %}
   {% if alias.alias != '' %}
-alias {{ alias.alias }}='{{ alias.action }}'
+alias '{{ alias.alias }}'="{{ alias.action }}"
   {% endif %}
 {% endfor %}
 
 # python aliases
 {% for alias in zsh_python_aliases %}
   {% if alias.alias != '' %}
-alias {{ alias.alias }}='{{ alias.action }}'
+alias '{{ alias.alias }}'="{{ alias.action }}"
   {% endif %}
 {% endfor %}
 
