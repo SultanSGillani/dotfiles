@@ -139,6 +139,16 @@
   tags:
   - update
 
+- name: Synchronize and delete files in dest for aliases
+  synchronize:
+    src: aliases/
+    dest: '{{ zdot_dir }}/aliases/'
+    owner: yes
+    delete: yes
+    recursive: yes
+  tags:
+  - update
+
 - name: write z.sh
   copy:
     src: z.sh
