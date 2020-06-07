@@ -328,17 +328,9 @@ if (( ${+ztermtitle} )); then
 fi
 
 # aliases
-{% for alias in zsh_aliases %}
-  {% if alias.alias != '' %}
-alias '{{ alias.alias }}'="{{ alias.action }}"
-  {% endif %}
-{% endfor %}
+. "$ZDOTDIR/aliases/global_aliases.zsh"
 
-{% for alias in zsh_misc_aliases %}
-  {% if alias.alias != '' %}
-alias '{{ alias.alias }}'="{{ alias.action }}"
-  {% endif %}
-{% endfor %}
+. "$ZDOTDIR/aliases/misc_aliases.zsh"
 
 # One of @janmoesen’s ProTip™s
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
@@ -346,35 +338,19 @@ for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
 done
 
 # ruby aliases
-{% for alias in zsh_ruby_aliases %}
-  {% if alias.alias != '' %}
-alias '{{ alias.alias }}'="{{ alias.action }}"
-  {% endif %}
-{% endfor %}
+. "$ZDOTDIR/aliases/ruby_aliases.zsh"
 
 # python aliases
-{% for alias in zsh_python_aliases %}
-  {% if alias.alias != '' %}
-alias '{{ alias.alias }}'="{{ alias.action }}"
-  {% endif %}
-{% endfor %}
+. "$ZDOTDIR/aliases/python_aliases.zsh"
 
 {% if ansible_facts['os_family']|lower == "archlinux" or  ansible_facts['os_family']|lower == "debian" %}
 # linux only aliases
-  {% for alias in zsh_linux_aliases %}
-    {% if alias.alias != '' %}
-alias '{{ alias.alias }}'="{{ alias.action }}"
-    {% endif %}
-  {% endfor %}
+. "$ZDOTDIR/aliases/linux_aliases.zsh"
 {% endif %}
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
 # mac only aliases
-  {% for alias in zsh_mac_aliases %}
-    {% if alias.alias != '' %}
-alias '{{ alias.alias }}'="{{ alias.action }}"
-    {% endif %}
-  {% endfor %}
+. "$ZDOTDIR/aliases/mac_aliases.zsh"
 {% endif %}
 
 #################################################################
