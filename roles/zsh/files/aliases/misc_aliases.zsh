@@ -24,7 +24,7 @@ alias 'clsym'="find . -xtype l -delete"
 alias 'filesize'="stat -f \"%z bytes\""
 # ROT13-encode text. Works for decoding, too! ;)
 alias 'rot13'="tr a-zA-Z n-za-mN-ZA-M"
-alias ''="'"
+
 ### The Rest ###
 alias 'clr'="clear"
 alias 'pg'="ps -ef | rg"
