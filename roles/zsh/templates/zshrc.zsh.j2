@@ -206,27 +206,17 @@ zt 0a light-mode for \
         rimraf/k \
     as"program" pick"zsh-better-npm-completion.plugin.zsh" \
         lukechilds/zsh-better-npm-completion \
-    has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf \
-        laggardkernel/git-ignore \
     make!"!PREFIX=$ZPFX" \
     atclone"cp build/def-* $ZPFX/bin/" \
         sei40kr/zsh-fast-alias-tips \
     compile'{hsmw-*,test/*}' \
         zdharma/history-search-multi-word
 
-zt 0b lucid light-mode for \
-   has'git-extras' \
-      https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
-
 ## Turbo 0b
 zt 0b lucid light-mode for \
         OMZL::git.zsh \
     atload"unalias grv" \
         OMZP::git \
-    has'man' \
-        ael-code/zsh-colored-man-pages \
-    has'notify-send' atload'AUTO_NOTIFY_THRESHOLD=300; AUTO_NOTIFY_IGNORE+=( "cht.sh" "cht" "lazydocker" "lazygit" "tmux" "yarn" "vagrant ssh" )' \
-        MichaelAquilina/zsh-auto-notify \
     as"program" pick"bin/git-dsf" \
         zdharma/zsh-diff-so-fancy \
     as"program" pick"$ZPFX/bin/(fzf|fzf-tmux)" \
