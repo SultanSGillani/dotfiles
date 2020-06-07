@@ -212,9 +212,10 @@ zt 0a light-mode for \
     atclone"cp build/def-* $ZPFX/bin/" \
         sei40kr/zsh-fast-alias-tips \
     compile'{hsmw-*,test/*}' \
-        zdharma/history-search-multi-word \
-    has'git-extras' \
-        https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
+        zdharma/history-search-multi-word
+
+zinit light has'git-extras'
+https://github.com/tj/git-extras/blob/master/etc/git-extras-completion.zsh
 
 ## Turbo 0b
 zt 0b lucid light-mode for \
