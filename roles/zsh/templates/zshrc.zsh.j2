@@ -227,16 +227,14 @@ zt 0b lucid light-mode for \
         MichaelAquilina/zsh-auto-notify \
     as"program" pick"bin/git-dsf" \
         zdharma/zsh-diff-so-fancy \
-    as'program' pick"$ZPFX/bin/(fzf|fzf-tmux)" \
-    atclone'cp "shell/completion.zsh" "_fzf_completion"; cp "bin/(fzf|fzf-tmux)" "$ZPFX/bin"; PREFIX=$ZPFX ./install' \
-    atload'source "$HOME/.fzf.zsh"' \
+    as"program" pick"$ZPFX/bin/(fzf|fzf-tmux)" \
+    atclone'cp "shell/completion.zsh" "_fzf_completion"; cp "bin/(fzf|fzf-tmux)" "$ZPFX/bin"; "PREFIX=$ZPFX" ./install' \
+    atload"source $HOME/.fzf.zsh" \
         junegunn/fzf
 
 zt 0b light-mode for \
     as"null" \
     pick"init.sh" \
-    atload'ENHANCD_FILTER="fzf --height 50% --reverse --ansi"' \
-    atinit'ENHANCD_DOT_SHOW_FULLPATH=1; export ENHANCD_FILTER; export ENHANCD_DOT_SHOW_FULLPATH' \
         b4b4r07/enhancd
 
 # Turbo 0c and OS dependent
@@ -258,7 +256,7 @@ zsnippet OMZP::ubuntu
 # fzy
 
 zt 1a lucid light-mode for \
-    as'program' pick"$ZPFX/bin/fzy*" \
+    as"program" pick"$ZPFX/bin/fzy*" \
     atclone'cp "contrib/fzy-*" "$ZPFX/bin/"' \
     make"!PREFIX=$ZPFX install" \
   jhawthorn/fzy
