@@ -206,6 +206,8 @@ zt 0a light-mode for \
         rimraf/k \
     as"program" pick"zsh-better-npm-completion.plugin.zsh" \
         lukechilds/zsh-better-npm-completion \
+    has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf \
+        laggardkernel/git-ignore \
     make!"!PREFIX=$ZPFX" \
     atclone"cp build/def-* $ZPFX/bin/" \
         sei40kr/zsh-fast-alias-tips \
@@ -370,3 +372,5 @@ fi
 } &!
 
 (( ! ${+functions[p10k]} )) || p10k finalize
+
+export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"

@@ -18,7 +18,6 @@ asdf_plugins:
   repository: https://github.com/danhper/asdf-python.git
   versions:
   - 3.8.0
-  - 3.7.5
   global: 3.7.5
 - name: ruby
   repository: https://github.com/asdf-vm/asdf-ruby.git

@@ -15,3 +15,4 @@
     dest: '{{ dotfiles_user_home }}/.gitconfig'
   tags:
   - update
+  - git_config
