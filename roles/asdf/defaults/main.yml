@@ -42,8 +42,8 @@ asdf_plugins:
 - name: java
   repository: https://github.com/halcyon/asdf-java.git
   versions:
-  - adopt-openjdk-14.0.1+7_openj9-0.20.0
-  global: adopt-openjdk-14.0.1+7_openj9-0.20.0
+  - adoptopenjdk-14.0.1+7.1.openj9-0.20.0
+  global: adoptopenjdk-14.0.1+7.1.openj9-0.20.0
 - name: skaffold
   repository: https://github.com/kristoflemmens/asdf-skaffold.git
   versions:
