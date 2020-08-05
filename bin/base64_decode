@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+TO_DECODE=$1
+
+echo -n "${TO_DECODE}" | base64 -d | pbcopy
+
