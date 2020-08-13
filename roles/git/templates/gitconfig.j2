@@ -47,8 +47,6 @@ url = "!f() { sha=$(git rev-parse ${1:-HEAD}); hub browse -u -- commit/$sha; }; 
 cb = "!git rev-parse --abbrev-ref HEAD | tr -d '\n' | pbcopy"
 
 remote-branches = "!f() { git ls-remote --heads ${1:origin} | sed 's?.*refs/heads/??'; }; f "
-
-# Git flow
 feature = flow feature start
 finfeature = flow feature finish
 fix = flow hotfix start
@@ -69,13 +67,14 @@ whitespace = nowarn
 keepBackup = false
 [difftool]
 prompt = false
+[fetch]
+prune=true
 [pull]
-rebase=true
+rebase=false
+[merge]
+ff=only
+autoStash=true
 [push]
-# See `git help config` (search for push.default)
-# for more information on different options of the below setting.
-#
-# Setting to git 2.0 default to surpress warning message
 default = simple
 followTags = true
 [github]
@@ -83,5 +82,5 @@ user = {{ git_user }}
 [commit]
 gpgsign = false
 [rebase]
-autoStash = true
-
+autoStash=true
+autosquash=true
