@@ -53,6 +53,7 @@ fix = flow hotfix start
 finfix = flow hotfix finish
 release = flow release start
 finrelease = flow release finish
+track = "!f() { branch=$(git rev-parse --abbrev-ref HEAD); git branch $branch --set-upstream-to origin/$branch }; f"
 [color]
 diff = auto
 status = auto
