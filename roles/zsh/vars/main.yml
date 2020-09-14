@@ -30,7 +30,7 @@ zsh_path:
 - /usr/local/sbin
 - ${HOME}/.asdf/asdf.sh
 - ${KREW_ROOT:-$HOME/.krew}/bin
-- ${HOME}/.local/bin
+- ${GOBIN}
 
 zsh_man_path:
 - "{{ brew_prefix }}/share/man"

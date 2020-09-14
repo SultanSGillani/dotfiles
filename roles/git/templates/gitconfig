@@ -1,12 +1,8 @@
 [hub]
 protocol = ssh
 [user]
-name = {{ full_name }}
-email = {{ git_email }}
-{% if ansible_os_family == 'Darwin' %}
-[credential]
-helper = cache
-{% endif %}
+name = Sultan Gillani
+email = sultan.gillani@ntgfreight.com,
 
 [alias]
 a = add
@@ -45,8 +41,6 @@ url = "!f() { sha=$(git rev-parse ${1:-HEAD}); hub browse -u -- commit/$sha; }; 
 # Copy current branch name to clipboard (macOS only)
 cb = "!git rev-parse --abbrev-ref HEAD | tr -d '\n' | pbcopy"
 
-prune-branches = !git branch --merged origin/master | grep -v master | xargs git branch -d
-
 remote-branches = "!f() { git ls-remote --heads ${1:origin} | sed 's?.*refs/heads/??'; }; f "
 feature = flow feature start
 finfeature = flow feature finish
@@ -80,7 +74,7 @@ autoStash=true
 default = simple
 followTags = true
 [github]
-user = {{ git_user }}
+user = sultan.gillani
 [commit]
 gpgsign = false
 [rebase]

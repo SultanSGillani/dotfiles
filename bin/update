@@ -14,7 +14,9 @@ HOSTS=${HOME}/dotfiles/inventory.yml
 
 HOST_OS=$(uname)
 
-cd ${ZSH} && git pull
+#cd ${ZSH} && git pull
+
+source ~/.secrets
 
 if [[ $# -eq 0 ]]; then
   echo "Running dotfiles update for ${HOST_OS}"

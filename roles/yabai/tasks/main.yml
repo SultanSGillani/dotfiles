@@ -1,14 +1,14 @@
-- name: Tap yabai
-  homebrew_tap:
-    name: koekeishiya/formulae
+- name: Install yabai
+  homebrew:
+    name: koekeishiya/formulae/yabai
     state: present
+    install_options: HEAD
   tags:
   - initial
 
-- name: Install yabai
-  homebrew:
-    name: yabai
-    state: present
+- name: CodeSign Yabai [Macos]
+  command: "codesign -fs 'yabai-cert' /usr/local/bin/yabai"
+  changed_when: false
   tags:
   - initial
 

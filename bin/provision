@@ -12,6 +12,7 @@ HOSTS=${HOME}/dotfiles/inventory.yml
 
 # Run main playbook
 
+source ~/.secrets
 HOST_OS=$(uname)
 
 cd ${ZSH}
