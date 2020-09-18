@@ -14,7 +14,7 @@ HOSTS=${HOME}/dotfiles/inventory.yml
 
 HOST_OS=$(uname)
 
-#cd ${ZSH} && git pull
+cd ${ZSH}
 
 source ~/.secrets
 

@@ -47,6 +47,7 @@ cb = "!git rev-parse --abbrev-ref HEAD | tr -d '\n' | pbcopy"
 
 prune-branches = !git branch --merged origin/master | grep -v master | xargs git branch -d
 
+push-origin = !git push -u origin $(git branch --show-current)
 remote-branches = "!f() { git ls-remote --heads ${1:origin} | sed 's?.*refs/heads/??'; }; f "
 feature = flow feature start
 finfeature = flow feature finish
