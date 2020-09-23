@@ -1,5 +1,5 @@
 - name: Restart Yabai
   command:
-    cmd: "launchctl kickstart -k gui/${UID}/homebrew.mxcl.yabai"
+    cmd: "brew services restart koekeishiya/formulae/yabai"
   become: '{{ (zsh_user != ansible_user_id) | bool }}'
   become_user: '{{ zsh_user }}'

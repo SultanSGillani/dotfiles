@@ -350,6 +350,9 @@ done
 {% if ansible_facts['os_family']|lower == "darwin" %}
 # mac only aliases
 . "$ZDOTDIR/aliases/mac_aliases.zsh"
+# mac only exports
+export BROWSER='open'
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 {% endif %}
 
 #################################################################
