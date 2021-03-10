@@ -25,7 +25,7 @@ plugins:
 - Shougo/unite.vim
 - Shougo/vimfiler.vim
 - SirVer/ultisnips
-- superevilmegaco/OpenUrl.nvim
+- dhruvasagar/vim-open-url
 - tmhedberg/SimpylFold
 - tmux-plugins/vim-tmux
 - tpope/vim-bundler

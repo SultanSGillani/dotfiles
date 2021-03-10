@@ -5,6 +5,3 @@ command:
 - -nargs=0 Format :call CocAction('format')
 - -nargs=? Fold :call     CocAction('fold', <f-args>)
 - -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-command_noex:
-- -bar -nargs=1 OpenURL :!open <args>

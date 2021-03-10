@@ -13,7 +13,6 @@ imap:
 - <C-L> <Space>=><Space>
 
 map:
-- <Leader>w :call OpenURL()<CR>
 - <C-z> <Esc>
 nmap:
 - <F1> <Esc>
@@ -34,7 +33,6 @@ nnoremap:
 - <silent> <F2> :NERDTreeFind<CR>
 - <silent> <F3> :NERDTreeToggle<CR>
 - <silent> K :call <SID>show_documentation()<CR>
-- <leader>q :call OpenUrl#UnderCursor()<CR>
 
 noremap:
 - <leader>ct :silent ! ctags -R --pluguages=ruby --exclude=.git --exclude=log -f .tags<cr>
