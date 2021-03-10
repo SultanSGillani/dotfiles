@@ -20,7 +20,6 @@ pacman_packages:
 - networkmanager
 - nmap
 - openvpn
-- orage
 - packer
 - parole
 - powerline

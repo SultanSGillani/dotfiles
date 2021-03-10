@@ -14,8 +14,7 @@ alias gpg=gpg2
 ### Neovim ###
 alias vim=nvim
 ### Rsync ###
-alias rsync="noglob rsync --verbose --progress --human-readable --compress
-    --archive --hard-links --one-file-system --acls --xattrs"
+alias rsync="noglob rsync --verbose --progress --human-readable --compress --archive --hard-links --one-file-system --acls --xattrs"
 alias 'rsync-copy'=rsync
 alias 'rsync-move'="rsync --remove-source-files"
 alias 'rsync-update'="rsync --update"

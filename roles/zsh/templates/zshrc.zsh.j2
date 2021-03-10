@@ -147,15 +147,6 @@ export GOROOT="${HOME}/.asdf/installs/golang/1.14.4/go"
 export GOPATH="${HOME}/go"
 export PATH="${GOROOT}/bin:${ASDF_ROOT}/shims:${PATH}"
 
-
-# Google Cloud SDK
-{% if ansible_facts['os_family']|lower == "darwin" %}
-export CLOUDSDK_ROOT_DIR="{{ brew_prefix }}/Caskroom/google-cloud-sdk/latest/google-cloud-sdk"
-{% else %}
-export CLOUDSDK_ROOT_DIR="/opt/google-cloud-sdk"
-{% endif %}
-. "${CLOUDSDK_ROOT_DIR}/path.zsh.inc"
-
 ##############################################################
 # ZINIT https://github.com/zdharma/zinit
 ##############################################################
@@ -221,11 +212,7 @@ zt 0b lucid light-mode for \
     atload"unalias grv" \
         OMZP::git \
     as"program" pick"bin/git-dsf" \
-        zdharma/zsh-diff-so-fancy \
-    as"program" pick"$ZPFX/bin/(fzf|fzf-tmux)" \
-    atclone'cp "shell/completion.zsh" "_fzf_completion"; cp "bin/(fzf|fzf-tmux)" "$ZPFX/bin"; "PREFIX=$ZPFX" ./install' \
-    atload"source $HOME/.fzf.zsh" \
-        junegunn/fzf
+        zdharma/zsh-diff-so-fancy
 
 zt 0b light-mode for \
     as"null" \
@@ -303,19 +290,6 @@ setup_history_substring_search() {
     bindkey "$terminfo[kcud1]" history-substring-search-down
 }
 
-{% if ansible_facts['os_family'] == "Darwin" %}
-# The next line updates PATH for the Google Cloud SDK.
-. "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-
-# The next line enables shell command completion for gcloud.
-. "$(brew --prefix)/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-{% else %}
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/usr/local/bin/google-cloud-sdk/path.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/usr/local/bin/google-cloud-sdk/completion.zsh.inc' ]; then . '/usr/local/bin/google-cloud-sdk/completion.zsh.inc'; fi
-{% endif %}
 
 if (( ${+ztermtitle} )); then
     case ${TERM} in

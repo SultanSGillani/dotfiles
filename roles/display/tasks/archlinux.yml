@@ -17,11 +17,6 @@
     name: lightdm-webkit-theme-aether
     use: yay
 
-- name: Install kvantum | aur
-  aur:
-    name: kvantum-qt5-git
-    use: yay
-
 - name: install remaining x packages
   package:
     name: '{{ pacman_packages }}'

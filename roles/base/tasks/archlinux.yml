@@ -6,9 +6,3 @@
   become: yes
   become_user: root
 
-- name: install universal ctags
-  aur:
-    name: universal-ctags-git
-    use: yay
-  tags:
-  - initial

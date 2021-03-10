@@ -18,19 +18,19 @@ zsh_arch_path:
 - /usr/lib/ccache/bin
 
 zsh_path:
-- ${ZSH}/bin
-- ${HOME}/.local/bin
-- ${HOME}/.dotnet/tools
+- /bin
 - /usr/local/bin
 - /usr/sbin
 - /usr/bin
 - /sbin
-- /bin
-- ${ZDOTDIR}/z.sh
 - /usr/local/sbin
+- ${GOBIN}
+- ${ZSH}/bin
+- ${HOME}/.local/bin
+- ${HOME}/.dotnet/tools
+- ${ZDOTDIR}/z.sh
 - ${HOME}/.asdf/asdf.sh
 - ${KREW_ROOT:-$HOME/.krew}/bin
-- ${GOBIN}
 
 zsh_man_path:
 - "{{ brew_prefix }}/share/man"
