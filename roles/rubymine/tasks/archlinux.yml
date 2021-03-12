@@ -1,6 +1,6 @@
 - name: install jetbrains | Archlinux
   aur:
     name: rubymine
-    use: yay
+    use: paru
   tags:
   - initial

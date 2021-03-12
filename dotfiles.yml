@@ -18,7 +18,7 @@
       - arch
       - aur
       - pacman
-      - yay
+      - paru
       when: ansible_facts['os_family']|lower == "archlinux"
     - import_role:
         name: osx

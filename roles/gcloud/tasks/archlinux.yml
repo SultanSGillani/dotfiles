@@ -1,6 +1,6 @@
 - name: install gcloud-sdk | Archlinux
   aur:
     name: google-cloud--sdk
-    use: yay
+    use: paru
   tags:
   - initial

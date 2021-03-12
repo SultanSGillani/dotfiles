@@ -15,7 +15,7 @@
 - name: Install lightdm-theme | aur
   aur:
     name: lightdm-webkit-theme-aether
-    use: yay
+    use: paru
 
 - name: install remaining x packages
   package:

@@ -8,4 +8,4 @@
 - name: install xinit-xsession using aur
   aur:
     name: xinit-xsession
-    use: yay
+    use: paru

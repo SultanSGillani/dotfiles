@@ -1,6 +1,6 @@
 - name: install rclone | Arch
   aur:
     name: exa
-    use: yay
+    use: paru
   tags:
   - initial

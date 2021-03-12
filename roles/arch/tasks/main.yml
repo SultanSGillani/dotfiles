@@ -64,9 +64,9 @@
   tags:
   - initial
 
-- name: Install yay with makepkg
+- name: Install paru with makepkg
   aur:
-    name: yay
+    name: paru
     use: makepkg
   tags:
   - initial
@@ -81,8 +81,8 @@
 
 - name: install aur packages [Archlinux]
   aur:
-    name: '{{ yay_packages }}'
-    use: yay
+    name: '{{ paru_packages }}'
+    use: paru
     skip_pgp_check: true
   tags:
   - initial

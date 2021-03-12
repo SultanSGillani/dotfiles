@@ -1,6 +1,6 @@
 - name: Install pacman packages [Archlinux]
   aur:
     name: compton-tryone-git
-    use: yay
+    use: paru
   tags:
   - initial

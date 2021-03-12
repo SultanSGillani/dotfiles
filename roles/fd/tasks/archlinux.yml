@@ -1,6 +1,6 @@
 - name: install fd | Archlinux
   aur:
     name: fd
-    use: yay
+    use: paru
   tags:
   - initial

@@ -9,6 +9,6 @@
   - name: install i3 packages | Archlinux
     aur:
       name: '{{ i3_aur }}'
-      use: yay
+      use: paru
   tags:
   - initial

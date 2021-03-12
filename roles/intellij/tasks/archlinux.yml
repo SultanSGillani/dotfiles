@@ -1,6 +1,6 @@
 - name: install intellij
   aur:
     name: intellij-idea-ultimate-edition
-    use: yay
+    use: paru
   tags:
   - initial

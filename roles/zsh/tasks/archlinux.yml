@@ -1,6 +1,6 @@
 - name: install zsh packages | Arch
   aur:
     name: zsh
-    use: yay
+    use: paru
   tags:
   - initial

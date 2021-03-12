@@ -34,6 +34,6 @@ pacman_packages:
 - xfburn
 - zopfli
 
-yay_packages:
+paru_packages:
 - downgrade
 - networkmanager-openvpn

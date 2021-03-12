@@ -1,6 +1,6 @@
 - name: install fzf | Archlinux
   aur:
     name: fzf
-    use: yay
+    use: paru
   tags:
   - initial

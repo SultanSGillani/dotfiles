@@ -1,7 +1,7 @@
 - name: Install jq
   aur:
     name: jq
-    use: yay
+    use: paru
     skip_pgp_check: true
   tags:
   - initial

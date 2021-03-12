@@ -1,6 +1,6 @@
 - name: Install pacman packages [Archlinux]
   aur:
     name: polybar
-    use: yay
+    use: paru
   tags:
   - initial

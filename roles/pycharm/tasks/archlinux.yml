@@ -1,6 +1,6 @@
 - name: install jetbrains | Archlinux
   aur:
     name: pycharm-professional
-    use: yay
+    use: paru
   tags:
   - initial
