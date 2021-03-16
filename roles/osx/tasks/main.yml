@@ -71,7 +71,7 @@
   - brew
 
 - name: Install Cask Packages
-  homebrew_cask:
+  community.general.homebrew_cask:
     name: "{{ brew_casks }}"
     state: present
     accept_external_apps: yes
@@ -80,7 +80,7 @@
   - brew
 
 - name: upgrade Cask programs
-  homebrew_cask:
+  community.general.homebrew_cask:
     upgrade: yes
   tags:
   - upgrade
