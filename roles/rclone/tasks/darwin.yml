@@ -1,5 +1,5 @@
 - name: install rclone | osx
-  homebrew:
+  community.general.homebrew:
     name: rclone
     state: present
   tags:

@@ -1,5 +1,5 @@
 - name: Install docker packages [Archlinux]
-  homebrew:
+  community.general.homebrew:
     name: docker
     state: present
   become: yes
@@ -8,7 +8,7 @@
   - initial
 
 - name: Install docker-compose packages [Archlinux]
-  homebrew:
+  community.general.homebrew:
     name: docker-compose
     state: present
   become: yes

@@ -1,10 +1,17 @@
+#!/usr/bin/env bash
+
+if [[ -f "${HOME}/.asdf/installs/python/3.8.5/bin/python" ]]; then
+  export ANSIBLE_PYTHON_INTERPRETER=""
+  else
+    export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3
+fi
+
 export ANSIBLE_LIBRARY=
 export ANSIBLE_VERBOSITY=
 export ANSIBLE_ROLES_PATH=
 export ANSIBLE_HOST_KEY_CHECKING=
 export ANSIBLE_LOG_PATH=
 export ANSIBLE_EXECUTABLE=/bin/bash
-export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3
 export ANSIBLE_BECOME=
 export ANSIBLE_BECOME_USER=
 export ANSIBLE_PIPELINING=

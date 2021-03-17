@@ -1,6 +1,6 @@
 # tasks file for roles/wallpaper
 - name: Make sure wallpaper program is installed
-  homebrew:
+  community.general.homebrew:
     name: wallpaper
     state: present
 

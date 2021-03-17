@@ -1,5 +1,5 @@
 - name: install zsh | OSX
-  homebrew:
+  community.general.homebrew:
     name: zsh
     state: present
   tags:

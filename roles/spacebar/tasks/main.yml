@@ -1,7 +1,8 @@
 - name: Install spacebar
-  homebrew:
-    name: somdoron/formulae/spacebar
+  community.general.homebrew:
+    name: cmacrae/formulae/spacebar
     state: present
+  notify: Start spacebar
   tags:
   - initial
 

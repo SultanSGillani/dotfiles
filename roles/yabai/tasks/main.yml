@@ -1,5 +1,5 @@
 - name: Install yabai
-  homebrew:
+  community.general.homebrew:
     name: koekeishiya/formulae/yabai
     state: present
     install_options: HEAD

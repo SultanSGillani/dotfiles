@@ -1,5 +1,5 @@
 - name: OSX | Install Bat
-  homebrew:
+  community.general.homebrew:
     name: bat
     state: present
   tags:

@@ -1,5 +1,5 @@
 - name: Install Git on Mac
-  homebrew:
+  community.general.homebrew:
     name: git
     state: present
   become: no

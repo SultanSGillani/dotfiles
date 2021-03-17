@@ -1,5 +1,11 @@
+- name: Start spacebar
+  command:
+    cmd: brew services start cmacrae/formulae/spacebar
+  become: '{{ (zsh_user != ansible_user_id) | bool }}'
+  become_user: '{{ zsh_user }}'
+
 - name: Restart spacebar
   command:
-    cmd: brew services restart spacebar
+    cmd: brew services restart cmacrae/formulae/spacebar
   become: '{{ (zsh_user != ansible_user_id) | bool }}'
   become_user: '{{ zsh_user }}'

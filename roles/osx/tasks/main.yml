@@ -46,7 +46,7 @@
   - brew
 
 - name: Install brew programs
-  homebrew:
+  community.general.homebrew:
     name: "{{ brew_packages }}"
     state: present
   become: no
@@ -54,7 +54,7 @@
   - brew
 
 - name: upgrade brew programs
-  homebrew:
+  community.general.homebrew:
     upgrade: yes
   become: no
   tags:
@@ -62,9 +62,9 @@
   - brew
 
 - name: update brew programs
-  homebrew:
+  community.general.homebrew:
     upgrade: no
-    update_homebrew: yes
+    update_community.general.homebrew: yes
   become: no
   tags:
   - update

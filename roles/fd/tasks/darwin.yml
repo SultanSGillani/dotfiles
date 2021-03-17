@@ -1,5 +1,5 @@
 - name: Install fd for OSX
-  homebrew:
+  community.general.homebrew:
     name: fd
     state: present
   tags:

@@ -1,5 +1,5 @@
 - name: Install | osx
-  homebrew:
+  community.general.homebrew:
     name: '{{ item }}'
     state: present
   loop: '{{ darwin_packages }}'

@@ -6,6 +6,7 @@
   tags:
   - skip_ansible_lint
   - update
+  - pip
 
 - name: add pip extra packages for debian
   set_fact:
@@ -13,6 +14,7 @@
   when: ansible_facts['os_family']|lower == "debian"
   tags:
   - update
+  - pip
 
 - name: Ensure pip_packages are installed.
   pip:
@@ -25,3 +27,4 @@
     \ else %}{{ pip_packages }}{% endif %}"
   tags:
   - update
+  - pip

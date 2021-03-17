@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 set -o errexit
 set -o pipefail
 set -o nounset
@@ -11,18 +10,22 @@ PLAYBOOK=${HOME}/dotfiles/sudo.yml
 HOSTS=${HOME}/dotfiles/inventory.yml
 
 # Run main playbook
-
-source ~/.secrets
+source "${HOME}"/.secrets
 HOST_OS=$(uname)
 
-cd ${ZSH}
+cd "${ZSH}"
+
+if [[ ! -d "${HOME}"/.ansible/collections/ansible_collections/community/general ]]; then
+    echo "Installing ansible-galaxy collection for community.general"
+    ansible-galaxy collection install community.general
+fi
 
 if [[ $# -eq 0 ]]; then
   echo "Running dotfiles Playbook for ${HOST_OS}"
   if [[ ! -f ~/.vault_password.txt ]]; then
   echo "please add your vault password file to your home directory"
   elif [[ "${HOST_OS}" = 'Darwin' ]] || [[ "${HOST_OS}" = 'Linux' ]]; then
-  ansible-playbook -i ${HOSTS} ${PLAYBOOK} --vault-password-file ~/.vault_password.txt
+  ansible-playbook -i "${HOSTS}" "${PLAYBOOK}" --vault-password-file ~/.vault_password.txt
   else
     echo "Unknown host OS: ${HOST_OS}"
     exit 1
@@ -32,7 +35,7 @@ else
   if [[ ! -f ~/.vault_password.txt ]]; then
   echo "please add your vault password file to your home directory"
   elif [[ "${HOST_OS}" = 'Darwin' ]] || [[ "${HOST_OS}" = 'Linux' ]]; then
-  ansible-playbook -i ${HOSTS} ${PLAYBOOK} --vault-password-file ~/.vault_password.txt --tags "$@"
+  ansible-playbook -i "${HOSTS}" "${PLAYBOOK}" --vault-password-file ~/.vault_password.txt --tags "$@"
   else
     echo "Unknown host OS: ${HOST_OS}"
     exit 1

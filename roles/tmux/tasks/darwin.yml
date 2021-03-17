@@ -1,5 +1,5 @@
 - name: Install | mac
-  homebrew:
+  community.general.homebrew:
     name: tmux
     state: present
   tags:

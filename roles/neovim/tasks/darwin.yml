@@ -1,5 +1,5 @@
 - name: OSX | Install neovim
-  homebrew:
+  community.general.homebrew:
     name: '{{ vim_packages }}'
     state: present
   tags:

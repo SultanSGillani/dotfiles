@@ -1,4 +1,4 @@
 - name: install screen
-  homebrew:
+  community.general.homebrew:
     name: screen
     state: present

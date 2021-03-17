@@ -1,5 +1,5 @@
 - name: FZF | OSX install
-  homebrew:
+  community.general.homebrew:
     name: fzf
     state: present
   tags:

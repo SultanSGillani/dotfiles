@@ -1,5 +1,5 @@
 - name: Install intellij | Macos
-  homebrew_cask:
+  community.general.homebrew_cask:
     name: intellij-idea
     state: present
   tags:

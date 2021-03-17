@@ -1,5 +1,5 @@
 - name: Install rg | osx
-  homebrew:
+  community.general.homebrew:
     name: ripgrep
     state: present
   tags:
