@@ -35,9 +35,9 @@ export MANPATH="{{ zsh_man_path | join(":") }}:${MANPATH}"
 ##############################################################
 
 # ASDF
-. ${HOME}/.asdf/asdf.sh
+. "{{ asdf_dir }}"
 
-[[ -f ${HOME}/.asdf/plugins/java/set-java-home.zsh ]] && . ${HOME}/.asdf/plugins/java/set-java-home.zsh
+[[ -f "{{ asdf_plugins_dir }}/java/set-java-home.zsh" ]] && . "{{ asdf_plugins_dir }}/java/set-java-home.zsh"
 
 # Homebrew options
 {% if ansible_facts['os_family']|lower == "darwin" %}
