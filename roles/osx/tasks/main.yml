@@ -64,7 +64,7 @@
 - name: update brew programs
   community.general.homebrew:
     upgrade: no
-    update_community.general.homebrew: yes
+    update_homebrew: yes
   become: no
   tags:
   - update
