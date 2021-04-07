@@ -8,7 +8,7 @@ touchpad_speed: .85
 
 zsh_mac_path:
 - $(ruby -e 'puts Gem.user_dir')/bin
-- "{{ brew_prefix }}"
+- "{{ brew_prefix }}/bin"
 - /opt/local/bin
 - /opt/local/sbin
 
