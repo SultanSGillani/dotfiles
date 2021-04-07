@@ -1,3 +1,2 @@
 zsh_prompt: p10k
 
-zsh_shell: "{% if ansible_facts['os_family'] == 'Darwin' %}/usr/local/bin/zsh{% else %}/bin/zsh{% endif %}"

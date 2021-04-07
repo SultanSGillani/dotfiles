@@ -12,23 +12,13 @@
   include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
   when: ansible_facts['os_family']|lower is defined
 
-- name: Install asdf
-  git:
-    repo: https://github.com/asdf-vm/asdf.git
-    dest: '{{ dotfiles_user_home }}/.asdf'
-    update: yes
-    accept_hostkey: yes
-    version: master
-  tags:
-  - initial
-
 - name: Stat Nodejs Plugin Path
   stat:
-    path: '{{ dotfiles_user_home }}/.asdf/plugins/nodejs'
+    path: '{{ asdf_plugins_dir }}/nodejs'
   register: nodejs_plugin_path
 
 - name: add nodejs pgp keys
-  command: '{{ dotfiles_user_home }}/.asdf/plugins/nodejs/bin/import-release-team-keyring'
+  command: "{{ asdf_plugins_dir }}/nodejs/bin/import-release-team-keyring"
   when: nodejs_plugin_path is not defined
   tags:
   - initial
@@ -46,7 +36,7 @@
 - name: install plugins
   command: '{{ asdf_executable }} plugin-add {{ item.name }} {{ item.repository }}'
   args:
-    creates: '{{ dotfiles_user_home }}/.asdf/plugins/{{ item.name }}'
+    creates: '{{ asdf_plugins_dir }}/{{ item.name }}'
     chdir: '{{ dotfiles_user_home }}'
   with_items: '{{ asdf_plugins }}'
   when: asdf_plugins|length > 0
@@ -56,8 +46,7 @@
 - name: install plugin versions
   command: '{{ asdf_executable }} install {{ item.0.name }} {{ item.1 }}'
   args:
-    creates: '{{ dotfiles_user_home }}/.asdf/installs/{{ item.0.name }}/{{ item.1
-      }}'
+    creates: '{{ asdf_installs_dir }}/{{ item.0.name }}/{{ item.1 }}'
     chdir: '{{ dotfiles_user_home }}'
   with_subelements:
   - '{{ asdf_plugins }}'
@@ -69,8 +58,7 @@
   become_user: '{{ zsh_user }}'
 
 - name: set global plugin versions
-  command: '{{ asdf_executable }} global {{ item.name }} {{ item.global | default(item.versions[0])
-    }}'
+  command: '{{ asdf_executable }} global {{ item.name }} {{ item.global | default(item.versions[0]) }}'
   args:
     chdir: '{{ dotfiles_user_home }}'
   notify: reshim asdf

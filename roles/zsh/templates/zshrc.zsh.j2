@@ -7,10 +7,11 @@ zt()  { zinit depth'3' lucid ${1/#[0-9][a-c]/wait"$1"} "${@:2}"; }
 zct() { .zinit-ice load"[[ \${MYPROMPT} = ${1} ]]" unload"[[ \${MYPROMPT} != ${1} ]]" \
 atinit'[ -f "${thmf}/${MYPROMPT}-pre" ] && source "${thmf}/${MYPROMPT}-pre"' \
 atload'![ -f "${thmf}/${MYPROMPT}-post" ] && source "${thmf}/${MYPROMPT}-post"'; \
-ZINIT_ICE+=( "${(kv)ZINIT_ICES[@]}"); }
+local ZINIT_ICE+=( "${(kv)ZINIT_ICES[@]}"); }
 z()  { [ -z $2 ] && zinit light "${@}" || zinit "${@}"; } # zplugin
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    # shellcheck source=./p10k-instant-prompt-${(%):-%n}.zsh
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
     typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 fi
@@ -142,7 +143,16 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
 
 # Go
+{% if ansible_facts['os_family']|lower == "darwin" %}
+export ASDF_ROOT="{{ brew_prefix }}/opt/asdf"
+export ASDF_DATA_DIR="{{ brew_prefix }}/opt/asdf"
+export ASDF_DIR="{{ brew_prefix }}/opt/asdf"
+{% else %}
 export ASDF_ROOT="${HOME}/.asdf"
+export ASDF_DATA_DIR="${HOME}/.asdf"
+export ASDF_DIR="${HOME}/.asdf"
+{% endif %}
+
 export GOROOT="${HOME}/.asdf/installs/golang/1.14.4/go"
 export GOPATH="${HOME}/go"
 export PATH="${GOROOT}/bin:${ASDF_ROOT}/shims:${PATH}"

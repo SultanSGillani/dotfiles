@@ -167,3 +167,4 @@
   become_user: root
   tags:
   - initial
+  - my_shell

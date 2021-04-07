@@ -38,7 +38,7 @@
   - update
 
 - name: Tap Casks
-  homebrew_tap:
+  community.general.homebrew_tap:
     name: "{{ brew_taps }}"
     state: present
   become: no

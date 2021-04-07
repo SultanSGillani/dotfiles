@@ -6,8 +6,6 @@ zsh_debian_path: ${HOME}/bin:/snap/bin
 
 touchpad_speed: .85
 
-brew_prefix: $(brew --prefix)
-
 zsh_mac_path:
 - $(ruby -e 'puts Gem.user_dir')/bin
 - "{{ brew_prefix }}"

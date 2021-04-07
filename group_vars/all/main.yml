@@ -28,6 +28,13 @@ vcenter_password: "{{ lookup('env','VMWARE_PASS') }}"
 esxi_hostname: "{{ lookup('env','VMWARE_HOSTNAME') }}"
 wallpaper_file: '{{ dotfiles_user_home }}/wallpapers/atari_dracula.png'
 
+zsh_shell: "{% if (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'arm64') %}/opt/homebrew/bin/zsh{% elif (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'x86_64') %}/usr/local/bin/zsh{% else %}/bin/zsh{% endif %}"
+
+brew_prefix: "{% if (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'arm64') %}/opt/homebrew{% else %}/usr/local{% endif %}"
+asdf_executable: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix }}/bin/asdf{% else %}{{ dotfiles_user_home }}/.asdf/bin/asdf{% endif %}"
+asdf_plugins_dir: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix }}/opt/asdf/plugins{% else %}{{ dotfiles_user_home }}/.asdf/plugins{% endif %}"
+asdf_installs_dir: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix }}/opt/asdf/installs{% else %}{{ dotfiles_user_home }}/.asdf/installs{% endif %}"
+
 ## Base16 Theme Vars for xresources and i3
 default_theme: dracula
 vim_theme: base16-dracula

@@ -1,7 +1,13 @@
 projects_dir: '{{ dotfiles_user_home }}/projects'
 python_env_dir: '{{ dotfiles_user_home }}/.projs'
 ssh_dir: '{{ dotfiles_user_home }}/.ssh'
-login_shell: /usr/local/bin/zsh
+login_shell: "{% if (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'arm64') %}
+                           /opt/homebrew/bin/zsh
+                        {% elif (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'x86_64') %}
+                           /usr/local/bin/zsh
+                        {% else %}
+                         /bin/zsh
+                        {% endif %}"
 finder_new_window_path: file://{{ dotfiles_user_home }}
 screenshots_dir: '{{ dotfiles_user_home }}/screenshots'
 mac_files_dir: '{{ dotfiles_dir }}/roles/osx/files'

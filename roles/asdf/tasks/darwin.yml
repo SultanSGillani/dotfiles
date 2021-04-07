@@ -18,3 +18,10 @@
     state: present
   tags:
   - initial
+
+- name: Install asdf
+  community.general.homebrew:
+    name: asdf
+    state: present
+  tags:
+  - initial

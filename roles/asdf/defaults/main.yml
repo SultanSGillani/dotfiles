@@ -61,8 +61,6 @@ asdf_plugins:
   - 3.0.1
   global: 3.0.1
 
-asdf_executable: '{{ dotfiles_user_home }}/.asdf/bin/asdf'
-
 asdf_dots:
 - {src: default-gems, dest: .default-gems}
 - {src: package.json, dest: package.json}
