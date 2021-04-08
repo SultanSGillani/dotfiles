@@ -126,7 +126,7 @@ for f in $(ls "${ZDOTDIR}"/functions/*.zsh); do
 done
 
 {% if ansible_facts['os_family']|lower == "darwin" %}
-export PATH="{{ zsh_path | join(":") }}:{{ zsh_mac_path | join(":") }}:${PATH}"
+export PATH="{{ zsh_mac_path | join(":") }}:{{ zsh_path | join(":") }}:${PATH}"
 {% elif ansible_facts['os_family']|lower == "debian" %}
 export PATH="{{ zsh_path | join(":") }}:{{ zsh_debian_path | join(":") }}:${PATH}"
 {% elif ansible_facts['os_family']|lower == "archlinux" %}
@@ -143,17 +143,11 @@ export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
 
 # Go
-{% if ansible_facts['os_family']|lower == "darwin" %}
-export ASDF_ROOT="{{ brew_prefix }}/opt/asdf"
-export ASDF_DATA_DIR="{{ brew_prefix }}/opt/asdf"
-export ASDF_DIR="{{ brew_prefix }}/opt/asdf"
-{% else %}
-export ASDF_ROOT="${HOME}/.asdf"
-export ASDF_DATA_DIR="${HOME}/.asdf"
-export ASDF_DIR="${HOME}/.asdf"
-{% endif %}
+export ASDF_ROOT="{{ asdf_path }}"
+export ASDF_DATA_DIR="{{ asdf_path }}"
+export ASDF_DIR="{{ asdf_path }}"
 
-export GOROOT="$ASDF_ROOT/installs/golang/1.14.4/go"
+export GOROOT="${ASDF_ROOT}/installs/golang/1.14.4/go"
 export GOPATH="${HOME}/go"
 export PATH="${GOROOT}/bin:${ASDF_ROOT}/shims:${PATH}"
 

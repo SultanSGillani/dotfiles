@@ -37,7 +37,7 @@
   command: '{{ asdf_executable }} plugin-add {{ item.name }} {{ item.repository }}'
   args:
     creates: '{{ asdf_plugins_dir }}/{{ item.name }}'
-    chdir: '{{ dotfiles_user_home }}'
+    chdir: '{{ asdf_dir }}'
   with_items: '{{ asdf_plugins }}'
   when: asdf_plugins|length > 0
   become: true
@@ -47,7 +47,7 @@
   command: '{{ asdf_executable }} install {{ item.0.name }} {{ item.1 }}'
   args:
     creates: '{{ asdf_installs_dir }}/{{ item.0.name }}/{{ item.1 }}'
-    chdir: '{{ dotfiles_user_home }}'
+    chdir: '{{ asdf_dir }}'
   with_subelements:
   - '{{ asdf_plugins }}'
   - versions
