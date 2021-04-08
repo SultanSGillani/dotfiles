@@ -26,6 +26,7 @@ vcenter_username: "{{ lookup('env','VMWARE_USERNAME') }}"
 vcenter_password: "{{ lookup('env','VMWARE_PASS') }}"
 esxi_hostname: "{{ lookup('env','VMWARE_HOSTNAME') }}"
 wallpaper_file: '{{ dotfiles_user_home }}/wallpapers/atari_dracula.png'
+go_install_path: "{{ lookup('pipe', 'asdf where golang') }}"
 
 zsh_shell: "{% if (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'arm64') %}/opt/homebrew/bin/zsh{% elif (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'x86_64') %}/usr/local/bin/zsh{% else %}/bin/zsh{% endif %}"
 
