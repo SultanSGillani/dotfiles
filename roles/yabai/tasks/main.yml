@@ -7,7 +7,7 @@
   - initial
 
 - name: CodeSign Yabai [Macos]
-  command: "codesign -fs 'yabai-cert' /usr/local/bin/yabai"
+  command: "codesign -fs 'yabai-cert' {{ brew_prefix}}/bin/yabai"
   changed_when: false
   tags:
   - initial

@@ -93,15 +93,7 @@ brew_casks:
 - dash
 - docker
 - drawio
-- font-cousine
-- font-hack-nerd-font
 - gpg-suite
-- osxfuse
-- pycharm
-- rider
-- tunnelblick
-- vagrant
-- webstorm
 
 mas:
 - {name: Magnet, id: 441258766}
