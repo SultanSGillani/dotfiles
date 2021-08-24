@@ -35,7 +35,7 @@ export MANPATH="{{ zsh_man_path | join(":") }}:${MANPATH}"
 ##############################################################
 
 # ASDF
-. "{{ asdf_dir }}"
+. "{{ asdf_dir }}/asdf.sh"
 
 [[ -f "{{ asdf_plugins_dir }}/java/set-java-home.zsh" ]] && . "{{ asdf_plugins_dir }}/java/set-java-home.zsh"
 
@@ -141,6 +141,10 @@ export PATH="${CARGO_HOME}:${PATH}"
 if [[ "${+commands[rustc]}" == 1 ]]; then
 export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
+
+# Dotnet
+export CI_NTG_USER=ntg-user
+export CI_NTG_TOKEN="YeWRzr-J5F1oegtsAaix"
 
 # Go
 export ASDF_ROOT="{{ asdf_path }}"

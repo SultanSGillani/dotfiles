@@ -45,7 +45,7 @@ remote-branches = "!f() { git ls-remote --heads ${1:origin} | sed 's?.*refs/head
 feature = flow feature start
 finfeature = flow feature finish
 fix = flow hotfix start
-finfix = flow hotfix finish
+finfix = flow hotfix finis
 release = flow release start
 finrelease = flow release finish
 track = "!git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`"

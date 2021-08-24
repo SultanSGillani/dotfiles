@@ -38,14 +38,17 @@ yabai -m rule --add app="^RubyMine$" space=2
 yabai -m rule --add app="^JetBrains RubyMine$" space=2
 yabai -m rule --add app="^Visual Studio$" space=2
 yabai -m rule --add app="^JetBrains Rider$" space=2
-yabai -m rule --add app="^JetBrains PyCharm$" space=3
-yabai -m rule --add app="^PyCharm$" space=3
+yabai -m rule --add app="^Rider$" space=2
+yabai -m rule --add app="^WebStorm" space=3
+yabai -m rule --add app="^JetBrains PyCharm$" space=5
+yabai -m rule --add app="^PyCharm$" space=5
 yabai -m rule --add app="^Intelli$" space=7
 yabai -m rule --add app="^Slack$" space=4
 yabai -m rule --add app="^Microsoft Teams$" space=4
 yabai -m rule --add app="^Microsoft Remote Desktop$" space=6
 yabai -m rule --add app="^Parallels Desktop$" space=6
 yabai -m rule --add app="^Music$" space=10
+yabai -m rule --add app="^Outlook$" space=8
 yabai -m rule --add app="^Microsoft Outlook$" space=8
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^Messages$" manage=off
