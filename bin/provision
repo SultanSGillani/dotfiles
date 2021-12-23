@@ -10,10 +10,11 @@ PLAYBOOK=${HOME}/dotfiles/sudo.yml
 HOSTS=${HOME}/dotfiles/inventory.yml
 
 # Run main playbook
-source "${HOME}"/.secrets
-HOST_OS=$(uname)
 
-cd "${ZSH}"
+cd ${ZSH}
+
+source ~/.secrets
+HOST_OS=$(uname)
 
 if [[ ! -d "${HOME}"/.ansible/collections/ansible_collections/community/general ]]; then
     echo "Installing ansible-galaxy collection for community.general"
