@@ -6,9 +6,9 @@ aur_user: aur_user
 zsh_user_group: "{{ lookup('pipe','id -g') }}"
 dotfiles_user_home: "{{ '~' | expanduser }}"
 zdot_dir: '{{ dotfiles_user_home }}/.zsh'
-pip_executable: '{{ asdf_path }}/shims/pip'
-npm_executable: '{{ asdf_path }}/shims/npm'
-gem_executable: '{{ asdf_path }}/shims/gem'
+pip_executable: '{{dotfiles_user_home }}/.asdf/shims/pip'
+npm_executable: '{{dotfiles_user_home }}/.asdf/shims/npm'
+gem_executable: '{{dotfiles_user_home }}/.asdf/shims/gem'
 cargo_home: '{{ dotfiles_user_home }}/.cargo'
 rustup_home: '{{ dotfiles_user_home }}/.rustup'
 dotfiles_dir: '{{ dotfiles_user_home }}/dotfiles'

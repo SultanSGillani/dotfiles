@@ -70,6 +70,7 @@ brew_packages:
 - wallpaper
 - wget
 - xz
+- devopyio/yamlfmt/yamlfmt
 - zlib
 - zsh
 
