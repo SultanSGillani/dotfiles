@@ -229,7 +229,7 @@ zt 0b light-mode for \
 # Turbo 0c and OS dependent
 {% if ansible_facts['os_family']|lower == "darwin" %}
 zinit ice svn wait"0c" lucid
-zsnippet OMZP::osx
+zsnippet OMZP::macos
 {% endif %}
 
 {% if ansible_facts['distribution']|lower == "debian" %}
