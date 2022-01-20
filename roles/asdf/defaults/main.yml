@@ -61,6 +61,7 @@ asdf_plugins:
 asdf_dots:
 - {src: default-gems, dest: .default-gems}
 - {src: package.json, dest: package.json}
+- {src: package-lock.json, dest: package-lock.json}
 - {src: asdfrc, dest: .asdfrc}
 
 pip_packages:

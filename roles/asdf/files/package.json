@@ -100,7 +100,7 @@
     "prettier": "1.18.2",
     "react-app-polyfill": "1.0.2",
     "rimraf": "3.0.0",
-    "shelljs": "0.8.3",
+    "shelljs": ">=0.8.5",
     "style-loader": "1.0.0",
     "stylelint": "10.1.0",
     "stylelint-config-recommended": "2.2.0",

@@ -2,6 +2,13 @@
 
 # -*- coding: utf-8 -*-
 
+import os
+import shutil
+import tempfile
+import yaml
+
+from ansible.module_utils.basic import AnsibleModule
+
 ANSIBLE_METADATA = {
     "metadata_version": "1.1",
     "status": ["preview"],
@@ -173,7 +180,7 @@ EXAMPLES = """
 - base16_builder:
     scheme: my-brand-new-color-scheme
     template: shell
-    schemes_source: http://github.com/my-user/my-schemes-source-fork
+    schemes_source: https://github.com/my-user/my-schemes-source-fork
     templates_source: http://github.com/my-user/my-templates-source-fork
 """
 
@@ -225,13 +232,6 @@ schemes:
           colors:
             base16-gruvbox-dark-medium.colors: "\" vi:syntax=vim\n\n\" base16-vim ..."
 """
-
-import os
-import shutil
-import tempfile
-import yaml
-
-from ansible.module_utils.basic import AnsibleModule
 
 PYSTACHE_ERR = None
 try:
