@@ -2,6 +2,7 @@
   community.general.homebrew:
     name: cmacrae/formulae/spacebar
     state: present
+    install_options: HEAD
   notify: Start spacebar
   tags:
   - initial

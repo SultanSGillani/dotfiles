@@ -42,6 +42,7 @@
   when: asdf_plugins|length > 0
   become: true
   become_user: '{{ zsh_user }}'
+  ignore_errors: true
 
 - name: install plugin versions
   command: '{{ asdf_executable }} install {{ item.0.name }} {{ item.1 }}'

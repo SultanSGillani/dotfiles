@@ -4,10 +4,10 @@
 
 - name: install zinit
   git:
-    repo: https://github.com/zdharma/zinit.git
+    repo: https://github.com/zdharma-continuum/zinit.git
     dest: '{{ dotfiles_user_home }}/.zinit/bin'
     update: no
-    version: master
+    version: main
   tags:
   - initial
 

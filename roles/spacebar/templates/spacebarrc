@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
 spacebar -m config debug_output on
+spacebar -m config title                on
+spacebar -m config spaces               on
+spacebar -m config clock                on
+spacebar -m config power                on
 spacebar -m config text_font         "Hack Nerd Font:Bold:12.0"
 spacebar -m config icon_font         "Hack Nerd Font:Regular:12.0"
 spacebar -m config background_color  0xaa282a36

@@ -29,6 +29,7 @@ eval "$(/usr/libexec/path_helper -s)"
 {% if ansible_facts['os_family'] == "Darwin" %}
 BREW_PREFIX={{ brew_prefix }}
 export MANPATH="{{ zsh_man_path | join(":") }}:${MANPATH}"
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 {% endif %}
 ##############################################################
 # GLOBAL CONFIG
@@ -94,7 +95,7 @@ export ENHANCD_FILTER
 # ssh_agent
 eval "$(ssh-agent -s)" >/dev/null
 {% if ansible_facts['os_family'] == "Darwin" %}
-ssh-add -K &> /dev/null
+ssh-add --apple-load-keychain &> /dev/null
 {% else %}
 ssh-add &> /dev/null
 {% endif %}
@@ -155,13 +156,13 @@ export GOROOT="{{ go_install_path }}/go"
 export PATH="${GOROOT}/bin:${ASDF_ROOT}/shims:${PATH}"
 
 ##############################################################
-# ZINIT https://github.com/zdharma/zinit
+# ZINIT https://github.com/zdharma-continuum/zinit
 ##############################################################
 
 ZINIT_PATH="${HOME}/.zinit"
 if [[ ! -f ${ZINIT_PATH}/bin/zinit.zsh ]]; then
 if (( $+commands[git] )); then
-    git clone https://github.com/zdharma/zinit.git ${ZINIT_PATH}/bin
+    git clone https://github.com/zdharma-continuum/zinit.git ${ZINIT_PATH}/bin
 else
     echo 'git not found' >&2
     exit 1
@@ -172,6 +173,11 @@ source ${ZINIT_PATH}/bin/zinit.zsh
 
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
+
+
+{% if ansible_facts['os_family']|lower == "darwin" %}
+autoload -U +X bashcompinit && bashcompinit
+{% endif %}
 
 # Do not load the prompt asynchronously since it's super fast anyways!
 # Theme options
@@ -211,7 +217,7 @@ zt 0a light-mode for \
     atclone"cp build/def-* $ZPFX/bin/" \
         sei40kr/zsh-fast-alias-tips \
     compile'{hsmw-*,test/*}' \
-        zdharma/history-search-multi-word
+        zdharma-continuum/history-search-multi-word
 
 ## Turbo 0b
 zt 0b lucid light-mode for \
@@ -219,7 +225,7 @@ zt 0b lucid light-mode for \
     atload"unalias grv" \
         OMZP::git \
     as"program" pick"bin/git-dsf" \
-        zdharma/zsh-diff-so-fancy
+        zdharma-continuum/zsh-diff-so-fancy
 
 zt 0b light-mode for \
     as"null" \
@@ -276,7 +282,7 @@ zt 2a lucid for \
 # Fast-syntax-highlighting & autosuggestions
 zt 2c lucid for \
     atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" \
-        zdharma/fast-syntax-highlighting \
+        zdharma-continuum/fast-syntax-highlighting \
     atload"!_zsh_autosuggest_start" \
     atinit"export ZSH_AUTOSUGGEST_USE_ASYNC=1; export ZSH_AUTOSUGGEST_MANUAL_REBIND=1; export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20" \
         zsh-users/zsh-autosuggestions \

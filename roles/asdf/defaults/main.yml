@@ -11,8 +11,8 @@ asdf_plugins:
 - name: nodejs
   repository: https://github.com/asdf-vm/asdf-nodejs.git
   versions:
-  - 12.16.1
-  global: 12.16.1
+  - 16.14.0
+  global: 16.14.0
 - name: python
   repository: https://github.com/danhper/asdf-python.git
   versions:

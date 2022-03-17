@@ -20,6 +20,7 @@ brew_packages:
 - autoconf
 - automake
 - awk
+- awscli
 - bash-snippets
 - coffeescript
 - convmv
