@@ -8,14 +8,10 @@ Host * (asterisk for all hosts or add specific host)
 {% endif %}
   GSSAPIAuthentication yes
   GSSAPIDelegateCredentials yes
-  IdentityFile ~/.ssh/id_rsa
-  IdentityFile ~/.ssh/id_rsa_work
   IdentityFile ~/.ssh/id_rsa_office
-  IdentityFile ~/.ssh/id_rsa_personal
   IdentityFile ~/.ssh/id_ed25519
   IdentityFile ~/.ssh/id_ed25519_work
   IdentityFile ~/.ssh/id_ecdsa
-  IdentityFile ~/.ssh/id_ecdsa_work
   Compression yes
 
 Host github.com
@@ -23,28 +19,13 @@ HostName github.com
 User git
 IdentityFile ~/.ssh/id_rsa
 
-Host gitlab.com
-HostName gitlab.com
-User git
-IdentityFile ~/.ssh/id_ed25519_work
-
-Host personal
-HostName github.com
-User git
-IdentityFile ~/.ssh/id_ecdsa
-
-Host vs-ssh.visualstudio.com
-HostName vs-ssh.visualstudio.com
-user ntgfreight
-IdentityFile ~/.ssh/id_rsa_work
-
 Host 10.10.0.45
 Hostname 10.10.0.45
 user sultan
 IdentityFile ~/.ssh/id_rsa_office
 
-Host 208.78.106.189
-Hostname 208.78.106.189
-user administrator
-IdentityFile /Users/sultan.gillani/.ssh/id_ed25519_work
+Host gitlab.com
+HostName gitlab.com
+User git
+IdentityFile ~/.ssh/id_ed25519_work
 
