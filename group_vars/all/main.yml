@@ -20,12 +20,12 @@ debianfiles_home: '{{ dotfiles_dir }}/roles/apt/files'
 docker_users: '{{ zsh_user }}'
 gitfiles_dir: '{{ dotfiles_dir }}/roles/git/files'
 gemfile_dir: '{{ dotfiles_dir }}/roles/ruby/files'
-wallpaper_dir: '{{ dotfiles_dir }}/roles/wallpaper/files'
+wallpaper_dir: '{{ dotfiles_dir }}/roles/wallpaper/files/wallpapers'
 vcenter_hostname: "{{ lookup('env','VMWARE_IP') }}"
 vcenter_username: "{{ lookup('env','VMWARE_USERNAME') }}"
 vcenter_password: "{{ lookup('env','VMWARE_PASS') }}"
 esxi_hostname: "{{ lookup('env','VMWARE_HOSTNAME') }}"
-wallpaper_file: '{{ dotfiles_user_home }}/wallpapers/atari_dracula.png'
+wallpaper_file: '{{ wallpaper_dir }}/neon.png'
 go_install_path: "{{ lookup('pipe', 'asdf where golang') }}"
 
 zsh_shell: "{% if (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'arm64') %}/opt/homebrew/bin/zsh{% elif (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'x86_64') %}/usr/local/bin/zsh{% else %}/bin/zsh{% endif %}"
