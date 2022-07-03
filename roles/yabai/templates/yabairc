@@ -44,7 +44,7 @@ yabai -m rule --add app="^JetBrains PyCharm$" space=5
 yabai -m rule --add app="^PyCharm$" space=5
 yabai -m rule --add app="^Intelli$" space=6
 yabai -m rule --add app="^Slack$" space=4
-yabai -m rule --add app="^Parallels Desktop$" space=6
+yabai -m rule --add app="^zoom.us$" space=8
 yabai -m rule --add app="^Music$" space=10
 yabai -m rule --add app="^Firefox" space=7
 

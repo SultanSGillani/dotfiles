@@ -31,6 +31,7 @@ brew_packages:
 - diff-so-fancy
 - dive
 - docker-compose
+- thefuck
 - gettext
 - git
 - gnupg

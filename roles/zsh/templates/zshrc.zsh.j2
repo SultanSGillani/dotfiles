@@ -44,6 +44,7 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 {% if ansible_facts['os_family']|lower == "darwin" %}
 export HOMEBREW_INSTALL_BADGE="⚗️"
 export HOMEBREW_NO_ANALYTICS=1
+export ASDF_HASHICORP_OVERWRITE_ARCH_TERRAFORM=amd64
 {% endif %}
 
 # FZF
