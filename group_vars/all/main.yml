@@ -6,9 +6,6 @@ aur_user: aur_user
 zsh_user_group: "{{ lookup('pipe','id -g') }}"
 dotfiles_user_home: "{{ '~' | expanduser }}"
 zdot_dir: '{{ dotfiles_user_home }}/.zsh'
-pip_executable: '{{dotfiles_user_home }}/.asdf/shims/pip'
-npm_executable: '{{dotfiles_user_home }}/.asdf/shims/npm'
-gem_executable: '{{dotfiles_user_home }}/.asdf/shims/gem'
 cargo_home: '{{ dotfiles_user_home }}/.cargo'
 rustup_home: '{{ dotfiles_user_home }}/.rustup'
 dotfiles_dir: '{{ dotfiles_user_home }}/dotfiles'
@@ -36,6 +33,10 @@ asdf_plugins_dir: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix
 asdf_installs_dir: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix }}/opt/asdf/installs{% else %}{{ dotfiles_user_home }}/.asdf/installs{% endif %}"
 asdf_dir: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix }}/opt/asdf/libexec{% else %}{{ dotfiles_user_home }}/.asdf{% endif %}"
 asdf_path: "{{ asdf_dir }}"
+
+pip_executable: '{{ asdf_dir }}/shims/pip'
+npm_executable: '{{ asdf_dir }}/shims/npm'
+gem_executable: '{{ asdf_dir }}/shims/gem'
 
 ## Base16 Theme Vars for xresources and i3
 default_theme: dracula

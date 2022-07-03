@@ -2,7 +2,6 @@ plugins:
 - nodejs
 - ruby
 - python
-- dotnet-core
 - golang
 - java
 - shellcheck
@@ -16,22 +15,11 @@ asdf_plugins:
 - name: python
   repository: https://github.com/danhper/asdf-python.git
   versions:
+  - 3.7.3
   - 3.9.2
   - 3.9.6
   - 3.10.1
   global: 3.10.1
-- name: ruby
-  repository: https://github.com/asdf-vm/asdf-ruby.git
-  versions:
-    - 3.0.1
-  global: 3.0.1
-- name: dotnet-core
-  repository: https://github.com/emersonsoares/asdf-dotnet-core.git
-  versions:
-    - 3.1.301
-    - 5.0.404
-    - 6.0.101
-  global: 6.0.101
 - name: golang
   repository: https://github.com/kennyp/asdf-golang.git
   versions:
@@ -57,6 +45,11 @@ asdf_plugins:
   versions:
   - 3.0.1
   global: 3.0.1
+- name: terraform
+  repository: https://github.com/asdf-community/asdf-hashicorp.git
+  versions:
+  - 0.13.7
+  - 1.2.4
 
 asdf_dots:
 - {src: default-gems, dest: .default-gems}
