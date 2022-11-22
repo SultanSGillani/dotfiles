@@ -130,14 +130,25 @@
 
 - name: Synchronize and delete files in dest for completions
   synchronize:
-    src: completions/
+    src: completions/debian/
     dest: '{{ zdot_dir }}/completions/'
     owner: yes
     delete: yes
     recursive: yes
   when: ansible_facts['os_family'] != "Darwin"
   tags:
-  - update
+    - update
+
+- name: Synchronize and delete files in dest for completions
+  synchronize:
+    src: completions/osx/
+    dest: '{{ zdot_dir }}/completions/'
+    owner: yes
+    delete: yes
+    recursive: yes
+  when: ansible_facts['os_family'] != "Darwin"
+  tags:
+    - update
 
 - name: Synchronize and delete files in dest for aliases
   synchronize:

@@ -94,6 +94,9 @@ ENHANCD_FILTER='fzf --height 50% --reverse --ansi'
 export ENHANCD_DOT_SHOW_FULLPATH=1;
 export ENHANCD_FILTER
 
+#Podman
+export DOCKER_HOST='unix:///Users/sultan.gillani/.local/share/containers/podman/machine/podman-machine-default/podman.sock'
+
 # ssh_agent
 eval "$(ssh-agent -s)" >/dev/null
 {% if ansible_facts['os_family'] == "Darwin" %}
