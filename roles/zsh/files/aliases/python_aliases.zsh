@@ -4,3 +4,4 @@ alias py=python3
 alias icurl="curl -I"
 alias pyserv="python -m http.server"
 alias autopy="autopep8 --in-place --aggressive $@"
+alias pip="python -m pip"

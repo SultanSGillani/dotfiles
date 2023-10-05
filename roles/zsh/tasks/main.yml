@@ -119,7 +119,7 @@
   - update
 
 - name: Synchronize and delete files in dest for functions
-  synchronize:
+  ansible.posix.synchronize:
     src: functions/
     dest: '{{ zdot_dir }}/functions/'
     owner: yes
@@ -129,7 +129,7 @@
   - update
 
 - name: Synchronize and delete files in dest for completions
-  synchronize:
+  ansible.posix.synchronize:
     src: completions/debian/
     dest: '{{ zdot_dir }}/completions/'
     owner: yes
@@ -140,7 +140,7 @@
     - update
 
 - name: Synchronize and delete files in dest for completions
-  synchronize:
+  ansible.posix.synchronize:
     src: completions/osx/
     dest: '{{ zdot_dir }}/completions/'
     owner: yes
@@ -151,7 +151,7 @@
     - update
 
 - name: Synchronize and delete files in dest for aliases
-  synchronize:
+  ansible.posix.synchronize:
     src: aliases/
     dest: '{{ zdot_dir }}/aliases/'
     owner: yes

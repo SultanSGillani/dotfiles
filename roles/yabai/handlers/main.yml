@@ -1,5 +1,5 @@
 - name: Restart Yabai
   command:
-    cmd: "brew services restart koekeishiya/formulae/yabai"
+    cmd: "yabai --restart-service"
   become: '{{ (zsh_user != ansible_user_id) | bool }}'
   become_user: '{{ zsh_user }}'

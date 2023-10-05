@@ -15,11 +15,10 @@ asdf_plugins:
 - name: python
   repository: https://github.com/danhper/asdf-python.git
   versions:
-  - 3.7.3
   - 3.9.2
   - 3.9.6
-  - 3.10.1
-  global: 3.10.1
+  - 3.11.5
+  global: 3.11.5
 - name: golang
   repository: https://github.com/kennyp/asdf-golang.git
   versions:
@@ -48,7 +47,6 @@ asdf_plugins:
 - name: terraform
   repository: https://github.com/asdf-community/asdf-hashicorp.git
   versions:
-  - 0.13.7
   - 1.2.4
 
 asdf_dots:
