@@ -391,12 +391,3 @@
     type: bool
     value: true
 
-# ============ Safari
-# ===================================================================
-- name: Safari | Show debug menu
-  community.general.osx_defaults:
-    domain: com.apple.Safari
-    key: IncludeInternalDebugMenu
-    type: bool
-    value: true
-    state: present

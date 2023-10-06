@@ -3,7 +3,7 @@ alias git=hub
 ### Bat ###
 alias cat=bat
 ### Exa ###
-alias ls='exa -bh ${${${ABSD#0}:+-G}:---color=auto}'
+alias ls='eza -bh ${${${ABSD#0}:+-G}:---color=auto}'
 alias l="ls"
 alias l.="ls -d .*"
 alias lA="ls -a"

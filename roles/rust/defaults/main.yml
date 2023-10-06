@@ -12,8 +12,8 @@ rustup_install_dir: '{{ rustup_home }}'
 
 # Cargo
 cargo_items:
-- name: exa
-  binary: exa
+- name: eza
+  binary: eza
 - name: bat
   binary: bat
 - name: cargo-deb
@@ -23,4 +23,4 @@ rustup_url: '{{ rustup_mirror }}/{{ rustup_platform }}/rustup-init'
 
 darwin_packages:
 - rust
-- exa
+- eza

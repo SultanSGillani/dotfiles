@@ -40,6 +40,8 @@ FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 [[ -f "{{ asdf_plugins_dir }}/java/set-java-home.zsh" ]] && . "{{ asdf_plugins_dir }}/java/set-java-home.zsh"
 
+export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+
 # Homebrew options
 {% if ansible_facts['os_family']|lower == "darwin" %}
 export HOMEBREW_INSTALL_BADGE="⚗️"
@@ -93,9 +95,6 @@ export FZF_TMUX_HEIGHT="30%"
 ENHANCD_FILTER='fzf --height 50% --reverse --ansi'
 export ENHANCD_DOT_SHOW_FULLPATH=1;
 export ENHANCD_FILTER
-
-#Podman
-export DOCKER_HOST='unix:///Users/sultan.gillani/.local/share/containers/podman/machine/podman-machine-default/podman.sock'
 
 # ssh_agent
 eval "$(ssh-agent -s)" >/dev/null
@@ -219,8 +218,6 @@ zt 0a light-mode for \
     has'git' pick'init.zsh' atload'alias gi="git-ignore"' blockf \
         laggardkernel/git-ignore \
     make!"!PREFIX=$ZPFX" \
-    atclone"cp build/def-* $ZPFX/bin/" \
-        sei40kr/zsh-fast-alias-tips \
     compile'{hsmw-*,test/*}' \
         zdharma-continuum/history-search-multi-word
 
@@ -236,6 +233,9 @@ zt 0b light-mode for \
     as"null" \
     pick"init.sh" \
         b4b4r07/enhancd
+
+zinit ice from'gh-r' as'program'
+zinit light decayofmind/zsh-fast-alias-tips
 
 # Turbo 0c and OS dependent
 {% if ansible_facts['os_family']|lower == "darwin" %}
@@ -269,7 +269,7 @@ zlight b4b4r07/httpstat
 
 zt 2a lucid for \
   as"completion" \
-        OMZP::docker/_docker \
+        OMZP::docker/completions/_docker \
   as"completion" \
         OMZP::extract/_extract \
   as"completion" \
