@@ -6,6 +6,8 @@ A cross-platform development environment provisioned with [Ansible](https://www.
 
 Repo: <https://github.com/SultanSGillani/dotfiles>
 
+> **Upgrading from a previous version?** See [CHANGELOG.md](CHANGELOG.md) for breaking changes and migration steps (rust/cargo/npm tools moved to mise).
+
 ## What it sets up
 
 - **Shell:** zsh + [zinit](https://github.com/zdharma-continuum/zinit) plugin manager, base16 themes, fzf, Powerlevel10k, custom completions/bindings/functions
