@@ -2,7 +2,7 @@
 
 All notable changes to this dotfiles repo. Dates are YYYY-MM-DD.
 
-## [Unreleased] — 2026-05-05
+## [v1.0] — 2026-05-05
 
 ### ⚠️ Breaking changes
 
