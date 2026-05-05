@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-if [[ -f "${HOME}/.asdf/installs/python/3.8.5/bin/python" ]]; then
-  export ANSIBLE_PYTHON_INTERPRETER=""
+if [[ -x "${HOME}/.local/share/mise/shims/python" ]]; then
+  export ANSIBLE_PYTHON_INTERPRETER="${HOME}/.local/share/mise/shims/python"
   else
     export ANSIBLE_PYTHON_INTERPRETER=/usr/local/bin/python3
 fi
@@ -18,3 +18,4 @@ export ANSIBLE_PIPELINING=
 export ANSIBLE_INVENTORY=
 export ANSIBLE_INVENTORY_ENABLED="ini, yaml, auto"
 export ANSIBLE_FORCE_COLOR=True
+export ANSIBLE_DEPRECATION_WARNINGS=False

@@ -1,0 +1,3 @@
+# handlers file for mise
+- name: reshim mise
+  command: '{{ mise_executable }} reshim'

@@ -3,45 +3,41 @@ set -o errexit
 set -o pipefail
 set -o nounset
 
-ZSH=${HOME}/dotfiles
+ZSH="${HOME}/dotfiles"
+PLAYBOOK="${ZSH}/dotfiles.yml"
+HOSTS="${ZSH}/inventory.yml"
 
-PLAYBOOK=${HOME}/dotfiles/sudo.yml
+cd "${ZSH}"
 
-HOSTS=${HOME}/dotfiles/inventory.yml
+# shellcheck source=/dev/null
+[[ -f ~/.secrets ]] && source ~/.secrets
 
-# Run main playbook
+HOST_OS="$(uname)"
 
-cd ${ZSH}
-
-source ~/.secrets
-HOST_OS=$(uname)
-
-if [[ ! -d "${HOME}"/.ansible/collections/ansible_collections/community/general ]]; then
-    echo "Installing ansible-galaxy collection for community.general"
-    ansible-galaxy collection install community.general
+if [[ ! -d "${HOME}/.ansible/collections/ansible_collections/community/general" ]]; then
+  echo "Installing ansible-galaxy collection for community.general"
+  ansible-galaxy collection install community.general
 fi
+
+if [[ ! -f ~/.vault_password.txt ]]; then
+  echo "please add your vault password file (~/.vault_password.txt)"
+  exit 1
+fi
+
+if [[ "${HOST_OS}" != "Darwin" && "${HOST_OS}" != "Linux" ]]; then
+  echo "Unknown host OS: ${HOST_OS}"
+  exit 1
+fi
+
+echo "Running dotfiles Playbook for ${HOST_OS}"
 
 if [[ $# -eq 0 ]]; then
-  echo "Running dotfiles Playbook for ${HOST_OS}"
-  if [[ ! -f ~/.vault_password.txt ]]; then
-  echo "please add your vault password file to your home directory"
-  elif [[ "${HOST_OS}" = 'Darwin' ]] || [[ "${HOST_OS}" = 'Linux' ]]; then
-  ansible-playbook -i "${HOSTS}" "${PLAYBOOK}" --vault-password-file ~/.vault_password.txt
-  else
-    echo "Unknown host OS: ${HOST_OS}"
-    exit 1
-  fi
+  ansible-playbook -i "${HOSTS}" "${PLAYBOOK}" -K \
+    --vault-password-file ~/.vault_password.txt
 else
-    echo "Running dotfiles Playbook for ${HOST_OS}"
-  if [[ ! -f ~/.vault_password.txt ]]; then
-  echo "please add your vault password file to your home directory"
-  elif [[ "${HOST_OS}" = 'Darwin' ]] || [[ "${HOST_OS}" = 'Linux' ]]; then
-  ansible-playbook -i "${HOSTS}" "${PLAYBOOK}" --vault-password-file ~/.vault_password.txt --tags "$@"
-  else
-    echo "Unknown host OS: ${HOST_OS}"
-    exit 1
-  fi
+  TAGS="$(IFS=,; echo "$*")"
+  ansible-playbook -i "${HOSTS}" "${PLAYBOOK}" -K \
+    --vault-password-file ~/.vault_password.txt \
+    --tags "${TAGS}"
 fi
-
-trap - EXIT
 

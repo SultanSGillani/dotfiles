@@ -67,8 +67,9 @@
       tags:
       - fd
     - import_role:
-        name: asdf
+        name: mise
       tags:
+      - mise
       - asdf
     - import_role:
         name: fzf
@@ -112,11 +113,6 @@
       tags:
       - rg
       - ripgrep
-    - import_role:
-        name: rust
-      tags:
-      - rust
-      - exa
     - import_role:
         name: tmux
       tags:

@@ -3,7 +3,7 @@
   - group_vars/all/main.yml
   hosts: all
   gather_facts: no
-  become: yes
+  become: no
   become_user: '{{ zsh_user }}'
   tasks:
   - block:

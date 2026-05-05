@@ -15,7 +15,6 @@ snippet_files:
 - global
 - html
 - python
-- ruby
 - sh
 - zsh
 

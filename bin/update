@@ -1,39 +1,34 @@
 #!/usr/bin/env bash
-
 set -o errexit
 set -o pipefail
 set -o nounset
 
-ZSH=${HOME}/dotfiles
+ZSH="${HOME}/dotfiles"
+PLAYBOOK="${ZSH}/dotfiles.yml"
+HOSTS="${ZSH}/inventory.yml"
 
-PLAYBOOK=${HOME}/dotfiles/dotfiles.yml
+cd "${ZSH}"
 
-HOSTS=${HOME}/dotfiles/inventory.yml
+# shellcheck source=/dev/null
+[[ -f ~/.secrets ]] && source ~/.secrets
 
-# Run main playbook
+HOST_OS="$(uname)"
 
-HOST_OS=$(uname)
-
-cd ${ZSH}
-
-source ~/.secrets
-
-if [[ $# -eq 0 ]]; then
-  echo "Running dotfiles update for ${HOST_OS}"
-  if [[ "${HOST_OS}" = 'Darwin' ]] || [[ "${HOST_OS}" = 'Linux' ]]; then
-  ansible-playbook -i ${HOSTS} ${PLAYBOOK} --vault-password-file ~/.vault_password.txt --skip-tags initial
-  else
-    echo "Unknown host OS: ${HOST_OS}"
-    exit 1
-  fi
-else
-    echo "Running dotfiles update for ${HOST_OS}"
-  if [[ "${HOST_OS}" = 'Darwin' ]] || [[ "${HOST_OS}" = 'Linux' ]]; then
-  ansible-playbook -i ${HOSTS} ${PLAYBOOK} --vault-password-file ~/.vault_password.txt --skip-tags initial --tags "$@"
-  else
-    echo "Unknown host OS: ${HOST_OS}"
-    exit 1
-  fi
+if [[ "${HOST_OS}" != "Darwin" && "${HOST_OS}" != "Linux" ]]; then
+  echo "Unknown host OS: ${HOST_OS}"
+  exit 1
 fi
 
-trap - EXIT
+echo "Running dotfiles update for ${HOST_OS}"
+
+if [[ $# -eq 0 ]]; then
+  ansible-playbook -i "${HOSTS}" "${PLAYBOOK}" \
+    --vault-password-file ~/.vault_password.txt \
+    --skip-tags initial
+else
+  TAGS="$(IFS=,; echo "$*")"
+  ansible-playbook -i "${HOSTS}" "${PLAYBOOK}" \
+    --vault-password-file ~/.vault_password.txt \
+    --skip-tags initial \
+    --tags "${TAGS}"
+fi

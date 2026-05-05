@@ -88,11 +88,11 @@
       tags:
       - fd
     - import_role:
-        name: asdf
+        name: mise
       tags:
+      - mise
       - asdf
       - python
-      - ruby
       - nodejs
       - npm
       - node
@@ -134,11 +134,6 @@
       tags:
       - rg
       - ripgrep
-    - import_role:
-        name: rust
-      tags:
-      - rust
-      - exa
     - import_role:
         name: tmux
       tags:

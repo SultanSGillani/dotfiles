@@ -1,8 +1,1 @@
-- name: Arch Pkgs | Install Bat
-  package:
-    name: bat
-    state: present
-  become: yes
-  become_user: root
-  tags:
-  - initial
+# bat is installed via mise (cargo:bat); see roles/mise/files/miseconfig

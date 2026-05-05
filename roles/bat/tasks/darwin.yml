@@ -1,6 +1,1 @@
-- name: OSX | Install Bat
-  community.general.homebrew:
-    name: bat
-    state: present
-  tags:
-  - initial
+# bat is installed via mise (cargo:bat); see roles/mise/files/miseconfig

@@ -1,7 +1,0 @@
-- name: Install | osx
-  community.general.homebrew:
-    name: '{{ item }}'
-    state: present
-  loop: '{{ darwin_packages }}'
-  tags:
-  - initial

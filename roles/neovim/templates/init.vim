@@ -7,7 +7,7 @@ endif
 
 let vimplug_exists=expand('{{ neovim_config_dir }}/autoload/plug.vim')
 
-let g:sultan_vim_plugs = "{ vim_plugs|join(',') }}"
+let g:sultan_vim_plugs = "{{ plugins | join(',') }}"
 let g:sultan_vim_editor = "nvim"
 
 if !filereadable(vimplug_exists)
@@ -134,7 +134,7 @@ else
 
   " IndentLine
   let g:indentLine_enabled = 1
-  let g:indentLine_concealcursor = 0
+  let g:indentLine_concealcursor = ''
   let g:indentLine_char = '┆'
   let g:indentLine_faster = 1
 endif

@@ -1,4 +1,4 @@
-#!/home/sultan/.pyenv/versions/3.7.3/bin/python3.7
+#!/usr/bin/env python3
 import redsea.cli as cli
 from redsea.mediadownloader import MediaDownloader
 from redsea.tagger import Tagger

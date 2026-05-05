@@ -8,6 +8,7 @@
 tests/*.retry
 *.iml
 *.swp
+misc/iTerm2 State.itermexport
 
 #### Ctags
 tags

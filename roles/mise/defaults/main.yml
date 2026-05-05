@@ -1,0 +1,22 @@
+mise_dots:
+- {src: miseconfig, dest: .config/mise/config.toml}
+
+pip_packages:
+- ansible-lint
+- cryptography
+- django
+- docker
+- flake8
+- jedi
+- jmespath
+- mkdocs
+- neovim
+- powerline-status
+- pylint
+- pyvmomi
+- tmuxp
+- virtualenv
+- virtualenvwrapper
+- yamllint
+- yapf
+- "git+http://github.com/crtomirmajer/secode.git"

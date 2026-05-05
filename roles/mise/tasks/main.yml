@@ -1,0 +1,55 @@
+- name: Read vars from first file found, use 'vars/' relative subdir
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+      - '{{ ansible_facts["os_family"]|lower }}.yml'
+      - default.yml
+      paths:
+      - vars
+
+- name: Include os specific tasks
+  include_tasks: "{{ ansible_facts['os_family']|lower }}.yml"
+  when: ansible_facts['os_family']|lower is defined
+
+- name: Ensure mise config directory exists
+  file:
+    path: '{{ dotfiles_user_home }}/.config/mise'
+    state: directory
+    mode: '0755'
+  become: yes
+  become_user: '{{ zsh_user }}'
+
+- name: copy package files and configs
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ dotfiles_user_home }}/{{ item.dest }}'
+  loop: '{{ mise_dots }}'
+  become: yes
+  become_user: '{{ zsh_user }}'
+  tags:
+  - update
+
+- name: install mise tools from config
+  command: '{{ mise_executable }} install'
+  args:
+    chdir: '{{ dotfiles_user_home }}'
+  become: true
+  become_user: '{{ zsh_user }}'
+  tags:
+  - update
+
+- name: reshim mise
+  command: '{{ mise_executable }} reshim'
+  args:
+    chdir: '{{ dotfiles_user_home }}'
+  become: true
+  become_user: '{{ zsh_user }}'
+  tags:
+  - update
+
+- name: Include pip package installs
+  import_tasks: pip.yml
+  tags:
+  - pip
+  - update

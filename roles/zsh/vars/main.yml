@@ -9,9 +9,6 @@ touchpad_speed: .85
 zsh_mac_path:
 - "{{ brew_prefix }}/bin"
 - "{{ brew_prefix }}/sbin"
-- $(ruby -e 'puts Gem.user_dir')/bin
-- /opt/local/bin
-- /opt/local/sbin
 
 zsh_arch_path:
 - /usr/lib/ccache/bin
@@ -23,12 +20,10 @@ zsh_path:
 - /usr/bin
 - /sbin
 - /usr/local/sbin
-- ${GOBIN}
 - ${ZSH}/bin
 - ${HOME}/.local/bin
 - ${HOME}/.dotnet/tools
 - ${ZDOTDIR}/z.sh
-- "{{ asdf_path }}/asdf.sh"
 - ${KREW_ROOT:-$HOME/.krew}/bin
 
 zsh_man_path:

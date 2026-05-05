@@ -1,14 +1,14 @@
 #!/usr/bin/env zsh
 
 zcommand() { zinit ice wait"0b" silent as"command" "${@}"; }
-zlight()  { [ -zlight $2 ] && zinit light "${@}" || zinit "${@}"; }
+zlight()  { [[ -z "$2" ]] && zinit light "${@}" || zinit "${@}"; }
 zsnippet() { zinit snippet "${@}"; }
 zt()  { zinit depth'3' lucid ${1/#[0-9][a-c]/wait"$1"} "${@:2}"; }
 zct() { .zinit-ice load"[[ \${MYPROMPT} = ${1} ]]" unload"[[ \${MYPROMPT} != ${1} ]]" \
 atinit'[ -f "${thmf}/${MYPROMPT}-pre" ] && source "${thmf}/${MYPROMPT}-pre"' \
 atload'![ -f "${thmf}/${MYPROMPT}-post" ] && source "${thmf}/${MYPROMPT}-post"'; \
 local ZINIT_ICE+=( "${(kv)ZINIT_ICES[@]}"); }
-z()  { [ -z $2 ] && zinit light "${@}" || zinit "${@}"; } # zplugin
+z()  { [[ -z "$2" ]] && zinit light "${@}" || zinit "${@}"; } # zplugin
 
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     # shellcheck source=./p10k-instant-prompt-${(%):-%n}.zsh
@@ -25,30 +25,34 @@ fi
 eval "$(/usr/libexec/path_helper -s)"
 {% endif %}
 
-# Homebrew
-{% if ansible_facts['os_family'] == "Darwin" %}
-BREW_PREFIX={{ brew_prefix }}
-export MANPATH="{{ zsh_man_path | join(":") }}:${MANPATH}"
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-{% endif %}
+
 ##############################################################
 # GLOBAL CONFIG
 ##############################################################
 
-# ASDF
-. "{{ asdf_dir }}/asdf.sh"
-
-[[ -f "{{ asdf_plugins_dir }}/java/set-java-home.zsh" ]] && . "{{ asdf_plugins_dir }}/java/set-java-home.zsh"
-
-export ASDF_GOLANG_MOD_VERSION_ENABLED=true
+# Homebrew (must be first so brew/installed binaries are on PATH for the rest of this file)
+{% if ansible_facts['os_family'] == "Darwin" %}
+export BREW_PREFIX={{ brew_prefix }}
+if [[ -x "${BREW_PREFIX}/bin/brew" ]]; then
+  eval "$(${BREW_PREFIX}/bin/brew shellenv)"
+fi
+export MANPATH="{{ zsh_man_path | join(":") }}:${MANPATH}"
+FPATH="${BREW_PREFIX}/share/zsh/site-functions:${FPATH}"
+{% endif %}
 
 # Homebrew options
 {% if ansible_facts['os_family']|lower == "darwin" %}
 export HOMEBREW_INSTALL_BADGE="⚗️"
 export HOMEBREW_NO_ANALYTICS=1
-export ASDF_HASHICORP_OVERWRITE_ARCH_TERRAFORM=amd64
-eval $(thefuck --alias)
+if (( $+commands[thefuck] )); then
+  eval "$(thefuck --alias)"
+fi
 {% endif %}
+
+# mise (asdf-compatible runtime version manager)
+if (( $+commands[mise] )); then
+  eval "$(mise activate zsh)"
+fi
 
 # FZF
 [[ -f ${HOME}/.fzf.zsh ]] && . ${HOME}/.fzf.zsh
@@ -97,7 +101,7 @@ export ENHANCD_DOT_SHOW_FULLPATH=1;
 export ENHANCD_FILTER
 
 # ssh_agent
-eval "$(ssh-agent -s)" >/dev/null
+[[ -z "${SSH_AUTH_SOCK:-}" ]] && eval "$(ssh-agent -s)" >/dev/null
 {% if ansible_facts['os_family'] == "Darwin" %}
 ssh-add --apple-load-keychain &> /dev/null
 {% else %}
@@ -113,8 +117,6 @@ export PYTHONSTARTUP="${HOME}/.pyrc.py"
 # Gpg2
 export GPG_TTY=$(tty)
 
-fast-theme default 2> /dev/null
-
 # Z
 export _Z_CMD=z
 
@@ -126,7 +128,8 @@ for i in completions bindings generic history dir; do
     source "${ZDOTDIR}/$i.zsh"
 done
 
-for f in $(ls "${ZDOTDIR}"/functions/*.zsh); do
+setopt local_options null_glob
+for f in "${ZDOTDIR}"/functions/*.zsh(N); do
     source "${f}"
 done
 
@@ -140,24 +143,14 @@ export MAKEFLAGS="-j9 -l8"
 export PATH="{{ zsh_path | join(":") }}:{{ zsh_arch_path | join(":") }}:${PATH}"
 {% endif %}
 
-# Rust
+# Rust (toolchain & cargo binaries managed by mise)
 export CARGO_HOME="${HOME}/.cargo"
-export PATH="${CARGO_HOME}:${PATH}"
-if [[ "${+commands[rustc]}" == 1 ]]; then
-export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
+export PATH="${CARGO_HOME}/bin:${PATH}"
+if (( ${+commands[rustc]} )); then
+  export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
 
-# Dotnet
-export CI_NTG_USER=ntg-user
-export CI_NTG_TOKEN="YeWRzr-J5F1oegtsAaix"
-
 # Go
-export ASDF_ROOT="{{ asdf_path }}"
-export ASDF_DATA_DIR="{{ asdf_path }}"
-export ASDF_DIR="{{ asdf_path }}"
-
-export GOROOT="{{ go_install_path }}/go"
-export PATH="${GOROOT}/bin:${ASDF_ROOT}/shims:${PATH}"
 
 ##############################################################
 # ZINIT https://github.com/zdharma-continuum/zinit
@@ -169,7 +162,7 @@ if (( $+commands[git] )); then
     git clone https://github.com/zdharma-continuum/zinit.git ${ZINIT_PATH}/bin
 else
     echo 'git not found' >&2
-    exit 1
+    return 1
     fi
 fi
 
@@ -205,8 +198,6 @@ zt 0a light-mode for \
         OMZP::urltools \
         OMZP::nmap \
         OMZP::kubectl \
-        OMZP::docker-machine \
-        OMZP::asdf \
         OMZP::tmux \
         OMZP::extract \
         OMZP::command-not-found \
@@ -236,12 +227,6 @@ zt 0b light-mode for \
 
 zinit ice from'gh-r' as'program'
 zinit light decayofmind/zsh-fast-alias-tips
-
-# Turbo 0c and OS dependent
-{% if ansible_facts['os_family']|lower == "darwin" %}
-zinit ice svn wait"0c" lucid
-zsnippet OMZP::macos
-{% endif %}
 
 {% if ansible_facts['distribution']|lower == "debian" %}
 zinit ice svn wait"0c" lucid
@@ -277,8 +262,6 @@ zt 2a lucid for \
   as"completion" \
         OMZP::pip/_pip \
   as"completion" \
-        OMZP::docker-machine/_docker-machine \
-  as"completion" \
         OMZP::docker-compose/_docker-compose
 
 #################################################################
@@ -287,6 +270,7 @@ zt 2a lucid for \
 # Fast-syntax-highlighting & autosuggestions
 zt 2c lucid for \
     atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay" \
+    atload"fast-theme default &>/dev/null" \
         zdharma-continuum/fast-syntax-highlighting \
     atload"!_zsh_autosuggest_start" \
     atinit"export ZSH_AUTOSUGGEST_USE_ASYNC=1; export ZSH_AUTOSUGGEST_MANUAL_REBIND=1; export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20" \
@@ -327,9 +311,6 @@ fi
 for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
     alias "$method"="lwp-request -m '$method'"
 done
-
-# ruby aliases
-. "$ZDOTDIR/aliases/ruby_aliases.zsh"
 
 # python aliases
 . "$ZDOTDIR/aliases/python_aliases.zsh"

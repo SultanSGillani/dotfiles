@@ -1,0 +1,16 @@
+- name: Install jq
+  aur:
+    name: jq
+    use: paru
+    skip_pgp_check: true
+  tags:
+  - initial
+  - java_packages
+
+- name: Install mise
+  aur:
+    name: mise
+    use: paru
+    skip_pgp_check: true
+  tags:
+  - initial

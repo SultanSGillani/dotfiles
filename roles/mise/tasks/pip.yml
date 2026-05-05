@@ -10,7 +10,7 @@
 
 - name: add pip extra packages for debian
   set_fact:
-    pip_packages: '{{ pip_packages + [ debian_pip_packages ] }}'
+    pip_packages: '{{ pip_packages + debian_pip_packages }}'
   when: ansible_facts['os_family']|lower == "debian"
   tags:
   - update
@@ -23,8 +23,7 @@
     virtualenv: '{{ item.virtualenv | default(omit) }}'
     state: '{{ item.state | default(omit) }}'
     executable: '{{ pip_executable }}'
-  loop: "{% if  ansible_facts['os_family']|lower == 'debian' %}{{ pip_packages }}{%\
-    \ else %}{{ pip_packages }}{% endif %}"
+  loop: '{{ pip_packages }}'
   tags:
   - update
   - pip

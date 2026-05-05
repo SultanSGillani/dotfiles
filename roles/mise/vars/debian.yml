@@ -1,7 +1,3 @@
-ruby_pkgs:
-- libcurl4-openssl-dev
-- libxslt1-dev
-
 python_pkgs:
 - libbz2-dev
 - libffi-dev

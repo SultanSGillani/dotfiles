@@ -128,7 +128,7 @@
   tags:
   - update
 
-- name: Synchronize and delete files in dest for completions
+- name: Synchronize and delete files in dest for completions (debian)
   ansible.posix.synchronize:
     src: completions/debian/
     dest: '{{ zdot_dir }}/completions/'
@@ -139,14 +139,14 @@
   tags:
     - update
 
-- name: Synchronize and delete files in dest for completions
+- name: Synchronize and delete files in dest for completions (osx)
   ansible.posix.synchronize:
     src: completions/osx/
     dest: '{{ zdot_dir }}/completions/'
     owner: yes
     delete: yes
     recursive: yes
-  when: ansible_facts['os_family'] != "Darwin"
+  when: ansible_facts['os_family'] == "Darwin"
   tags:
     - update
 
@@ -174,8 +174,7 @@
   user:
     name: '{{ zsh_user }}'
     shell: '{{ zsh_shell }}'
-  become: yes
-  become_user: root
+  become: true
   tags:
   - initial
   - my_shell

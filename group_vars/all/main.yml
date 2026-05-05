@@ -7,7 +7,6 @@ zsh_user_group: "{{ lookup('pipe','id -g') }}"
 dotfiles_user_home: "{{ '~' | expanduser }}"
 zdot_dir: '{{ dotfiles_user_home }}/.zsh'
 cargo_home: '{{ dotfiles_user_home }}/.cargo'
-rustup_home: '{{ dotfiles_user_home }}/.rustup'
 dotfiles_dir: '{{ dotfiles_user_home }}/dotfiles'
 dotfiles_home: '{{ dotfiles_dir }}/roles/dotfiles/files'
 user_tmp_dir: '{{ dotfiles_user_home }}/tmp'
@@ -16,27 +15,23 @@ widgets_dir: '{{ dotfiles_user_home }}/projects/bar/widgets'
 debianfiles_home: '{{ dotfiles_dir }}/roles/apt/files'
 docker_users: '{{ zsh_user }}'
 gitfiles_dir: '{{ dotfiles_dir }}/roles/git/files'
-gemfile_dir: '{{ dotfiles_dir }}/roles/ruby/files'
 wallpaper_dir: '{{ dotfiles_dir }}/roles/wallpaper/files/wallpapers'
 vcenter_hostname: "{{ lookup('env','VMWARE_IP') }}"
 vcenter_username: "{{ lookup('env','VMWARE_USERNAME') }}"
 vcenter_password: "{{ lookup('env','VMWARE_PASS') }}"
 esxi_hostname: "{{ lookup('env','VMWARE_HOSTNAME') }}"
 wallpaper_file: '{{ wallpaper_dir }}/neon.png'
-go_install_path: "{{ lookup('pipe', 'asdf where golang') }}"
 
 zsh_shell: "{% if (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'arm64') %}/opt/homebrew/bin/zsh{% elif (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'x86_64') %}/usr/local/bin/zsh{% else %}/bin/zsh{% endif %}"
 
 brew_prefix: "{% if (ansible_facts['os_family'] == 'Darwin') and (ansible_facts['architecture'] == 'arm64') %}/opt/homebrew{% else %}/usr/local{% endif %}"
-asdf_executable: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix }}/opt/asdf/libexec/bin/asdf{% else %}{{ dotfiles_user_home }}/.asdf/bin/asdf{% endif %}"
-asdf_plugins_dir: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix }}/opt/asdf/libexec/plugins{% else %}{{ dotfiles_user_home }}/.asdf/plugins{% endif %}"
-asdf_installs_dir: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix }}/opt/asdf/libexec/installs{% else %}{{ dotfiles_user_home }}/.asdf/installs{% endif %}"
-asdf_dir: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix }}/opt/asdf/libexec{% else %}{{ dotfiles_user_home }}/.asdf{% endif %}"
-asdf_path: "{{ asdf_dir }}"
+mise_executable: "{% if ansible_facts['os_family'] == 'Darwin' %}{{ brew_prefix }}/bin/mise{% else %}{{ dotfiles_user_home }}/.local/bin/mise{% endif %}"
+mise_data_dir: "{{ dotfiles_user_home }}/.local/share/mise"
+mise_shims_dir: "{{ mise_data_dir }}/shims"
+mise_config_dir: "{{ dotfiles_user_home }}/.config/mise"
 
-pip_executable: '{{ asdf_dir }}/shims/pip'
-npm_executable: '{{ asdf_dir }}/shims/npm'
-gem_executable: '{{ asdf_dir }}/shims/gem'
+pip_executable: '{{ mise_shims_dir }}/pip'
+npm_executable: '{{ mise_shims_dir }}/npm'
 
 ## Base16 Theme Vars for xresources and i3
 default_theme: dracula

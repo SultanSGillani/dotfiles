@@ -34,7 +34,6 @@ set:
 - number
 - numberwidth=1
 - nrformats-=octal
-- pastetoggle=<leader>z
 - ruler
 - scrolloff=3
 - shell=$SHELL

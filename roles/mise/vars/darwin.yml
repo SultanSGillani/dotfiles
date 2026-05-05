@@ -1,7 +1,3 @@
-ruby_pkgs:
-- openssl
-- libyaml
-
 python_pkgs:
 - readline
 - xz
