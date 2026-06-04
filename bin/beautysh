@@ -217,5 +217,5 @@ class Beautify:
 
 
 # if not called as a module
-if(__name__ == '__main__'):
+if __name__ == '__main__':
     Beautify().main()
