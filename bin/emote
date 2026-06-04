@@ -5,9 +5,11 @@
 # emoth - 2015 (c) wtfpl z3bra.org
 
 usage() {
-    echo "$(basename $0) <name>"
+    echo "$(basename "$0") <name>"
     exit 1
 }
+
+[ $# -eq 0 ] && usage
 
 case $1 in
     shrug)
@@ -74,10 +76,10 @@ case $1 in
       printf "┌∩┐(◣_◢)┌∩┐"
     ;;
     mad)
-      printf "(⇀‸↼‶)"
+      printf '(⇀‸↼‶)'
     ;;
     flex)
-      printf "ᕙ(⇀‸↼‶)ᕗ"
+      printf 'ᕙ(⇀‸↼‶)ᕗ'
     ;;
     trip)
       printf "｡.*:・’ﾟ:。'(((＋_＋)))｡.*:ﾟ･’ﾟﾟ:。’･ﾟ"

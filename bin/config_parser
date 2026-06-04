@@ -13,7 +13,7 @@ COMMENT_RE = r'^;.*'
 
 
 class InvalidConfig(Exception):
-    pass
+    """Exception raised for invalid configuration files."""
 
 
 def _is_format_str(s):
@@ -80,9 +80,11 @@ class ConfigParser:
         return section in self._sections
 
     def has_option(self, section, option):
+        """Check if an option exists within a given section."""
         return self.has_section(section) and option in self._sections[section]
 
     def options(self, section):
+        """Return a list of option names for the given section."""
         if not self.has_section(section):
             return []
         return list(self._sections[section].keys())
@@ -97,12 +99,12 @@ class ConfigParser:
             filenames = [filenames]
         for fname in filenames:
             try:
-                f = open(fname, 'r')
-                self.readfp(f)
+                with open(fname, 'r', encoding='utf-8') as f:
+                    self.readfp(f)
             except IOError:
-                print("Fail to open file %s, ignored" % fname)
+                print(f"Fail to open file {fname}, ignored")
             except InvalidConfig:
-                print("Invalid config file %s, ignored" % fname)
+                print(f"Invalid config file {fname}, ignored")
 
     def readfp(self, fp):
         """
@@ -113,22 +115,28 @@ class ConfigParser:
         secs = _parse_config_file(fp)
         self._sections.update(secs)
 
-    def parse_item(self, section, key, val):
+    def parse_item(self, section, _key, val, extra_vars=None):
+        """Parse a configuration value, applying interpolation if needed."""
         # Now support only 1 level of interpolation
         if not _is_format_str(val):
             return val
-        else:
-            # first try default section
+        # first try extra_vars, then defaults, then section
+        if extra_vars:
             try:
-                newval = val % self._defaults
+                return val % extra_vars
             except KeyError:
-                try:
-                    newval = val % self._sections[section]
-                except KeyError:
-                    newval = val
-            return newval
+                pass
+        try:
+            newval = val % self._defaults
+        except KeyError:
+            try:
+                newval = val % self._sections[section]
+            except KeyError:
+                newval = val
+        return newval
 
-    def get(self, section, option, raw=False, vars=None):
+    def get(self, section, option, raw=False, extra_vars=None):
+        """Return the value for the given option in the specified section."""
         if not self.has_section(section):
             return None
         sec = self._sections[section]
@@ -136,21 +144,24 @@ class ConfigParser:
             return None
         if raw:
             return sec[option]
-        return self.parse_item(section, option, sec[option])
+        return self.parse_item(section, option, sec[option], extra_vars)
 
     def getint(self, section, option):
+        """Return the value for the given option in the specified section as an integer."""
         val = self.get(section, option)
         if val is None:
             raise KeyError(f"Option '{option}' not found in section '{section}'")
         return int(val)
 
     def getfloat(self, section, option):
+        """Return the value for the given option in the specified section as a float."""
         val = self.get(section, option)
         if val is None:
             raise KeyError(f"Option '{option}' not found in section '{section}'")
         return float(val)
 
     def getboolean(self, section, option):
+        """Return the value for the given option in the specified section as a boolean."""
         val = self.get(section, option)
         if val is None:
             raise KeyError(f"Option '{option}' not found in section '{section}'")
@@ -163,6 +174,7 @@ class ConfigParser:
             raise ValueError("Invalid boolean option")
 
     def items(self, section, raw=False, vars=None):
+        """Return a list of (name, value) pairs for each option in the given section."""
         try:
             d = self._sections[section].copy()
         except KeyError:
@@ -171,13 +183,19 @@ class ConfigParser:
         return d.items()
 
     def remove_option(self, section, option):
+        """Remove the specified option from the given section."""
         if self.has_option(section, option):
             del self._sections[section][option]
 
     def set(self, section, option, value):
+        """Set the value for the given option in the specified section."""
         if self.has_section(section):
             self._sections[section][option] = value
 
     def write(self, fp):
-        # write the configuration state in .ini format
-        pass
+        """Write the configuration state in .ini format to the given file object."""
+        for section, options in self._sections.items():
+            fp.write(f"[{section}]\n")
+            for key, value in options.items():
+                fp.write(f"{key} = {value}\n")
+            fp.write("\n")

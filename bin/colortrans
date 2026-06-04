@@ -291,9 +291,6 @@ CLUT = [  # color look-up table
     ('255', 'eeeeee'),
 ]
 
-def _str2hex(hexstr):
-    return int(hexstr, 16)
-
 def _strip_hash(rgb):
     # Strip leading `#` if exists.
     if rgb.startswith('#'):
@@ -307,16 +304,20 @@ def _create_dicts():
         rgb2short_dict[v] = k
     return rgb2short_dict, short2rgb_dict
 
-def short2rgb(short):
-    return SHORT2RGB_DICT[short]
+def short2rgb(code):
+    """ Convert an xterm-256 color code to its hexadecimal RGB value.
+    @param code: String between 0 and 255 representing an xterm color code.
+    @returns: Hex code representing the RGB value, eg, 'abcdef'
+    """
+    return SHORT2RGB_DICT[code]
 
 def print_all():
     """ Print all 256 xterm color codes.
     """
-    for code, rgb in CLUT:
-        sys.stdout.write('\033[48;5;%sm%s:%s' % (code, code, rgb))
+    for code, color_rgb in CLUT:
+        sys.stdout.write(f'\033[48;5;{code}m{code}:{color_rgb}')
         sys.stdout.write("\033[0m  ")
-        sys.stdout.write('\033[38;5;%sm%s:%s' % (code, code, rgb))
+        sys.stdout.write(f'\033[38;5;{code}m{code}:{color_rgb}')
         sys.stdout.write("\033[0m\n")
     print("Printed all codes.")
     print("You can translate a hex or 0-255 code by providing an argument.")
@@ -332,10 +333,10 @@ def rgb2short(rgb_input):
     >>> rgb2short('0DADD6') # vimeo logo
     ('38', '00afd7')
     """
-    rgb = _strip_hash(rgb_input)
+    rgb_hex = _strip_hash(rgb_input)
     incs = (0x00, 0x5f, 0x87, 0xaf, 0xd7, 0xff)
     # Break 6-char RGB code into 3 integer vals.
-    parts = [ int(h, 16) for h in re.split(r'(..)(..)(..)', rgb)[1:4] ]
+    parts = [ int(h, 16) for h in re.split(r'(..)(..)(..)', rgb_hex)[1:4] ]
     res = []
     for part in parts:
         i = 0
@@ -352,7 +353,7 @@ def rgb2short(rgb_input):
                 break
             i += 1
     #print '***', res
-    res = ''.join([ ('%02.x' % i) for i in res ])
+    res = ''.join([ f'{i:02x}' for i in res ])
     equiv = RGB2SHORT_DICT[ res ]
     #print '***', res, equiv
     return equiv, res
@@ -370,9 +371,9 @@ if __name__ == '__main__':
     arg = sys.argv[1]
     if len(arg) < 4 and int(arg) < 256:
         rgb = short2rgb(arg)
-        sys.stdout.write('xterm color \033[38;5;%sm%s\033[0m -> RGB exact \033[38;5;%sm%s\033[0m' % (arg, arg, arg, rgb))
+        sys.stdout.write(f'xterm color \033[38;5;{arg}m{arg}\033[0m -> RGB exact \033[38;5;{arg}m{rgb}\033[0m')
         sys.stdout.write("\033[0m\n")
     else:
         short, rgb = rgb2short(arg)
-        sys.stdout.write('RGB %s -> xterm color approx \033[38;5;%sm%s (%s)' % (arg, short, short, rgb))
+        sys.stdout.write(f'RGB {arg} -> xterm color approx \033[38;5;{short}m{short} ({rgb})')
         sys.stdout.write("\033[0m\n")
