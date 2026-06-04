@@ -8,7 +8,7 @@
   package:
     name: '{{ debian_packages }}'
     state: present
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -44,7 +44,7 @@
     target: install
     params:
       NUM_THREADS: 8
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial

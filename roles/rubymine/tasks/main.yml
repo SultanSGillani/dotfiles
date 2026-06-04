@@ -7,5 +7,5 @@
     config_dir: "{% if ansible_facts['os_family'] != 'Darwin' %}{{ dotfiles_user_home\
       \ }}/.{{ rubymine_user_dir }}/config{% else %}{{ dotfiles_user_home }}/Library/Preferences/{{\
       \ rubymine_user_dir }}{% endif %}"
-  become: yes
+  become: true
   become_user: '{{ zsh_user }}'

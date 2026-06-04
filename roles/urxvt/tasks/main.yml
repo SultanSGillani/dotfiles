@@ -2,7 +2,7 @@
   apt:
     state: present
     name: libperl-dev
-  become: yes
+  become: true
   become_user: root
   when: ansible_facts['os_family']|lower == 'debian'
 
@@ -33,7 +33,7 @@
     dest: /tmp/
     owner: '{{ zsh_user }}'
     group: '{{ zsh_user_group }}'
-  become: yes
+  become: true
   become_user: root
 
 - name: patch urxvt
@@ -92,14 +92,14 @@
   - urxvt
   - urxvtc
   - urxvt-tabbed
-  become: yes
+  become: true
   become_user: root
 
 - name: make install 24-bit rxvt
   make:
     chdir: /tmp/rxvt-unicode-9.22
     target: install
-  become: yes
+  become: true
   become_user: root
 
 - name: Replace after the expression till the end of the file (requires Ansible >=
@@ -115,12 +115,12 @@
     src: /tmp/rxvt-unicode-9.22/doc/rxvt-tabbed
     dest: /usr/bin/urxvt-tabbed
     mode: 0755
-  become: yes
+  become: true
   become_user: root
 
 - name: remove rxvt true color dir
   file:
     path: /tmp/rxvt-unicode-9.22
     state: absent
-  become: yes
+  become: true
   become_user: root

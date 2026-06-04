@@ -2,7 +2,7 @@
   package:
     name: '{{ pacman_packages }}'
     state: present
-  become: yes
+  become: true
   become_user: root
 
 - name: install xinit-xsession using aur

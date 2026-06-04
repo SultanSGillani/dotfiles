@@ -8,6 +8,6 @@
   package:
     name: bat
     state: absent
-  become: yes
+  become: true
   become_user: root
   when: bat_check_deb.rc == 1

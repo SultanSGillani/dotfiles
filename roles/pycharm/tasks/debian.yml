@@ -5,7 +5,7 @@
     owner: root
     group: root
     mode: 0755
-  become: yes
+  become: true
   become_user: root
   tags:
   - configuration
@@ -17,7 +17,7 @@
     owner: root
     group: root
     mode: 0644
-  become: yes
+  become: true
   become_user: root
 
 - name: create Pycharm Professional installation directory
@@ -27,7 +27,7 @@
     group: root
     mode: u=rwx,go=rx
     dest: '{{ pycharm_install_dir }}'
-  become: yes
+  become: true
   become_user: root
 
 - name: install Pycharm Professional
@@ -39,7 +39,7 @@
     owner: root
     group: root
     creates: '{{ pycharm_install_dir }}/bin'
-  become: yes
+  become: true
   become_user: root
 
 - name: create bin link
@@ -50,7 +50,7 @@
     owner: root
     group: root
     mode: u=rwx,go=rx
-  become: yes
+  become: true
   become_user: root
 
 - name: install Pycharm Professional desktop file
@@ -60,5 +60,5 @@
     owner: root
     group: root
     mode: u=rw,go=r
-  become: yes
+  become: true
   become_user: root

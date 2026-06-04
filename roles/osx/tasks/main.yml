@@ -41,7 +41,7 @@
   community.general.homebrew_tap:
     name: "{{ brew_taps }}"
     state: present
-  become: no
+  become: false
   tags:
   - brew
 
@@ -49,23 +49,23 @@
   community.general.homebrew:
     name: "{{ brew_packages }}"
     state: present
-  become: no
+  become: false
   tags:
   - brew
 
 - name: upgrade brew programs
   community.general.homebrew:
-    upgrade: yes
-  become: no
+    upgrade: true
+  become: false
   tags:
   - upgrade
   - brew
 
 - name: update brew programs
   community.general.homebrew:
-    upgrade: no
-    update_homebrew: yes
-  become: no
+    upgrade: false
+    update_homebrew: true
+  become: false
   tags:
   - update
   - brew
@@ -74,14 +74,14 @@
   community.general.homebrew_cask:
     name: "{{ brew_casks }}"
     state: present
-    accept_external_apps: yes
+    accept_external_apps: true
   tags:
   - cask
   - brew
 
 - name: upgrade Cask programs
   community.general.homebrew_cask:
-    upgrade: yes
+    upgrade: true
   tags:
   - upgrade
   - brew

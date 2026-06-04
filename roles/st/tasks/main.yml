@@ -8,7 +8,7 @@
   package:
     name: '{{ st_packages }}'
     state: present
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -35,7 +35,7 @@
   make:
     chdir: '{{ dotfiles_user_home }}/.config/st'
     target: install
-  become: yes
+  become: true
   become_user: root
   tags:
   - update

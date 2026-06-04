@@ -10,7 +10,7 @@
   group:
     name: '{{ sudoers_group }}'
     state: present
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -20,7 +20,7 @@
     name: '{{ zsh_user }}'
     append: yes
     groups: '{{ sudoers_group }}'
-  become: yes
+  become: true
   become_user: root
 
 - name: Create or Update sudoers configuration in /etc/sudoers.d/{{ sudoers_file }}
@@ -31,7 +31,7 @@
     owner: root
     group: '{{ sudoers_group }}'
     mode: '0440'
-  become: yes
+  become: true
   become_user: root
   tags:
   - update
@@ -46,7 +46,7 @@
   register: sudoers_contents
   changed_when: no
   when: purge_other_sudoers_files | bool == 'false'
-  become: yes
+  become: true
   become_user: root
 
 - name: Remove unmanaged /etc/sudoers.d/ files
@@ -59,5 +59,5 @@
   when:
   - purge_other_sudoers_files | bool == 'false'
   - (item.path|basename) != sudoers_file
-  become: yes
+  become: true
   become_user: root

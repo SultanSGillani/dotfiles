@@ -2,7 +2,7 @@
   package:
     name: '{{ python_pkgs }}'
     state: present
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -11,7 +11,7 @@
   package:
     name: jq
     state: present
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -21,7 +21,7 @@
     curl https://mise.run | sh
   args:
     creates: '{{ dotfiles_user_home }}/.local/bin/mise'
-  become: yes
+  become: true
   become_user: '{{ zsh_user }}'
   tags:
   - initial

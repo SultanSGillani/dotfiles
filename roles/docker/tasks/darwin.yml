@@ -2,7 +2,7 @@
   community.general.homebrew:
     name: docker
     state: present
-  become: yes
+  become: true
   become_user: '{{ zsh_user }}'
   tags:
   - initial
@@ -11,7 +11,7 @@
   community.general.homebrew:
     name: docker-compose
     state: present
-  become: yes
+  become: true
   become_user: '{{ zsh_user }}'
   tags:
   - initial

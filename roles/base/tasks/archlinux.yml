@@ -3,6 +3,6 @@
     name: base-devel
     state: present
     update_cache: yes
-  become: yes
+  become: true
   become_user: root
 

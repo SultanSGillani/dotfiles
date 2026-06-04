@@ -18,7 +18,7 @@
     src: Flat-Remix-GTK-Blue-Darkest.tar.gz
     dest: /usr/share/themes
     keep_newer: yes
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -28,7 +28,7 @@
     src: Flat-Remix-Blue-Dark.tar.gz
     dest: /usr/share/icons
     keep_newer: yes
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -38,7 +38,7 @@
     src: Capitaine.tar.gz
     dest: /usr/share/icons
     keep_newer: yes
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial

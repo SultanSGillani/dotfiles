@@ -2,5 +2,5 @@
   package:
     name: '{{ apt_packages }}'
     state: present
-  become: yes
+  become: true
   become_user: root

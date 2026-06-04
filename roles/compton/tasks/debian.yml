@@ -8,7 +8,7 @@
   package:
     name: '{{ compton_packages }}'
     state: present
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -29,7 +29,7 @@
   make:
     chdir: '{{ dotfiles_user_home }}/compton'
     target: install
-  become: yes
+  become: true
   become_user: root
 
 - name: remove compton repo dir

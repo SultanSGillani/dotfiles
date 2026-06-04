@@ -11,7 +11,7 @@
   package:
     name: libpam0g-dev
     state: present
-  become: yes
+  become: true
   become_user: root
 
 - name: run autogen on screen
@@ -53,7 +53,7 @@
   make:
     chdir: '{{ dotfiles_user_home }}/screen/src'
     target: install
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -68,7 +68,7 @@
   - {name: tmpfiles.d, dest: /usr/lib/tmpfiles.d/screen.conf}
   - {name: '{{ dotfiles_user_home }}/screen/src/etc/etcscreenrc', dest: /etc/screenrc}
   - {name: '{{ dotfiles_user_home }}/screen/src/etc/screenrc', dest: /etc/skel/.screenrc}
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial

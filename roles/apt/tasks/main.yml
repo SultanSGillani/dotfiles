@@ -2,7 +2,7 @@
   apt:
     upgrade: no
     update_cache: yes
-  become: yes
+  become: true
   become_user: root
   tags:
   - update
@@ -10,7 +10,7 @@
 - name: Upgrade APT to the latest packages
   apt:
     upgrade: dist
-  become: yes
+  become: true
   become_user: root
   tags:
   - dist_upgrade
@@ -20,7 +20,7 @@
   apt:
     upgrade: yes
     update_cache: no
-  become: yes
+  become: true
   become_user: root
   tags:
   - upgrade
@@ -29,7 +29,7 @@
   apt:
     name: '{{ debian_packages }}'
     state: present
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial

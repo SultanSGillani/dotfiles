@@ -2,7 +2,7 @@
   package:
     name: '{{ docker_apt_absent_packages }}'
     state: absent
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -15,7 +15,7 @@
     state: present
   register: add_repository_key
   ignore_errors: '{{ docker_apt_ignore_key_error }}'
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -25,7 +25,7 @@
     repo: '{{ docker_apt_repository }}'
     state: present
     update_cache: yes
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial
@@ -35,7 +35,7 @@
     name: '{{ docker_packages }}'
     state: '{{ docker_package_state }}'
   notify: restart docker
-  become: yes
+  become: true
   become_user: root
   tags:
   - initial

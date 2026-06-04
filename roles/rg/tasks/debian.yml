@@ -9,7 +9,7 @@
 - name: Install ripgrep with a .deb file
   apt:
     deb: '{{ rg_release_url }}/{{ rg_version }}/{{ rg_dpkg_file }}'
-  become: yes
+  become: true
   become_user: root
   when: rg_check_deb.rc == 1
   tags:
@@ -41,7 +41,7 @@
 - name: Update ripgrep
   apt:
     deb: '{{ rg_release_url }}/{{ rg_version }}/{{ rg_dpkg_file }}'
-  become: yes
+  become: true
   become_user: root
   when: rg_version != rg_installed_ver
   tags:

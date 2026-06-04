@@ -4,7 +4,7 @@
     package:
       name: '{{ i3_pac }}'
       state: present
-    become: yes
+    become: true
     become_user: root
   - name: install i3 packages | Archlinux
     aur:

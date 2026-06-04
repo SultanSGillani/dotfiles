@@ -7,7 +7,7 @@
 - name: Install a fd .deb file
   apt:
     deb: '{{ fd_release_url }}/{{ fd_version }}/{{ fd_dpkg_file }}'
-  become: yes
+  become: true
   become_user: root
   when: fd_check_deb.rc == 1
   tags:
