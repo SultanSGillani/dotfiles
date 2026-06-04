@@ -14,12 +14,12 @@ HOSTS=${HOME}/dotfiles/inventory.yml
 
 HOST_OS=$(uname)
 
-cd ${ZSH}
+cd "${ZSH}"
 
 if [[ $# -eq 0 ]]; then
   echo "Running sudo bootstrapping Playbook for ${HOST_OS}"
   if [[ "${HOST_OS}" = 'Darwin' ]] || [[ "${HOST_OS}" = 'Linux' ]]; then
-  ansible-playbook -i ${HOSTS} ${PLAYBOOK} --ask-become-pass --tags bootstrap
+  ansible-playbook -i "${HOSTS}" "${PLAYBOOK}" --ask-become-pass --tags bootstrap
   else
     echo "Unknown host OS: ${HOST_OS}"
     exit 1
@@ -27,7 +27,7 @@ if [[ $# -eq 0 ]]; then
 else
     echo "Running bootstrapping Playbook for ${HOST_OS}"
   if [[ "${HOST_OS}" = 'Darwin' ]] || [[ "${HOST_OS}" = 'Linux' ]]; then
-  ansible-playbook -i ${HOSTS} ${PLAYBOOK} -ask-become-pass --tags bootstrap,"$@"
+  ansible-playbook -i "${HOSTS}" "${PLAYBOOK}" --ask-become-pass --tags bootstrap --tags "$@"
   else
     echo "Unknown host OS: ${HOST_OS}"
     exit 1

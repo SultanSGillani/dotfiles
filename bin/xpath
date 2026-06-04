@@ -2,7 +2,7 @@
 
 import argparse
 
-example = '''Example file:
+EXAMPLE = '''Example file:
 
     <nodes>
        <node at1="1" at2="2"> 12 </node>
@@ -21,16 +21,15 @@ parser.add_argument('--example', help='print an example', action='store_true')
 args = parser.parse_args()
 
 if args.example:
-    print(example)
+    print(EXAMPLE)
     parser.exit()
 
 xmlfile = args.file
 path = args.path
 
-import libxml2
+from lxml import etree
 
-doc = libxml2.parseFile(xmlfile)
-ctx = doc.xpathNewContext()
+doc = etree.parse(xmlfile)
 print('# path:', path)
-for match in ctx.xpathEval(path):
-    print(match)
+for match in doc.xpath(path):
+    print(etree.tostring(match, pretty_print=True).decode() if hasattr(match, 'tag') else match)

@@ -4,7 +4,7 @@ This is my own implementation of standard library ConfigParser module
 It parses .ini file and generates a configuration object
 """
 import re
-import collections
+
 
 FORMAT_RE = r'.*%\([^\)]+\)[sd].*'
 SECTION_RE = r'\[([^\[\]]+)\]'
@@ -33,8 +33,10 @@ def _parse_config_file(f):
     for line in f:
         line = line.strip()
 
-        if not line: continue
-        if comment_re.match(line): continue
+        if not line:
+            continue
+        if comment_re.match(line):
+            continue
 
         mo = section_re.match(line)
         if mo:
@@ -56,7 +58,9 @@ def _parse_config_file(f):
     return sections
 
 
-class ConfigParser(object):
+class ConfigParser:
+    """Configuration file parser for .ini files with interpolation support."""
+
     def __init__(self, defaults=None):
         """
         create the parser and specify a dictionary of intrinsic defaults.  The
@@ -68,10 +72,11 @@ class ConfigParser(object):
         self._sections = {}
 
     def sections(self):
-        # return all the configuration section names
+        """Return all the configuration section names."""
         return self._sections.keys()
 
     def has_section(self, section):
+        """Check if a section exists in the configuration."""
         return section in self._sections
 
     def has_option(self, section, option):
@@ -80,8 +85,7 @@ class ConfigParser(object):
     def options(self, section):
         if not self.has_section(section):
             return []
-        else:
-            return self._sections[section].keys()
+        return list(self._sections[section].keys())
 
     def read(self, filenames):
         """
@@ -89,22 +93,18 @@ class ConfigParser(object):
         name.  A single filename is also allowed.  Non-existing files
         are ignored.  Return list of successfully read files.
         """
-        if isinstance(filenames, basestring):
-            f = open(filenames, 'r')
-            self.readfp(f)
-        elif isinstance(filenames, collections.Iterable):
-            for fname in filenames:
-                try:
-                    f = open(fname, 'r')
-                    self.readfp(f)
-                except IOError:
-                    print
-                    "Fail to open file %s, ignored" % fname
-                except InvalidConfig:
-                    print
-                    "Invalid config file %s, ignored" % fname
+        if isinstance(filenames, str):
+            filenames = [filenames]
+        for fname in filenames:
+            try:
+                f = open(fname, 'r')
+                self.readfp(f)
+            except IOError:
+                print("Fail to open file %s, ignored" % fname)
+            except InvalidConfig:
+                print("Invalid config file %s, ignored" % fname)
 
-    def readfp(self, fp, filename=None):
+    def readfp(self, fp):
         """
         read and parse one configuration file, given as a file object.
         The filename defaults to fp.name; it is only used in error
@@ -134,16 +134,27 @@ class ConfigParser(object):
         sec = self._sections[section]
         if option not in sec:
             return None
+        if raw:
+            return sec[option]
         return self.parse_item(section, option, sec[option])
 
     def getint(self, section, option):
-        return int(self.get(section, option))
+        val = self.get(section, option)
+        if val is None:
+            raise KeyError(f"Option '{option}' not found in section '{section}'")
+        return int(val)
 
     def getfloat(self, section, option):
-        return float(self.get(section, option))
+        val = self.get(section, option)
+        if val is None:
+            raise KeyError(f"Option '{option}' not found in section '{section}'")
+        return float(val)
 
     def getboolean(self, section, option):
-        val = self.get(section, option).strip()
+        val = self.get(section, option)
+        if val is None:
+            raise KeyError(f"Option '{option}' not found in section '{section}'")
+        val = val.strip()
         if val.lower() in ["0", "false", "no", "off"]:
             return False
         elif val.lower() in ["1", "true", "yes", "on"]:
@@ -153,15 +164,11 @@ class ConfigParser(object):
 
     def items(self, section, raw=False, vars=None):
         try:
-            d = self._sections[section]
+            d = self._sections[section].copy()
         except KeyError:
             d = {}
         d.update(self._defaults)
         return d.items()
-
-    def remove_section(self, section):
-        if self.has_section(section):
-            del self._sections[section]
 
     def remove_option(self, section, option):
         if self.has_option(section, option):

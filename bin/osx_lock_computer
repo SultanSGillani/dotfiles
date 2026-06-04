@@ -1,8 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 sleep 0.5
 
-if [[ "$(ioreg -c AppleSmartBattery | grep '"ExternalConnected" = Yes')" ]]; then
+if ioreg -c AppleSmartBattery | grep -q '"ExternalConnected" = Yes'; then
   # Plugged in: start screensaver.
   open /System/Library/Frameworks/ScreenSaver.framework/Versions/A/Resources/ScreenSaverEngine.app
 else

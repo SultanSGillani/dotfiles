@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Based on:
 # https://github.com/zargony/dotfiles/blob/1edf635/bin/update-rust-nightly

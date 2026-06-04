@@ -1,9 +1,9 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # modified from http://ficate.com/blog/2012/10/15/battery-life-in-the-land-of-tmux/
 
 HEART='♥ '
 
-if [[ `uname` == 'Linux' ]]; then
+if [[ $(uname) == 'Linux' ]]; then
   current_charge=$(cat /proc/acpi/battery/BAT1/state | grep 'remaining capacity' | awk '{print $3}')
   total_charge=$(cat /proc/acpi/battery/BAT1/info | grep 'last full capacity' | awk '{print $4}')
 else
