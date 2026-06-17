@@ -21,17 +21,21 @@ yamllint:
 
 ansible-lint:
   <<: *linting
-  image: registry.gitlab.com/sultangillani/docker-ansible-lint:latest
-  script:
+  image: python:3.12-slim
+  before_script:
+    - pip install ansible ansible-lint
     - ansible-galaxy collection install -r requirements.yml
+  script:
     - chmod 0700 .
     - ansible-lint -c .ansible-lint dotfiles.yml darwin.yml linux.yml sudo.yml vmware.yml
 
 ansible-syntax-check:
   <<: *linting
-  image: registry.gitlab.com/sultangillani/docker-ansible-lint:latest
-  script:
+  image: python:3.12-slim
+  before_script:
+    - pip install ansible
     - ansible-galaxy collection install -r requirements.yml
+  script:
     - ansible-playbook -i inventory.yml --syntax-check dotfiles.yml
     - ansible-playbook -i inventory.yml --syntax-check darwin.yml
     - ansible-playbook -i inventory.yml --syntax-check linux.yml

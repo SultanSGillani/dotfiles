@@ -1,5 +1,5 @@
 [![GitHub CI](https://github.com/SultanSGillani/dotfiles/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/SultanSGillani/dotfiles/actions/workflows/ci.yml)
-[![GitLab CI](https://gitlab.com/sultangillani/dotfiles/badges/main/pipeline.svg)](https://gitlab.com/sultangillani/dotfiles/-/pipelines)
+[![GitLab CI](https://gitlab.com/sultangillani/dotfiles/badges/main/pipeline.svg)](https://gitlab.com/sultangillani/dotfiles/-/commits/main)
 [![License: ISC](https://img.shields.io/badge/license-ISC-blue.svg?style=popout-square)](https://www.isc.org/downloads/software-support-policy/isc-license)
 
 # Dotfiles
