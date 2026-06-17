@@ -143,3 +143,4 @@ venv.bak/
 # mypy
 .mypy_cache/
 *.json
+!.markdownlint.json
