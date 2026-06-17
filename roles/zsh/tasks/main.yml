@@ -137,7 +137,7 @@
     recursive: yes
   when: ansible_facts['os_family'] != "Darwin"
   tags:
-    - update
+  - update
 
 - name: Synchronize and delete files in dest for completions (osx)
   ansible.posix.synchronize:
@@ -148,7 +148,7 @@
     recursive: yes
   when: ansible_facts['os_family'] == "Darwin"
   tags:
-    - update
+  - update
 
 - name: Synchronize and delete files in dest for aliases
   ansible.posix.synchronize:

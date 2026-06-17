@@ -46,9 +46,9 @@ base16:
       scheme_slug: tomorrow_night_eighties
       scheme_author: Chris Kempson
       base00_hex: 2d2d2d   # black basically
-      base01_hex: '393939' # dark dark grey almost black
-      base02_hex: '515151' # medium grey
-      base03_hex: '999999' # lighter grey than above
+      base01_hex: '393939'  # dark dark grey almost black
+      base02_hex: '515151'  # medium grey
+      base03_hex: '999999'  # lighter grey than above
       base04_hex: b4b7b4   # light grey with tad blue
       base05_hex: cccccc   # light grey but darker than below
       base06_hex: e0e0e0   # light grey

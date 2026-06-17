@@ -43,6 +43,7 @@ jobs:
       - name: Syntax check playbooks
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
+          ANSIBLE_LIBRARY: ./library:./library/ansible-aur/library
         run: |
           for pb in dotfiles.yml darwin.yml linux.yml sudo.yml vmware.yml; do
             ansible-playbook -i inventory.yml --syntax-check "$pb"

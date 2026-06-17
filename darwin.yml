@@ -14,7 +14,7 @@
     - import_role:
         name: spacebar
       tags:
-        - spacebar
+      - spacebar
     - import_role:
         name: yabai
       tags:
@@ -25,4 +25,3 @@
       - iterm
       - iterm2
       - iterm2-nightly
-
