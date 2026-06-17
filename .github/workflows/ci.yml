@@ -30,6 +30,8 @@ jobs:
       - name: Install collections
         run: ansible-galaxy collection install -r requirements.yml
       - name: Run ansible-lint
+        env:
+          ANSIBLE_LIBRARY: ./library:./library/ansible-aur/library
         run: |
           chmod 0700 .
           ansible-lint -c .ansible-lint dotfiles.yml darwin.yml linux.yml sudo.yml vmware.yml
