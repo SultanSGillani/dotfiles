@@ -1,5 +1,4 @@
 ---
-parseable: true
 quiet: true
 skip_list:
   # metadata/701 - Role info should contain platforms

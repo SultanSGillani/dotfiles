@@ -1,0 +1,49 @@
+---
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  yamllint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install yamllint
+        run: pip install --user yamllint
+      - name: Run yamllint
+        run: yamllint -c ./.yamllint -f standard .
+
+  ansible-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install ansible-lint
+        run: pip install --user ansible ansible-lint
+      - name: Run ansible-lint
+        run: |
+          chmod 0700 .
+          ansible-lint -c .ansible-lint dotfiles.yml darwin.yml linux.yml sudo.yml vmware.yml
+
+  ansible-syntax-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Install ansible
+        run: pip install --user ansible
+      - name: Syntax check playbooks
+        env:
+          ANSIBLE_HOST_KEY_CHECKING: "False"
+        run: |
+          for pb in dotfiles.yml darwin.yml linux.yml sudo.yml vmware.yml; do
+            ansible-playbook -i inventory.yml --syntax-check "$pb"
+          done

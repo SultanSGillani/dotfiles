@@ -34,7 +34,6 @@ group_vars/all/      # shared vars (mise paths, brew_prefix, base16 themes)
 roles/<name>/        # one role per tool/area
 bin/                 # personal scripts on PATH
 library/             # custom Ansible modules (aur, base16_builder, cmake, macos_install)
-tests/               # CI smoke playbook
 ```
 
 ## Prerequisites
@@ -132,6 +131,25 @@ Larger / more opinionated roles have their own README:
 - [roles/mise/README.md](roles/mise/README.md) — toolchain config, backends, troubleshooting (codesign/Killed:9 etc.)
 - [roles/zsh/README.md](roles/zsh/README.md) — zinit plugin layout, theme switching, completions sync
 - [roles/neovim/README.md](roles/neovim/README.md) — coc extensions, plugin list, manual `:PlugInstall` flow
+
+## CI
+
+Linting runs on both GitHub Actions ([.github/workflows/ci.yml](.github/workflows/ci.yml)) and GitLab CI ([.gitlab-ci.yml](.gitlab-ci.yml)). There is no full provisioning integration test — CI only validates static correctness:
+
+- `yamllint` against [.yamllint](.yamllint)
+- `ansible-lint` against the root playbooks using [.ansible-lint](.ansible-lint)
+- `ansible-playbook --syntax-check` against `dotfiles.yml`, `darwin.yml`, `linux.yml`, `sudo.yml`, `vmware.yml`
+
+Run the same checks locally:
+
+```sh
+pip install --user ansible ansible-lint yamllint
+yamllint -c .yamllint .
+ansible-lint -c .ansible-lint dotfiles.yml darwin.yml linux.yml sudo.yml vmware.yml
+for pb in dotfiles.yml darwin.yml linux.yml sudo.yml vmware.yml; do
+  ansible-playbook -i inventory.yml --syntax-check "$pb"
+done
+```
 
 ## Troubleshooting
 
