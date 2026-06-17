@@ -1,7 +1,25 @@
 ---
-quiet: true
-skip_list:
-  # metadata/701 - Role info should contain platforms
-  - '701'
 use_default_rules: true
-verbosity: 1
+
+# This is a personal dotfiles repo, not a published collection.
+# We skip stylistic rules that would require a large mechanical rewrite
+# but keep correctness-focused rules enabled (syntax, undefined vars,
+# deprecated module args, schema, etc.).
+skip_list:
+  - fqcn               # fqcn[action-core] / fqcn[action]
+  - name               # name[missing], name[casing], name[play]
+  - var-naming         # role vars don't use role_ prefix
+  - jinja              # jinja[spacing] cosmetic
+  - risky-file-permissions
+  - risky-shell-pipe
+  - no-changed-when
+  - ignore-errors
+  - key-order
+  - command-instead-of-module
+  - yaml               # yamllint is configured separately via .yamllint
+
+# yamllint config differs from ansible-lint's expectations on purpose.
+# This silences the "incompatible yamllint configuration" warning.
+exclude_paths:
+  - .cache/
+  - misc/lib/

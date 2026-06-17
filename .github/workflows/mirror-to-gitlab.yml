@@ -1,0 +1,45 @@
+---
+name: Mirror to GitLab
+
+on:
+  push:
+    branches: [main]
+
+# Prevent concurrent mirror runs from racing each other.
+concurrency:
+  group: mirror-to-gitlab
+  cancel-in-progress: false
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Configure SSH
+        env:
+          GITLAB_SSH_PRIVATE_KEY: ${{ secrets.GITLAB_SSH_PRIVATE_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$GITLAB_SSH_PRIVATE_KEY" > ~/.ssh/id_gitlab
+          chmod 600 ~/.ssh/id_gitlab
+          ssh-keyscan -t rsa,ecdsa,ed25519 gitlab.com >> ~/.ssh/known_hosts 2>/dev/null
+          cat > ~/.ssh/config <<'EOF'
+          Host gitlab.com
+            HostName gitlab.com
+            User git
+            IdentityFile ~/.ssh/id_gitlab
+            IdentitiesOnly yes
+          EOF
+          chmod 600 ~/.ssh/config
+
+      - name: Push to GitLab
+        run: |
+          git remote add gitlab git@gitlab.com:sultangillani/dotfiles.git
+          git push gitlab HEAD:refs/heads/main
+          git push gitlab --tags

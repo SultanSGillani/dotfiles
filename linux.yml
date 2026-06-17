@@ -23,7 +23,7 @@
         name: gtk
       tags:
       - gtk
-      - 3
+      - "3"
     - import_role:
         name: urxvt
       tags:
