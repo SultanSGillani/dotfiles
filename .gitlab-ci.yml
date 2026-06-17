@@ -23,6 +23,7 @@ ansible-lint:
   <<: *linting
   image: registry.gitlab.com/sultangillani/docker-ansible-lint:latest
   script:
+    - ansible-galaxy collection install -r requirements.yml
     - chmod 0700 .
     - ansible-lint -c .ansible-lint dotfiles.yml darwin.yml linux.yml sudo.yml vmware.yml
 
@@ -30,6 +31,7 @@ ansible-syntax-check:
   <<: *linting
   image: registry.gitlab.com/sultangillani/docker-ansible-lint:latest
   script:
+    - ansible-galaxy collection install -r requirements.yml
     - ansible-playbook -i inventory.yml --syntax-check dotfiles.yml
     - ansible-playbook -i inventory.yml --syntax-check darwin.yml
     - ansible-playbook -i inventory.yml --syntax-check linux.yml

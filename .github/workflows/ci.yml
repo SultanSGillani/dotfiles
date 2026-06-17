@@ -27,6 +27,8 @@ jobs:
           submodules: recursive
       - name: Install ansible-lint
         run: pip install --user ansible ansible-lint
+      - name: Install collections
+        run: ansible-galaxy collection install -r requirements.yml
       - name: Run ansible-lint
         run: |
           chmod 0700 .
@@ -40,6 +42,8 @@ jobs:
           submodules: recursive
       - name: Install ansible
         run: pip install --user ansible
+      - name: Install collections
+        run: ansible-galaxy collection install -r requirements.yml
       - name: Syntax check playbooks
         env:
           ANSIBLE_HOST_KEY_CHECKING: "False"
