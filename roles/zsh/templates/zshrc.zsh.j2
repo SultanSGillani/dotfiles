@@ -150,7 +150,8 @@ if (( ${+commands[rustc]} )); then
   export RUST_SRC_PATH="$(rustc --print sysroot)/lib/rustlib/src/rust/src"
 fi
 
-# Go
+# Go (toolchain managed by mise)
+export GOBIN="${HOME}/.local/bin"
 
 ##############################################################
 # ZINIT https://github.com/zdharma-continuum/zinit

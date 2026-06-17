@@ -3,7 +3,6 @@
 
 export EDITOR=vim
 export VISUAL=vim
-export GOPATH=$HOME/Coding/golang
 
 case "$(uname -s)" in
     Linux)

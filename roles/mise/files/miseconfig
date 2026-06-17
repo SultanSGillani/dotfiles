@@ -1,5 +1,6 @@
 [tools]
 dotnet = "10.0.203"
+go = "1.26.4"
 java = "zulu-26.30.11.0"
 node = "24.15.0"
 python = "3.13.7"

@@ -1,12 +1,11 @@
-import argparse
 import re
+import sys
+import argparse
 from urllib.parse import urlparse
 
 
 def get_args():
-    #
-    # argparse setup
-    #
+    """argparse setup."""
     parser = argparse.ArgumentParser(
         description='A music downloader for Tidal.')
 
@@ -52,6 +51,7 @@ def get_args():
 
 
 def parse_media_option(urls):
+    """Parse a list of URLs or media identifiers into a list of type/id option dicts."""
     opts = []
     for url in urls:
         if is_valid_url(url):
@@ -60,8 +60,8 @@ def parse_media_option(urls):
             url = urlparse(url)
             components = url.path.split('/')
             if not components or len(components) <= 2:
-                print('Invalid URL: ' + url)
-                exit()
+                print('Invalid URL: ' + url.geturl())
+                sys.exit()
             type_ = components[1]
             id_ = components[2]
             if type_ == 'album':
@@ -81,9 +81,10 @@ def parse_media_option(urls):
             o = {'type': url[:ci], 'id': url[ci + 1:hi], 'index': url[hi + 1:]}
             opts.append(o)
         else:
-            print('Input "{}" does not appear to be a valid url.'.format(url))
+            print(f'Input "{url}" does not appear to be a valid url.')
     return opts
 
 
 def is_valid_url(url):
+    """Return True if the given string is a valid HTTP URL."""
     return url.startswith('http')
